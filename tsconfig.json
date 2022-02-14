@@ -1,0 +1,23 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es6",
+        "module": "es6",
+        "sourceMap": true,
+        "outDir": "./js",
+        "moduleResolution": "classic",
+        "typeRoots": [],
+        "baseUrl": ".",
+        "paths": {
+            "ti": [
+                "./erase/tiza.js"
+            ]
+        }
+        //"outDir": "js",
+        //"rootDir": "./ts"
+    },
+    //"include":["ts/y2/*", "ts/*"]
+    "include": [
+        "ts//**//*"
+    ],
+}
