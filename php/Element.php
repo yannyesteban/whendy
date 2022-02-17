@@ -3,6 +3,9 @@
 class Element
 {
     public $async = false;
+    
+    public $setPanel = null;
+    
     public $elementId = null;
     public $name = '';
     public $eparams = [];

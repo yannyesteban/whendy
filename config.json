@@ -16,8 +16,8 @@
             },
             "module": {
                 "src": "js/Map.js",
-                "name": "Map",
-                "alias": "Map",
+                "name": "WHMap",
+                "alias": "WHMap",
                 "component": "wh-map"
             }
         }

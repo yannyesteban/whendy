@@ -6,8 +6,10 @@ class Map extends Element{
 
     static $patternJsonFile = '';
     
-    public function __constructor(){
-        echo "555";
+    public function __construct($config = null){
+
+        Element::__construct($config);
+
     }
 
     public function evalMethod($method = false): bool{
@@ -28,15 +30,17 @@ class Map extends Element{
     public function load(){
         $this->setInfoElement([
             'type'      => 'element',
+            'setPanel'=> $this->setPanel,
 			'id'		=> $this->id,
 			'title'		=> 'MAP',
 			'iClass'	=> 'WHMap',
             'component' => 'wh-map',
+            'replayToken'=>$this->replayToken,
 			//'html'		=> $this->panel->render(),
 			'script'	=> '',
 			'css'		=> '',
 			'config'	=> [
-                "a"=>9999
+                "length"=>12474737
             ]
 			
 		]);
