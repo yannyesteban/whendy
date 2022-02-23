@@ -1,0 +1,37 @@
+<planeta>
+
+    <continentes>
+
+        <america>
+            <norte></norte>
+            <centro></centro>
+            <sur>
+                <colombia></colombia>
+                <venezuela>
+                    <estados>
+                        <lara></lara>
+                        <zulia></zulia>
+                        <cojedes></cojedes>
+                        <carabobo>
+                            <municipios>
+                                <libertador></libertador>
+                                <valencia>
+                                    <parroquia></parroquia>
+                                </valencia>
+                                <san-diego></san-diego>
+                            </municipios>
+                        </carabobo>
+                        <capital></capital>
+                    </estados>
+                </venezuela>
+            </sur>
+        </america>
+        <africa></africa>
+        <oceania></oceania>
+        <europa></europa>
+        <asia></asia>
+
+    </continentes>
+
+
+</planeta>

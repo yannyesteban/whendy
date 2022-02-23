@@ -1,67 +1,10 @@
+import { loadScript } from "./LoadScript.js";
+import { loadCss } from "./LoadCss.js";
+
 import { _sgQuery as $, _sgQuery as X } from "./Query.js";
 
-const loadCssFile = (url, async) => {
-    return new Promise((resolve, reject) => {
-        try {
-            const myScript = document.createElement("link");
 
-            myScript.setAttribute("href", url);
-            myScript.setAttribute("rel", "stylesheet");
-            myScript.setAttribute("type", "text/css");
-            //myScript.setAttribute("async", async);
 
-            myScript.addEventListener("load", (event) => {
-                resolve({
-                    status: true,
-                });
-            });
-
-            myScript.addEventListener("error", (event) => {
-                reject({
-                    status: false,
-                    msg: "error",
-                });
-            });
-
-            document.body.appendChild(myScript);
-        } catch (error) {
-            reject({
-                status: false,
-                msg: error,
-            });
-        }
-    });
-};
-const loadScriptFile = (url, async) => {
-    return new Promise((resolve, reject) => {
-        try {
-            const myScript = document.createElement("script");
-            myScript.setAttribute("src", url);
-            myScript.setAttribute("type", "module");
-            myScript.setAttribute("async", async);
-
-            myScript.addEventListener("load", (event) => {
-                resolve({
-                    status: true,
-                });
-            });
-
-            myScript.addEventListener("error", (event) => {
-                reject({
-                    status: false,
-                    msg: "error",
-                });
-            });
-
-            document.body.appendChild(myScript);
-        } catch (error) {
-            reject({
-                status: false,
-                msg: error,
-            });
-        }
-    });
-};
 
 export interface IResponse {
     id: string;
@@ -74,6 +17,7 @@ export interface IResponse {
 interface IElement {
     id: string;
     iClass: string;
+    component: string;
     title: string;
     html: string;
     script: string;
@@ -152,7 +96,7 @@ export class App extends HTMLElement {
     }
 
     test() {
-       
+       return;
         const request = {
             confirm: "?",
             valid: true,
@@ -166,7 +110,7 @@ export class App extends HTMLElement {
             request: [
                 {
                     type: "init",
-                    element: "map",
+                    element: "GTMap",
                     id: "test",
                     config: {
                         "name": "one",
@@ -223,7 +167,7 @@ export class App extends HTMLElement {
             },
             requestFunction: (data) => {
                 data.cssSheets.forEach((sheet) => {
-                    loadCssFile(sheet, true);
+                    loadCss(sheet, true);
                 });
                 this.innerHTML = data.template;
                 this.modules = data.modules;
@@ -282,17 +226,18 @@ export class App extends HTMLElement {
             if (m) {
                 console.log(m);
 
-                loadScriptFile(m.src, true).then((e) => {
+                loadScript(m.src, {async: true, type:"module"}).then((e) => {
                     console.log(window[element.iClass]);
 
 
-                    this._e[id] = $.create("wh-map").get();
+                    this._e[id] = $.create(element.component).get();
 
 
                     for(let x in element.config){
-                        console.log(x)
+                        console.log(x, element.config[x])
 
-                        this._e[id].setAttribute(x, element.config[x]);
+                        //this._e[id].setAttribute(x, element.config[x]);
+                        this._e[id][x] = element.config[x];
 
                     };
                     if(element.setPanel ){

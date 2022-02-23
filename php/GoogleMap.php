@@ -2,7 +2,7 @@
 
 include_once 'Element.php';
 
-class Map extends Element{
+class GoogleMap extends Element{
 
     static $patternJsonFile = '';
     

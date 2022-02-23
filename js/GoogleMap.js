@@ -44,4 +44,4 @@ export class Map extends HTMLElement {
 _Map_config = new WeakMap();
 customElements.define('wh-map', Map);
 window["WHMap"] = Map;
-//# sourceMappingURL=Map.js.map
+//# sourceMappingURL=GoogleMap.js.map

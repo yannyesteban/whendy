@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHENDY</title>
+    <link rel="icon" type="./image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <script type="module" src="js/howtoTabs.js"></script>
+
+
+</head>
+
+<body>
+    <style>
+        howto-tab {
+            border: 1px solid black;
+            padding: 20px;
+        }
+
+        howto-panel {
+            padding: 20px;
+            background-color: lightgray;
+        }
+
+        howto-tab[selected] {
+            background-color: bisque;
+        }
+
+        xxx-map:not(:defined),
+        howto-tabs:not(:defined),
+        howto-tab:not(:defined),
+        howto-panel:not(:defined) {
+            display: block;
+        }
+
+        xx-map {
+            display: block;
+            height: 300px;
+            border: 2px solid red;
+        }
+    </style>
+    
+    <howto-tabs>
+        <div slot="tab">HOLA</div>
+        <div slot="panel">Que panel</div>
+        <div slot="tab">adios</div>
+    </howto-tabs>
+
+    <xx-map>
+        <div slot="tab">HOLA</div>
+        <div slot="panel">Que panel</div>
+        <div slot="tab">adios</div>
+    </xx-map>
+
+</body>
+
+</html>

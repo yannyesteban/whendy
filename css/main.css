@@ -1,7 +1,5 @@
-html,
-body {
-  margin: 0px;
-  height: 100%;
+wh-app {
+  background-color: chocolate;
 }
 
 .layout {
@@ -11,7 +9,7 @@ body {
       grid-template-columns: 1fr 1fr;
   -ms-grid-rows: 60px 40px 1fr;
       grid-template-rows: 60px 40px 1fr;
-  height: 100%;
+  height: 100vh;
   overflow: auto;
 }
 

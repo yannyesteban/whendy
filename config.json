@@ -1,6 +1,7 @@
 {
     "templateFile": "templates/init.html",
     "cssSheets": [
+        "css/reset.css",
         "css/main.css"
     ],
     "elements": [
@@ -19,6 +20,23 @@
                 "name": "WHMap",
                 "alias": "WHMap",
                 "component": "wh-map"
+            }
+        },
+        {
+            "name": "GTMap",
+            "enable": true,
+            "file": "php/GTMap.php",
+            "class": "GTMap",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            },
+            "module": {
+                "src": "js/GTMap.js",
+                "name": "GTMap",
+                "alias": "GTMap",
+                "component": "gt-map"
             }
         }
     ]

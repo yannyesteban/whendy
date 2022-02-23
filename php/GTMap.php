@@ -2,7 +2,7 @@
 
 include_once 'Element.php';
 
-class Map extends Element{
+class GTMap extends Element{
 
     static $patternJsonFile = '';
     
@@ -32,9 +32,9 @@ class Map extends Element{
             'type'      => 'element',
             'setPanel'=> $this->setPanel,
 			'id'		=> $this->id,
-			'title'		=> 'MAP',
-			'iClass'	=> 'WHMap',
-            'component' => 'wh-map',
+			'title'		=> 'GT-Map',
+			'iClass'	=> 'GTMap',
+            'component' => 'gt-map',
             'replayToken'=>$this->replayToken,
 			//'html'		=> $this->panel->render(),
 			'script'	=> '',
