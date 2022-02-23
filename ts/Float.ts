@@ -357,7 +357,6 @@ export class Float {
 
     static float(opt) {
 
-
         let
             e = opt.e,
             left = opt.left,
@@ -484,7 +483,7 @@ export class Move {
 
     static init(config) {
 
-        const main = config.hand;
+        const main = config.main;
         const hand = config.hand;
 
         let startLeft = 0;
@@ -535,10 +534,8 @@ export class Move {
         };
 
         Drag.init({
-            main: config.hand,
+            main: hand,
             onCapture: (response) => {
-                console.log(" ON - Capture")
-                console.log(response)
 
                 startLeft = main.offsetLeft;
                 startTop = main.offsetTop;
@@ -555,103 +552,6 @@ export class Move {
             onRelease: release
         });
     }
-};
-
-export class Move2 {
-    static main = null;
-    static info = null;
-
-    static sX = null;
-    static sY = null;
-
-    static posX = null;
-    static posY = null;
-
-
-
-    static init(info) {
-        Drag.init({
-            main: info.hand,
-            onstart: this.start(info.main, info),
-            oncapture: this.capture,
-            onrelease: this.release
-        });
-
-    }
-    static start(main, info) {
-
-        return function () {
-            this.main = main;
-            this.info = info;
-            this.sX = main.offsetLeft;
-            this.sY = main.offsetTop;
-            //this.main.style.position = "fixed";
-
-            if (this.info.onstart) {
-                this.info.onstart({ left: this.sX, top: this.sY });
-            }
-        };
-    }
-
-    static restart() {
-        this.sX = this.main.offsetLeft;
-        this.sY = this.main.offsetTop;
-    }
-
-    static capture(left, top, iniX, iniY) {
-
-        this.posX = this.sX + (left - iniX);
-        this.posY = this.sY + (top - iniY);
-
-        if (this.posX <= 0) {
-            this.posX = 0;
-        }
-
-        if (this.posY <= 0) {
-            this.posY = 0;
-        }
-
-        this.main.style.left = this.posX + "px";
-        this.main.style.top = this.posY + "px";
-
-        if (this.info.onmove && this.info.onmove(this.posX, this.posY, left, top)) {
-            this.sX = this.main.offsetLeft;
-            this.sY = this.main.offsetTop;
-            //this.restart();
-        }
-
-    }
-
-    static release(left, top, iniX, iniY) {
-
-        const info = Float.getXY(this.main);
-
-        if (info.left > info.cW - 80 || info.top > info.cH - 20) {
-
-            left = (info.left > info.cW - 80) ? info.cW - 80 : info.left;
-            top = (info.top > info.cH - 20) ? info.cH - 20 : info.top;
-
-            Float.move(this.main, left + "px", top + "px");
-        }
-
-        if (this.info.onrelease) {
-            this.info.onrelease(this.posX, this.posY, left, top, iniX, iniY);
-        }
-
-        return;
-        const rect = this.main.getBoundingClientRect();
-        console.log(info);
-        console.log(rect);
-
-        const x1 = (rect.x + rect.width) / info.cW * 100
-        const x2 = (info.cW - (rect.left + rect.width));
-        console.log("porcentaje ini", rect.left, x2);
-        //this.main.style.position = "sticky";
-        //this.main.style.transform = "";
-        this.main.style.left = "auto";
-        this.main.style.right = x2 + "px";
-    }
-
 };
 
 export class Resize {
@@ -683,22 +583,17 @@ export class Resize {
             className: "rs rt", backgroundColor: "", cursor: "sw-resize",
             left: "100%", top: "0", width: "10px", height: "10px", margin: "-5px",
         },
-
         {
             className: "rs lb", backgroundColor: "", cursor: "ne-resize",
             left: "0", top: "100%", width: "10px", height: "10px", margin: "-5px",
         },
-
         {
             className: "rs rb", backgroundColor: "blue", cursor: "nwse-resize",
             left: "100%", top: "100%", width: "10px", height: "10px", margin: "-5px",
         },
     ]
+    
     static init(config) {
-
-
-
-        //this.setHolders(opt.main, opt);
 
         const main = config.main;
         main.style.userSelect = "none";
@@ -824,7 +719,7 @@ export class Resize {
                 if (x1 > maxLeft) {
                     x1 = maxLeft;
                 }
-                main.style.left = x1 + "px";
+                
             } else if (x2 !== null) {
                 x1 = left;
                 if (x2 > maxRight) {
@@ -846,7 +741,7 @@ export class Resize {
                 if (y1 > maxTop) {
                     y1 = maxTop;
                 }
-                main.style.top = y1 + "px";
+                
             } else if (y2 !== null) {
                 y1 = top;
                 if (y2 < minBottom) {
@@ -869,6 +764,8 @@ export class Resize {
             width = x2 - x1;
             height = y2 - y1;
 
+            main.style.left = left + "px";
+            main.style.top = top + "px";
             main.style.width = width + "px";
             main.style.height = height + "px";
 
@@ -913,9 +810,3 @@ export class Resize {
         });
     }
 }
-
-
-
-
-
-

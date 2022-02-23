@@ -16,8 +16,20 @@
 }
 
 .kk {
-	margin: 30px;
-
-	padding: 30px;
 	background-color: rgba(95, 158, 160, 0.747);
+	user-select: none;
+}
+
+#k1 {
+	width: 80px;
+	height: 80px;
+	position: fixed;
+
+	min-height: 20px;
+	min-width: 60px;
+}
+
+#k2 {
+	width: auto;
+	height: 20px;
 }
