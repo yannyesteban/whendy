@@ -27,12 +27,58 @@
   width: 80px;
   height: 80px;
   position: fixed;
-  min-height: 20px;
-  min-width: 60px;
+  max-height: 300px;
+  min-height: 60px;
+  border: 10px solid green;
 }
 
 #k2 {
   width: auto;
-  height: 20px;
+  height: 60px;
+  border: 1px solid red;
+}
+
+.yy2,
+.yy3 {
+  border: 3px solid red;
+  padding: 20;
+  color: #e95d0d;
+  font-weight: bold;
+}
+
+.yy2 .z,
+.yy3 .z {
+  color: #d853e4 !important;
+  border: 3px solid pink;
+  margin: 5px;
+}
+
+#q2 {
+  min-height: 100px;
+  min-width: 100px;
+}
+
+.win {
+  border: 2px solid #b8b8b8;
+  -webkit-box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+  background-color: rgba(1, 1, 1, 0.212);
+}
+
+.win wh-win-header {
+  background-color: #0077ff;
+  color: white;
+}
+
+.win .myicon1 {
+  height: 100%;
+  width: 100%;
+}
+
+*[paz] {
+  border: 1px solid red;
+  background-color: aqua;
+  width: 50px;
+  height: 50px;
 }
 /*# sourceMappingURL=test.css.map */

@@ -31,4 +31,4 @@ Resize.init({main:document.getElementById("q2")});
 Resize.init({main:document.getElementById("k1")});
 
 
-Float.center(document.getElementById("q2"));
+//Float.center(document.getElementById("q2"));

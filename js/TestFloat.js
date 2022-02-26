@@ -15,5 +15,5 @@ Float.show({ e: document.getElementById("q2"), left: 200, top: 200 });
 //Float.center(document.getElementById("q2"));
 Resize.init({ main: document.getElementById("q2") });
 Resize.init({ main: document.getElementById("k1") });
-Float.center(document.getElementById("q2"));
+//Float.center(document.getElementById("q2"));
 //# sourceMappingURL=TestFloat.js.map

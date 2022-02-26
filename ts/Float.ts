@@ -425,11 +425,11 @@ export class Drag {
         let element: HTMLElement = config.main;
 
         const _mouseDown = (event) => {
-            
+
             if (event.target && event.target.classList.contains("_drag_start_")) {
                 return;
             }
-            
+
             element.classList.add("_drag_start_");
 
             const startX = event.clientX;
@@ -454,7 +454,7 @@ export class Drag {
 
             const release = (event) => {
                 element.classList.remove("_drag_start_");
-                
+
                 off(document, "mousemove", drag);
                 off(document, "mouseup", release);
 
@@ -554,44 +554,53 @@ export class Move {
 };
 
 export class Resize {
-    static mode = "";
+
+    static modeX: number = 0;
+    static modeY: number = 0;
+
     static holders = [
         {
             className: "rs t", backgroundColor: "", cursor: "s-resize",
             left: "0", top: "0", width: "100%", height: "", margin: "-2px",
+            modeX: 0, modeY: 1
         },
         {
             className: "rs r", backgroundColor: "", cursor: "e-resize",
             left: "100%", top: "0", width: "", height: "100%", margin: "-2px",
+            modeX: 2, modeY: 0
         },
         {
             className: "rs b", backgroundColor: "", cursor: "n-resize",
             left: "0", top: "100%", width: "100%", height: "", margin: "-2px",
+            modeX: 0, modeY: 2
         },
         {
             className: "rs l", backgroundColor: "", cursor: "w-resize",
             left: "0", top: "0", width: "", height: "100%", margin: "-2px",
+            modeX: 1, modeY: 0
         },
-
-
         {
             className: "rs lt", backgroundColor: "red", cursor: "nwse-resize",
-            left: "0", top: "0", width: "10px", height: "10px", margin: "-5px",
+            left: "0", top: "0", width: "0.6rem", height: "0.6rem", margin: "-0.3rem",
+            modeX: 1, modeY: 1
         },
         {
             className: "rs rt", backgroundColor: "", cursor: "sw-resize",
-            left: "100%", top: "0", width: "10px", height: "10px", margin: "-5px",
+            left: "100%", top: "0", width: "0.6rem", height: "0.6rem", margin: "-0.3rem",
+            modeX: 2, modeY: 1
         },
         {
             className: "rs lb", backgroundColor: "", cursor: "ne-resize",
-            left: "0", top: "100%", width: "10px", height: "10px", margin: "-5px",
+            left: "0", top: "100%", width: "0.6rem", height: "0.6rem", margin: "-0.3rem",
+            modeX: 1, modeY: 2
         },
         {
             className: "rs rb", backgroundColor: "blue", cursor: "nwse-resize",
-            left: "100%", top: "100%", width: "10px", height: "10px", margin: "-5px",
+            left: "100%", top: "100%", width: "0.6rem", height: "0.6rem", margin: "-0.3rem",
+            modeX: 2, modeY: 2
         },
     ]
-    
+
     static init(config) {
 
         const main = config.main;
@@ -605,9 +614,9 @@ export class Resize {
         let width = 0;
         let height = 0;
 
-        let clientWidth = 0;
-        let clientHeight = 0;
-        
+        let viewWidth = 0;
+        let viewHeight = 0;
+
         let minLeft = 0;
         let maxLeft = 0;
         let minRight = 0;
@@ -616,7 +625,7 @@ export class Resize {
         let maxTop = 0;
         let minBottom = 0;
         let maxBottom = 0;
-
+        
         const capture = () => {
 
             const rect = main.getBoundingClientRect();
@@ -625,19 +634,29 @@ export class Resize {
             left = rect.left;
             top = rect.top;
 
-            clientWidth = document.documentElement.clientWidth;
-            clientHeight = document.documentElement.clientHeight;
+            viewWidth = document.documentElement.clientWidth;
+            viewHeight = document.documentElement.clientHeight;
 
             width = main.offsetWidth;
             height = main.offsetHeight;
+            /*
+            main.style.left = left + "px";
+			main.style.width = width + "px";
+			main.style.top = top + "px";
+			main.style.height = height + "px";
+            */
+            if (config.onStart) {
+                config.onStart({ left, top, right, bottom, width, height });
+            }
 
+            //const clientWidth = main.clientWidth;
+            //const clientHeight = main.clientHeight;
             const compute = window.getComputedStyle(main, null);
 
-            const minWidth = parseFloat(compute.minWidth) || 0;
-            const minHeight = parseFloat(compute.minHeight) || 0;
-            const maxWidth = parseFloat(compute.maxWidth) || clientWidth;
-            const maxHeight = parseFloat(compute.maxHeight) || clientHeight;
-            
+            const minWidth = (parseFloat(compute.minWidth) || 0) + (width - main.clientWidth);
+            const minHeight = (parseFloat(compute.minHeight) || 0) + (height - main.clientHeight);
+            const maxWidth = parseFloat(compute.maxWidth) || viewWidth;
+            const maxHeight = parseFloat(compute.maxHeight) || viewHeight;
 
             minLeft = left - (maxWidth - width);
             maxLeft = left + (width - minWidth);
@@ -650,11 +669,6 @@ export class Resize {
 
             minBottom = top + minHeight;
             maxBottom = bottom + (maxHeight - height);
-
-            if (config.onStart) {
-                config.onStart({ left, top, right, bottom, width, height });
-            }
-
         }
 
         const resize = ({ x, y }) => {
@@ -662,52 +676,33 @@ export class Resize {
             if (x < 0) {
                 x = 0;
             }
-            if (x > clientWidth) {
-                x = clientWidth;
+            if (x > viewWidth) {
+                x = viewWidth;
             }
 
             if (y < 0) {
                 y = 0;
             }
-            if (y > clientHeight) {
-                y = clientHeight;
+            if (y > viewHeight) {
+                y = viewHeight;
             }
-            
+
             let x1 = null;
             let x2 = null;
 
             let y1 = null;
             let y2 = null;
 
-            switch (this.mode) {
-                case "t":
-                    y1 = y;
-                    break;
-                case "l":
-                    x1 = x;
-                    break;
-                case "r":
-                    x2 = x;
-                    break;
-                case "b":
-                    y2 = y;
-                    break;
-                case "lt":
-                    x1 = x;
-                    y1 = y;
-                    break;
-                case "rt":
-                    x2 = x;
-                    y1 = y;
-                    break;
-                case "lb":
-                    x1 = x;
-                    y2 = y;
-                    break;
-                case "rb":
-                    x2 = x;
-                    y2 = y
-                    break;
+            if (this.modeX === 1) {
+                x1 = x;
+            } else if (this.modeX === 2) {
+                x2 = x;
+            }
+
+            if (this.modeY === 1) {
+                y1 = y;
+            } else if (this.modeY === 2) {
+                y2 = y;
             }
 
             if (x1 !== null) {
@@ -718,7 +713,7 @@ export class Resize {
                 if (x1 > maxLeft) {
                     x1 = maxLeft;
                 }
-                
+
             } else if (x2 !== null) {
                 x1 = left;
                 if (x2 > maxRight) {
@@ -740,7 +735,7 @@ export class Resize {
                 if (y1 > maxTop) {
                     y1 = maxTop;
                 }
-                
+
             } else if (y2 !== null) {
                 y1 = top;
                 if (y2 < minBottom) {
@@ -794,8 +789,8 @@ export class Resize {
             main.appendChild(holder);
 
             on(holder, "mousedown", (event) => {
-                this.mode = holder.className.split(" ")[1];
-
+                this.modeX = h.modeX;
+                this.modeY = h.modeY;
             });
 
             Drag.init({
@@ -805,7 +800,6 @@ export class Resize {
                 onDrag: resize,
                 onRelease: release
             });
-
         });
     }
 }
