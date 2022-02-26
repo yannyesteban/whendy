@@ -335,9 +335,9 @@ export class Move {
         let startTop = 0;
         const minVisibleX = (config.minVisibleX !== undefined) ? config.minVisibleX : 40;
         const minVisibleY = (config.minVisibleY !== undefined) ? config.minVisibleX : 40;
-        const drag = (reps) => {
-            let left = startLeft + reps.deltaX;
-            let top = startTop + reps.deltaY;
+        const drag = (info) => {
+            let left = startLeft + info.deltaX;
+            let top = startTop + info.deltaY;
             if (left <= 0) {
                 left = 0;
             }
@@ -347,7 +347,11 @@ export class Move {
             main.style.left = left + "px";
             main.style.top = top + "px";
             if (config.onDrag) {
-                config.onDrag({ left, top });
+                info.left = left;
+                info.top = top;
+                config.onDrag(info);
+                //startLeft = main.offsetLeft;
+                //startTop = main.offsetTop;
             }
         };
         const release = (reps) => {

@@ -173,9 +173,19 @@ class WHWin extends HTMLElement {
 		const holder = this.querySelector(`wh-win-header`) as HTMLElement;
 
 		Float.init(this);
-		Move.init({ main: this, hand: holder, onDrag:()=>{
+		Move.init({ main: this, hand: holder, onDrag:(info)=>{
 			if(this.mode === "max"){
+				console.log(info)
+				let w = this.offsetWidth;
 				this.setAttribute("mode", "custom");
+				let w2 = this.offsetWidth;
+				this.style.left = (info.x - (w2 * (info.x - info.left) /w)) + "px";
+				
+
+				return true;
+
+				this.setAttribute("mode", "custom");
+				console.log(info)
 			}
 			
 		} });
