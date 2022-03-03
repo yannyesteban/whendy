@@ -1,25 +1,22 @@
-export const getParentElement = (child, parentTag) => {
+export const getParentElement = (child, parentTag: string) => {
 
+    let parent = child.parentNode;
 
-    let parentNode = null;
-    let ele = this;
+    while (parent !== null) {
+        if (parent.tagName === parentTag.toLocaleUpperCase()) {
 
-    do {
-        parentNode = child.parentNode;
-        ele = parentNode;
-    } while (
-        parentNode !== null &&
-        parentNode.tagName.toUpperCase() !== parentTag.toUpperCase()
-    );
+            return parent;
+        }
+        parent = parent.parentNode;
+    }
 
-
-    return parentNode;
+    return null;
 }
 
 export const fire = (element, name, data) => {
     const event = new CustomEvent(name, {
         detail: data
     });
-    
+
     element.dispatchEvent(event);
 }

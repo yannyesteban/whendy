@@ -88,7 +88,7 @@ class WHWinHeader extends HTMLElement {
 
 		$(this.shadowRoot).q(".auto").on("click", event => {
 			this.getWin().setAttribute("mode", "");
-			this.getWin().updatePos();
+			//this.getWin().updatePos();
 			this.getWin().updateSize();
 		});
 
@@ -96,6 +96,13 @@ class WHWinHeader extends HTMLElement {
 			this.getWin().setAttribute("visibility", "hidden");
 		});
 
+		$(this).on("dblclick", event => {
+			if(this.getWin().mode === "max"){
+				this.getWin().setAttribute("mode", "");
+			}else{
+				this.getWin().setAttribute("mode", "max");
+			}
+		})
 
 		this.getWin().addEventListener("mode-changed", (e:CustomEvent) => {
 			this.setAttribute("mode", e.detail.mode);
@@ -175,28 +182,31 @@ class WHWin extends HTMLElement {
 		Float.init(this);
 		Move.init({ main: this, hand: holder, onDrag:(info)=>{
 			if(this.mode === "max"){
-				console.log(info)
-				let w = this.offsetWidth;
+				
+				const w = this.offsetWidth;
 				this.setAttribute("mode", "custom");
-				let w2 = this.offsetWidth;
+				const w2 = this.offsetWidth;
 				this.style.left = (info.x - (w2 * (info.x - info.left) /w)) + "px";
 				
-
 				return true;
 
-				this.setAttribute("mode", "custom");
-				console.log(info)
 			}
 			
 		} });
 		Resize.init({
-			main: this, onStart: (info) => {
+			main: this,
+			onStart: (info) => {
 				this.style.left = info.left + "px";
 				this.style.width = info.width + "px";
 				this.style.top = info.top + "px";
 				this.style.height = info.height + "px";
 				this.setAttribute("mode", "custom");
+			},
+			onRelease: (info) =>{
+				this.width = info.width + "px";
+				this.height = info.height + "px";
 			}
+			
 		});
 	}
 

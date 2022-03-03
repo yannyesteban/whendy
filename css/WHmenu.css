@@ -1,0 +1,97 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+:host {
+  background-color: red;
+  height: 100%;
+  line-height: 1rem;
+  font-size: 1rem;
+  overflow: hidden;
+  vertical-align: middle;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: inline-block;
+  -ms-grid-columns: auto 1fr auto auto;
+      grid-template-columns: auto 1fr auto auto;
+  gap: 4px;
+  padding: 0.1rem;
+  gap: 6px;
+}
+
+:host > .icon {
+  height: 1.2rem;
+  width: 1.2rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+:host > .caption {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:host .control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+:host .control button {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid black;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+:host([mode="min"]) .control .min {
+  display: none;
+}
+
+:host([mode="max"]) .control .max {
+  display: none;
+}
+
+:host([mode=""]) .control .auto,
+:host(:not([mode])) .control .auto {
+  display: none;
+}
+
+:host-context(wh-window-caption div) {
+  font-weight: bold;
+}
+
+:host-context(.rojo) {
+  font-weight: bold;
+}
+
+:host(.win) {
+  font-weight: bold;
+  color: #269c0e !important;
+}
+/*# sourceMappingURL=WHmenu.css.map */

@@ -1,0 +1,51 @@
+{
+    "name": "test",
+    "query": "select ...",
+    "form": {
+        "caption": "Logín",
+        "className": "sevian",
+        "fields": [
+            {
+                "name": "name",
+                "input": "input",
+                "type": "text",
+                "label": "Nombre"
+            },
+            {
+                "name": "lastname",
+                "input": "input",
+                "type": "text",
+                "label": "Apellido"
+            },
+            {
+                "name": "age",
+                "input": "input",
+                "type": "text",
+                "label": "Edad"
+            },
+            {
+                "name": "email",
+                "input": "input",
+                "type": "text",
+                "label": "Correo"
+            }
+        ],
+        "nav": {
+            "className": "sevian",
+            "items": [
+                {
+                    "caption": "Login",
+                    "send":{
+                        "valid":false,
+                        "confirm":"",
+                        "request":[
+
+                        ]
+
+
+                    }
+                }
+            ]
+        }
+    }
+}

@@ -14,7 +14,7 @@
 
 <body>
 
-    <wh-win class="win" 
+    <wh-win class="win" id="A"
         modee="min"
         resizable="true"
         movible="true"
@@ -33,6 +33,36 @@
         <wh-window-icon>
 
     </wh-win>
+
+    <wh-win class="win" id="B"
+        modee="min"
+        resizable="true"
+        movible="true"
+        width="300px"
+        height="300px"
+        left="300px"
+        top="300px">
+
+        <wh-win-header class="rojo">
+            <wh-win-icon draggable="false"><img class="myicon" src="./../images/icon.png" /></wh-win-icon>
+            <wh-win-caption>Caption de la Ventana 2022</wh-win-caption>
+        </wh-win-header>
+        <wh-win-body>
+            Venezuela es Hoy
+        </wh-win-body>
+        <wh-window-icon>
+
+    </wh-win>
+    <div id="yanny">
+        yanny
+        
+    
+    </div>
+    <div id="h">
+          HHHHHH  
+    </div>
+    <div id="ee">EEEE</div>
+    <button id="stop">STOP</button>
     <script>
 
 
@@ -41,6 +71,22 @@
     //x.innerHTML= " AVENGER";
     </script>
     <script type="module" src="./../js/WHWindow.js"></script>
+    <script type="module">
+        import {Q} from  "./../js/q.js";
+        import {Float as f} from "./../js/Float.js";
+
+        //const y = Q(document.getElementById("yanny"))
+        //console.log(y.children())
+        const ff = f.init(document.getElementById("yanny"));
+        const f2 = f.init(document.getElementById("h"));
+        const f3 = f.init(document.getElementById("ee"));
+
+        Q("#stop").on("click", ev=>{
+            ff.stop()
+        });
+
+
+    </script>
 
 </body>
 

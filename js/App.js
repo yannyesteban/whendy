@@ -1,6 +1,6 @@
 import { loadScript } from "./LoadScript.js";
 import { loadCss } from "./LoadCss.js";
-import { _sgQuery as $ } from "./Query.js";
+import { Q as $ } from "./Q.js";
 export class App extends HTMLElement {
     constructor() {
         super();
@@ -8,6 +8,7 @@ export class App extends HTMLElement {
         this.modules = [];
         this.components = [];
         this._e = [];
+        this.token = "x.y.z";
     }
     static get observedAttributes() {
         return ["server"];
@@ -27,7 +28,7 @@ export class App extends HTMLElement {
                 requestFunctions[item.iToken](item.data);
                 return;
             }
-            switch (item.type) {
+            switch (item.mode) {
                 case "debug":
                     console.log(item.info);
                     break;
@@ -39,11 +40,11 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
-                    //this.updateElement(item)
+                    this.updateElement(item);
                     break;
                 case "response":
                     break;
-                case "element":
+                case "init":
                     this.initElement(item);
                     break;
                 case "fragment":
@@ -61,7 +62,6 @@ export class App extends HTMLElement {
         });
     }
     test() {
-        return;
         const request = {
             confirm: "?",
             valid: true,
@@ -87,18 +87,110 @@ export class App extends HTMLElement {
         };
         this.go(request);
     }
+    initApp() {
+        const request = {
+            confirm: "?",
+            valid: true,
+            headers: {
+                "Application-Mode": "start"
+            },
+            data: {
+                id: this.id,
+            },
+            requestFunctionS: (data) => {
+                data.cssSheets.forEach((sheet) => {
+                    loadCss(sheet, true);
+                });
+                this.innerHTML = data.template;
+                this.modules = data.modules;
+                console.log(this.modules);
+            },
+            request: [],
+            request2: [
+                {
+                    type: "init-app",
+                    element: "app",
+                    method: "init",
+                    id: null,
+                    config: {},
+                    setPanel: null,
+                    setTemplate: null,
+                },
+            ],
+        };
+        this.go(request);
+    }
+    whenComponent(module) {
+        console.log(module.src);
+        return new Promise((resolve, reject) => {
+            if (customElements.get(module.component)) {
+                console.log("opcion 1");
+                resolve(customElements.get(module.component));
+            }
+            import(module.src).then(MyModule => {
+                console.log("opcion 2");
+                resolve(customElements.get(module.component));
+            }).catch(error => {
+                reject(error);
+            });
+        });
+    }
+    updateElement(info) {
+        const e = $.id(info.id);
+        if (e) {
+            if (info.props) {
+                e.prop(info.props);
+            }
+        }
+    }
+    importModule(element) {
+        const m = this.modules.find((e) => e.name == element.iClass);
+        const module = this.modules.find((e) => e.component == element.wc);
+        loadScript(m.src, { async: true, type: "module" }).then((info) => {
+            const e = $.create(element.wc);
+            e.id(element.id);
+            e.prop(element.props);
+            e.attr(element.attrs);
+            const panel = $.id(element.setPanel);
+            if (panel) {
+                panel.text("");
+                panel.append(e);
+            }
+        });
+    }
+    initElement(element) {
+        const module = this.modules.find((e) => e.component == element.wc);
+        if (module) {
+            this.whenComponent(module).then((component) => {
+                const e = $.create(module.component);
+                e.id(element.id);
+                e.prop(element.props);
+                e.attr(element.attrs);
+                const panel = $.id(element.setPanel);
+                if (panel) {
+                    panel.text("");
+                    panel.append(e);
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+    }
     go(info) {
         var _a;
+        console.log(info);
         let body;
         if (info.dataForm) {
         }
         else {
         }
+        const headers = Object.assign({
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${this.token}`
+        }, info.headers || {});
         fetch(this.server, {
             method: "post",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers,
             body: JSON.stringify({
                 __sg_request: info.request,
                 __sg_data: (_a = info.data) !== null && _a !== void 0 ? _a : null,
@@ -109,103 +201,13 @@ export class App extends HTMLElement {
         })
             .catch((error) => { })
             .then((json) => {
+            console.log(json);
             if (info.requestFunction) {
                 info.requestFunction(json);
                 return true;
             }
-            console.log(json);
             this.decodeResponse(json, info.requestFunctions || null);
         });
-    }
-    initApp() {
-        const request = {
-            confirm: "?",
-            valid: true,
-            data: {
-                name: "yanny nuñez",
-            },
-            requestFunction: (data) => {
-                data.cssSheets.forEach((sheet) => {
-                    loadCss(sheet, true);
-                });
-                this.innerHTML = data.template;
-                this.modules = data.modules;
-                console.log("yanny");
-                console.log(this.modules);
-                document.getElementById("wh-menu").addEventListener("click", (event) => {
-                    this.test();
-                });
-            },
-            request: [
-                {
-                    type: "init-app",
-                    element: "",
-                    id: null,
-                    config: {},
-                    setPanel: null,
-                    setTemplate: null,
-                },
-            ],
-        };
-        this.go(request);
-    }
-    initElement(element) {
-        if (!element) {
-            return;
-        }
-        const id = element.id;
-        if ($(id)) {
-            $(id).text(element.html);
-        }
-        if (element.script) {
-            $.appendScript(element.script);
-        }
-        if (element.css) {
-            $.appendStyle(element.css);
-        }
-        if (element.title) {
-            document.title = element.title;
-        }
-        console.log(element);
-        console.log(this.modules);
-        if (!this.components[element.iClass]) {
-            const m = this.modules.find((e) => e.name == element.iClass);
-            if (m) {
-                console.log(m);
-                loadScript(m.src, { async: true, type: "module" }).then((e) => {
-                    console.log(window[element.iClass]);
-                    this._e[id] = $.create(element.component).get();
-                    for (let x in element.config) {
-                        console.log(x, element.config[x]);
-                        //this._e[id].setAttribute(x, element.config[x]);
-                        this._e[id][x] = element.config[x];
-                    }
-                    ;
-                    if (element.setPanel) {
-                        const panel = $(element.setPanel);
-                        if (panel) {
-                            panel.text("");
-                            panel.append(this._e[id]);
-                        }
-                    }
-                });
-                /*import(m.src).then(MyModule => {
-                            
-                            console.log(MyModule.Map)
-                            this._e[id] = new MyModule[m.name](element.config);
-                            this._e[id].test();
-                            $(id).text("");
-                            $(id).append(this._e[id]);
-                         })
-                         */
-            }
-        }
-        if (this.components[element.iClass] && element.config !== null) {
-            if (this._e[id]) {
-                delete this._e[id];
-            }
-            this._e[id] = new this.components[element.iClass](element.config); //x.option
-        }
     }
 }
 customElements.define("wh-app", App);

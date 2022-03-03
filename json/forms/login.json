@@ -1,0 +1,110 @@
+{
+    "name": "login",
+    "query": "select ...",
+    "config": [
+        {
+            "name": "codpersona",
+            "field": "codpersona",
+            "table": "xxx",
+            "onInsert": {
+                "value": "${nombre}"
+            },
+            "dataInput": "select * from ",
+            "rules": {
+                "integer": true,
+                "email": true
+            },
+            "rulesLevel": [
+                "onsubmit",
+                "onsave"
+            ]
+        }
+    ],
+    "rules": [
+        {
+            "field": "nombre",
+            "uppercase": true,
+            "numeric": "true",
+            "integer": "true"
+        }
+    ],
+    "data": {
+        "codestado": [
+            [
+                "",
+                "",
+                ""
+            ],
+            "select * from "
+        ]
+    },
+    "tables": {
+        "table1": [
+            "input1:field",
+            "field2"
+        ],
+        "table2": [
+            "user",
+            "field2"
+        ]
+    },
+    "form": {
+        "caption": "Logín",
+        "className": "sevian",
+        "fields": [
+            {
+                "name": "user",
+                "input": "input",
+                "type": "text",
+                "label": "Usuario"
+            },
+            {
+                "name": "pass",
+                "input": "input",
+                "type": "password",
+                "label": "Clave"
+            }
+        ],
+        "nav": {
+            "className": "sevian",
+            "items": [
+                {
+                    "caption": "Login",
+                    "send": {
+                        "valid": false,
+                        "confirm": "",
+                        "request": [
+                            {
+                                "id": "",
+                                "type": "element",
+                                "element": "user-admin",
+                                "method": "login",
+                                
+                                "name": "",
+                                "config": {}
+                            }
+                        ]
+                    }
+                },
+                {
+                    "caption": "test",
+                    "send": {
+                        "valid": false,
+                        "confirm": "",
+                        "request": [
+                            {
+                                "id": "form-login2",
+                                "type": "element",
+                                "element": "form",
+                                "method": "request",
+                                "setPanel": "wh-form2",
+                                "name": "/{@JSON_PATH}forms/test.json",
+                                "config": {}
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}

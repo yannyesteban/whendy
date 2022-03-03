@@ -1,57 +1,82 @@
 <?php
-$token = '*******-****-****-****-*********';
+
+class JWT
+{
+    private static $payload = [];
+    private static $key = 'pre';
+
+    private static $header = [
+        'alg'=>'HS256',
+        'typ'=>'JWT'
+    ];
+    public static function getPayload($payload){
+        return self::$payload;
+    }
     
-$header = array(
-   "alg" => "HS256",
-   "typ" => "JWT"
-);
-   
-$header = json_encode($header);
-$header = base64url_encode($header);
+    public static function generate($payload)
+    {
+        self::$payload = $payload;
+        
+        $header =  self::base64url_encode(json_encode(self::$header)); //-> "PDw/Pz8+Pg=="
+        $payload =  self::base64url_encode(json_encode($payload)); //-> "PDw/Pz8+Pg=="
+        $signature = self::base64url_encode(hash_hmac('SHA256', "$header.$payload", self::$key, true));
 
-$payload = array(
-  "id" => "XXXX"
-);
+        return "$header.$payload.$signature";
+    }
 
-$payload = json_encode($payload);
-$payload = base64url_encode($payload);
-$payload = str_replace('==', '', $payload);
+    public static function decode($token)
+    {
+        $str = explode('.', $token);
+        $header = json_decode(self::base64url_decode($str[0]));
+        $payload = json_decode(self::base64url_decode($str[1]));
+        $signature = $str[2];
 
-$toHash = $header .'.'. $payload;
+        return [
+            'header'    => $header,
+            'payload'   => $payload,
+            'signature' => $signature
+        ];
+    }
 
-$signature = hash_hmac('sha256', $toHash, $token, true);
-$signature = base64url_encode($signature);
+    public static function verifyHeader(){
+        $headers = getallheaders();
+        if($headers['Authorization']){
+            $arr = explode(' ', $headers['Authorization']);
+            return self::verify(array_pop($arr));
+        }
+        
+        return null;;
+    }
 
+    public static function verify($token)
+    {
+        $str = explode('.', $token);
+        $header = self::base64url_decode($str[0]);
+        $payload = self::base64url_decode($str[1]);
+        $signature = $str[2];
 
-echo "$toHash.$signature<hr>";
+        $header1 =  self::base64url_encode($header);
+        $payload1 =  self::base64url_encode($payload);
+        $signature1 = self::base64url_encode(hash_hmac('SHA256', "$header1.$payload1", self::$key, true));
 
+        if($signature === $signature1){
+            return [
+                'header'    => json_decode($header),
+                'payload'   => json_decode($payload),
+                'signature' => $signature
+            ];
+        }
 
-function base64url_encode($data) {
-    return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
-  }
-  
-  function base64url_decode($data) {
-    return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
-  } 
+        return false;
+    }
 
-$header = [
-'alg'=>'HS256',
-'typ'=>'JWT'
+    public static function base64url_encode($data)
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
 
-];
-
-$payload = [
-    'sub'=> '1234567890',
-    'name'=> 'John Doe',
-    'iat'=> 1516239022
-];
-
-// Encode text to Base64 standard
-$header =  base64url_encode(json_encode($header)); //-> "PDw/Pz8+Pg=="
-$payload =  base64url_encode(json_encode($payload)); //-> "PDw/Pz8+Pg=="
-$sig = base64url_encode(hash_hmac('SHA256', $header.".".$payload, 'yanny', true));
-
-echo "$header.$payload.$sig";
-
-
-
+    public static function base64url_decode($data)
+    {
+        return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+    }
+}

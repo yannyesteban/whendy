@@ -1,4 +1,4 @@
-import { Float, Drag, Move, Resize } from "./Float.js";
+import { Float, Drag, Move, Resize } from "./FloatOld.js";
 
 export class TestFloat{
     constructor(){

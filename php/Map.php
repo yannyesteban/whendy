@@ -28,7 +28,7 @@ class Map extends Element{
     }
 
     public function load(){
-        $this->setInfoElement([
+        $this->addResponse([
             'type'      => 'element',
             'setPanel'=> $this->setPanel,
 			'id'		=> $this->id,

@@ -12,13 +12,23 @@ const off = function (obj, _event, _function) {
     obj.removeEventListener(_event, _function, false);
 };
 export class Float {
-    static init(e) {
-        on(e, "mousedown", (event) => {
-            e.style.zIndex = getIndex(e.style.zIndex);
-        });
-        on(e, "touchstart", (event) => {
-            e.style.zIndex = getIndex(e.style.zIndex);
-        });
+    constructor(config) {
+        this._mousedown = (event) => {
+            this.e.style.zIndex = getIndex(this.e.style.zIndex);
+        };
+        this._touchstart = (event) => {
+            this.e.style.zIndex = getIndex(this.e.style.zIndex);
+        };
+        this.e = config;
+        on(this.e, "mousedown", this._mousedown);
+        on(this.e, "touchstart", this._touchstart);
+    }
+    stop() {
+        off(this.e, "mousedown", this._mousedown);
+        off(this.e, "touchstart", this._touchstart);
+    }
+    static init(config) {
+        return new Float(config);
     }
     static setIndex(e) {
         e.style.zIndex = getIndex(e.style.zIndex);
@@ -278,12 +288,13 @@ export class Float {
     }
 }
 export class Drag {
-    static init(config) {
-        const onCapture = config.onCapture || ((config) => { });
-        const onDrag = config.onDrag || ((config) => { });
-        const onRelease = config.onRelease || ((config) => { });
-        let element = config.main;
-        const _mouseDown = (event) => {
+    constructor(config) {
+        this.e = null;
+        this.onCapture = (config) => { };
+        this.onDrag = (config) => { };
+        this.onRelease = (config) => { };
+        this._mouseDown = (event) => {
+            const element = this.e;
             if (event.target && event.target.classList.contains("_drag_start_")) {
                 return;
             }
@@ -292,9 +303,9 @@ export class Drag {
             const startY = event.clientY;
             const left = element.offsetLeft;
             const top = element.offsetTop;
-            onCapture({ startX, startY, left, top });
+            this.onCapture({ startX, startY, left, top });
             const drag = (event) => {
-                onDrag({
+                this.onDrag({
                     x: event.clientX,
                     y: event.clientY,
                     startX,
@@ -309,7 +320,7 @@ export class Drag {
                 element.classList.remove("_drag_start_");
                 off(document, "mousemove", drag);
                 off(document, "mouseup", release);
-                onRelease({
+                this.onRelease({
                     x: event.clientX,
                     y: event.clientY,
                     startX,
@@ -323,10 +334,22 @@ export class Drag {
             on(document, "mousemove", drag);
             on(document, "mouseup", release);
         };
-        on(element, "mousedown", _mouseDown);
+        for (var x in config) {
+            if (this.hasOwnProperty(x)) {
+                this[x] = config[x];
+            }
+        }
+        this.e = config.main;
+        on(this.e, "mousedown", this._mouseDown);
+    }
+    stop() {
+        off(this.e, "mousedown", this._mouseDown);
+    }
+    ;
+    static init(config) {
+        return new Drag(config);
     }
 }
-Drag.stop = () => { };
 export class Move {
     static init(config) {
         const main = config.main;
@@ -349,9 +372,10 @@ export class Move {
             if (config.onDrag) {
                 info.left = left;
                 info.top = top;
-                config.onDrag(info);
-                //startLeft = main.offsetLeft;
-                //startTop = main.offsetTop;
+                if (config.onDrag(info)) {
+                    startLeft = main.offsetLeft;
+                    startTop = main.offsetTop;
+                }
             }
         };
         const release = (reps) => {
@@ -367,7 +391,7 @@ export class Move {
                 config.onRelease(reps);
             }
         };
-        Drag.init({
+        return Drag.init({
             main: hand,
             onCapture: (response) => {
                 startLeft = main.offsetLeft;
@@ -386,8 +410,17 @@ export class Move {
 }
 ;
 export class Resize {
-    static init(config) {
-        const main = config.main;
+    constructor(config) {
+        this.main = null;
+        this.modeX = 0;
+        this.modeY = 0;
+        this._drag = [];
+        for (var x in config) {
+            if (this.hasOwnProperty(x)) {
+                this[x] = config[x];
+            }
+        }
+        const main = this.main;
         main.style.userSelect = "none";
         let left = 0;
         let top = 0;
@@ -528,11 +561,11 @@ export class Resize {
             }
         };
         const release = (resp) => {
-            if (config.onStart) {
-                config.onStart({ left, top, right, bottom, width, height });
+            if (config.onRelease) {
+                config.onRelease({ left, top, right, bottom, width, height });
             }
         };
-        this.holders.forEach((h) => {
+        Resize.holders.forEach((h) => {
             const holder = document.createElement("div");
             holder.style.cssText = "position:absolute;min-height:3px;min-width:3px;z-index:10";
             holder.className = h.className;
@@ -547,18 +580,23 @@ export class Resize {
                 this.modeX = h.modeX;
                 this.modeY = h.modeY;
             });
-            Drag.init({
+            this._drag.push(Drag.init({
                 main: holder,
                 context: main,
                 onCapture: capture,
                 onDrag: resize,
                 onRelease: release
-            });
+            }));
         });
     }
+    stop() {
+        this._drag.forEach(drag => drag.stop());
+        Array.from(document.body.querySelectorAll(`:scope > div.rs`)).map(child => child.remove);
+    }
+    static init(config) {
+        return new Resize(config);
+    }
 }
-Resize.modeX = 0;
-Resize.modeY = 0;
 Resize.holders = [
     {
         className: "rs t", backgroundColor: "", cursor: "s-resize",

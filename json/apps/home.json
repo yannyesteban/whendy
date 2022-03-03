@@ -1,0 +1,11 @@
+{
+    "name":"home",
+    "templateFile":"",
+    "elements":[],
+    "className":[],
+    "roles":["*public*"],
+    "cssSheets": [
+        "css/reset.css",
+        "css/main.css"
+    ]
+}

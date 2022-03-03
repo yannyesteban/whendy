@@ -2,7 +2,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "target": "es6",
-        "module": "es6",
+        "module": "es2020",
         "sourceMap": true,
         "outDir": "./js",
         "moduleResolution": "classic",

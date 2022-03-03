@@ -1,0 +1,44 @@
+[
+    {
+        "name": "test",
+        "enable": true,
+        "file": "php/test8.php",
+        "class": "Test8"
+    },
+    {
+        "name": "app",
+        "enable": true,
+        "file": "php/App.php",
+        "class": "\\WH\\App"
+    },
+    {
+        "name": "html",
+        "enable": true,
+        "file": "php/Html.php",
+        "class": "\\WH\\Html"
+    },
+    {
+        "name": "user-admin",
+        "enable": true,
+        "file": "php/UserAdmin.php",
+        "class": "\\WH\\UserAdmin"
+    },
+    {
+        "name": "form",
+        "enable": true,
+        "file": "php/Form.php",
+        "class": "\\WH\\Form"
+    },
+    {
+        "name": "map",
+        "enable": true,
+        "file": "php/map.php",
+        "class": "Map"
+    },
+    {
+        "name": "GTMap",
+        "enable": true,
+        "file": "php/GTMap.php",
+        "class": "GTMap"
+    }
+]

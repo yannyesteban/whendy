@@ -29,14 +29,25 @@ const off = function (obj, _event, _function) {
 };
 
 export class Float {
+    public e;
+    public _mousedown = (event) => {
+        this.e.style.zIndex = getIndex(this.e.style.zIndex);
+    }
+    public _touchstart = (event) => {
+        this.e.style.zIndex = getIndex(this.e.style.zIndex);
+    }
+    constructor(config) {
+        this.e = config;
+        on(this.e, "mousedown", this._mousedown);
+        on(this.e, "touchstart", this._touchstart);
+    }
 
-    static init(e) {
-        on(e, "mousedown", (event) => {
-            e.style.zIndex = getIndex(e.style.zIndex);
-        });
-        on(e, "touchstart", (event) => {
-            e.style.zIndex = getIndex(e.style.zIndex);
-        });
+    stop() {
+        off(this.e, "mousedown", this._mousedown);
+        off(this.e, "touchstart", this._touchstart);
+    }
+    static init(config) {
+        return new Float(config);
     }
 
     static setIndex(e) {
@@ -414,67 +425,81 @@ export class Float {
 }
 
 export class Drag {
+    public e: HTMLElement = null;
 
-    static stop = () => { };
-    static init(config) {
+    public onCapture = (config) => { };
+    public onDrag = (config) => { };
+    public onRelease = (config) => { };
 
-        const onCapture = config.onCapture || ((config) => { });
-        const onDrag = config.onDrag || ((config) => { });
-        const onRelease = config.onRelease || ((config) => { });
+    public _mouseDown = (event) => {
+        const element = this.e;
+        if (event.target && event.target.classList.contains("_drag_start_")) {
+            return;
+        }
 
-        let element: HTMLElement = config.main;
+        element.classList.add("_drag_start_");
 
-        const _mouseDown = (event) => {
+        const startX = event.clientX;
+        const startY = event.clientY;
+        const left = element.offsetLeft;
+        const top = element.offsetTop;
 
-            if (event.target && event.target.classList.contains("_drag_start_")) {
-                return;
-            }
+        this.onCapture({ startX, startY, left, top });
 
-            element.classList.add("_drag_start_");
-
-            const startX = event.clientX;
-            const startY = event.clientY;
-            const left = element.offsetLeft;
-            const top = element.offsetTop;
-
-            onCapture({ startX, startY, left, top });
-
-            const drag = (event) => {
-                onDrag({
-                    x: event.clientX,
-                    y: event.clientY,
-                    startX,
-                    startY,
-                    left,
-                    top,
-                    deltaX: event.clientX - startX,
-                    deltaY: event.clientY - startY
-                });
-            };
-
-            const release = (event) => {
-                element.classList.remove("_drag_start_");
-
-                off(document, "mousemove", drag);
-                off(document, "mouseup", release);
-
-                onRelease({
-                    x: event.clientX,
-                    y: event.clientY,
-                    startX,
-                    startY,
-                    left,
-                    top,
-                    deltaX: event.clientX - startX,
-                    deltaY: event.clientY - startY
-                });
-
-            }
-            on(document, "mousemove", drag);
-            on(document, "mouseup", release);
+        const drag = (event) => {
+            this.onDrag({
+                x: event.clientX,
+                y: event.clientY,
+                startX,
+                startY,
+                left,
+                top,
+                deltaX: event.clientX - startX,
+                deltaY: event.clientY - startY
+            });
         };
 
-        on(element, "mousedown", _mouseDown);
+        const release = (event) => {
+            element.classList.remove("_drag_start_");
+
+            off(document, "mousemove", drag);
+            off(document, "mouseup", release);
+
+            this.onRelease({
+                x: event.clientX,
+                y: event.clientY,
+                startX,
+                startY,
+                left,
+                top,
+                deltaX: event.clientX - startX,
+                deltaY: event.clientY - startY
+            });
+
+        }
+        on(document, "mousemove", drag);
+        on(document, "mouseup", release);
+    };
+
+    constructor(config) {
+
+        for (var x in config) {
+            if (this.hasOwnProperty(x)) {
+                this[x] = config[x];
+            }
+        }
+        this.e = config.main;
+        on(this.e, "mousedown", this._mouseDown);
+    }
+
+    stop() {
+
+        off(this.e, "mousedown", this._mouseDown);
+    };
+
+    static init(config) {
+        
+        return new Drag(config);
     }
 }
 
@@ -510,10 +535,12 @@ export class Move {
             if (config.onDrag) {
                 info.left = left;
                 info.top = top;
-                config.onDrag(info);
-                
-                //startLeft = main.offsetLeft;
-                //startTop = main.offsetTop;
+                if (config.onDrag(info)) {
+                    startLeft = main.offsetLeft;
+                    startTop = main.offsetTop;
+                }
+
+
             }
         };
 
@@ -537,7 +564,7 @@ export class Move {
             }
         };
 
-        Drag.init({
+        return Drag.init({
             main: hand,
             onCapture: (response) => {
 
@@ -560,8 +587,12 @@ export class Move {
 
 export class Resize {
 
-    static modeX: number = 0;
-    static modeY: number = 0;
+    public main: HTMLElement = null;
+
+    public modeX: number = 0;
+    public modeY: number = 0;
+
+    public _drag: Drag[] = [];
 
     static holders = [
         {
@@ -606,9 +637,14 @@ export class Resize {
         },
     ]
 
-    static init(config) {
+    constructor(config){
+        for (var x in config) {
+            if (this.hasOwnProperty(x)) {
+                this[x] = config[x];
+            }
+        }
 
-        const main = config.main;
+        const main = this.main; 
         main.style.userSelect = "none";
 
         let left = 0;
@@ -630,7 +666,7 @@ export class Resize {
         let maxTop = 0;
         let minBottom = 0;
         let maxBottom = 0;
-        
+
         const capture = () => {
 
             const rect = main.getBoundingClientRect();
@@ -646,9 +682,9 @@ export class Resize {
             height = main.offsetHeight;
             /*
             main.style.left = left + "px";
-			main.style.width = width + "px";
-			main.style.top = top + "px";
-			main.style.height = height + "px";
+            main.style.width = width + "px";
+            main.style.top = top + "px";
+            main.style.height = height + "px";
             */
             if (config.onStart) {
                 config.onStart({ left, top, right, bottom, width, height });
@@ -774,12 +810,12 @@ export class Resize {
         }
 
         const release = (resp) => {
-            if (config.onStart) {
-                config.onStart({ left, top, right, bottom, width, height });
+            if (config.onRelease) {
+                config.onRelease({ left, top, right, bottom, width, height });
             }
         }
 
-        this.holders.forEach((h) => {
+        Resize.holders.forEach((h) => {
             const holder = document.createElement("div");
             holder.style.cssText = "position:absolute;min-height:3px;min-width:3px;z-index:10";
 
@@ -798,13 +834,21 @@ export class Resize {
                 this.modeY = h.modeY;
             });
 
-            Drag.init({
+            this._drag.push(Drag.init({
                 main: holder,
                 context: main,
                 onCapture: capture,
                 onDrag: resize,
                 onRelease: release
-            });
+            }));
         });
+    }
+    public stop(){
+        this._drag.forEach(drag => drag.stop());
+        Array.from(document.body.querySelectorAll(`:scope > div.rs`)).map(child => child.remove);
+        
+    }
+    static init(config) {
+        return new Resize(config);
     }
 }
