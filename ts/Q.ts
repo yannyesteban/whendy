@@ -262,7 +262,7 @@ export const Q = (query) => {
     return Object.assign(new QElement(e), utils);
 }
 Q.id = (id) => {
-    return Q(`#${id}`);
+    return Q(document.getElementById(id));
 }
 Q.create = (config) => {
 

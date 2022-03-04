@@ -24,6 +24,8 @@ include_once 'php/EnvAdmin.php';
 include_once 'php/ConstantAdmin.php';
 include_once 'php/ClassAdmin.php';
 
+Store::start();
+
 ConstantAdmin::load("configuration/constants.json");
 EnvAdmin::load("configuration/env.json");
 ClassAdmin::load("configuration/classes.json");

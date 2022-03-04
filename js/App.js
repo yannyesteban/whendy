@@ -9,9 +9,10 @@ export class App extends HTMLElement {
         this.components = [];
         this._e = [];
         this.token = "x.y.z";
+        this.sid = "energy";
     }
     static get observedAttributes() {
-        return ["server"];
+        return ["server", "sid"];
     }
     attributeChangedCallback(name, oldVal, newVal) {
         this[name] = newVal;
@@ -40,6 +41,7 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
+                    console.log(item);
                     this.updateElement(item);
                     break;
                 case "response":
@@ -177,24 +179,22 @@ export class App extends HTMLElement {
         }
     }
     go(info) {
-        var _a;
         console.log(info);
         let body;
         if (info.dataForm) {
         }
         else {
         }
+        const data = Object.assign(info.data || {}, { __sg_request: info.request });
         const headers = Object.assign({
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${this.token}`
+            "Authorization": `Bearer ${this.token}`,
+            "SID": this.sid
         }, info.headers || {});
         fetch(this.server, {
             method: "post",
             headers,
-            body: JSON.stringify({
-                __sg_request: info.request,
-                __sg_data: (_a = info.data) !== null && _a !== void 0 ? _a : null,
-            }),
+            body: JSON.stringify(data),
         })
             .then((response) => {
             return response.json();

@@ -1,19 +1,28 @@
 <?php
 namespace Sigefor;
-
+include_once __DIR__.'/../Store.php';
 include_once __DIR__.'/../Interfaces.php';
 include_once __DIR__.'/../Element.php';
 include_once __DIR__.'/../Trait/ConfigJson.php';
 
-use ConfigJson, WH\IUserInfo;
+use ConfigJson, WH\IUserInfo, WH\IPreConfig, Store;
 
-class Element extends \Element implements IUserInfo
+class Element extends \Element implements IUserInfo, IPreConfig
 {
     
     use ConfigJson;
 
     protected $_userInfo =  null;
 
+
+    public static function _loadPreConfig($info){
+
+        if($info->name){
+            return Store::loadJson($info->name);
+        }
+        return $info;
+    }
+    
     public function __construct($config = []){
         \Element::__construct($config);
     }

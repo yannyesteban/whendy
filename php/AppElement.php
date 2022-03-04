@@ -8,16 +8,27 @@ include_once 'Trait/ConfigJson.php';
 
 use ConfigJson, WH\IUserInfo;
 
-class AppElement extends \Element implements IUserInfo, IAppAmin
+class AppElement extends \Element implements IUserInfo, IAppAmin, IAppElementAdmin
 {
 
     use ConfigJson;
+
+    protected $modules = [];
+    protected $cssSheets = [];
+    protected $templateFile = [];
+    protected $template = [];
+    protected $elements = [];
+    
 
     protected $_userInfo =  null;
 
     public function __construct($config = [])
     {
         \Element::__construct($config);
+    }
+
+    public function getAppElement(){
+        return $this->elements;
     }
 
     public function setUserInfo($info)

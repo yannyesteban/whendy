@@ -16,6 +16,13 @@ class Element
 
     protected $_response =  [];
 
+    protected $acceptedRoles = [];
+    static $_acceptedRoles = ['a', 'b', 'c'];
+
+    static public function _acceptedRoles(){
+        return self::$_acceptedRoles;
+    }
+
     public function __construct($opt = [])
     {
         foreach ($opt as $k => $v) {
@@ -24,34 +31,10 @@ class Element
     }
 
     /* OK */
-    public function config()
-    {
-    }
-
-    /* OK */
     public function evalMethod()
     {
     }
 
-    /* OK */
-    public function setPanel($panel)
-    {
-        $this->_panel = $panel ;
-    }
-
-    /* OK */
-    public function getPanel()
-    {
-        if (isset($this->_panel)) {
-            return $this->_panel;
-        }
-        return $this->panel;
-    }
-
-    
-
-
-   
     public function addResponse($response)
     {
         $this->_response[] = (object)$response;

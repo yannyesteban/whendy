@@ -46,9 +46,9 @@ class Form extends Element{
 
     public function form(){
         
-        $json = $this->getConfigJson();
-        //print_r($json);exit;
-        
+        //$json = $this->getConfigJson();
+        //print_r($this->setPanel);exit;
+       
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -56,7 +56,7 @@ class Form extends Element{
             'id'    => $this->id,
             'props' =>[
                 'name'  =>$this->name,
-                'data'=>$json->form,
+                'data'=>$this->form,
             ],
             'replayToken'=>$this->replayToken,
             'setPanel'=>$this->setPanel

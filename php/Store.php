@@ -6,6 +6,9 @@ include_once 'Tool.php';
 class Store{
     
 	private static $id = [];
+	private static $sid = '';
+
+	private static $method = [];
 
 	public static $ses = [];
 	public static $req = [];
@@ -13,23 +16,56 @@ class Store{
 	public static $frm = [];
     public static $env = [];
 
+	private static $header = null;
 
 	public static $cfg = null;
-	public static function start($id){
+	
+	public static function start(){
 
-		if($id){
-			self::$id = $id;
+		self::$header = getallheaders();
+		self::$req = self::decodeRequest();
+		self::$sid = self::$header['SID'];
+
+		if(self::$sid){
+			session_name(self::$sid);
 		}else{
-			self::$id = uniqid('p');
+			self::$sid = uniqid('p');
 		}
 
-		session_name(self::$id);
 		session_start();
-		
+
 		self::$cfg = &$_SESSION;
+		self::$ses = &$_SESSION['ses'];
+	}
 
-		self::$cfg['ses'] = &self::$ses;
+	private static function decodeRequest()
+    {
+        self::$method = strtolower($_SERVER['REQUEST_METHOD']);
+		
+		if (strtolower($_SERVER['CONTENT_TYPE'] ?? '') === 'application/json') {
 
+			return json_decode(file_get_contents('php://input'), true);
+        } elseif (self::$method === 'get') {
+
+			return $_GET;
+        } elseif (self::$method === 'post') {
+            
+			return $_POST;
+        }
+		
+		return [];		
+    }
+	
+	public static function getSid(){
+		return self::$sid;
+	}
+
+	public static function setSes($key, $value){
+		self::$ses[$key] = $value;
+	}
+	
+	public static function &getSes($key){
+		return self::$ses[$key];
 	}
 
 	public static function setVReq($data){
@@ -45,11 +81,9 @@ class Store{
 		return self::$req[$key];
 	}
 
-    public static function setSes($key, $value){
-		self::$ses[$key] = $value;
+	public static function getHeader($key){
+		return self::$header[$key] ?? null;
 	}
-
-	
 
 	public static function addSes($ses){
 		self::$ses = array_merge(self::$ses, $ses);
@@ -62,32 +96,27 @@ class Store{
 	public static function setExp($key, $value){
 		self::$exp[$key] = $value;
 	}
-	public static function &getSes($key){
-		return self::$ses[$key];
-	}
 	
 	public static function &getExp($key){
 		return self::$exp[$key];
 	}
+
 	public static function &getVSes(){
 		return self::$ses;
 	}
-
 	
 	public static function &getVExp(){
 		return self::$exp;
 	}
+
 	public static function &getVFrm(){
 		return self::$frm;
 	}
 
     public static function evalExp($q){
 
-
 		return Tool::evalExp(self::vars($q));
-
 	}
-
 
 	public static function setEnvData($data){
 		self::$env = $data;
@@ -163,5 +192,10 @@ class Store{
         $json = self::getJson($file);
         
         return $json;
+    }
+
+	public static function loadFile($name){
+        $data = Tool::loadFile($name);
+		return Store::vars($data);
     }
 }

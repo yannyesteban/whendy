@@ -98,7 +98,7 @@
                                 "element": "form",
                                 "method": "request",
                                 "setPanel": "wh-form2",
-                                "name": "/{@JSON_PATH}forms/test.json",
+                                "name": "{@JSON_PATH}/forms/test.json",
                                 "config": {}
                             }
                         ]

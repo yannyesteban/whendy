@@ -1,11 +1,44 @@
 {
+    "id":"gtcomm",
     "name":"home",
-    "templateFile":"",
-    "elements":[],
-    "className":[],
-    "roles":["*public*"],
+    "templateFile":"{@TEMPLATES_PATH}/init.html",
+    "elements":[{
+        "setPanel":"wh-body",
+        "element":"form",
+        "name":"{@JSON_PATH}/forms/login.json",
+        "method":"request",
+        "eparams":{"a":"x"}
+    }],
+    "className":["one", "sevian"],
+    "acceptedRoles":["** public **"],
     "cssSheets": [
         "css/reset.css",
         "css/main.css"
+    ],
+    "modules": [
+        {
+            "src": "./WHHtml.js",
+            "name": "WHHtml",
+            "alias": "WHHtml",
+            "component": "wh-html"
+        },
+        {
+            "src": "./WHForm.js",
+            "name": "WHForm",
+            "alias": "WHForm",
+            "component": "wh-form"
+        },
+        {
+            "src": "js/Map.js",
+            "name": "WHMap",
+            "alias": "WHMap",
+            "component": "wh-map"
+        },
+        {
+            "src": "js/GTMap.js",
+            "name": "GTMap",
+            "alias": "GTMap",
+            "component": "gt-map"
+        }
     ]
 }

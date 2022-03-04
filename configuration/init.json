@@ -1,6 +1,7 @@
 {
+    "type":"element",
     "element":"app",
-    "name":"home",
+    "name":"{@APP_PATH}/home.json",
     "method":"init"
 
 }

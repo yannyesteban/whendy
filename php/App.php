@@ -1,52 +1,86 @@
 <?php
+
 namespace WH;
 
+include_once 'Store.php';
 include_once 'AppElement.php';
 include_once 'Interfaces.php';
 
-use ConfigJson, WH\IUserInfo;
+use ConfigJson, WH\IUserInfo, Store;
 
-class App extends AppElement{
+class App extends AppElement implements IPreConfig
+{
 
     static $patternJsonFile = '';
-    
-    public function __construct($config = null){
 
-        AppElement::__construct($config);
+    public static function _loadPreConfig($info)
+    {
 
+        if ($info->name) {
+            return Store::loadJson($info->name);
+        }
+        return $info;
     }
 
-    public function evalMethod($method = false): bool{
-		
-		if($method){
-            $this->method = $method;//$method = $this->method;
-		}
+    public static function _test()
+    {
 
-        switch ($this->method){
+        print_r("esto es un test estatico");
+    }
+
+    public function __construct($config = null)
+    {
+
+        AppElement::__construct($config);
+    }
+
+    public function evalMethod($method = false): bool
+    {
+
+        if ($method) {
+            $this->method = $method; //$method = $this->method;
+        }
+
+        switch ($this->method) {
             case 'init':
                 $this->load();
-                break;            
+                break;
             case 'load':
                 $this->load();
                 break;
         }
-		
-		
-		
-		
-		return true;
-	}
 
-    public function load(){
-        $this->addResponse([
-            'mode'  => 'update',
-            'id'    => $this->id,
-            'props'  =>[
-                'unitData'      => "12474737",
-                'innerHTML'=>"hello"
-            ],
-            'replayToken'=>$this->replayToken
-        ]);	
+
+
+
+        return true;
     }
 
+    public function load()
+    {
+
+        $this->template = Store::loadFile($this->templateFile);
+
+
+        $response = [
+            'mode'  => 'update',
+            'element' => 'wh-app',
+            'id'    => $this->id,
+            'props'  => [
+                'name'      => $this->name,
+                'className'      => $this->className,
+                'cssSheets'      => $this->cssSheets,
+                'modules'      => $this->modules,
+                'innerHTML' => $this->template
+
+
+            ],
+            'attrs' => [
+                'sid' => Store::getSid()
+            ]
+        ];
+
+        //hx($response);
+        $this->addResponse($response);
+    }
 }
