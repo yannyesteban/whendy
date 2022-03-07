@@ -143,6 +143,17 @@ export class QElement {
         return this;
     }
 
+    value(data?){
+        
+        if(data === undefined){
+            return this.e["value"];
+        }
+        
+        this.e["value"] = data;
+        
+        return this;
+    }
+
     style(attrs, value?) {
 
         if (typeof attrs === "string" && value === undefined) {
@@ -245,11 +256,13 @@ export const Q = (query) => {
         return query;
     }
 
-    let e: HTMLElement = null;
+    let e: HTMLElement | DocumentFragment | Document = null;
 
     if (query === undefined || query === "") {
         e = document.body;
-    } else if (query instanceof HTMLElement) {
+    } else if (query instanceof HTMLElement 
+        || query instanceof Document 
+        || query instanceof DocumentFragment) {
         e = query;
     } else {
         e = document.querySelector(query);

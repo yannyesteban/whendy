@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/test.css">
+</head>
+
+<body>
+    <form name="form1" method="get">
+        <label for="filtro">Filtro</label>
+        <input name="filtro" id="filtro" type="text">
+        <label for="list">list</label>
+        <wh-list-text id="list" group="2" value="8" name="milista">
+            
+                <wh-option value="1" data-group="1" data-text="Uno">Uno</wh-option>
+                <wh-option value="2" data-group="1" data-text="dos">dos</wh-option>
+                <wh-option value="3" data-group="1" data-text="tres">tres</wh-option>
+                <wh-option value="4" data-group="2" data-text="Cuatro">Cuatro</wh-option>
+                <wh-option value="5" data-group="2" data-text="cinco">cinco</wh-option>
+                <wh-option value="6" data-group="2" data-text="seis">seis</wh-option>
+                <wh-option value="7" data-group="2" data-text="Siete">Siete</wh-option>
+                <wh-option value="8" data-group="2" data-text="ocho">ocho</wh-option>
+                <wh-option value="9" data-group="2" data-text="Nueve">Nueve</wh-option>
+                <wh-option value="10" data-group="2" data-text="yanny">yanny</wh-option>
+                <wh-option value="11" data-group="2" data-text="yanny esteban">yanny esteban</wh-option>
+                <wh-option value="12" data-group="2" data-text="yanny nuñez">yanny nuñez</wh-option>
+                <wh-option value="13" data-group="2" data-text="yanny power">yanny power</wh-option>
+                <wh-option value="14" data-group="2" data-text="yanesteban">yanesteban</wh-option>
+                <wh-option value="15" data-group="2" data-text="yanjimenez">yanjimenez</wh-option>
+                
+            
+
+        </wh-list-text>
+
+        <button id="f" type="button">FFFF</button>
+        <select id="xx">
+            <option value="" default data-group="2" data-text="ocho">--</option>
+            <option value="1" data-group="2" data-text="ocho">Uno</option>
+            <option value="2" data-group="2" data-text="Nueve">Dos</option>
+        </select>
+
+        <select id="fil">
+            <option value="" default data-group="2" data-text="ocho">--</option>
+            <option value="1" data-group="2" data-text="ocho">SI</option>
+            <option value="2" data-group="2" data-text="Nueve">NO</option>
+        </select>
+        <hr>
+        <!--<my-control name="cosa" value="explicacion"></my-control>-->
+        <button>SEND</button>
+    </form>
+    <script type="module" src="./../js/ListText.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        const e = $("#filtro");
+        const l = $("#list");
+        e.on("change", (event) => {
+            console.log(event.currentTarget.value);
+            l.get().group = event.currentTarget.value;
+        })
+
+        $(f).on("click", () => {
+            list.value = 13;
+        })
+
+        xx.onchange = function(){
+            list.group = this.value
+        }
+
+        fil.onchange = function(){
+            if(this.value == "1"){
+                list.filtered = "true";
+            }else{
+                list.filtered = false;
+            }
+            
+        }
+
+    </script>
+</body>
+
+</html>

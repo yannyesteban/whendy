@@ -36,6 +36,7 @@ export class Float {
     public _touchstart = (event) => {
         this.e.style.zIndex = getIndex(this.e.style.zIndex);
     }
+    
     constructor(config) {
         this.e = config;
         on(this.e, "mousedown", this._mousedown);

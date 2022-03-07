@@ -3,10 +3,12 @@
 namespace WH;
 
 include_once 'Store.php'; 
-include_once 'User.php'; 
+include_once 'User.php';
+include_once 'JWT.php'; 
 include_once 'Tool.php';
 include_once 'Interfaces.php';
 
+use JWT;
 use Tool, Store, User, ClassAdmin;
 
 class Whendy
@@ -24,14 +26,33 @@ class Whendy
         }
     }
 
+    private function evalJWT(){
+        $value = JWT::verifyHeader();
+
+        if($value){
+
+            //Tool::hx($value);
+            User::set($value->payload->user);
+            User::setRoles($value->payload->roles);
+            return true;
+        }
+        User::set(null);
+        User::setRoles([]);
+        
+        return false;
+    }
+
     private function init()
     {
         
+        $this->evalJWT();
+
         if(Store::getHeader('Application-Mode') === 'start'){
             $this->setElement($this->init);
         }
 
-        $this->request = Store::getReq('__sg_request');
+        $this->request = Store::getReq('__app_request');
+        $this->id = Store::getReq('__app_id');
         
         $this->evalRequest($this->request);
     }
@@ -82,7 +103,8 @@ class Whendy
             "mode" => "update",
             "id"=>$this->id,
             "props"=>[
-                "token" => $token
+                "token" => $token,
+                "paz"=>"nunca"
             ]
         ]);
     }
@@ -172,8 +194,13 @@ class Whendy
             
         }
 
-        if ($e instanceof \WH\UserAdmin and $userInfo = $e->getUserInfo()) {
-            //hx($userInfo);
+        if ($e instanceof \WH\IUserAdmin and $userInfo = (object)$e->getUserInfo()) {
+            
+            User::set($userInfo->user);
+            User::setRoles($userInfo->roles);
+            $token = JWT::generate($userInfo);
+            
+            $this->responseToken($token);
             //$this->setUserInfo($userInfo);
         }
 

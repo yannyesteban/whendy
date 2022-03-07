@@ -17,7 +17,7 @@ class Element
     protected $_response =  [];
 
     protected $acceptedRoles = [];
-    static $_acceptedRoles = ['a', 'b', 'c'];
+    static $_acceptedRoles = [];
 
     static public function _acceptedRoles(){
         return self::$_acceptedRoles;

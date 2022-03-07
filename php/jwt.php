@@ -38,17 +38,17 @@ class JWT
         ];
     }
 
-    public static function verifyHeader(){
+    public static function verifyHeader():object | null{
         $headers = getallheaders();
         if($headers['Authorization']){
             $arr = explode(' ', $headers['Authorization']);
             return self::verify(array_pop($arr));
         }
         
-        return null;;
+        return null;
     }
 
-    public static function verify($token)
+    public static function verify($token):object | null
     {
         $str = explode('.', $token);
         $header = self::base64url_decode($str[0]);
@@ -60,14 +60,14 @@ class JWT
         $signature1 = self::base64url_encode(hash_hmac('SHA256', "$header1.$payload1", self::$key, true));
 
         if($signature === $signature1){
-            return [
+            return (object)[
                 'header'    => json_decode($header),
                 'payload'   => json_decode($payload),
                 'signature' => $signature
             ];
         }
 
-        return false;
+        return null;
     }
 
     public static function base64url_encode($data)

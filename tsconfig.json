@@ -1,4 +1,8 @@
 {
+    "paths": {
+        "@main/*": ["./*"]
+        
+    },
     "compileOnSave": true,
     "compilerOptions": {
         "target": "es6",

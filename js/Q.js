@@ -101,6 +101,13 @@ export class QElement {
         }
         return this;
     }
+    value(data) {
+        if (data === undefined) {
+            return this.e["value"];
+        }
+        this.e["value"] = data;
+        return this;
+    }
     style(attrs, value) {
         if (typeof attrs === "string" && value === undefined) {
             return this.e.style[attrs];
@@ -178,7 +185,9 @@ export const Q = (query) => {
     if (query === undefined || query === "") {
         e = document.body;
     }
-    else if (query instanceof HTMLElement) {
+    else if (query instanceof HTMLElement
+        || query instanceof Document
+        || query instanceof DocumentFragment) {
         e = query;
     }
     else {

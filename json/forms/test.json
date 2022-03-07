@@ -1,6 +1,7 @@
 {
     "name": "test",
     "query": "select ...",
+    "acceptedRoles":["power"],
     "form": {
         "caption": "Logín",
         "className": "sevian",

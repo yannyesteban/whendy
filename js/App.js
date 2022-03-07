@@ -10,11 +10,14 @@ export class App extends HTMLElement {
         this._e = [];
         this.token = "x.y.z";
         this.sid = "energy";
+        this.name = "";
+        this.xx = "";
     }
     static get observedAttributes() {
-        return ["server", "sid"];
+        return ["server", "sid", "token"];
     }
     attributeChangedCallback(name, oldVal, newVal) {
+        console.log({ name, oldVal, newVal });
         this[name] = newVal;
     }
     connectedCallback() {
@@ -62,6 +65,13 @@ export class App extends HTMLElement {
                     break;
             }
         });
+    }
+    set paz(x) {
+        this.xx = x;
+        this.setAttribute("xx", x);
+    }
+    get paz() {
+        return this.getAttribute("xx");
     }
     test() {
         const request = {
@@ -138,9 +148,12 @@ export class App extends HTMLElement {
         });
     }
     updateElement(info) {
+        console.log(info.id);
         const e = $.id(info.id);
+        console.log(e);
         if (e) {
             if (info.props) {
+                console.log(info.props);
                 e.prop(info.props);
             }
         }
@@ -185,11 +198,12 @@ export class App extends HTMLElement {
         }
         else {
         }
-        const data = Object.assign(info.data || {}, { __sg_request: info.request });
+        const data = Object.assign(info.data || {}, { __app_request: info.request, __app_id: this.id });
         const headers = Object.assign({
             "Content-Type": "application/json",
             "Authorization": `Bearer ${this.token}`,
-            "SID": this.sid
+            "SID": this.sid,
+            "Application-Id": this.id,
         }, info.headers || {});
         fetch(this.server, {
             method: "post",

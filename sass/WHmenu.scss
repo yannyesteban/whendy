@@ -21,78 +21,12 @@ dd {
 
 
 :host {
-	background-color: red;
-	height: 100%;
-	line-height: 1rem;
-	font-size: 1rem;
-	//line-height: 2rem;
+	display: block;
+	height: auto;
+	border:2px solid rgb(197, 197, 197);
+	font-size: 2rem;
 	overflow: hidden;
-	vertical-align: middle;
-	align-items: center;
-	display: inline-block;
-	grid-template-columns: auto 1fr auto auto;
-	gap: 4px;
 	padding: 0.1rem;
-	gap: 6px;
-
-	& > .icon {
-		height: 1.2rem;
-		width: 1.2rem;
-		overflow: hidden;
-		pointer-events: none;
-	}
-
-	& > .caption {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.control {
-		display: flex;
-		gap: 2px;
-		padding: 2px;
-		align-items: center;
-		button {
-			width: 1.2rem;
-			height: 1.2rem;
-			border: 1px solid black;
-			font-size: 1rem;
-			line-height: 1rem;
-		}
-	}
-}
-:host([mode="min"]) {
-	.control {
-		.min {
-			display: none;
-		}
-	}
-}
-:host([mode="max"]) {
-	.control {
-		.max {
-			display: none;
-		}
-	}
-}
-:host([mode=""]),
-:host(:not([mode])) {
-	.control {
-		.auto {
-			display: none;
-		}
-	}
-}
-
-:host-context(wh-window-caption div) {
-	font-weight: bold;
-}
-
-:host-context(.rojo) {
-	font-weight: bold;
-}
-
-:host(.win) {
-	font-weight: bold;
-	color: rgb(38, 156, 14) !important;
+	//margin:0.2rem;
+	
 }

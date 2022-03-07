@@ -118,30 +118,10 @@ ul{
 }
 
 
-wh-menu-item{
+
+
+*:not(:defined){
+	border:4px solid pink;
 	display: block;
-	border: 2px solid red;
 }
 
-
-wh-menu{
-	display: block;
-	border: 2px solid red !important;
-	padding: 20px;
-}
-
-wh-menu-caption{
-	display: grid;
-	grid-template-columns: auto 1fr auto;
-	>*{
-		border:2px solid blue;
-		min-width: 20px;
-	}
-}
-
-
-wh-icon{
-	display: inline-block;
-	height: 25px;
-	width: 25px;
-}

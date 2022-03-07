@@ -69,20 +69,37 @@
             "className": "sevian",
             "items": [
                 {
-                    "caption": "Login",
+                    "caption": "Login APP",
+                    "send": {
+                        "valid": false,
+                        "confirm": "",
+                        "request": [{
+                            
+                                "id": "",
+                                "type": "element",
+                                "element": "user-admin",
+                                "method": "login",
+                                "name": "",
+                                "config": {}
+                            
+                        }]
+                    }
+                },
+                {
+                    "caption": "New APP",
                     "send": {
                         "valid": false,
                         "confirm": "",
                         "request": [
                             {
-                                "id": "",
-                                "type": "element",
-                                "element": "user-admin",
-                                "method": "login",
                                 
-                                "name": "",
+                                "type": "element",
+                                "element": "app",
+                                "method": "init",
+                                "name": "{@APP_PATH}/webcar.json",
                                 "config": {}
                             }
+                            
                         ]
                     }
                 },
@@ -101,6 +118,7 @@
                                 "name": "{@JSON_PATH}/forms/test.json",
                                 "config": {}
                             }
+                            
                         ]
                     }
                 }

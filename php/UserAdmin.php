@@ -15,12 +15,13 @@ class UserAdmin extends \Element implements IUserAdmin{
 
     use ConfigJson;
 
-    protected $tUsers = "_sg_users";
-    protected $tGroups = "_sg_groups";
-    protected $tGroUsr = "_sg_grp_usr";
+    protected $tUsers = '_sg_users';
+    protected $tGroups = '_sg_groups';
+    protected $tGroUsr = '_sg_grp_usr';
 
     static $patternJsonFile = '';
-
+    protected $user = '';
+    protected $roles = [];
 
     public function __construct($config = null){
 
@@ -43,6 +44,7 @@ class UserAdmin extends \Element implements IUserAdmin{
                 $user = Store::getReq('user');
                 $pass = Store::getReq('pass');
                 $this->dbLogin($user, $pass);
+                
                 break;                
         }
 		
@@ -71,8 +73,8 @@ class UserAdmin extends \Element implements IUserAdmin{
 
     public function getUserInfo(){
         return [
-            'user'=>'pepe',
-            'roles'=>['admin']
+            'user'=>$this->user,
+            'roles'=>$this->roles
         ];
     }
 
@@ -103,7 +105,7 @@ class UserAdmin extends \Element implements IUserAdmin{
                 if($rs['status'] != 1){
                     // user not active
                     $error = 3;  
-                }elseif($rs['expiration'] != '' and $rs['expiration'] != '0000-00-00' and $rs['expiration'] < date("Y-m-d")) {
+                }elseif($rs['expiration'] != '' and $rs['expiration'] != '0000-00-00' and $rs['expiration'] < date('Y-m-d')) {
                     // the pass is expired
                     $error = 4; 
                 }else{
@@ -138,6 +140,7 @@ class UserAdmin extends \Element implements IUserAdmin{
 			WHERE user = '$_user'";
 
 		$result = $cn->execute();
-		return $cn->getDataAll($result);
+		$data = $cn->getDataAll($result);
+        return array_column($data, 'group');
     }
 }

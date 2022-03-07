@@ -8,70 +8,88 @@
     <title>Window</title>
     <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
     <link rel="stylesheet" href="./../css/reset.css">
-    <link rel="stylesheet" href="./../css/test.css">
+    <link rel="stylesheet" href="./../css/test1.css">
 
 </head>
 
 <body>
 
-    <wh-menu>
+    <wh-menu id="x" checkbox="">
         <wh-menu-item>
-            <wh-menu-caption>
-                <wh-icon>_</wh-icon>
+            <wh-link href="" action="alert('es una action')" check="alert('es un check')">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
                 <wh-caption>One</wh-caption>
-            </wh-menu-caption>
+            </wh-link>
+
         </wh-menu-item>
 
         <wh-menu-item>
-            <wh-menu-caption>
-                <wh-icon>_</wh-icon>
-                <wh-caption>Dos</wh-caption>
-            </wh-menu-caption>
-           
+            <wh-link href="">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                <wh-caption>Two</wh-caption>
+            </wh-link>
         </wh-menu-item>
 
-
         <wh-menu-item>
-            <wh-menu-caption>
-                <wh-icon><img src="./../images/icon.png"></wh-icon>
-                <wh-caption>Tres</wh-caption>
-            </wh-menu-caption>
-            <wh-submenu>
+            <wh-link href="">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                <wh-caption>Three</wh-caption>
+            </wh-link>
+            <wh-group>
                 <wh-menu-item>
-                    <wh-menu-caption>
-                        <wh-icon>_</wh-icon>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
                         <wh-caption>3.1</wh-caption>
-                    </wh-menu-caption>
+                    </wh-link>
                 </wh-menu-item>
 
                 <wh-menu-item>
-                    <wh-menu-caption>
-                        <wh-icon>_</wh-icon>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
                         <wh-caption>3.2</wh-caption>
-                    </wh-menu-caption>
+                    </wh-link>
+                    <wh-group>
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.1</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.2</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.3</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                    </wh-group>
                 </wh-menu-item>
 
                 <wh-menu-item>
-                    <wh-menu-caption>
-                        <wh-icon>_</wh-icon>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
                         <wh-caption>3.3</wh-caption>
-                    </wh-menu-caption>
+                    </wh-link>
                 </wh-menu-item>
 
-            </wh-submenu>
+            </wh-group>
         </wh-menu-item>
 
 
-        <wh-menu-item>
-            <wh-menu-caption>
-                <wh-icon>_</wh-icon>
-                <wh-caption>Cuatro</wh-caption>
-            </wh-menu-caption>
-           
-        </wh-menu-item>
 
 
     </wh-menu>
+
+    <button id="boton">LOAD</button>
+
     <script>
 
 
@@ -81,7 +99,59 @@
     </script>
     <script type="module" src="./../js/WHmenu.js"></script>
     <script type="module">
-        import { Q } from "./../js/q.js";
+        import { Q as $ } from "./../js/q.js";
+
+        $(boton).on("click", e => {
+            x.loadConfig({
+
+                items: [
+                    {
+                        caption: "anneliesse",
+                        action: "alert('aneliesse morales')"
+                    },
+                    {
+                        caption: "yrianny",
+                        "action": () => {
+                            alert("hola soy yo")
+                        }
+                    },
+                    {
+                        caption: "yriangel",
+                        icon: `<img class="myicon" src="./../images/icon.png" />`
+                    },
+                    {
+                        caption: "yanny"
+                    },
+                    {
+                        caption: "jimenez",
+                        items: [
+                            {
+                                caption: "uno"
+                            },
+                            {
+                                caption: "dos",
+                                icon: `<img class="myicon" src="./../images/admin.png"/>`
+                            },
+                            {
+                                caption: "tres",
+                                items: [
+                                    {
+                                        caption: "uno"
+                                    },
+                                    {
+                                        caption: "dos",
+                                        icon: `<img class="myicon" src="./../images/admin.png"/>`
+                                    },
+                                    {
+                                        caption: "tres"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            });
+        })
 
 
 

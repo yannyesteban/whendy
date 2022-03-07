@@ -1,0 +1,53 @@
+{
+    "id":"gtcomm",
+    "name":"home",
+    "templateFile":"{@TEMPLATES_PATH}/webcar.html",
+    "elements":[{
+        "id": "menu",
+        "element": "html",
+        "method": "load",
+        "setPanel": "wh-menu",
+        "name": "{@JSON_PATH}/forms/test.json",
+        "config": {}
+    },
+    {
+        "id": "form-login2",
+        "element": "form",
+        "method": "request",
+        "setPanel": "wh-form2",
+        "name": "{@JSON_PATH}/forms/test.json",
+        "config": {}
+    }],
+    "className":["one", "sevian"],
+    "acceptedRoles":["** public **"],
+    "cssSheets": [
+        "css/reset.css",
+        "css/main.css"
+    ],
+    "modules": [
+        {
+            "src": "./WHHtml.js",
+            "name": "WHHtml",
+            "alias": "WHHtml",
+            "component": "wh-html"
+        },
+        {
+            "src": "./WHForm.js",
+            "name": "WHForm",
+            "alias": "WHForm",
+            "component": "wh-form"
+        },
+        {
+            "src": "js/Map.js",
+            "name": "WHMap",
+            "alias": "WHMap",
+            "component": "wh-map"
+        },
+        {
+            "src": "js/GTMap.js",
+            "name": "GTMap",
+            "alias": "GTMap",
+            "component": "gt-map"
+        }
+    ]
+}
