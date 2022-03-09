@@ -16,7 +16,7 @@
 
     <wh-menu id="x" checkbox="">
         <wh-menu-item>
-            <wh-link href="" action="alert('es una action')" check="alert('es un check')">
+            <wh-link href="" action="console.log('es una action')" check="console.log('es un check')">
                 <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
                 <wh-caption>One</wh-caption>
             </wh-link>
@@ -102,6 +102,7 @@
         import { Q as $ } from "./../js/q.js";
 
         $(boton).on("click", e => {
+            //https://www.htmlelements.com/docs/menu/
             x.loadConfig({
 
                 items: [
@@ -153,6 +154,9 @@
             });
         })
 
+        x.addEventListener("link-action", (event)=>{
+            console.log(event.detail)
+        })
 
 
     </script>

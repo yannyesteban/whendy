@@ -1,14 +1,23 @@
 import { Q as $ } from "./Q.js";
 import "./WH.js"
 
+
+function dispatchEvent(element, eventName, detail) {
+	const event = new CustomEvent(eventName, {
+		detail
+	});
+	
+	element.dispatchEvent(event);
+}
+
 class WHMenuLink extends HTMLElement {
 	public pepe = "";
 	public _action = null;
 	public _check = null;
 	public _checkbox = null;
-	
+
 	static get observedAttributes() {
-		return ["action", "checkbox", "check"];
+		return ["onaction", "usecheck", "oncheck", "value","disabled","checked"];
 	}
 
 	constructor() {
@@ -31,10 +40,22 @@ class WHMenuLink extends HTMLElement {
 	}
 
 	public connectedCallback() {
-
 		this.slot = "link";
+		
+		const checkbox = $(this.shadowRoot).query(`input[type="checkbox"]`);
 
-		if (!this.hasAttribute('role')){
+		checkbox.on("click", (event) => {
+			
+			dispatchEvent(checkbox.get(), "link-check", this)
+		});
+
+		$(this).on("click", () => {
+			dispatchEvent(this, "link-action", this)
+		});
+
+		
+
+		if (!this.hasAttribute('role')) {
 			this.setAttribute('role', 'link');
 		}
 
@@ -54,39 +75,31 @@ class WHMenuLink extends HTMLElement {
 	public attributeChangedCallback(name, oldValue, newValue) {
 
 		switch (name) {
-			case 'action':
-				if (newValue) {
-					this._defineAction(newValue);
-				}
+			case 'value':
 				break;
-			case 'check':
-				if (newValue) {
-					this._defineCheck(newValue);
-				}
+			case 'checked':
+				break;
+			case 'disabled':
+				break;
+			case 'visible':
+				break;		
+			case 'use-check':
+				break;
+			case 'use-icon':
+				break;					
+			case 'onaction':
+				break;
+			case 'oncheck':
 				break;
 		}
 	}
 
-	public set action(value) {
-
-		if (typeof value === "string") {
-			this.setAttribute("action", value);
-			this._action = null;
-
-		} else {
-			this.setAttribute("action", "");
-			this._action = value;
-			if (value) {
-				this._defineAction(value);
-			}
-		}
+	set value(value) {
+		this.setAttribute("value", value);
 	}
 
-	public get action() {
-		if (this._action !== null) {
-			return this._action;
-		}
-		return this.getAttribute("action");
+	get value() {
+		return this.getAttribute('value')
 	}
 
 	public get check() {
@@ -111,51 +124,102 @@ class WHMenuLink extends HTMLElement {
 		}
 	}
 
-	
-	set checkbox(value) {
+	set useIcon(value) {
 
 		if (Boolean(value)) {
-			this.setAttribute("checkbox", "");
+			this.setAttribute("use-icon", "");
 		} else {
-			this.removeAttribute("checkbox");
+			this.removeAttribute("use-icon");
 		}
-		if (this.checkbox) {
-			
+		
+	}
+
+	get useIcon() {
+		return this.hasAttribute('use-icon')
+	}
+
+	set useCheck(value) {
+
+		if (Boolean(value)) {
+			this.setAttribute("use-check", "");
+		} else {
+			this.removeAttribute("use-check");
+		}
+		
+	}
+
+	get useCheck() {
+		return this.hasAttribute('use-check')
+	}
+
+	
+	set checked(value) {
+		if (Boolean(value)) {
+			this.setAttribute("checked", "");
+		} else {
+			this.removeAttribute("checked");
 		}
 	}
 
-	get checkbox() {
-		return this.hasAttribute('checkbox')
+	get checked() {
+		return this.hasAttribute('checked')
 	}
 
-	_defineAction(fn){
+	set disabled(value) {
+		if (Boolean(value)) {
+			this.setAttribute("disabled", "");
+		} else {
+			this.removeAttribute("disabled");
+		}
+	}
+
+	get disabled() {
+		return this.hasAttribute('disabled')
+	}
+
+	set visible(value) {
+		if (Boolean(value)) {
+			this.setAttribute("visible", "");
+		} else {
+			this.removeAttribute("visible");
+		}
+	}
+
+	get visible() {
+		return this.hasAttribute('visible')
+	}
+
+	_defineAction(fn) {
 		const action = $.bind(fn, this, "item, dataUser, event");
 		$(this).on("click", (event) => {
-			console.log(event.target)
-			if(event.target.getAttribute('type') !== "checkbox"){
-				action(this, "datauser", event); 
+
+
+			const myCheckbox = event.composedPath()[0];
+
+			if (myCheckbox.getAttribute('type') !== "checkbox") {
+				action(this, "datauser", event);
 			}
 		});
 	}
 
-	_defineCheck(fn){
+	_defineCheck(fn) {
 		console.log("DOS")
 		const action = $.bind(fn, this, "item, dataUser, event");
-		
+
 		console.log($(this.shadowRoot).query(`input[type]`))
 		//console.log($(this).query(`input`))
 
 		$(this.shadowRoot).query(`input[type]`).on("click", (event) => {
-			action(this, "datauser", event); 
+			action(this, "datauser", event);
 		});
 	}
 
-	
+
 	navigateLink(e) {
 		if (e.type === 'click' || e.key === 'Enter') {
 			let ref = e.target != null ? e.target : e.srcElement;
 			if (ref) {
-			  window.open(ref.getAttribute('data-href'), '_blank');
+				window.open(ref.getAttribute('data-href'), '_blank');
 			}
 		}
 	}
@@ -305,6 +369,25 @@ class WHMenu extends HTMLElement {
 
 
 	public initMenu() {
+
+
+		$(this).on("click", (e) => {
+			console.log(e.target)
+		})
+
+		$(this).on("link-action", (e) => {
+			console.log(e);
+		})
+		const links = Array.from(this.querySelectorAll('wh-link'));
+		links.forEach(link => {
+			link["checkbox"] = true;
+
+			link.addEventListener("link-action", () => {
+				dispatchEvent(this, "link-action", link)
+			});
+		});
+
+
 		const groups = this.querySelectorAll(`wh-menu-item > wh-group`);
 
 
@@ -317,23 +400,21 @@ class WHMenu extends HTMLElement {
 				link.addClass(["sub-menu", "close"])
 				link.on("click", (event) => {
 
-					if(event.target.getAttribute('type') !== "checkbox"){
+					if (event.target.getAttribute('type') !== "checkbox") {
 						link.toggleClass("close");
 						$(group.parentElement).toggleClass("close");
 					}
-					 
-					
+
+
 				});
 			}
 
 
 
 		});
-		const links = Array.from(this.querySelectorAll('wh-link'));
 
-		links.forEach(link => {
-			link["checkbox"] = true;
-		});
+
+
 
 	}
 
@@ -396,7 +477,7 @@ class WHMenu extends HTMLElement {
 	get checkbox() {
 		console.log("get check box", this.getAttribute('checkbox'))
 		return this.hasAttribute('checkbox')
-	};
+	}
 
 }
 
