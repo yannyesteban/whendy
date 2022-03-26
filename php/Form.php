@@ -56,7 +56,7 @@ class Form extends Element{
             'id'    => $this->id,
             'props' =>[
                 'name'  =>$this->name,
-                'data'=>$this->form,
+                'dataSource'=>$this->form,
             ],
             'replayToken'=>$this->replayToken,
             'setPanel'=>$this->setPanel

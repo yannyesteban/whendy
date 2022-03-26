@@ -57,6 +57,13 @@ export class GTMap extends HTMLElement {
         const map = new google.maps.Map(this, {
             zoom: 10,
             center: { lat: this.latitude, lng: this.longitude },
+            disableDefaultUI: true,
+            //zoomControl: true,
+            //mapTypeControl: true,
+            //scaleControl: true,
+            //streetViewControl: true,
+            //rotateControl: true,
+            fullscreenControl: true
         });
         __classPrivateFieldSet(this, _GTMap_map, map, "f");
         //this.onLoad(map);;
@@ -87,6 +94,7 @@ export class GTMap extends HTMLElement {
     connectedCallback() {
         console.log(this.innerHtml);
         this.style.height = "100%";
+        this.style.width = "100%";
         this.style.display = "block";
         this.init();
         //this.innerHTML = this.innerHtml+this.length;
@@ -99,5 +107,5 @@ export class GTMap extends HTMLElement {
 _GTMap_config = new WeakMap(), _GTMap_map = new WeakMap();
 GTMap.scriptLoaded = false;
 customElements.define('gt-map', GTMap);
-window["GTMap"] = GTMap;
+//window["GTMap"] = GTMap;
 //# sourceMappingURL=GTMap.js.map

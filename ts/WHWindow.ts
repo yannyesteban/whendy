@@ -7,6 +7,9 @@ import { Float, Move, Drag, Resize } from "./Float.js";
 class WHWinIcon extends HTMLElement {
 	constructor() {
 		super();
+		
+	}
+	public connectedCallback() {
 		this.slot = "icon";
 	}
 }
@@ -15,6 +18,9 @@ customElements.define("wh-win-icon", WHWinIcon);
 class WHWinCaption extends HTMLElement {
 	constructor() {
 		super();
+	}
+
+	public connectedCallback() {
 		this.slot = "caption";
 	}
 }
@@ -23,6 +29,10 @@ customElements.define("wh-win-caption", WHWinCaption);
 class WHWinBody extends HTMLElement {
 	constructor() {
 		super();
+		
+	}
+
+	public connectedCallback() {
 		this.slot = "body";
 	}
 }
@@ -38,7 +48,7 @@ class WHWinHeader extends HTMLElement {
 
 	constructor() {
 		super();
-		this.slot = "header";
+		
 		const template = document.createElement("template");
 
 		template.innerHTML = `
@@ -78,6 +88,9 @@ class WHWinHeader extends HTMLElement {
 
 
 	public connectedCallback() {
+		
+		this.slot = "header";
+
 		$(this.shadowRoot).q(".min").on("click", event => {
 			this.getWin().setAttribute("mode", "min");
 		});

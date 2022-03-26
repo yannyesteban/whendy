@@ -1,0 +1,5 @@
+{
+    "name": "webcar-login",
+    
+    "templateFile":"{@TEMPLATES_PATH}/logo.html"
+}

@@ -1,6 +1,22 @@
 import { loadScript } from "./LoadScript.js";
 import { loadCss } from "./LoadCss.js";
 import { Q as $ } from "./Q.js";
+class WHLayout extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+    }
+}
+customElements.define("wh-layout", WHLayout);
+class WHPanel extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+    }
+}
+customElements.define("wh-panel", WHPanel);
 export class App extends HTMLElement {
     constructor() {
         super();
@@ -44,7 +60,6 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
-                    console.log(item);
                     this.updateElement(item);
                     break;
                 case "response":
@@ -115,7 +130,6 @@ export class App extends HTMLElement {
                 });
                 this.innerHTML = data.template;
                 this.modules = data.modules;
-                console.log(this.modules);
             },
             request: [],
             request2: [
@@ -133,14 +147,11 @@ export class App extends HTMLElement {
         this.go(request);
     }
     whenComponent(module) {
-        console.log(module.src);
         return new Promise((resolve, reject) => {
             if (customElements.get(module.component)) {
-                console.log("opcion 1");
                 resolve(customElements.get(module.component));
             }
             import(module.src).then(MyModule => {
-                console.log("opcion 2");
                 resolve(customElements.get(module.component));
             }).catch(error => {
                 reject(error);
@@ -148,12 +159,9 @@ export class App extends HTMLElement {
         });
     }
     updateElement(info) {
-        console.log(info.id);
         const e = $.id(info.id);
-        console.log(e);
         if (e) {
             if (info.props) {
-                console.log(info.props);
                 e.prop(info.props);
             }
         }
@@ -166,14 +174,28 @@ export class App extends HTMLElement {
             e.id(element.id);
             e.prop(element.props);
             e.attr(element.attrs);
-            const panel = $.id(element.setPanel);
-            if (panel) {
-                panel.text("");
-                panel.append(e);
+            let panel = null;
+            if (element.setPanel) {
+                alert(999);
+                panel = $.id(element.setPanel);
+                if (panel) {
+                    panel.text("");
+                    panel.append(e);
+                    return;
+                }
+            }
+            if (element.appendTo) {
+                alert(8888);
+                panel = $(element.appendTo);
+                if (panel) {
+                    panel.append(e);
+                    return;
+                }
             }
         });
     }
     initElement(element) {
+        console.log(element);
         const module = this.modules.find((e) => e.component == element.wc);
         if (module) {
             this.whenComponent(module).then((component) => {
@@ -181,15 +203,34 @@ export class App extends HTMLElement {
                 e.id(element.id);
                 e.prop(element.props);
                 e.attr(element.attrs);
-                const panel = $.id(element.setPanel);
-                if (panel) {
-                    panel.text("");
-                    panel.append(e);
+                let panel = null;
+                if (element.setPanel) {
+                    panel = $.id(element.setPanel);
+                    if (panel) {
+                        panel.text("");
+                        panel.append(e);
+                        return;
+                    }
+                }
+                if (element.appendTo) {
+                    panel = $(element.appendTo);
+                    if (panel) {
+                        panel.append(e);
+                        return;
+                    }
                 }
             }).catch(error => {
                 console.log(error);
             });
         }
+    }
+    set jsModules(jsFiles) {
+        jsFiles.forEach(src => {
+            loadScript(src, { async: true, type: "module" });
+        });
+    }
+    set addClass(classes) {
+        $(this).addClass(classes);
     }
     go(info) {
         console.log(info);

@@ -13,6 +13,8 @@ class App extends AppElement implements IPreConfig
 
     static $patternJsonFile = '';
 
+    protected $jsModules = [];
+
     public static function _loadPreConfig($info)
     {
 
@@ -71,6 +73,7 @@ class App extends AppElement implements IPreConfig
                 'className'      => $this->className,
                 'cssSheets'      => $this->cssSheets,
                 'modules'      => $this->modules,
+                'jsModules'      => $this->jsModules,
                 'innerHTML' => $this->template
 
 

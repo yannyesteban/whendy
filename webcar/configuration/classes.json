@@ -1,0 +1,62 @@
+[
+    {
+        "name": "test",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/test8.php",
+        "class": "Test8"
+    },
+    {
+        "name": "app",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/App.php",
+        "class": "\\WH\\App"
+    },
+    {
+        "name": "fragment",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/Fragment.php",
+        "class": "\\WH\\Fragment"
+    },
+    {
+        "name": "user-admin",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/UserAdmin.php",
+        "class": "\\WH\\UserAdmin"
+    },
+    {
+        "name": "form",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/Form.php",
+        "class": "\\WH\\Form"
+    },
+    {
+        "name": "menu",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/Menu.php",
+        "class": "\\WH\\Menu"
+    },
+    {
+        "name": "map",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/map.php",
+        "class": "Map"
+    },
+    {
+        "name": "GTMap",
+        "enable": true,
+        "file": "{@MAIN_PATH}php/GTMap.php",
+        "class": "GTMap"
+    },
+    {
+        "name": "gt-unit-menu",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/UnitMenu.php",
+        "class": "\\GT\\UnitMenu"
+    },
+    {
+        "name": "gt-unit-list",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/UnitList.php",
+        "class": "\\GT\\UnitList"
+    }
+]

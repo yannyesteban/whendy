@@ -1,0 +1,90 @@
+{
+    "name": "ToolMenu",
+    "menu": {
+        "addClass":["tool-menu"],
+        "hideCheck": true,
+        "hideIcon": false,
+        "events": {
+            "link-action": "console.log('hola')"
+        },
+        "items": [
+
+            {
+                "caption": "Historial",
+                "addClass": "history",
+                "title":"Historial",
+                "events": {
+                    "link-action": null
+                }
+            },
+            {
+                "caption": "Traza",
+                "addClass": "trace",
+                "title":"Iniciar Herramienta de Traza",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Regla",
+                "addClass": "rule",
+                "title":"Herramienta de Medición",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Polígonos",
+                "addClass": "poly",
+                "title":"Herramienta de Polígonos",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Puntos",
+                "addClass": "marker",
+                "title":"Herramienta de Puntos",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "FullScreen",
+                "addClass": "full",
+                "title":"Pantalla Completa",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+
+            {
+                "caption": "+",
+                "addClass": "zoom-in",
+                "title":"Zoom In",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+
+            {
+                "caption": "-",
+                "addClass": "zoom-out",
+                "title":"Zoom Out",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+
+            {
+                "caption": "Reset",
+                "addClass": "bearing",
+                "title":"Reset Baring",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            }
+        
+        ]
+    }
+}

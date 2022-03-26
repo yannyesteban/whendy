@@ -1,0 +1,124 @@
+{
+	"id": "gtcomm",
+	"name": "home",
+	"templateFile": "{@TEMPLATES_PATH}/webcar.html",
+	"elements": [
+		{
+			
+			"appendTo": "#wh-menu .menu-1",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/MainMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#wh-menu .menu-2",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/MainMenu2.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#wh-menu .menu-4",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ExitMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#popup-menu",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/PhoneMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#popup-tool",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ToolMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"appendTo": "#wh-body",
+			"element": "gt-unit-list",
+			"id": "unit-list",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"setPanel": "wh-banner",
+			"element": "fragment",
+			"name": "{@JSON_PATH}fragments/webcar-banner.json",
+			"method": "load",
+			"eparams": {}
+		},
+		{
+			"id": "unit-menu",
+			"appendTo": "div#a99",
+			"setPanell": "gt-unit-menu",
+			"element": "gt-unit-menuuu",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		}
+	],
+	"className": ["webcar"],
+	"acceptedRoles": ["** public **"],
+	"cssSheetss": ["css/reset.css", "css/main.css"],
+	"jsModules": [
+		"../js/GTMap.js",
+		"../js/WHWindow.js",
+		"../js/WHMenu.js",
+		"../js/ListText.js",
+		"../js/WHPopup.js"
+	],
+	"modules": [
+		{
+			"src": "./WHHtml.js",
+			"name": "WHHtml",
+			"alias": "WHHtml",
+			"component": "wh-html"
+		},
+		{
+			"src": "./WHForm.js",
+			"name": "WHForm",
+			"alias": "WHForm",
+			"component": "wh-form"
+		},
+		{
+			"src": "./WHMenu.js",
+			"name": "WHMenu",
+			"alias": "WHMenu",
+			"component": "wh-menu"
+		},
+		{
+			"src": "js/Map.js",
+			"name": "WHMap",
+			"alias": "WHMap",
+			"component": "wh-map"
+		},
+		{
+			"src": "js/GTMap.js",
+			"name": "GTMap",
+			"alias": "GTMap",
+			"component": "gt-map"
+		},
+		{
+			"src": "./gt/GTUnitMenu.js",
+			"name": "GTUnitMenu",
+			"alias": "GTUnitMenu",
+			"component": "gt-unit-menu"
+		},
+		{
+			"src": "./gt/GTUnitList.js",
+			"name": "GTUnitList",
+			"alias": "GTUnitList",
+			"component": "gt-unit-list"
+		}
+	]
+}

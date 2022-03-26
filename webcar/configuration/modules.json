@@ -1,0 +1,26 @@
+[
+    {
+        "src": "./WHHtml.js",
+        "name": "WHHtml",
+        "alias": "WHHtml",
+        "component": "wh-html"
+    },
+    {
+        "src": "./WHForm.js",
+        "name": "WHForm",
+        "alias": "WHForm",
+        "component": "wh-form"
+    },
+    {
+        "src": "js/Map.js",
+        "name": "WHMap",
+        "alias": "WHMap",
+        "component": "wh-map"
+    },
+    {
+        "src": "js/GTMap.js",
+        "name": "GTMap",
+        "alias": "GTMap",
+        "component": "gt-map"
+    }
+]

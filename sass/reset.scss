@@ -77,3 +77,15 @@ html {
 	font-size: 12pt;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+*:not(:defined) {
+	background-color: red;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+
+wh-menu-linkk {
+	grid-template-columns: 2em 1fr 2em 2em;
+	grid-template-areas: "check caption icon ind";
+}

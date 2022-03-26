@@ -47,10 +47,15 @@ export class Float {
         off(this.e, "mousedown", this._mousedown);
         off(this.e, "touchstart", this._touchstart);
     }
+    
     static init(config) {
         return new Float(config);
     }
-
+    
+    static upIndex(e) {
+        e.style.zIndex = getIndex(e.style.zIndex);
+    }
+    
     static setIndex(e) {
         e.style.zIndex = getIndex(e.style.zIndex);
     }
@@ -160,6 +165,8 @@ export class Float {
         if (top !== null) {
             top = top + (deltaY || 0)
         }
+
+        console.log({ e: e, left: left, top: top, z: z })
         return this.showElem({ e: e, left: left, top: top, z: z });
 
     }
@@ -433,6 +440,11 @@ export class Drag {
     public onRelease = (config) => { };
 
     public _mouseDown = (event) => {
+        console.log("start")
+        if(event.changedTouches && event.changedTouches[0]){
+            event = event.changedTouches[0];
+        }
+
         const element = this.e;
         if (event.target && event.target.classList.contains("_drag_start_")) {
             return;
@@ -448,6 +460,11 @@ export class Drag {
         this.onCapture({ startX, startY, left, top });
 
         const drag = (event) => {
+            console.log("drag")
+            if(event.changedTouches && event.changedTouches[0]){
+                event.preventDefault();
+                event = event.changedTouches[0];
+            }
             this.onDrag({
                 x: event.clientX,
                 y: event.clientY,
@@ -461,10 +478,21 @@ export class Drag {
         };
 
         const release = (event) => {
+            console.log("release")
+            if(event.changedTouches && event.changedTouches[0]){
+                event.preventDefault();
+                event = event.changedTouches[0];
+            }
+            
+
             element.classList.remove("_drag_start_");
 
             off(document, "mousemove", drag);
             off(document, "mouseup", release);
+
+
+            off(document, "touchmove", drag);
+            off(document, "touchend", release);
 
             this.onRelease({
                 x: event.clientX,
@@ -480,6 +508,9 @@ export class Drag {
         }
         on(document, "mousemove", drag);
         on(document, "mouseup", release);
+
+        on(document, "touchmove", drag);
+        on(document, "touchend", release);
     };
 
     constructor(config) {
@@ -491,11 +522,13 @@ export class Drag {
         }
         this.e = config.main;
         on(this.e, "mousedown", this._mouseDown);
+        on(this.e, "touchstart", this._mouseDown);
     }
 
     stop() {
 
         off(this.e, "mousedown", this._mouseDown);
+        off(this.e, "touchstart", this._mouseDown);
     };
 
     static init(config) {

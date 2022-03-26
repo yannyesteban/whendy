@@ -1,0 +1,150 @@
+{
+    "templateFile": "templates/init.html",
+    "cssSheets": [
+        "css/reset.css",
+        "css/main.css"
+    ],
+    "elements": [
+        {
+            "name": "app",
+            "enable": true,
+            "file": "php/App.php",
+            "class": "\\WH\\App",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            }
+            
+        },
+
+        {
+            "name": "html",
+            "enable": true,
+            "file": "php/Html.php",
+            "class": "\\WH\\Html",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            },
+            "module": {
+                "src": "./WHHtml.js",
+                "name": "WHHtml",
+                "alias": "WHHtml",
+                "component": "wh-html"
+            }
+        },
+        {
+            "name": "user-admin",
+            "enable": true,
+            "file": "php/UserAdmin.php",
+            "class": "\\WH\\UserAdmin",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            }
+        },
+        {
+            "name": "form",
+            "enable": true,
+            "file": "php/Form.php",
+            "class": "\\WH\\Form",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            },
+            "module": {
+                "src": "./WHForm.js",
+                "name": "WHForm",
+                "alias": "WHForm",
+                "component": "wh-form"
+            }
+        },
+        {
+            "name": "map",
+            "enable": true,
+            "file": "php/map.php",
+            "class": "Map",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            },
+            "module": {
+                "src": "js/Map.js",
+                "name": "WHMap",
+                "alias": "WHMap",
+                "component": "wh-map"
+            }
+        },
+        {
+            "name": "GTMap",
+            "enable": true,
+            "file": "php/GTMap.php",
+            "class": "GTMap",
+            "js": [],
+            "css": [],
+            "init": {
+                "patternJsonFile": "{@MAIN_PATH}json/{name}.json"
+            },
+            "module": {
+                "src": "js/GTMap.js",
+                "name": "GTMap",
+                "alias": "GTMap",
+                "component": "gt-map"
+            }
+        }
+    ],
+
+    "init":[
+        {
+            "id":"banner",
+            "type":"element",
+            "element":"html",
+            "method":"load",
+            "name":"x",
+            "setPanel":"wh-banner",
+            "config":{
+
+            }
+
+        },
+        {
+            "id":"user-admin",
+            "type":"element",
+            "element":"user-admin",
+            "method":"form",
+            "setPanel":"wh-body",
+            "name":"/{@JSON_PATH}forms/login.json",
+            "config":{
+            }
+
+        },
+        {
+            "id":"form-login",
+            "type":"element",
+            "element":"form",
+            "method":"request",
+            "setPanel":"wh-body",
+            "name":"/{@JSON_PATH}forms/login.json",
+            "config":{
+            }
+
+        },
+        {
+            "id":"form-login2",
+            "type":"element",
+            "element":"form",
+            "method":"request",
+            "setPanel":"wh-form2",
+            "name":"/{@JSON_PATH}forms/login.json",
+            "config":{
+            }
+
+        }
+
+    ]
+}

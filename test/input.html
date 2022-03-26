@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <!--<link rel="stylesheet" href="./../css/test.css">-->
+    <style>
+        wh-select {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <wh-radio id="x">
+
+
+        <wh-radio-option value="1" data-group="1" data-text="Uno">uno</wh-radio-option>
+        <wh-radio-option value="2" data-group="1" data-text="Dos">dos</wh-radio-option>
+        <wh-radio-option value="3" data-group="1" data-text="Tres">Tres</wh-radio-option>
+        <wh-radio-option value="4" data-group="1" data-text="Cuatro">Cuatro</wh-radio-option>
+        <wh-radio-option value="5" data-group="1" data-text="Cinco">cinco</wh-radio-option>
+        <wh-radio-option value="6" data-group="1" data-text="Seis">seis</wh-radio-option>
+
+        <wh-radio-option value="7" data-group="2" data-text="Siete">siete</wh-radio-option>
+        <wh-radio-option value="8" data-group="2" data-text="Ocho">ocho</wh-radio-option>
+        <wh-radio-option checked value="9" data-group="2" data-text="Nueve">nueve</wh-radio-option>
+    </wh-radio>
+<hr>
+    <wh-check id="k">
+
+
+        <wh-check-option value="1" data-group="1" data-text="Uno">uno</wh-check-option>
+        <wh-check-option value="2" data-group="1" data-text="Dos">dos</wh-check-option>
+        <wh-check-option value="3" data-group="1" data-text="Tres">Tres</wh-check-option>
+        <wh-check-option value="4" data-group="1" data-text="Cuatro">Cuatro</wh-check-option>
+        <wh-check-option value="5" data-group="1" data-text="Cinco">cinco</wh-check-option>
+        <wh-check-option value="6" data-group="1" data-text="Seis">seis</wh-check-option>
+
+        <wh-check-option value="7" data-group="2" data-text="Siete">siete</wh-check-option>
+        <wh-check-option value="8" data-group="2" data-text="Ocho">ocho</wh-check-option>
+        <wh-check-option checked value="9" data-group="2" data-text="Nueve">nueve</wh-check-option>
+    </wh-check>
+
+    <hr>
+    <button id="d"> YANNY</button>
+
+    <button id="boton">LOAD Formulario</button>
+<select><option>hola</option></select>
+
+<wh-select><option>Yess</option></wh-select>
+
+<wh-select><option>hola</option><option>adios</option><option>QQ</option></wh-select>
+    <script>
+
+
+    //const x = document.getElementById("x");
+
+    //x.innerHTML= " AVENGER";
+    </script>
+    <script type="module" src="./../js/WHRadio.js"></script>
+    <script type="module" src="./../js/WHCheck.js"></script>
+    <script type="module" src="./../js/select.js"></script>
+    
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        (function () {
+
+
+
+            $(d).on("click", e=>{
+                x.value = "3";
+
+                x.dataSource = {
+                    addClass: ["sevian"],
+                    name:"x",
+                    id:"x",
+                    value:"2",
+                    data:[
+                        ["1", "One", "que"],
+                        ["2", "Two"],
+                        ["3", "Tres"]
+                    ],
+                    events:{
+                        "change":"console.log(this.value)"
+                    }
+                };
+            })
+            $(boton).on("click", e => {
+                alert(x.value)
+                
+               })
+
+
+        })()
+
+
+
+
+
+    </script>
+
+</body>
+
+
+</html>

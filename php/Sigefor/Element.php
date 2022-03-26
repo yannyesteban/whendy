@@ -17,7 +17,7 @@ class Element extends \Element implements IUserInfo, IPreConfig
 
     public static function _loadPreConfig($info){
 
-        if($info->name){
+        if($info->name?? false){
             return Store::loadJson($info->name);
         }
         return $info;

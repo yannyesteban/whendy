@@ -160,12 +160,17 @@ class Whendy
         $config = $info;
         
         if(is_a($class, "\WH\IPreConfig", true)){
+            
             $config = $class::_loadPreConfig($info);
-
+            //Tool::hr($config);
             if(($config->acceptedRoles?? false) && !User::validRoles($config->acceptedRoles)){
                 return;
             }
             
+            if($info->appendTo ?? false){
+                $config->appendTo = $info->appendTo;
+            }
+
             if($info->setPanel ?? false){
                 $config->setPanel = $info->setPanel;
             }
@@ -218,7 +223,7 @@ class Whendy
         $this->init();
 
         header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Application-Mode, authorization, sid,  Application-Id");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         header("Allow: GET, POST, OPTIONS, PUT, DELETE");
         header('mode: init');

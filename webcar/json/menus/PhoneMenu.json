@@ -1,0 +1,78 @@
+{
+    "name": "PhoneMenu",
+    "menu": {
+        "addClass":["phone-menu", "unit"],
+        "hideCheck": true,
+        "hideIcon": false,
+        "events": {
+            "link-action": "console.log('hola')"
+        },
+        "items": [
+            {
+                "caption": "Sitios",
+                "addClass": "site",
+                "title":"Sitios",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Geo",
+                "addClass": "geofence",
+                "title":"Geocercas",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Alarm",
+                "addClass": "alarm",
+                "title":"Alarmas",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Inm",
+                "addClass": "bolt",
+                "title":"Inmediato",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Adm",
+                "addClass": "event-admin",
+                "title":"Administrador de Eventos",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Búsq",
+                "addClass": "search",
+                "title":"Búsqueda",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+
+            {
+                "caption": "Conf",
+                "addClass": "setting",
+                "title":"Configuración del Sistema",
+                "events": {
+                    "link-action": "document.getElementById('unit-menu').test()"
+                }
+            },
+            {
+                "caption": "Salir",
+                "addClass": "exit",
+                "title":"Salir",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "name": "MainMenu",
+    "menu": {
+        "addClass":["main-menu", "main-menu1", "unit"],
+        "hideCheck": true,
+        "hideIcon": false,
+        "events": {
+            "link-action": "console.log('hola')"
+        },
+        "items": [
+            
+            {
+                "caption": "Unidades",
+                "addClass": "unit",
+                "title":"Unidades",
+                "events": {
+                    "link-action": "document.querySelector('wh-popup').setAttribute('mode', 'open')"
+                }
+            },
+            {
+                "caption": "Sitios",
+                "addClass": "site",
+                "title":"Sitios",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Geocercas",
+                "addClass": "geofence",
+                "title":"Geocercas",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Alarmas",
+                "addClass": "alarm",
+                "title":"Alarmas",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Inmediato",
+                "addClass": "bolt",
+                "title":"Inmediato",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Administrador de Eventos",
+                "addClass": "event-admin",
+                "title":"Administrador de Eventos",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            },
+            {
+                "caption": "Búsqueda",
+                "addClass": "search",
+                "title":"Búsqueda",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            }
+        ]
+    }
+}

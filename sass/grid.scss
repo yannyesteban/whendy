@@ -1,0 +1,48 @@
+.grid {
+	display: grid;
+	grid-template-columns: repeat(7, auto);
+	position: relative;
+	height: 500px;
+	overflow: auto;
+	.header,
+	.footer,
+	.row {
+		display: contents;
+		.cell {
+			min-width: 200px;
+		}
+	}
+
+	.header {
+		.cell {
+			background-color: aqua;
+			position: sticky;
+			top: 0;
+			z-index: 3 !important;
+		}
+	}
+
+	.footer {
+		.cell {
+			background-color: aqua;
+			position: sticky;
+			bottom: 0;
+			z-index: 3 !important;
+		}
+	}
+
+	.row:hover {
+		.cell {
+			background-color: aqua;
+		}
+	}
+
+	> div {
+		div:nth-child(1) {
+			background-color: chocolate;
+			position: sticky;
+			left: 0;
+			z-index: 0;
+		}
+	}
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <!--<link rel="stylesheet" href="./../css/test.css">-->
+
+</head>
+
+<body>
+
+    <wh-form id="f">
+
+
+    </wh-form>
+
+    <wh-form>
+
+        <wh-form-caption>Formulario</wh-form-caption>
+        <wh-form-body>
+            <wh-form-field>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text">
+            </wh-form-field>
+
+            <wh-form-field>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text">
+            </wh-form-field>
+
+            <wh-form-field>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text">
+            </wh-form-field>
+
+            <wh-form-field>
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text">
+            </wh-form-field>
+
+            <wh-page>
+                <wh-page-caption>Hola</wh-page-caption>
+                <wh-page-body>
+                    <wh-form-field>
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text">
+                    </wh-form-field>
+
+                    <wh-form-field>
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text">
+                    </wh-form-field>
+
+                </wh-page-body>
+
+            </wh-page>
+
+            <fieldset>
+                <legend>grupo</legend>
+                <wh-form-field>
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text">
+                </wh-form-field>
+                <wh-form-field>
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text">
+                </wh-form-field>
+
+            </fieldset>
+        </wh-form-body>
+        <wh-nav>
+            <button>A</button><button>b</button><button>c</button>
+        </wh-nav>
+
+    </wh-form>
+    <button> YANNY</button>
+
+    <button id="boton">LOAD Formulario</button>
+
+    <script>
+
+
+    //const x = document.getElementById("x");
+
+    //x.innerHTML= " AVENGER";
+    </script>
+    <script type="module" src="./../js/WHForm2.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        (function () {
+
+
+
+
+            $(boton).on("click", e => {
+                $("#f").get().dataSource = {
+                    caption: "Form 2",
+                    elements: [
+                        {
+                            "control": "field",
+                            "label": "nombre:",
+                            "input": "input",
+                            "attr": {
+                                "type": "text",
+                                "name": "name",
+                                "id": "name"
+                            },
+                            "events": {
+                                "click": "alert(1)"
+                            }
+                        },
+                        {
+                            control: "fieldset",
+                            "label": "datos personales",
+                            elements: [
+                                {
+                                    "control": "field",
+                                    "label": "edad:",
+                                    "input": "input",
+                                    "attr": {
+                                        "type": "text",
+                                        "name": "edad",
+                                        "id": "edad"
+                                    },
+                                    "events": {
+                                        "click": "alert(2)"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            control: "tab",
+                            pages: [
+                                {
+                                    "label": "tab Uno",
+                                    "elements": [
+                                        {
+                                            "control": "field",
+                                            "label": "nombre:",
+                                            "input": "input",
+                                            "attr": {
+                                                "type": "text",
+                                                "name": "name",
+                                                "id": "name"
+                                            },
+                                            "events": {
+                                                "click": "alert(1)"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "label": "tab Dos",
+                                    "elements": [
+                                        {
+                                            "control": "field",
+                                            "label": "nombre:",
+                                            "input": "input",
+                                            "attr": {
+                                                "type": "text",
+                                                "name": "name",
+                                                "id": "name",
+                                                value:"hola"
+                                            },
+                                            "events": {
+                                                "click": "alert(1)"
+                                            }
+                                        }
+                                    ]
+                                }
+
+                            ]
+                        }
+                    ]
+                }
+            })
+
+
+        })()
+
+
+
+
+
+    </script>
+
+</body>
+
+
+</html>

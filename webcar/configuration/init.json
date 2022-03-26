@@ -1,0 +1,7 @@
+{
+    "type":"element",
+    "element":"app",
+    "name":"{@APP_PATH}/webcar.json",
+    "method":"init"
+
+}

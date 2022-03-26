@@ -1,0 +1,46 @@
+{
+    "caption":"form1",
+    "elements":
+        [
+            {
+                "control":"field",
+                "input":"input",
+                "type":"text",
+                "label":"nombre",
+                "value":"yanny"
+            },
+            {
+                "control":"page",
+                "label":"datos personales",
+                "elements":[
+                    {
+                        "control":"field",
+                        "input":"input",
+                        "type":"text",
+                        "label":"nombre",
+                        "value":"yanny"
+                    }
+                ]
+            },
+            {
+                "control":"tab",
+                "tabs":[
+                    {
+                        "label":"uno",
+                        "elements":[
+
+                        ]
+
+                    }
+                ]
+            },
+            {
+                "control":"group",
+                "label":"xx",
+                "elements":[]
+            }
+
+
+
+        ]
+}

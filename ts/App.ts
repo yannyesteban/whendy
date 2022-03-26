@@ -28,7 +28,34 @@ interface IElement {
     props: any;
     data: any;
     setPanel: string;
+    appendTo: string;
 }
+
+class WHLayout extends HTMLElement {
+	constructor() {
+		super();
+
+
+	}
+	public connectedCallback() {
+		
+	}
+}
+
+customElements.define("wh-layout", WHLayout);
+
+class WHPanel extends HTMLElement {
+	constructor() {
+		super();
+
+
+	}
+	public connectedCallback() {
+		
+	}
+}
+
+customElements.define("wh-panel", WHPanel);
 
 export class App extends HTMLElement {
     public server = "";
@@ -50,9 +77,9 @@ export class App extends HTMLElement {
     }
 
     attributeChangedCallback(name, oldVal, newVal) {
-        console.log({name, oldVal, newVal});
+        console.log({ name, oldVal, newVal });
         this[name] = newVal;
-        
+
     }
 
     connectedCallback() {
@@ -84,12 +111,13 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
-                    console.log(item)
+                    
                     this.updateElement(item)
                     break;
                 case "response":
                     break;
                 case "init":
+                    
                     this.initElement(item);
                     break;
                 case "fragment":
@@ -107,12 +135,12 @@ export class App extends HTMLElement {
         });
     }
 
-    set paz(x){
+    set paz(x) {
         this.xx = x;
         this.setAttribute("xx", x);
     }
 
-    get paz(){
+    get paz() {
         return this.getAttribute("xx");
     }
 
@@ -148,7 +176,7 @@ export class App extends HTMLElement {
 
     }
 
-    
+
 
     initApp() {
         const request = {
@@ -167,7 +195,7 @@ export class App extends HTMLElement {
                 this.innerHTML = data.template;
                 this.modules = data.modules;
 
-                console.log(this.modules);
+                
 
             },
             request: [],
@@ -190,15 +218,16 @@ export class App extends HTMLElement {
     }
 
     public whenComponent(module) {
-        console.log(module.src)
+        
+        
         return new Promise((resolve, reject) => {
             if (customElements.get(module.component)) {
-                console.log("opcion 1")
+        
                 resolve(customElements.get(module.component));
             }
 
             import(module.src).then(MyModule => {
-                console.log("opcion 2")
+        
                 resolve(customElements.get(module.component));
 
             }).catch(error => {
@@ -209,12 +238,12 @@ export class App extends HTMLElement {
     }
 
     updateElement(info) {
-        console.log(info.id)
+        
         const e = $.id(info.id);
-        console.log(e)
+        
         if (e) {
             if (info.props) {
-                console.log(info.props)
+        
                 e.prop(info.props);
             }
         }
@@ -229,17 +258,32 @@ export class App extends HTMLElement {
             e.id(element.id);
             e.prop(element.props);
             e.attr(element.attrs);
-
-            const panel = $.id(element.setPanel);
-            if (panel) {
-
-                panel.text("");
-                panel.append(e);
+            let panel = null;
+            if (element.setPanel) {
+                alert(999)
+                panel = $.id(element.setPanel);
+                if (panel) {
+                    panel.text("");
+                    panel.append(e);
+                    return;
+                }
             }
+            if (element.appendTo) {
+                alert(8888)
+                panel = $(element.appendTo);
+                if (panel) {
+                    panel.append(e);
+                    return;
+                }
+
+            }
+
         });
     }
 
     initElement(element: IElement | IResponse) {
+
+        console.log(element)
 
         const module = this.modules.find((e) => e.component == element.wc);
 
@@ -252,11 +296,26 @@ export class App extends HTMLElement {
                 e.prop(element.props);
                 e.attr(element.attrs);
 
-                const panel = $.id(element.setPanel);
-                if (panel) {
+                let panel = null;
+                if (element.setPanel) {
+                    
+                    panel = $.id(element.setPanel);
+                    
+                    if (panel) {
+                        panel.text("");
+                        panel.append(e);
+                        return;
+                    }
+                }
+                if (element.appendTo) {
+                    
+                    panel = $(element.appendTo);
+                    
+                    if (panel) {
+                        panel.append(e);
+                        return;
+                    }
 
-                    panel.text("");
-                    panel.append(e);
                 }
 
 
@@ -264,6 +323,19 @@ export class App extends HTMLElement {
                 console.log(error)
             })
         }
+    }
+
+    set jsModules(jsFiles) {
+        
+        jsFiles.forEach(src => {
+        
+            loadScript(src, { async: true, type: "module" });
+        })
+
+    }
+
+    set addClass(classes) {
+        $(this).addClass(classes);
     }
 
     go(info) {
@@ -274,7 +346,7 @@ export class App extends HTMLElement {
         } else {
         }
 
-        const data = Object.assign(info.data || {}, {__app_request: info.request, __app_id: this.id});
+        const data = Object.assign(info.data || {}, { __app_request: info.request, __app_id: this.id });
 
         const headers = Object.assign({
             "Content-Type": "application/json",

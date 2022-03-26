@@ -17,10 +17,7 @@
 
 .kk {
   background-color: rgba(95, 158, 160, 0.747);
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 
 #k1 {
@@ -60,8 +57,7 @@
 
 .win {
   border: 2px solid #b8b8b8;
-  -webkit-box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
-          box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
   background-color: rgba(1, 1, 1, 0.212);
 }
 
@@ -98,12 +94,9 @@ ul {
   max-height: 3000px;
   overflow: auto;
   opacity: 1;
-  -webkit-transition-duration: 0.5s;
-          transition-duration: 0.5s;
-  -webkit-transition-property: all;
+  transition-duration: 5.5s;
   transition-property: all;
-  -webkit-transition-timing-function: ease-in;
-          transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
 }
 
 .item.close > .submenu {
@@ -111,14 +104,18 @@ ul {
   overflow: hidden;
   padding-left: 10px;
   opacity: 0;
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: all;
+  transition-duration: 5.2s;
   transition-property: all;
 }
 
 *:not(:defined) {
   border: 4px solid pink;
   display: block;
+}
+
+wh-menu-item::part(s) {
+  display: block;
+  border: 4px solid #3f6e19;
+  color: red;
 }
 /*# sourceMappingURL=test.css.map */

@@ -1,0 +1,58 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host(wh-form) {
+  display: flex;
+  flex-direction: column;
+}
+
+:host(wh-form) ::slotted(wh-form-caption) {
+  text-align: center;
+}
+
+:host(wh-form) ::slotted(wh-form-body) {
+  flex-basis: 100%;
+  overflow: auto;
+}
+
+:host(wh-form) ::slotted(wh-nav) {
+  display: flex;
+  gap: 0.2em;
+  background-color: rgba(0, 0, 0, 0.08);
+  padding: 0.2em;
+  user-select: none;
+}
+
+:host(wh-nav) ::slotted(wh-nav-button) {
+  border: 1px solid white;
+  background-color: #fffcfc;
+  background: linear-gradient(180deg, white 0%, #e2e2e2 100%);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  border-radius: 0.2em;
+  font-size: 0.9em;
+  color: #4d4d4d;
+}
+
+:host(wh-nav) ::slotted(wh-nav-button:hover) {
+  outline: 1px solid #9c9c9c;
+  color: #1a1a1a;
+}
+
+:host {
+  display: block;
+}
+
+:host(wh-page) {
+  padding: 10px;
+  border: 1.1em solid red;
+}
+
+:host(wh-page) ::slotted(wh-page-caption) {
+  background-color: aqua;
+  text-align: center;
+}
+/*# sourceMappingURL=WHForm.css.map */

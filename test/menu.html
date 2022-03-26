@@ -8,86 +8,106 @@
     <title>Window</title>
     <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
     <link rel="stylesheet" href="./../css/reset.css">
-    <link rel="stylesheet" href="./../css/test1.css">
+    <!--<link rel="stylesheet" href="./../css/test.css">-->
 
 </head>
 
 <body>
 
-    <wh-menu id="x" checkbox="">
-        <wh-menu-item>
-            <wh-link href="" action="console.log('es una action')" check="console.log('es un check')">
-                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                <wh-caption>One</wh-caption>
-            </wh-link>
-
+    <wh-menu id="x">
+        <wh-menu-item checked>
+            <wh-menu-link>
+                <wh-menu-check><input type="checkbox"></wh-menu-check>
+                <wh-menu-icon><img class="myicon" src="./../images/icon.png" /></wh-menu-icon>
+                <wh-menu-caption>Yanny</wh-menu-caption>
+            </wh-menu-link>
         </wh-menu-item>
 
-        <wh-menu-item>
-            <wh-link href="">
-                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                <wh-caption>Two</wh-caption>
-            </wh-link>
+        <wh-menu-item checked>
+            <wh-menu-link>
+                <wh-menu-check><input type="checkbox"></wh-menu-check>
+                <wh-menu-icon><img class="myicon" src="./../images/icon.png" /></wh-menu-icon>
+                <wh-menu-caption>Esteban</wh-menu-caption>
+            </wh-menu-link>
         </wh-menu-item>
 
-        <wh-menu-item>
-            <wh-link href="">
-                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                <wh-caption>Three</wh-caption>
-            </wh-link>
-            <wh-group>
-                <wh-menu-item>
-                    <wh-link href="">
-                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                        <wh-caption>3.1</wh-caption>
-                    </wh-link>
-                </wh-menu-item>
-
-                <wh-menu-item>
-                    <wh-link href="">
-                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                        <wh-caption>3.2</wh-caption>
-                    </wh-link>
-                    <wh-group>
-                        <wh-menu-item>
-                            <wh-link href="">
-                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                                <wh-caption>3.2.1</wh-caption>
-                            </wh-link>
-                        </wh-menu-item>
-
-                        <wh-menu-item>
-                            <wh-link href="">
-                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                                <wh-caption>3.2.2</wh-caption>
-                            </wh-link>
-                        </wh-menu-item>
-
-                        <wh-menu-item>
-                            <wh-link href="">
-                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                                <wh-caption>3.2.3</wh-caption>
-                            </wh-link>
-                        </wh-menu-item>
-
-                    </wh-group>
-                </wh-menu-item>
-
-                <wh-menu-item>
-                    <wh-link href="">
-                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
-                        <wh-caption>3.3</wh-caption>
-                    </wh-link>
-                </wh-menu-item>
-
-            </wh-group>
+        <wh-menu-item checked>
+            <wh-menu-link>
+                <wh-menu-check><input type="checkbox"></wh-menu-check>
+                <wh-menu-icon><img class="myicon" src="./../images/icon.png" /></wh-menu-icon>
+                <wh-menu-caption>Nuñez</wh-menu-caption>
+            </wh-menu-link>
         </wh-menu-item>
 
 
-
+        <wh-menu-item>
+            <wh-menu-link>
+                <wh-menu-check><input type="checkbox"></wh-menu-check>
+                <wh-menu-icon><img class="myicon" src="./../images/icon.png" /></wh-menu-icon>
+                <wh-menu-caption>SubMenu</wh-menu-caption>
+            </wh-menu-link>
+            <wh-menu-group>
+                <wh-menu-item>
+                    <wh-menu-link>
+                        <wh-menu-check><input type="checkbox"></wh-menu-check>
+                        <wh-menu-icon><img class="myicon" src="./../images/icon.png" /></wh-menu-icon>
+                        <wh-menu-caption>Nuñez</wh-menu-caption>
+                    </wh-menu-link>
+                </wh-menu-item>
+    
+            </wh-menu-group>
+        </wh-menu-item>
+        
 
     </wh-menu>
 
+    <!--
+    <wh-menu id="x" hhide-icon hhide-check>
+
+        <wh-menu-item class="" use-check value="4" checked onaction="console.log(event)" oncheck="console.log(this.checked)">
+            <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+            <wh-caption>One</wh-caption>
+        </wh-menu-item>
+
+        <wh-menu-item value="5">
+            <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+            <wh-caption>Two</wh-caption>
+        </wh-menu-item>
+
+        <wh-menu-item value="5" checked>
+            <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+            <wh-caption>Tres</wh-caption>
+            <wh-group>
+                <wh-menu-item value="5">
+                    <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                    <wh-caption>3.1</wh-caption>
+                </wh-menu-item>
+
+                <wh-menu-item value="5">
+                    <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                    <wh-caption>3.2</wh-caption>
+                </wh-menu-item>
+            </wh-group>
+        </wh-menu-item>
+
+        <wh-menu-item value="6">
+            <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+            <wh-caption>Tres</wh-caption>
+            <wh-group>
+                <wh-menu-item value="5">
+                    <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                    <wh-caption>3.1</wh-caption>
+                </wh-menu-item>
+
+                <wh-menu-item value="5">
+                    <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                    <wh-caption>3.2</wh-caption>
+                </wh-menu-item>
+            </wh-group>
+        </wh-menu-item>
+
+    </wh-menu>
+-->
     <button id="boton">LOAD</button>
 
     <script>
@@ -102,18 +122,38 @@
         import { Q as $ } from "./../js/q.js";
 
         $(boton).on("click", e => {
-            //https://www.htmlelements.com/docs/menu/
-            x.loadConfig({
+            /*
+            x.loadItems(x, [
+                    {
+                        caption: "anneliesse 2002",
+                        icon: `<img class="myicon" src="./../images/icon.png" />`,
+                        events: {
+                            "link-action": () => { alert(8) }
+                        }
+                    }]);
 
+                    return;
+            */
+            //https://www.htmlelements.com/docs/menu/
+            x.dataSource = {
+                //hideCheck: false,
+                //hideIcon: true,
+                checkbox:true,
+                events:{
+                    "link-action":"console.log('hola')"
+                },
                 items: [
                     {
                         caption: "anneliesse",
-                        action: "alert('aneliesse morales')"
+                        checkbox: "checked",
+                        events: {
+                            "link-check": () => { console.log(77) }
+                        }
                     },
                     {
                         caption: "yrianny",
-                        "action": () => {
-                            alert("hola soy yo")
+                        events: {
+                            "link-action": function () { console.log(this) }
                         }
                     },
                     {
@@ -144,18 +184,25 @@
                                         icon: `<img class="myicon" src="./../images/admin.png"/>`
                                     },
                                     {
-                                        caption: "tres"
+                                        caption: "tres",
+                                        events: {
+                                            "link-action": function () { alert("tres") }
+                                        }
                                     }
                                 ]
                             }
                         ]
                     }
                 ]
-            });
+            }
         })
 
-        x.addEventListener("link-action", (event)=>{
-            console.log(event.detail)
+        x.addEventListener("link-action", (event) => {
+
+        });
+
+        x.addEventListener("link-check", (event) => {
+
         })
 
 

@@ -7,6 +7,7 @@ class Element
     public $name = '';
     public $eparams = [];
     public $setPanel = null;
+    public $appendTo = null;
     public $method = '';
     
     public $replayToken = false;

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <!--<link rel="stylesheet" href="./../css/test.css">-->
+
+</head>
+
+<body>
+    <button> YANNY</button>
+    <wh-tab id="t">
+        <wh-tab-menu>A</wh-tab-menu>
+        <wh-tab-menu>B</wh-tab-menu>
+        <wh-tab-menu selected>C</wh-tab-menu>
+        <wh-tab-menu>D</wh-tab-menu>
+        <wh-tab-panel>aa</wh-tab-panel>
+        <wh-tab-panel>bb</wh-tab-panel>
+        <wh-tab-panel>cc</wh-tab-panel>
+        <wh-tab-panel>dd<br>ddd</wh-tab-panel>
+    </wh-tab>
+
+    <wh-tab id="y">
+        <wh-tab-menu>A</wh-tab-menu>
+        <wh-tab-menu>B</wh-tab-menu>
+        <wh-tab-menu>C</wh-tab-menu>
+        <wh-tab-menu selected>Extra</wh-tab-menu>
+        <wh-tab-panel>aa</wh-tab-panel>
+        <wh-tab-panel>bb</wh-tab-panel>
+        <wh-tab-panel>cc</wh-tab-panel>
+        <wh-tab-panel>
+            <wh-tab id="ty">
+                <wh-tab-menu>Caracas</wh-tab-menu>
+                <wh-tab-menu selected>Valencia</wh-tab-menu>
+                <wh-tab-menu>Baquisimeto</wh-tab-menu>
+                <wh-tab-menu>Valera</wh-tab-menu>
+                <wh-tab-panel>Venezuela</wh-tab-panel>
+                <wh-tab-panel>Carabobo</wh-tab-panel>
+                <wh-tab-panel>Lara</wh-tab-panel>
+                <wh-tab-panel>Trujillo</wh-tab-panel>
+            </wh-tab>
+        </wh-tab-panel>
+    </wh-tab>
+
+
+
+
+    <button id="boton">LOAD</button>
+
+    <script>
+
+
+    //const x = document.getElementById("x");
+
+    //x.innerHTML= " AVENGER";
+    </script>
+    <script type="module" src="./../js/WHTab.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        (function () {
+
+            
+            const tab = $.create("wh-tab");
+            tab.get().dataSource = {
+                className: "",
+                pages: [
+                    {
+                        menu: "hola",
+                        panel: "yanny",
+
+                    },
+                    {
+                        menu: "adios",
+                        panel: "esteban",
+                        selected: true
+                    }
+                ],
+                events: {
+                    "tab-open": "console.log('abierto hasta el amanecer')"
+                }
+            };
+
+            tab.appendTo(document.body);
+            t.addEventListener("tab-open", (event) => {
+                console.log(event.detail)
+            })
+
+            $(boton).on("click", e => {
+                y.index = 0
+            })
+
+
+        })()
+
+
+
+
+
+    </script>
+
+</body>
+
+
+</html>

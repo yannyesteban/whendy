@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/test1.css">
+
+</head>
+
+<body>
+
+    <wh-menu id="x" checkbox="">
+        <wh-menu-item>
+            <wh-link href="" action="console.log('es una action')" check="console.log('es un check')">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                <wh-caption>One</wh-caption>
+            </wh-link>
+
+        </wh-menu-item>
+
+        <wh-menu-item>
+            <wh-link href="">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                <wh-caption>Two</wh-caption>
+            </wh-link>
+        </wh-menu-item>
+
+        <wh-menu-item>
+            <wh-link href="">
+                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                <wh-caption>Three</wh-caption>
+            </wh-link>
+            <wh-group>
+                <wh-menu-item>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                        <wh-caption>3.1</wh-caption>
+                    </wh-link>
+                </wh-menu-item>
+
+                <wh-menu-item>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                        <wh-caption>3.2</wh-caption>
+                    </wh-link>
+                    <wh-group>
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.1</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.2</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                        <wh-menu-item>
+                            <wh-link href="">
+                                <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                                <wh-caption>3.2.3</wh-caption>
+                            </wh-link>
+                        </wh-menu-item>
+
+                    </wh-group>
+                </wh-menu-item>
+
+                <wh-menu-item>
+                    <wh-link href="">
+                        <wh-icon><img class="myicon" src="./../images/icon.png" /></wh-icon>
+                        <wh-caption>3.3</wh-caption>
+                    </wh-link>
+                </wh-menu-item>
+
+            </wh-group>
+        </wh-menu-item>
+
+
+
+
+    </wh-menu>
+
+    <button id="boton">LOAD</button>
+
+    <script>
+
+
+    //const x = document.getElementById("x");
+
+    //x.innerHTML= " AVENGER";
+    </script>
+    <script type="module" src="./../js/WHmenu.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+
+        $(boton).on("click", e => {
+            //https://www.htmlelements.com/docs/menu/
+            x.loadConfig({
+
+                items: [
+                    {
+                        caption: "anneliesse",
+                        action: "alert('aneliesse morales')"
+                    },
+                    {
+                        caption: "yrianny",
+                        "action": () => {
+                            alert("hola soy yo")
+                        }
+                    },
+                    {
+                        caption: "yriangel",
+                        icon: `<img class="myicon" src="./../images/icon.png" />`
+                    },
+                    {
+                        caption: "yanny"
+                    },
+                    {
+                        caption: "jimenez",
+                        items: [
+                            {
+                                caption: "uno"
+                            },
+                            {
+                                caption: "dos",
+                                icon: `<img class="myicon" src="./../images/admin.png"/>`
+                            },
+                            {
+                                caption: "tres",
+                                items: [
+                                    {
+                                        caption: "uno"
+                                    },
+                                    {
+                                        caption: "dos",
+                                        icon: `<img class="myicon" src="./../images/admin.png"/>`
+                                    },
+                                    {
+                                        caption: "tres"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            });
+        })
+
+        x.addEventListener("link-action", (event)=>{
+            console.log(event.detail)
+        })
+
+
+    </script>
+
+</body>
+
+
+</html>

@@ -40,7 +40,7 @@ class JWT
 
     public static function verifyHeader():object | null{
         $headers = getallheaders();
-        if($headers['Authorization']){
+        if($headers['Authorization']?? false){
             $arr = explode(' ', $headers['Authorization']);
             return self::verify(array_pop($arr));
         }

@@ -89,6 +89,8 @@ class ListText extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
         const slot = this.shadowRoot.querySelector("slot");
         slot.addEventListener("slotchange", (e) => {
+            console.log("slotchange");
+            //this.render();
             //const nodes = slot.assignedNodes();
         });
         this.input = this.shadowRoot.querySelector(`.input`);
@@ -389,6 +391,7 @@ class ListText extends HTMLElement {
     checkValidity() { return this.internals_.checkValidity(); }
     reportValidity() { return this.internals_.reportValidity(); }
     render() {
+        console.log("slotchange");
         this.resetData();
         $(this).addClass("active");
         $(this).removeClass("valid");
@@ -410,6 +413,21 @@ class ListText extends HTMLElement {
                 }
             }
         });
+    }
+    set data(data) {
+        console.log("set data(data)");
+        data.forEach(info => {
+            const option = $(this).create("wh-option");
+            option.attr("value", info.value);
+            option.html(info.text);
+        });
+    }
+    set dataSource(source) {
+        console.log("set dataSource(source)");
+        $(this).html("");
+        for (let k in source) {
+            this[k] = source[k];
+        }
     }
 }
 ListText.formAssociated = true;

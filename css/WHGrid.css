@@ -1,0 +1,30 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host(wh-grid) {
+  border: 2px solid #791010;
+  font-size: 1rem;
+  padding: 0.1rem;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  position: relative;
+  overflow: auto;
+}
+
+:host(wh-grid) ::slotted(wh-grid-row) {
+  display: contents;
+  border: 3px solid red;
+}
+
+:host(wh-grid-row:not([select-mode])) input {
+  display: none;
+}
+/*# sourceMappingURL=WHGrid.css.map */

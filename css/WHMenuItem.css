@@ -1,64 +1,51 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :host([slot="item"]) {
   display: block;
-  font-size: 1em;
+  border: 1px solid #e2e2e2;
+  user-select: none;
 }
 
-::slotted(wh-linkk) {
-  font-style: italic;
-  overflow: auto !important;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  background-color: #c4830a !important;
-  height: 2em;
-}
-
-:host(.close) ::slotted(wh-group) {
+:host([slot="item"][hidden]) {
   display: none;
 }
 
-:host([slot="link"]) {
-  border: 1px solid #e2e2e2;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  line-height: auto;
-  font-size: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 2.0rem;
-  margin: 2px;
+:host([opened]) ::slotted(wh-menu-group) {
+  max-height: 100vh;
+  overflow: auto;
+  opacity: 1;
+  transition-duration: 0.5s;
+  transition-property: all;
+  transition-timing-function: ease-in;
 }
 
-:host([slot="link"]) ::slotted(wh-caption) {
-  _border: 4px solid #b823cc;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
+:host(:not([opened])) ::slotted(wh-menu-group) {
+  max-height: 0px;
+  overflow: hidden;
+  padding-left: 10px;
+  opacity: 0;
+  transition-duration: 0.2s;
+  transition-property: all;
 }
 
-:host([slot="link"].sub-menu) .ind {
-  float: right;
+::slotted(div) {
+  display: inline-block;
+  margin: 10px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 4px 0 4px;
+  border-color: var(--color, steelblue) transparent transparent transparent;
+  background-color: transparent;
+  transform: rotateZ(var(--heading, 0deg));
+  transition: all 0.4s ease;
+}
+
+:host([slot="item"].sub-menu[opened]) .ind {
   margin: 10px;
   width: 8px;
   height: 3px;
@@ -67,8 +54,8 @@
   background-color: #c4c4c4;
 }
 
-:host([slot="link"].close) .ind {
-  float: right;
+:host([slot="item"].sub-menu:not([opened])) .ind {
+  margin: 10px;
   width: 0;
   height: 0;
   border-style: solid;
@@ -77,27 +64,16 @@
   background-color: transparent;
 }
 
-:host([slot="link"]) ::slotted(wh-icon) {
-  border: 1px solid #fffefe;
+:host([slot="link"]) ::slotted(wh-menu-icon) {
   width: 1.5rem;
   height: 1.5rem;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  user-select: none;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
-:host([slot="link"]:hover) {
+.link:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -105,6 +81,60 @@
   display: block;
   padding: 1px;
   background-color: rgba(0, 0, 0, 0.05);
-  margin: auto 10px  auto 10px;
+  margin: auto 10px auto 10px;
+}
+
+:host(wh-menu-link) {
+  user-select: none;
+  display: grid;
+  grid-template-columns: 2em 2em 1fr auto;
+  grid-template-areas: "check icon caption ind";
+  align-items: center;
+}
+
+::slotted(wh-menu-caption) {
+  grid-area: caption;
+}
+
+::slotted(wh-menu-check) {
+  grid-area: check;
+}
+
+::slotted(wh-menu-icon) {
+  grid-area: icon;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+::slotted(div) {
+  grid-area: ind;
+}
+
+:host ::slotted(wh-group) {
+  display: block;
+}
+
+:host(:not([use-check])) input {
+  display: none;
+}
+
+.checkbox {
+  width: 1.2em;
+  height: 1.2em;
+  display: grid;
+}
+
+:host([hide-icon]) ::slotted(wh-icon) {
+  display: none;
+}
+
+:host([hide-check]) .checkbox {
+  display: none;
+}
+
+:host(wh-menu-item[opened]) ::slotted(wh-menu-link ::slotted(wh-menu-caption)) {
+  --color: orangered;
+  --heading: -90deg;
+  border: 1px solid var(--color, steelblue) !important;
 }
 /*# sourceMappingURL=WHMenuItem.css.map */

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    
+</head>
+
+<body>
+
+    <wh-grid id="g">
+
+        <wh-grid-caption>Datos del Cliente</wh-grid-caption>yanny
+    </wh-grid>
+
+    <p>
+    <button id="x">OK</button>
+    <button id="y">Value</button>
+    </p>
+
+    <script type="module" src="./../js/WHGrid.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        
+        $("#y").on("click", event=>{
+            console.log(g.value)
+        });
+
+        $("#x").on("click", (event)=>{
+            console.log("creando el grid...");
+            g.dataSource = {
+                caption:"datos personales",
+                selectMode:"multi",
+                fields:[
+                    {
+                        name:"nombre",
+                        caption:"Nombre"
+                    },
+                    {
+                        name:"apellido",
+                        caption:"Apellido"
+                    },
+                    {
+                        name:"edad",
+                        caption:"Edad"
+                    },
+                    {
+                        name:"estado",
+                        caption:"estado"
+                    },
+                ],
+                data:[
+                    {
+                        nombre:"pedro",
+                        appellido:"lopez",
+                        edad:"12",
+                        estado:"carabobo"
+                    },
+                    {
+                        nombre:"yanny",
+                        appellido:"esteban",
+                        edad:"44",
+                        estado:"carabobo"
+                    },
+                    {
+                        nombre:"anneliesse",
+                        appellido:"morales",
+                        edad:"35",
+                        estado:"cojedes"
+                    },
+                    {
+                        nombre:"yrianny",
+                        appellido:"nuñez",
+                        edad:"17",
+                        estado:"distrito capital"
+                    },
+                    {
+                        nombre:"yriangel",
+                        appellido:"nuñez",
+                        edad:"15",
+                        estado:"distrito capital"
+                    }
+                ]
+
+            }
+        })
+
+    </script>
+    
+</body>
+
+</html>

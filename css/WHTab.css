@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host(:focus) {
+  outline: 1px dashed #adadad;
+}
+
+:host(wh-tab) {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:host(wh-tab) ::slotted(wh-tab-panel) {
+  flex-basis: 100%;
+  border-top: 1px solid #e9e9e9;
+}
+
+:host(wh-tab) > ::slotted(wh-tab-menu) {
+  display: inline-block;
+  background-color: #e9e9e9;
+  text-decoration: none;
+  color: #646464;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis "...";
+  max-width: 90px;
+  min-width: 70px;
+  box-sizing: padding-box;
+  border-radius: 4px 12px 0px 0px;
+  margin: 0px 2px 0px 0px;
+  padding: 4px 10px 4px 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+:host(wh-tab) > ::slotted(wh-tab-menu)[selected] {
+  color: red;
+}
+
+:host(wh-tab) > ::slotted(wh-tab-menu[selected]) {
+  color: white;
+  background-color: #7e7e7e;
+}
+
+:host(wh-tab) > ::slotted(wh-tab-menu:hover) {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.212);
+}
+/*# sourceMappingURL=WHTab.css.map */

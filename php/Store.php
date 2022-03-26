@@ -24,7 +24,7 @@ class Store{
 
 		self::$header = getallheaders();
 		self::$req = self::decodeRequest();
-		self::$sid = self::$header['SID'];
+		self::$sid = self::$header['SID']?? false;
 
 		if(self::$sid){
 			session_name(self::$sid);

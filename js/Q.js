@@ -18,11 +18,11 @@ export class QElement {
         return this.e;
     }
     on(event, fn) {
-        this.e.addEventListener(event, fn, false);
+        this.e.addEventListener(event, fn, true);
         return this;
     }
     off(event, fn) {
-        this.e.removeEventListener(event, fn, false);
+        this.e.removeEventListener(event, fn, true);
         return this;
     }
     id(id) {
@@ -84,11 +84,21 @@ export class QElement {
         }
         if (typeof attrs === "object") {
             for (let key in attrs) {
-                this.e.setAttribute(key, attrs[key]);
+                if (Boolean(attrs[key])) {
+                    this.e.setAttribute(key, attrs[key]);
+                }
+                else {
+                    this.e.removeAttribute(key);
+                }
             }
         }
         else {
-            this.e.setAttribute(attrs, value);
+            if (Boolean(value)) {
+                this.e.setAttribute(attrs, value);
+            }
+            else {
+                this.e.removeAttribute(attrs);
+            }
         }
         return this;
     }
@@ -170,9 +180,11 @@ export class QElement {
         }
         return this;
     }
-    fire(name, data) {
+    fire(name, detail) {
         const event = new CustomEvent(name, {
-            detail: data
+            detail,
+            cancelable: true,
+            bubbles: true
         });
         return this.e.dispatchEvent(event);
     }

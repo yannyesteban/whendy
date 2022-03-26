@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    
+</head>
+
+<body>
+
+    <wh-popup id="p" delayy="2000">
+
+        Hello
+    </wh-popup>
+
+    <button id ="x">x</button><button>y</button><button>z</button>
+    <script type="module" src="./../js/WHPopup.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        
+       $("#x").on("click",e=>{
+           p.mode ="open"
+       })
+
+    </script>
+    
+</body>
+
+</html>

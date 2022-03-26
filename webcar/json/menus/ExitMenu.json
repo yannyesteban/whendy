@@ -1,0 +1,30 @@
+{
+    "name": "ExitMenu",
+    "menu": {
+        "addClass":["exit-menu", "unit"],
+        "hideCheck": true,
+        "hideIcon": false,
+        "events": {
+            "link-action": "console.log('hola')"
+        },
+        "items": [
+
+            {
+                "caption": "Conf",
+                "addClass": "setting",
+                "title":"Configuración del Sistema",
+                "events": {
+                    "link-action": "document.getElementById('unit-menu').test()"
+                }
+            },
+            {
+                "caption": "Salir",
+                "addClass": "exit",
+                "title":"Salir",
+                "events": {
+                    "link-action": "console.log(this)"
+                }
+            }
+        ]
+    }
+}

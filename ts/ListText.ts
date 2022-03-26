@@ -124,6 +124,8 @@ class ListText extends HTMLElement {
 		const slot = this.shadowRoot.querySelector("slot");
 
 		slot.addEventListener("slotchange", (e) => {
+			console.log("slotchange");
+			//this.render();
 			//const nodes = slot.assignedNodes();
 		});
 
@@ -529,7 +531,7 @@ class ListText extends HTMLElement {
 	reportValidity() { return this.internals_.reportValidity(); }
 
 	public render() {
-
+		console.log("slotchange");
 		this.resetData();
 
 		$(this).addClass("active");
@@ -562,6 +564,26 @@ class ListText extends HTMLElement {
 				}
 			}
 		});
+	}
+
+
+
+	set data(data){
+		console.log("set data(data)");
+		data.forEach(info=>{
+			const option = $(this).create("wh-option");
+			option.attr("value", info.value);
+			option.html(info.text);
+		});
+	}
+	set dataSource(source) {
+		console.log("set dataSource(source)");
+		$(this).html("");
+
+		for (let k in source) {
+			this[k] = source[k];
+		}
+		
 	}
 }
 
