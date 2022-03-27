@@ -195,34 +195,35 @@ export class App extends HTMLElement {
         });
     }
     initElement(element) {
-        console.log(element);
         const module = this.modules.find((e) => e.component == element.wc);
         if (module) {
             this.whenComponent(module).then((component) => {
-                const e = $.create(module.component);
-                e.id(element.id);
-                e.prop(element.props);
-                e.attr(element.attrs);
-                let panel = null;
-                if (element.setPanel) {
-                    panel = $.id(element.setPanel);
-                    if (panel) {
-                        panel.text("");
-                        panel.append(e);
-                        return;
-                    }
-                }
-                if (element.appendTo) {
-                    panel = $(element.appendTo);
-                    if (panel) {
-                        panel.append(e);
-                        return;
-                    }
-                }
             }).catch(error => {
                 console.log(error);
             });
         }
+        customElements.whenDefined(element.wc).then(() => {
+            const e = $.create(element.wc);
+            e.id(element.id);
+            e.prop(element.props);
+            e.attr(element.attrs);
+            let panel = null;
+            if (element.setPanel) {
+                panel = $.id(element.setPanel);
+                if (panel) {
+                    panel.text("");
+                    panel.append(e);
+                    return;
+                }
+            }
+            if (element.appendTo) {
+                panel = $(element.appendTo);
+                if (panel) {
+                    panel.append(e);
+                    return;
+                }
+            }
+        });
     }
     set jsModules(jsFiles) {
         jsFiles.forEach(src => {

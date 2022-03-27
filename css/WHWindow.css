@@ -2,7 +2,8 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body,
@@ -24,9 +25,13 @@ dd {
   min-height: 2rem;
   max-height: 100hv;
   max-width: 100vw;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
+  -webkit-transition: 0.5s ease-in background-color;
   transition: 0.5s ease-in background-color;
 }
 
@@ -60,7 +65,9 @@ dd {
 }
 
 :host([mode="min"]) ::slotted(wh-win-body) {
-  flex: 0 0 0px !important;
+  -webkit-box-flex: 0 !important;
+      -ms-flex: 0 0 0px !important;
+          flex: 0 0 0px !important;
   height: 0px;
 }
 

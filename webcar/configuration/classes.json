@@ -58,5 +58,11 @@
         "enable": true,
         "file": "{@MODULE_PATH}php/UnitList.php",
         "class": "\\GT\\UnitList"
+    },
+    {
+        "name": "gt-unit-store",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/UnitStore.php",
+        "class": "\\GT\\UnitStore"
     }
 ]

@@ -2,7 +2,8 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 :host(wh-grid) {
@@ -13,8 +14,10 @@
 }
 
 .grid {
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  -ms-grid-columns: (auto)[5];
+      grid-template-columns: repeat(5, auto);
   position: relative;
   overflow: auto;
 }

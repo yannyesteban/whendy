@@ -17,7 +17,10 @@
 
 .kk {
   background-color: rgba(95, 158, 160, 0.747);
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #k1 {
@@ -57,7 +60,8 @@
 
 .win {
   border: 2px solid #b8b8b8;
-  box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
   background-color: rgba(1, 1, 1, 0.212);
 }
 
@@ -94,9 +98,12 @@ ul {
   max-height: 3000px;
   overflow: auto;
   opacity: 1;
-  transition-duration: 5.5s;
+  -webkit-transition-duration: 5.5s;
+          transition-duration: 5.5s;
+  -webkit-transition-property: all;
   transition-property: all;
-  transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+          transition-timing-function: ease-in;
 }
 
 .item.close > .submenu {
@@ -104,7 +111,9 @@ ul {
   overflow: hidden;
   padding-left: 10px;
   opacity: 0;
-  transition-duration: 5.2s;
+  -webkit-transition-duration: 5.2s;
+          transition-duration: 5.2s;
+  -webkit-transition-property: all;
   transition-property: all;
 }
 

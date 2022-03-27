@@ -34,7 +34,7 @@
                 }
             },
             {
-                "caption": "Polígonos",
+                "caption": "Geo",
                 "addClass": "poly",
                 "title":"Herramienta de Polígonos",
                 "events": {
@@ -50,7 +50,7 @@
                 }
             },
             {
-                "caption": "FullScreen",
+                "caption": "FullPant",
                 "addClass": "full",
                 "title":"Pantalla Completa",
                 "events": {

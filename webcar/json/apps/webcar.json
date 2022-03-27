@@ -65,6 +65,14 @@
 			"name": "",
 			"method": "init",
 			"eparams": {}
+		},
+		{
+			"id": "gt-unit-store",
+			"appendTo": "wh-app",
+			"element": "gt-unit-store",
+			"name": "",
+			"method": "init",
+			"eparams": {}
 		}
 	],
 	"className": ["webcar"],
@@ -75,7 +83,8 @@
 		"../js/WHWindow.js",
 		"../js/WHMenu.js",
 		"../js/ListText.js",
-		"../js/WHPopup.js"
+		"../js/WHPopup.js",
+		"../js/gt/GTUnitStore.js"
 	],
 	"modules": [
 		{

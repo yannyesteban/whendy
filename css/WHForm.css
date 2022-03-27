@@ -1,12 +1,18 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 :host(wh-form) {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 :host(wh-form) ::slotted(wh-form-caption) {
@@ -14,21 +20,28 @@
 }
 
 :host(wh-form) ::slotted(wh-form-body) {
-  flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
   overflow: auto;
 }
 
 :host(wh-form) ::slotted(wh-nav) {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 0.2em;
   background-color: rgba(0, 0, 0, 0.08);
   padding: 0.2em;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 :host(wh-nav) ::slotted(wh-nav-button) {
   border: 1px solid white;
   background-color: #fffcfc;
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#e2e2e2));
   background: linear-gradient(180deg, white 0%, #e2e2e2 100%);
   padding-left: 0.5em;
   padding-right: 0.5em;

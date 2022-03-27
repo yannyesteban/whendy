@@ -32,27 +32,27 @@ interface IElement {
 }
 
 class WHLayout extends HTMLElement {
-	constructor() {
-		super();
+    constructor() {
+        super();
 
 
-	}
-	public connectedCallback() {
-		
-	}
+    }
+    public connectedCallback() {
+
+    }
 }
 
 customElements.define("wh-layout", WHLayout);
 
 class WHPanel extends HTMLElement {
-	constructor() {
-		super();
+    constructor() {
+        super();
 
 
-	}
-	public connectedCallback() {
-		
-	}
+    }
+    public connectedCallback() {
+
+    }
 }
 
 customElements.define("wh-panel", WHPanel);
@@ -111,13 +111,13 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
-                    
+
                     this.updateElement(item)
                     break;
                 case "response":
                     break;
                 case "init":
-                    
+
                     this.initElement(item);
                     break;
                 case "fragment":
@@ -195,7 +195,7 @@ export class App extends HTMLElement {
                 this.innerHTML = data.template;
                 this.modules = data.modules;
 
-                
+
 
             },
             request: [],
@@ -218,16 +218,16 @@ export class App extends HTMLElement {
     }
 
     public whenComponent(module) {
-        
-        
+
+
         return new Promise((resolve, reject) => {
             if (customElements.get(module.component)) {
-        
+
                 resolve(customElements.get(module.component));
             }
 
             import(module.src).then(MyModule => {
-        
+
                 resolve(customElements.get(module.component));
 
             }).catch(error => {
@@ -238,12 +238,12 @@ export class App extends HTMLElement {
     }
 
     updateElement(info) {
-        
+
         const e = $.id(info.id);
-        
+
         if (e) {
             if (info.props) {
-        
+
                 e.prop(info.props);
             }
         }
@@ -283,7 +283,7 @@ export class App extends HTMLElement {
 
     initElement(element: IElement | IResponse) {
 
-        console.log(element)
+       
 
         const module = this.modules.find((e) => e.component == element.wc);
 
@@ -291,44 +291,54 @@ export class App extends HTMLElement {
 
             this.whenComponent(module).then((component) => {
 
-                const e = $.create(module.component);
-                e.id(element.id);
-                e.prop(element.props);
-                e.attr(element.attrs);
-
-                let panel = null;
-                if (element.setPanel) {
-                    
-                    panel = $.id(element.setPanel);
-                    
-                    if (panel) {
-                        panel.text("");
-                        panel.append(e);
-                        return;
-                    }
-                }
-                if (element.appendTo) {
-                    
-                    panel = $(element.appendTo);
-                    
-                    if (panel) {
-                        panel.append(e);
-                        return;
-                    }
-
-                }
-
-
+               
             }).catch(error => {
                 console.log(error)
-            })
+            });
+
+
         }
+
+        
+
+        
+        customElements.whenDefined(element.wc).then(() => {
+            const e = $.create(element.wc);
+            
+            e.id(element.id);
+            e.prop(element.props);
+            e.attr(element.attrs);
+
+
+
+            let panel = null;
+            if (element.setPanel) {
+
+                panel = $.id(element.setPanel);
+
+                if (panel) {
+                    panel.text("");
+                    panel.append(e);
+                    return;
+                }
+            }
+            if (element.appendTo) {
+
+                panel = $(element.appendTo);
+
+                if (panel) {
+                    panel.append(e);
+                    return;
+                }
+
+            }
+        });
     }
 
     set jsModules(jsFiles) {
-        
+
         jsFiles.forEach(src => {
-        
+
             loadScript(src, { async: true, type: "module" });
         })
 

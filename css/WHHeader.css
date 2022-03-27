@@ -2,7 +2,8 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body,
@@ -24,9 +25,13 @@ dd {
   font-size: 1rem;
   overflow: hidden;
   vertical-align: middle;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  -ms-grid-columns: auto 1fr auto auto;
+      grid-template-columns: auto 1fr auto auto;
   gap: 4px;
   padding: 0.1rem;
   gap: 6px;
@@ -46,10 +51,14 @@ dd {
 }
 
 :host .control {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 2px;
   padding: 2px;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 :host .control button {

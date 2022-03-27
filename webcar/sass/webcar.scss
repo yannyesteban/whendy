@@ -280,7 +280,7 @@ wh-menu.exit-menu {
 }
 /* phone */
 @media screen and (max-width: 600px) {
-	.main-menu1 {
+	.main-menu1, .exit-menu {
 		display: none !important;
 	}
 	wh-layout.webcar {
@@ -295,15 +295,20 @@ wh-menu.exit-menu {
 			z-index: 1;
 		}
 
-		wh-menu-icon {
-			//background-image: url("../webcar/images/unit.png");
-			background-size: 24px 24px;
-			background-position: center center;
-			background-repeat: no-repeat;
-			border: 0px;
-			height: 24px;
-			width: 30px;
+		wh-menu.main-menu2{
+			wh-menu-icon {
+				//background-image: url("../webcar/images/unit.png");
+				background-size: 24px 24px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				border: 0px;
+				height: 40px;
+				width: 40px;
+			}
+
 		}
+
+
 
 		wh-menu.phone-menu,
 		wh-menu.tool-menu {
@@ -341,6 +346,16 @@ wh-menu.exit-menu {
 					overflow: hidden;
 					text-align: center;
 				}
+
+				wh-menu-icon {
+					//background-image: url("../webcar/images/unit.png");
+					background-size: 24px 24px;
+					background-position: center center;
+					background-repeat: no-repeat;
+					border: 0px;
+					height: 24px;
+					width: 30px;
+				}
 			}
 		}
 	}
@@ -365,7 +380,7 @@ wh-menu.exit-menu {
 
 	wh-popup {
 		position: fixed;
-		bottom: 5em;
+		bottom: 4em;
 		border: 0;
 		margin: 1em;
 		//left: 50%;
@@ -458,4 +473,18 @@ wh-menu.exit-menu {
 
 .bearing > wh-menu-link > wh-menu-icon {
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M10.5 14l4-8 4 8h-8z'/%3E %3Cpath id='south' d='M10.5 16l4 8 4-8h-8z' fill='%23ccc'/%3E %3C/svg%3E");
+}
+
+
+.alarm2 > wh-menu-link > wh-menu-icon {
+	background-image: url(../webcar/images/alarm.png);
+}
+
+
+.alert > wh-menu-link > wh-menu-icon {
+	background-image: url(../webcar/images/alert.png);
+}
+
+.info > wh-menu-link > wh-menu-icon {
+	background-image: url(../webcar/images/info.png);
 }

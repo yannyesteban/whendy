@@ -25,25 +25,25 @@
                 }
             },
             {
-                "caption": "Sitios",
-                "addClass": "site",
-                "title":"Sitios",
+                "caption": "Inmediato",
+                "addClass": "bolt",
+                "title":"Inmediato",
                 "events": {
                     "link-action": "console.log(this)"
                 }
             },
             {
-                "caption": "Geocercas",
-                "addClass": "geofence",
-                "title":"Geocercas",
+                "caption": "Alarm",
+                "addClass": "alarm2",
+                "title":"Alarm",
                 "events": {
                     "link-action": "console.log(this)"
                 }
             },
             {
-                "caption": "Alarmas",
-                "addClass": "alarm",
-                "title":"Alarmas",
+                "caption": "Alert",
+                "addClass": "alert",
+                "title":"Alert",
                 "events": {
                     "link-action": "console.log(this)"
                 }
@@ -57,17 +57,9 @@
                 }
             },
             {
-                "caption": "Administrador de Eventos",
-                "addClass": "event-admin",
-                "title":"Administrador de Eventos",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
-            },
-            {
-                "caption": "Búsqueda",
-                "addClass": "search",
-                "title":"Búsqueda",
+                "caption": "Info",
+                "addClass": "info",
+                "title":"Info",
                 "events": {
                     "link-action": "console.log(this)"
                 }

@@ -25,7 +25,8 @@
   overflow-x: hidden;
   position: absolute;
   left: 0px;
-  box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
+          box-shadow: 5px 6px 12px -4px rgba(0, 0, 0, 0.5);
 }
 
 .light {
@@ -38,7 +39,10 @@
 
 ::slotted(wh-option) {
   display: block;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   padding: 0.4em;
   line-height: 1.1em;
   white-space: nowrap;
