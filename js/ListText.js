@@ -1,5 +1,13 @@
 import { Q as $ } from "./Q.js";
 import { Float } from "./Float.js";
+function dispatchEvent(element, eventName, detail) {
+    const event = new CustomEvent(eventName, {
+        detail,
+        cancelable: true,
+        bubbles: true
+    });
+    element.dispatchEvent(event);
+}
 const KEYCODE = {
     DOWN: 40,
     LEFT: 37,
@@ -141,6 +149,9 @@ class ListText extends HTMLElement {
         switch (name) {
             case 'value':
                 this.internals_.setFormValue(this.getAttribute("value"));
+                if (newValue != oldValue) {
+                    dispatchEvent(this, "change", newValue);
+                }
                 return;
             case 'checked':
                 this.setAttribute('aria-checked', String(hasValue));

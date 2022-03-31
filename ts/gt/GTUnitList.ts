@@ -68,19 +68,31 @@ class GTUnitList extends HTMLElement {
 
 	set dataSource(source) {
 		$(this).html("");
-		const list = $(this).create("wh-list-text");
-
-
-		const button = $(this).create("button");
-		button.html("»");
 
 		customElements.whenDefined('wh-list-text').then(() => {
+			
+			const list = $(this).create("wh-list-text");
+	
+	
+			const button = $(this).create("button");
+			button.html("»");
+			console.log("....");
 			list.prop("dataSource", { data: source.data });
+			
+			list.on("change", (event)=>{
+				this.getStore().run("load-unit", event.target.value)
 
+			});
+				
+			
 		});
 
 
 
+	}
+
+	getStore(){
+		return document.querySelector(`gt-unit-store`);
 	}
 
 }

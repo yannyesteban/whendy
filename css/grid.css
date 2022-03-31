@@ -1,8 +1,6 @@
 .grid {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (auto)[7];
-      grid-template-columns: repeat(7, auto);
+  grid-template-columns: repeat(7, auto);
   position: relative;
   height: 500px;
   overflow: auto;
@@ -22,7 +20,6 @@
 
 .grid .header .cell {
   background-color: aqua;
-  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 3 !important;
@@ -30,7 +27,6 @@
 
 .grid .footer .cell {
   background-color: aqua;
-  position: -webkit-sticky;
   position: sticky;
   bottom: 0;
   z-index: 3 !important;
@@ -42,7 +38,6 @@
 
 .grid > div div:nth-child(1) {
   background-color: chocolate;
-  position: -webkit-sticky;
   position: sticky;
   left: 0;
   z-index: 0;

@@ -59,9 +59,9 @@ class Whendy
 
     public function evalCommand($command)
     {
-        
-        $command = (object)$command;
-        
+       
+        //$command = Tool::toJson($command);
+
         switch ($command->type) {
             
             case 'init':
@@ -94,7 +94,7 @@ class Whendy
         }
 
         foreach ($requests as $request) {
-            $this->evalCommand($request);
+            $this->evalCommand(Tool::toJson($request));
         }
     }
 

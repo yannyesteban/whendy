@@ -153,4 +153,8 @@ class Tool
 		echo "<pre>$msg</pre>";
 		exit;
 	}
+
+	public static function toJson($data){
+		return json_decode(json_encode($data), FALSE);
+	}
 }

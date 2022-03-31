@@ -106,6 +106,6 @@ export class GTMap extends HTMLElement {
 }
 _GTMap_config = new WeakMap(), _GTMap_map = new WeakMap();
 GTMap.scriptLoaded = false;
-customElements.define('gt-map', GTMap);
+customElements.define('google-map', GTMap);
 //window["GTMap"] = GTMap;
 //# sourceMappingURL=GTMap.js.map

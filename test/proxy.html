@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/test.css">
+</head>
+
+<body>
+<button id="a">AA</button>
+<button id="b">BB</button>
+<button id="c">DD</button>
+<button id="d">EE</button>
+    <script type="module">
+        import {Q} from  "./../js/q.js";
+        import {test, P} from  "./../js/Proxy.js";
+       
+
+       
+       const p = new P()
+
+      
+        
+
+       const  suma=function(a, ...b){
+
+        console.log(b)
+        console.log({a, ...b})
+       }
+
+       suma(1,{a:2, b:3}, 666)
+
+        Q("#a").on("click", ev=>{
+            
+            /*
+            test.object = {
+                a:"yanny",
+                "b":"esteban"
+
+            }
+                */
+
+            test.object['name']="anneliesse";
+
+            console.log(test);
+            console.log(test.object);
+            test.object.nested["prop1"] = {
+        s:"12474737"
+    }
+            
+            return;
+            test.object.nested.prop1 = 55;
+
+            test.object['name']="yanny";
+
+            console.log(test)
+
+
+            p.setData("name", "yanny")
+            p.setData("tools", ["aa", "bb"])
+            p.setData("things", {
+                "a":"yanny",
+                "b":"esteban"
+            })
+            
+            p.getStore()["things"] = 
+            p.watch(p.getData("things"));
+
+            console.log(p.getStore()["things"])
+        });
+
+        Q("#b").on("click", ev=>{
+
+            const y = p.getData("things");
+
+            y.c = "nuñez";
+
+            //console.log(p.getData("things"));
+
+        });
+
+        Q("#c").on("click", ev=>{
+
+            p.setData("things", {
+                "a":"yanny 22",
+                "b":"esteban 23"
+            })
+
+            const y = p.getData("things");
+
+            y.c = "jimene 24z";
+
+            console.log(p.getData("things"));
+
+        });
+
+
+    </script>
+    
+
+</body>
+
+</html>

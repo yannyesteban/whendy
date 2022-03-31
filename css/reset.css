@@ -2,8 +2,7 @@
 *,
 *::before,
 *::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Remove default margin */
@@ -58,12 +57,9 @@ picture {
   *,
   *::before,
   *::after {
-    -webkit-animation-duration: 0.01ms !important;
-            animation-duration: 0.01ms !important;
-    -webkit-animation-iteration-count: 1 !important;
-            animation-iteration-count: 1 !important;
-    -webkit-transition-duration: 0.01ms !important;
-            transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
@@ -71,6 +67,7 @@ picture {
 html {
   font-size: 12pt;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  min-height: 100vh;
 }
 
 *:not(:defined) {
@@ -81,8 +78,7 @@ html {
 }
 
 wh-menu-linkk {
-  -ms-grid-columns: 2em 1fr 2em 2em;
-      grid-template-columns: 2em 1fr 2em 2em;
-      grid-template-areas: "check caption icon ind";
+  grid-template-columns: 2em 1fr 2em 2em;
+  grid-template-areas: "check caption icon ind";
 }
 /*# sourceMappingURL=reset.css.map */

@@ -1,4 +1,6 @@
 body {
+  width: 100vw;
+  height: 100vh;
   overscroll-behavior-y: contain;
 }
 
@@ -11,17 +13,17 @@ wh-app.webcar {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-size: auto auto;
   background-repeat: no-repeat;
   background-position-x: center;
   background-position-y: center;
 }
 
-wh-app.webcar .bodyy {
+wh-app.webcar .body {
   position: absolute;
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
@@ -164,7 +166,6 @@ wh-menu.exit-menu .ind {
     height: 100%;
   }
   wh-layout.webcar {
-    position: relative;
     height: 100%;
     width: 100%;
     display: grid;
@@ -259,7 +260,8 @@ wh-menu.exit-menu .ind {
 
 /* phone */
 @media screen and (max-width: 600px) {
-  .main-menu1, .exit-menu {
+  .main-menu1,
+  .exit-menu {
     display: none !important;
   }
   wh-layout.webcar {
@@ -444,5 +446,17 @@ wh-menu.exit-menu .ind {
 
 .info > wh-menu-link > wh-menu-icon {
   background-image: url(../webcar/images/info.png);
+}
+
+gt-map {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+map-box {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 /*# sourceMappingURL=webcar.css.map */

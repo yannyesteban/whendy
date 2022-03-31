@@ -8,6 +8,14 @@
             "link-action": "console.log('hola')"
         },
         "items": [
+            {
+                "caption": "Mapa",
+                "addClass": "setting",
+                "title":"GoogleMaps / MapBopx",
+                "events": {
+                    "link-action": "document.getElementById('gt-map').toggle()"
+                }
+            },
 
             {
                 "caption": "Conf",

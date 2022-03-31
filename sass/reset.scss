@@ -76,6 +76,7 @@ select {
 html {
 	font-size: 12pt;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	min-height: 100vh;
 }
 
 *:not(:defined) {

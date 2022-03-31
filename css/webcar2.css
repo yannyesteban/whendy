@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+
+wh-app {
+  overflow: auto;
+}
+
+wh-layout.webcar {
+  background-color: chartreuse;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 100px 1fr;
+  overflow: auto;
+}
+
+wh-layout.webcar .banner {
+  background-color: #eea00f;
+  border: 2px solid white;
+}
+
+wh-layout.webcar .map {
+  background-color: crimson;
+}
+
+wh-layout.webcar map-box {
+  background-color: #b119a4;
+  display: none;
+}
+
+/* phone */
+/*# sourceMappingURL=webcar2.css.map */

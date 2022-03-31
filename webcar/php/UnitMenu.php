@@ -82,7 +82,7 @@ class UnitMenu extends Element
 
         WHERE uu.user = '$user'
         ORDER BY client, account, unitName
-        #LIMIT 50
+        LIMIT 3
         ";
 
         $result = $cn->execute();
@@ -102,7 +102,8 @@ class UnitMenu extends Element
                     "caption" => $item['client'],
                     "addClass" => "client",
                     "value" => $item['clientId'],
-                    "items" => []
+                    "items" => [],
+                    "checkbox"=>"true"
 
                 ];
                 $account = null;
@@ -116,7 +117,8 @@ class UnitMenu extends Element
                     "caption" => $item['account'],
                     "addClass" => "account",
                     "value" => $item['accountId'],
-                    "items" => []
+                    "items" => [],
+                    "checkbox"=>"true"
 
                 ];
                 $main->items[] = $main1;
@@ -126,6 +128,7 @@ class UnitMenu extends Element
                 "caption" => $item['unitName'],
                 "addClass" => "unit",
                 "value" => $item['unitId'],
+                'checkbox'=> "true",
             ];
         }
 

@@ -64,5 +64,23 @@
         "enable": true,
         "file": "{@MODULE_PATH}php/UnitStore.php",
         "class": "\\GT\\UnitStore"
+    },
+    {
+        "name": "gt-unit",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Unit.php",
+        "class": "\\GT\\Unit"
+    },
+    {
+        "name": "gt-tracking",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Tracking.php",
+        "class": "\\GT\\Tracking"
+    },
+    {
+        "name": "gt-map",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Map.php",
+        "class": "\\GT\\Map"
     }
 ]

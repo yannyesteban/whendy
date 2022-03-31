@@ -59,9 +59,9 @@
 		},
 		{
 			"id": "unit-menu",
-			"appendTo": "div#a99",
+			"appendTo": "wh-app",
 			"setPanell": "gt-unit-menu",
-			"element": "gt-unit-menuuu",
+			"element": "gt-unit-menu",
 			"name": "",
 			"method": "init",
 			"eparams": {}
@@ -73,18 +73,46 @@
 			"name": "",
 			"method": "init",
 			"eparams": {}
+		},
+		{
+			"id": "gt-tracking",
+			"appendTo": "wh-app",
+			"element": "gt-tracking",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-map",
+			"appendTo": "#wh-body",
+			"element": "gt-map",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-unit",
+			"appendTo": "wh-app",
+			"element": "gt-unit",
+			"name": "",
+			"method": "init",
+			"eparams": {}
 		}
 	],
 	"className": ["webcar"],
 	"acceptedRoles": ["** public **"],
-	"cssSheetss": ["css/reset.css", "css/main.css"],
+	"cssSheetss": ["css/reset.css", "css/main.css", "https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"],
 	"jsModules": [
-		"../js/GTMap.js",
+		"../js/GoogleMaps.js",
+		"../js/MapBox.js",
 		"../js/WHWindow.js",
 		"../js/WHMenu.js",
 		"../js/ListText.js",
 		"../js/WHPopup.js",
-		"../js/gt/GTUnitStore.js"
+		"../js/gt/GTUnitStore.js",
+		"../js/gt/GTTracking.js",
+		"../js/gt/GTMap.js",
+		"../js/gt/GTUnit.js"
 	],
 	"modules": [
 		{
@@ -109,13 +137,13 @@
 			"src": "js/Map.js",
 			"name": "WHMap",
 			"alias": "WHMap",
-			"component": "wh-map"
+			"component": "wh-mapx"
 		},
 		{
 			"src": "js/GTMap.js",
 			"name": "GTMap",
 			"alias": "GTMap",
-			"component": "gt-map"
+			"component": "gt-mapx"
 		},
 		{
 			"src": "./gt/GTUnitMenu.js",

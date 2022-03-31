@@ -14,4 +14,26 @@ export const fire = (element, name, data) => {
     });
     element.dispatchEvent(event);
 };
+export const whenApp = (child) => {
+    return new Promise((resolve, reject) => {
+        customElements.whenDefined("wh-app").then(() => {
+            const app = getParentElement(child, "wh-app");
+            if (app) {
+                resolve(app);
+            }
+            reject('error');
+        });
+    });
+};
+export const whenElement = (parent, element) => {
+    return new Promise((resolve, reject) => {
+        customElements.whenDefined(element).then(() => {
+            const store = parent.querySelector(element);
+            if (store) {
+                resolve(store);
+            }
+            reject('error');
+        });
+    });
+};
 //# sourceMappingURL=Tool.js.map

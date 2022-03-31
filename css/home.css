@@ -8,15 +8,9 @@ body {
 }
 
 wh-app.home {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   background-image: url("../webcar/images/wall_01.webp");
@@ -38,12 +32,9 @@ wh-app.home wh-layout.login {
 wh-app.home wh-layout.webcar {
   height: 100%;
   width: 100%;
-  display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 30px 50px 1fr;
-      grid-template-rows: 30px 50px 1fr;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
+  grid-template-rows: 30px 50px 1fr;
+  grid-template-columns: 1fr;
 }
 
 wh-app.home wh-layout.webcar .body {
@@ -52,15 +43,9 @@ wh-app.home wh-layout.webcar .body {
 
 wh-app.home wh-panel {
   height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 wh-app.home wh-form {
@@ -81,19 +66,10 @@ wh-app.home wh-form wh-form-caption {
 
 wh-app.home wh-form wh-form-body {
   padding: 0.2em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 wh-app.home wh-form wh-form-field {
@@ -119,8 +95,6 @@ wh-app.home wh-form wh-form-field input[type="password"] {
 }
 
 wh-app.home wh-form wh-form-field.rememberme {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 0.8em;
 }
@@ -143,33 +117,22 @@ wh-app.home wh-form wh-nav-button:hover {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: auto auto;
-        grid-template-rows: auto auto;
-    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-            box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-        grid-template-areas: "one two" "one three";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    grid-template-areas: "one two" "one three";
     border: 0.2em solid white;
     border-radius: 1em;
   }
   wh-layout.login .logo {
-    -ms-grid-row: 1;
-    -ms-grid-row-span: 2;
-    -ms-grid-column: 1;
     grid-area: one;
     border-right: 0.2em solid #ffd900;
   }
   wh-layout.login .body {
-    -ms-grid-row: 1;
-    -ms-grid-column: 2;
     grid-area: two;
   }
   wh-layout.login .banner {
-    -ms-grid-row: 2;
-    -ms-grid-column: 2;
     grid-area: three;
   }
   wh-layout.login img.gtrack_logo {
@@ -197,50 +160,27 @@ wh-app.home wh-form wh-nav-button:hover {
   wh-layout.login {
     height: 80%;
     border: 2px solid white;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 16pt;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 0.6em;
-    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-            box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
   }
   wh-layout.login > * {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 1 auto;
-            flex: 0 1 auto;
+    flex: 0 1 auto;
   }
   wh-layout.login.login {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex-direction: column;
+    justify-content: center;
     padding: 1em;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
   }
   wh-layout.login.login * > {
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
+    flex: 0 0 auto;
   }
   wh-layout.login.login wh-panel {
     width: auto;
@@ -270,15 +210,11 @@ wh-app.home wh-form wh-nav-button:hover {
     background-color: rgba(0, 0, 0, 0.6);
     width: 100%;
     height: 100%;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-    -ms-grid-rows: auto auto;
-        grid-template-rows: auto auto;
-    -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-            box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
-        grid-template-areas: "one two" "three two";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+    grid-template-areas: "one two" "three two";
   }
   wh-layout.login .banner {
     border-right: 0.2em solid #ffd900;

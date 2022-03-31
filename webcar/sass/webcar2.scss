@@ -1,0 +1,66 @@
+$path_font: "fonts\/";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	margin: 0px;
+	height: 100%;
+}
+
+wh-app {
+	overflow: auto;
+}
+
+wh-layout.webcar {
+	//background-color: #b11919;
+	//position: absolute;
+	background-color: chartreuse;
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: auto;
+	grid-template-rows: 100px 1fr;
+	overflow: auto;
+
+	//grid-template-rows: 80px 1fr;
+	//grid-template-columns: 1fr;
+	//border: 10px solid rgb(204, 28, 145);
+	//justify-items: stretch;
+	//grid-template-areas: "banner" "menu" "body";
+	//align-items: stretch;
+	//align-items: center;
+	//place-items: center;
+	//justify-items: center;
+
+	.banner {
+		//grid-area: banner;
+
+		background-color: #eea00f;
+		border: 2px solid rgb(255, 255, 255);
+	}
+
+	.map {
+		background-color: crimson;
+		//height: 100%;
+		//width: 100%;
+	}
+
+	map-box {
+		//grid-area: body;
+		background-color: #b119a4;
+
+		display: none;
+	}
+}
+
+/* phone */
