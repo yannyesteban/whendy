@@ -65,6 +65,15 @@
                     "link-action": "document.getElementById('unit-menu').test()"
                 }
             },
+            
+            {
+                "caption": "Mapa",
+                "addClass": "map_01",
+                "title":"GoogleMaps / MapBopx",
+                "events": {
+                    "link-action": "document.getElementById('gt-map').toggle()"
+                }
+            },
             {
                 "caption": "Salir",
                 "addClass": "exit",
