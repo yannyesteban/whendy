@@ -1,3 +1,4 @@
+export const whenDefined = customElements.whenDefined;
 export const getParentElement = (child, parentTag) => {
     let parent = child.parentNode;
     while (parent !== null) {
@@ -8,9 +9,9 @@ export const getParentElement = (child, parentTag) => {
     }
     return null;
 };
-export const fire = (element, name, data) => {
+export const fire = (element, name, detail) => {
     const event = new CustomEvent(name, {
-        detail: data
+        detail
     });
     element.dispatchEvent(event);
 };
@@ -28,11 +29,11 @@ export const whenApp = (child) => {
 export const whenElement = (parent, element) => {
     return new Promise((resolve, reject) => {
         customElements.whenDefined(element).then(() => {
-            const store = parent.querySelector(element);
-            if (store) {
-                resolve(store);
+            const e = parent.querySelector(element);
+            if (e) {
+                resolve(e);
             }
-            reject('error');
+            reject(null);
         });
     });
 };

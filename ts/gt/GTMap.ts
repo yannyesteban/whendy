@@ -3,7 +3,10 @@ import * as Tool from "../Tool.js";
 
 export class GTMap extends HTMLElement {
     
+    _api = null;
+    _data = {}
 
+    popupTemplate = "";
     static get observedAttributes() {
         return ["api", "type"];
     }
@@ -11,13 +14,30 @@ export class GTMap extends HTMLElement {
     constructor() {
         super();
 
-        
+        this._unitsChange =  this._unitsChange.bind(this);
+        this._unitChange =  this._unitChange.bind(this);
 
     }
-   
-      
-
     
+    disconnectedCallback() {
+        console.log("disconnectedCallback");
+
+        Tool.whenApp(this).then((app)=>{
+            $(app).off("unit-data-changed", this._unitChange);
+            $(app).off("units-data-changed",  this._unitsChange);
+        });
+    }
+
+    connectedCallback() {
+        console.log("connectedCallback");
+
+        Tool.whenApp(this).then((app)=>{
+            $(app).on("unit-data-changed", this._unitChange);
+            $(app).on("units-data-changed",  this._unitsChange);
+        });
+        
+        
+    }
 
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
@@ -31,9 +51,19 @@ export class GTMap extends HTMLElement {
                 break;
         }
     }
-    connectedCallback() {
-        console.log("connectedCallback");
+
+    _unitsChange({detail}){
         
+        console.log(detail);
+        for(let x in detail){
+            this.mark = detail[x];
+        }
+        
+    
+    }
+
+    _unitChange({detail}){
+        console.log(detail);
     }
 
     set api(value) {
@@ -50,6 +80,34 @@ export class GTMap extends HTMLElement {
 		return this.getAttribute("api");
 	}
 
+    set mark(info){
+        console.log(info, this._api)
+
+
+        console.log({
+            latitude:info.latitude,
+            longitude:info.longitude,
+            heading:info.heading,
+            name:info.unitName,
+            image:info.image,
+            visible:info.visible? true: false,
+            follow:info.follow? true: false,
+            trace:info.trace? true: false,
+            info:info,
+        });
+        this._api.mark = {
+            latitude:info.latitude,
+            longitude:info.longitude,
+            heading:info.heading,
+            name:info.unitName,
+            icon:info.image,
+            visible:info.visible? true: false,
+            follow:info.follow? true: false,
+            trace:info.trace? true: false,
+            innerHTML: this.popupTemplate, 
+            info:info,
+        };
+    }
     render(){
         console.log("render", this.api)
         
@@ -60,18 +118,18 @@ export class GTMap extends HTMLElement {
                     return;
                 }
                 this.innerHTML = "";
-                $(this).create("google-maps");
+                this._api = $(this).create("google-maps").get();
             });
         }
 
         if(this.api === "mapbox"){
             
-            customElements.whenDefined("map-box").then(() => {
-                if(this.querySelector("map-box")){
+            customElements.whenDefined("mapbox-maps").then(() => {
+                if(this.querySelector("mapbox-maps")){
                     return;
                 }
                 this.innerHTML = "";
-                $(this).create("map-box");
+                this._api = $(this).create("mapbox-maps").get();
             });
         }
         
@@ -85,11 +143,7 @@ export class GTMap extends HTMLElement {
         }
     }
     set dataSource(source){
-        Tool.whenApp(this).then((app)=>{
-            $(app).on("unit-data-changed", ({detail})=>{
-                console.log(detail);
-            })
-        });
+        //console.log(source)
         this._dataSource = source;
         //this.api = "google";
         //this.render();

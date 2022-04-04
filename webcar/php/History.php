@@ -45,13 +45,14 @@ class History extends Element
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-unit-menu',
+            'wc'    => 'gt-history',
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Historial',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    
                 ],
             ],
             'replayToken' => $this->replayToken,

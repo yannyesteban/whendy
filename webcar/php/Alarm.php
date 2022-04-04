@@ -45,13 +45,14 @@ class Alarm extends Element
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-unit-menu',
+            'wc'    => 'gt-alarm',
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Alarmas',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    
                 ],
             ],
             'replayToken' => $this->replayToken,

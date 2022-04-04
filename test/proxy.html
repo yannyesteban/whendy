@@ -12,31 +12,31 @@
 </head>
 
 <body>
-<button id="a">AA</button>
-<button id="b">BB</button>
-<button id="c">DD</button>
-<button id="d">EE</button>
+    <button id="a">AA</button>
+    <button id="b">BB</button>
+    <button id="c">DD</button>
+    <button id="d">API</button>
     <script type="module">
-        import {Q} from  "./../js/q.js";
-        import {test, P} from  "./../js/Proxy.js";
-       
+        import { Q } from "./../js/q.js";
+        import { test, P } from "./../js/Proxy.js";
 
-       
-       const p = new P()
 
-      
-        
 
-       const  suma=function(a, ...b){
+        const p = new P()
 
-        console.log(b)
-        console.log({a, ...b})
-       }
 
-       suma(1,{a:2, b:3}, 666)
 
-        Q("#a").on("click", ev=>{
-            
+
+        const suma = function (a, ...b) {
+
+            console.log(b)
+            console.log({ a, ...b })
+        }
+
+        suma(1, { a: 2, b: 3 }, 666)
+
+        Q("#a").on("click", ev => {
+
             /*
             test.object = {
                 a:"yanny",
@@ -45,18 +45,18 @@
             }
                 */
 
-            test.object['name']="anneliesse";
+            test.object['name'] = "anneliesse";
 
             console.log(test);
             console.log(test.object);
             test.object.nested["prop1"] = {
-        s:"12474737"
-    }
-            
+                s: "12474737"
+            }
+
             return;
             test.object.nested.prop1 = 55;
 
-            test.object['name']="yanny";
+            test.object['name'] = "yanny";
 
             console.log(test)
 
@@ -64,17 +64,17 @@
             p.setData("name", "yanny")
             p.setData("tools", ["aa", "bb"])
             p.setData("things", {
-                "a":"yanny",
-                "b":"esteban"
+                "a": "yanny",
+                "b": "esteban"
             })
-            
-            p.getStore()["things"] = 
-            p.watch(p.getData("things"));
+
+            p.getStore()["things"] =
+                p.watch(p.getData("things"));
 
             console.log(p.getStore()["things"])
         });
 
-        Q("#b").on("click", ev=>{
+        Q("#b").on("click", ev => {
 
             const y = p.getData("things");
 
@@ -84,11 +84,11 @@
 
         });
 
-        Q("#c").on("click", ev=>{
+        Q("#c").on("click", ev => {
 
             p.setData("things", {
-                "a":"yanny 22",
-                "b":"esteban 23"
+                "a": "yanny 22",
+                "b": "esteban 23"
             })
 
             const y = p.getData("things");
@@ -100,8 +100,59 @@
         });
 
 
+        const data = {
+  "considerIp": "false",
+  "wifiAccessPoints": [
+    {
+      "macAddress": "44:48:c1:a6:f3:d0",
+      "signalStrength": -54,
+      "signalToNoiseRatio": 0
+    },
+    {
+      "macAddress": "9c:1c:12:b0:45:f1",
+      "signalStrength": -43,
+      "signalToNoiseRatio": 0
+    },
+    {
+      "macAddress": "20:a6:cd:33:6c:f4",
+      "signalStrength": -32,
+      "signalToNoiseRatio": 0
+    }
+  ]
+};
+        Q("#d").on("click", ev => {
+
+            const headers = Object.assign({
+            "Content-Type": "application/json",
+            
+            
+            
+        }, {});
+            fetch("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink", {
+                method: "post",
+                headers,
+                body:data
+               // body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .catch((error) => { })
+                .then((json) => {
+                    console.log(json);
+                    
+                });
+
+
+        });
+
+
+
+
+
+
     </script>
-    
+
 
 </body>
 

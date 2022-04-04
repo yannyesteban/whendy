@@ -1,5 +1,6 @@
 import { Q as $ } from "./Q.js";
 import { getParentElement } from "./Tool.js";
+import { App } from "./App.js";
 
 
 
@@ -176,6 +177,9 @@ customElements.define("wh-menu-link", WHMenuLink);
 
 class WHMenuItem extends HTMLElement {
 
+
+	_request = null;
+
 	static get observedAttributes() {
 		return ["onaction", "usecheck", "oncheck", "value", "disabled", "checked", "onlinkaction", "opened", "hidden"];
 	}
@@ -212,11 +216,11 @@ class WHMenuItem extends HTMLElement {
 
 				});
 
-				if(!this.hasAttribute("checked")){
-					
+				if (!this.hasAttribute("checked")) {
+
 					checkbox.prop("checked", false);
 				}
-				
+
 			}
 
 			const link = $(this).query(`wh-menu-link`);
@@ -274,7 +278,7 @@ class WHMenuItem extends HTMLElement {
 
 			});
 
-			
+
 
 		});
 
@@ -322,15 +326,6 @@ class WHMenuItem extends HTMLElement {
 	public connectedCallback() {
 
 		this.slot = "item";
-
-
-
-
-
-
-
-
-
 
 	}
 
@@ -507,13 +502,13 @@ class WHMenuItem extends HTMLElement {
 		}
 	}
 
-	set items(items){
+	set items(items) {
 
 		const group = $(this).create("wh-menu-group");
 
 
 		items.forEach((info, index) => {
-			
+
 			if (!info.icon) {
 				info.icon = "";
 			}
@@ -529,9 +524,9 @@ class WHMenuItem extends HTMLElement {
 
 
 			item["dataSource"] = info;
-		}
+		});
 
-		
+
 	}
 
 	set events(events) {
@@ -550,6 +545,24 @@ class WHMenuItem extends HTMLElement {
 		$(this).removeClass(className);
 	}
 
+	set request(value) {
+		this._request = value;
+
+	}
+
+	get request() {
+		return this._request;
+	}
+
+	set send(value) {
+		if (value) {
+			this.whenApp().then((app: App) => {
+				app.go(this.request);
+			});
+		}
+
+	}
+
 	_getCheckbox() {
 		return this.querySelector(`:scope > wh-menu-link > wh-menu-check input`) as HTMLInputElement
 	}
@@ -559,6 +572,24 @@ class WHMenuItem extends HTMLElement {
 		if (checkbox) {
 			checkbox.checked = this.hasAttribute("checked");
 		}
+
+	}
+
+	public getApp() {
+		return getParentElement(this, "wh-app") as App;
+	}
+
+	public whenApp() {
+
+		return new Promise((resolve, reject) => {
+			const app = this.getApp();
+			if (app) {
+				resolve(app);
+			}
+
+			reject({ error: "App not found!" });
+
+		});
 
 	}
 }

@@ -45,13 +45,14 @@ class Search extends Element
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-unit-menu',
+            'wc'    => 'gt-search',
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Buscar',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    
                 ],
             ],
             'replayToken' => $this->replayToken,

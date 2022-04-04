@@ -59,10 +59,10 @@ class WHWinHeader extends HTMLElement {
 				<div class="caption"><slot name="caption"></slot></div>
 				<div class="option"><slot name="option"></slot></div>
 				<div class="control">
-					<button class="min">.</button>
-					<button class="auto">R</button>
-					<button class="max">M</button>
-					<button class="exit">x</button>
+					<button class="min"></button>
+					<button class="auto"></button>
+					<button class="max"></button>
+					<button class="exit"></button>
 				</div>
 			
 			

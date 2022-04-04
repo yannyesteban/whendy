@@ -45,13 +45,14 @@ class Site extends Element
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-unit-menu',
+            'wc'    => 'gt-site',
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Lugares',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    
                 ],
             ],
             'replayToken' => $this->replayToken,

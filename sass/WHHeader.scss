@@ -1,3 +1,6 @@
+$delta_y: 100px;
+$delta_y_h: -240px;
+
 /* Box sizing rules */
 *,
 *::before,
@@ -50,9 +53,10 @@ dd {
 		padding: 2px;
 		align-items: center;
 		button {
+			background-color: transparent;
 			width: 1.2rem;
 			height: 1.2rem;
-			border: 1px solid black;
+			border: 0px;
 			font-size: 1rem;
 			line-height: 1rem;
 		}
@@ -92,4 +96,24 @@ dd {
 :host(.win) {
 	font-weight: bold;
 	color: rgb(38, 156, 14) !important;
+}
+
+
+.min{
+	background-image: url(../images/win_icons.png?i=18);
+	background-position: 0px -20px;
+}
+.max{
+	background-image: url(../images/win_icons.png?i=18);
+	background-position: 40px -20px;
+}
+
+.auto{
+	background-image: url(../images/win_icons.png?i=18);
+	background-position: -20px -20px;
+}
+
+.exit{
+	background-image: url(../images/win_icons.png?i=18);
+	background-position: -60px -20px;
 }

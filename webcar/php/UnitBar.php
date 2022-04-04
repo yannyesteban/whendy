@@ -9,7 +9,7 @@ include_once SEVIAN_PATH . 'Trait/ConfigJson.php';
 
 use Tool, Store, DB, ConfigJson, Sigefor\Element;
 
-class Command extends Element
+class UnitBar extends Element
 {
 
     public function __construct($config = null)

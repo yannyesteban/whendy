@@ -1,13 +1,16 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement, fire } from "../Tool.js";
 
+const IDENTITY = Symbol('proxy_target_identity')
 
 const _handler = (element) => {
 	return {
-		get(target, key) {
+		gett(target, key, receiver) {
 
 			//console.log({ target, key });
-
+			if (key === IDENTITY) {
+				return target
+			  }
 
 			if (key == 'isProxy'){
 				return true;
@@ -21,21 +24,23 @@ const _handler = (element) => {
 			if (!prop.isProxy && typeof prop === 'object'){
 				target[key] = new Proxy(prop, _handler(element));
 			}
-				
-			return target[key];
+			return Reflect.get(target, key, receiver)
+			//return target[key];
 		},
 		set(target, key, value) {
 			let oldValue = target[key];
-			
+			//console.log({ target, key, value , oldValue, type: typeof value})
 			if (oldValue !== value) {
 				fire(element, `${String(key)}-data-changed`, value);
 
-				//console.log(`${String(key)}-data-changed`)
+				console.log(`${String(key)}-data-changed`, value);
 			}
-			//console.log({ target, key, value })
+			
 			target[key] = value;
 			
 			fire(element, `${String(key)}-data-set`, value);
+
+			console.log(`${String(key)}-data-set`, value);
 			return true;
 		}
 	}
@@ -45,7 +50,7 @@ export class GTUnitStore extends HTMLElement {
 	_request = [];
 	_actions = [];
 	_timer = null;
-	_delay = 10;
+	_delay = 1000;
 	dataStore = {};
 	_dataStore = null;
 
@@ -126,6 +131,32 @@ export class GTUnitStore extends HTMLElement {
 
 	get store(){
 		return this._dataStore;
+	}
+
+	updateItem(name, value){
+
+
+		if(typeof this._dataStore[name] === 'object'){
+			this._dataStore[name] = Object.assign(this._dataStore[name], value);
+		}else{
+			this._dataStore[name] = value;
+		}
+		
+	}
+
+
+	getItem(name){
+
+		if(typeof this._dataStore[name] === 'object'){
+			return Object.assign({}, this._dataStore[name]);
+		}else{
+			return this._dataStore[name];
+		}
+		
+	}
+
+	getIdentity(name){
+		return this._dataStore[name][IDENTITY];
 	}
 
 	public getApp() {

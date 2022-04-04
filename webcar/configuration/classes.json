@@ -82,5 +82,119 @@
         "enable": true,
         "file": "{@MODULE_PATH}php/Map.php",
         "class": "\\GT\\Map"
+    },
+    {
+        "name": "gt-unit-bar",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/UnitBar.php",
+        "class": "\\GT\\UnitBar"
+    },
+    {
+        "name": "gt-unit-info",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/UnitInfo.php",
+        "class": "\\GT\\UnitInfo"
+    },
+    {
+        "name": "gt-event-info",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/EventInfo.php",
+        "class": "\\GT\\EventInfo"
+    },
+    {
+        "name": "gt-alarm-info",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/AlarmInfo.php",
+        "class": "\\GT\\AlarmInfo"
+    },
+    {
+        "name": "gt-connected-info",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/ConnectedInfo.php",
+        "class": "\\GT\\ConnectedInfo"
+    },
+    {
+        "name": "gt-socket",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Socket.php",
+        "class": "\\GT\\Socket"
+    },
+    {
+        "name": "gt-instant",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Instant.php",
+        "class": "\\GT\\Instant"
+    },
+    {
+        "name": "gt-bar-info",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/BarInfo.php",
+        "class": "\\GT\\BarInfo"
+    },
+    {
+        "name": "gt-site",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Site.php",
+        "class": "\\GT\\Site"
+    },
+    {
+        "name": "gt-geofence",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Geofence.php",
+        "class": "\\GT\\Geofence"
+    },
+    {
+        "name": "gt-alarm",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Alarm.php",
+        "class": "\\GT\\Alarm"
+    },
+    {
+        "name": "gt-command",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Command.php",
+        "class": "\\GT\\Command"
+    },
+    {
+        "name": "gt-instant",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Instant.php",
+        "class": "\\GT\\Instant"
+    },
+    {
+        "name": "gt-event-query",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/EventQuery.php",
+        "class": "\\GT\\EventQuery"
+    },
+    {
+        "name": "gt-search",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Search.php",
+        "class": "\\GT\\Search"
+    },
+    {
+        "name": "gt-config",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Config.php",
+        "class": "\\GT\\Config"
+    },
+    {
+        "name": "gt-pending",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Pending.php",
+        "class": "\\GT\\Pending"
+    },
+    {
+        "name": "gt-history",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/History.php",
+        "class": "\\GT\\History"
+    },
+    {
+        "name": "gt-trace",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/Trace.php",
+        "class": "\\GT\\Trace"
     }
 ]

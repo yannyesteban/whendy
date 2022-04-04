@@ -1,0 +1,16 @@
+{
+  "homeMobileCountryCode": 734,
+  "homeMobileNetworkCode": 260,
+  "radioType": "gsm",
+  "carrier": "Movilnet",
+  "cellTowers": [
+    {
+      "cellId": 39627456,
+      "locationAreaCode": 40495,
+      "mobileCountryCode": 310,
+      "mobileNetworkCode": 260,
+      "age": 0,
+      "signalStrength": -95
+    }
+  ]
+}

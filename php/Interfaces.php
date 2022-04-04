@@ -49,6 +49,7 @@ class ICommand
     public $config = null;
     public $replayToken = null;
     public $setPanel = null;
+    public $appendTo = null;
 
 
     public $debugMode = false;

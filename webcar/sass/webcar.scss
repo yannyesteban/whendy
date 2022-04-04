@@ -36,18 +36,23 @@ wh-app.webcar {
 	}
 
 	wh-win {
+		background-color: rgba(1, 1, 1, 0.6);
 		//height: 100%;
-		border: 0.1em solid rgb(206, 206, 206);
+		//border: 0.1em solid rgb(206, 206, 206);
+		border: 2px solid #176469 !important;
 		box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
 		wh-win-header {
-			background-color: #ffffff;
+			background-color: #112715;
 			border-bottom: 0.1em solid black;
+			color: white;
 		}
 
 		wh-win-body {
 			//overflow: auto;
 			//height: 100%;
 		}
+
 		wh-menu {
 			background-color: aliceblue;
 
@@ -65,6 +70,7 @@ wh-panell {
 	justify-content: center;
 	align-items: center;
 }
+
 wh-form {
 	background-color: rgba(0, 0, 0, 0.205);
 	color: rgb(59, 59, 59);
@@ -73,6 +79,7 @@ wh-form {
 	padding: 0.2em;
 	display: block;
 	border: 0.1em solid rgba(218, 218, 218, 0.527);
+
 	wh-form-caption {
 		background-color: rgba(0, 0, 0, 0.384);
 		color: white;
@@ -87,9 +94,11 @@ wh-form {
 		justify-content: center;
 		align-items: center;
 	}
+
 	wh-form-field {
 		padding: 0.2em;
 		width: 100%;
+
 		label {
 			display: block;
 			font-size: 0.7em;
@@ -117,6 +126,7 @@ wh-form {
 		height: 1.8em;
 		line-height: 1.8em;
 		text-transform: uppercase;
+
 		&:hover {
 			color: rgb(54, 2, 31);
 		}
@@ -135,6 +145,7 @@ wh-menu.exit-menu {
 		grid-template-columns: auto !important;
 		grid-template-areas: "icon" !important;
 	}
+
 	wh-menu-item {
 		background-color: rgba(37, 37, 37, 0.281);
 		border: 0px;
@@ -143,6 +154,7 @@ wh-menu.exit-menu {
 			background-color: rgba(0, 0, 0, 0.411);
 		}
 	}
+
 	wh-menu-caption {
 		display: none;
 	}
@@ -155,13 +167,19 @@ wh-menu.exit-menu {
 		display: none;
 	}
 }
+
 @media screen and (min-width: 600px) {
-	.main-menu2 {
+
+
+	.main-menu2,
+	wh-menu.phone-menu {
 		display: none !important;
 	}
+
 	img {
 		height: 100%;
 	}
+
 	wh-layout.webcar {
 		//background-color: #b11919;
 		//position: absolute;
@@ -173,6 +191,7 @@ wh-menu.exit-menu {
 		grid-template-columns: 1fr;
 
 		grid-template-areas: "banner" "menu" "body";
+
 		//align-items: stretch;
 		//align-items: center;
 		//place-items: center;
@@ -208,6 +227,7 @@ wh-menu.exit-menu {
 			top: 1em;
 			left: 1em;
 		}
+
 		wh-menu-icon {
 			//background-image: url("../webcar/images/unit.png");
 			background-size: 24px 24px;
@@ -219,12 +239,19 @@ wh-menu.exit-menu {
 		}
 
 		wh-popup#popup-tool {
+			display: none;
 			position: fixed;
-			right: 1em;
+			right: 0.5em;
 			top: 8em;
 		}
 
-		wh-menuu.tool-menu {
+		.main-tool {
+			position: fixed;
+			right: 0.5em;
+			top: 8em;
+		}
+
+		wh-menu.tool-menu {
 			border: 0px;
 			display: flex;
 			flex-direction: column;
@@ -237,6 +264,7 @@ wh-menu.exit-menu {
 				grid-template-columns: auto !important;
 				grid-template-rows: auto !important;
 				grid-template-areas: "icon" !important;
+
 				wh-menu-caption {
 					display: none;
 				}
@@ -250,14 +278,16 @@ wh-menu.exit-menu {
 				}
 			}
 		}
+
 		wh-menu.tool-menu {
 			border: 0px;
 			display: flex;
 			flex-direction: column;
 			gap: 0;
 			margin-bottom: 2px;
+
 			//background-color: #ffffff;
-			> wh-menu-item {
+			>wh-menu-item {
 				background-color: white;
 				border: 1px solid rgb(167, 167, 167);
 				box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.6);
@@ -280,12 +310,17 @@ wh-menu.exit-menu {
 		}
 	}
 }
+
 /* phone */
 @media screen and (max-width: 600px) {
+
 	.main-menu1,
-	.exit-menu {
+	.main-tool,
+	.exit-menu,
+	.best_logo {
 		display: none !important;
 	}
+
 	wh-layout.webcar {
 		background-color: #085252;
 		height: 100%;
@@ -299,6 +334,13 @@ wh-menu.exit-menu {
 		}
 
 		wh-menu.main-menu2 {
+			wh-menu-link{
+				background-color: rgba(0, 0, 0, 0.500);
+				&:hover{
+					background-color: rgba(0, 0, 0, 0.800);
+				}
+			}
+			
 			wh-menu-icon {
 				//background-image: url("../webcar/images/unit.png");
 				background-size: 24px 24px;
@@ -320,29 +362,34 @@ wh-menu.exit-menu {
 			//width: 20em;
 			padding: 0;
 			border: 0;
+
 			wh-menu-item {
-				background-color: #00000041;
+				//background-color: #00000041;
 				width: 7em;
 				height: 7em;
 				border: 0px;
+
 				//padding: 0.5em;
 				//border: 1px solid white;
 				&:hover {
-					background-color: #0000008e;
+					//background-color: #0000008e;
 				}
+
 				display: flex;
 				align-items: center;
 				justify-content: center;
 			}
+
 			wh-menu-link {
 				border: 0px;
 				display: grid;
 				grid-template-columns: auto;
 				grid-template-rows: auto auto;
-				grid-template-areas: "icon" "caption";
+				grid-template-areas: "icon""caption";
 
 				justify-content: center;
-				> wh-menu-caption {
+
+				>wh-menu-caption {
 					overflow: hidden;
 					text-align: center;
 				}
@@ -363,6 +410,7 @@ wh-menu.exit-menu {
 	wh-html {
 		height: 1em;
 	}
+
 	.banner {
 		//background-color: #ffffffd0;
 		position: absolute;
@@ -373,19 +421,43 @@ wh-menu.exit-menu {
 
 	wh-panel.menu {
 		position: fixed;
-		bottom: 1em;
+		bottom: 2em;
 		left: 1em;
 		height: auto;
 	}
 
 	wh-popup {
 		position: fixed;
-		bottom: 4em;
+		bottom: 4.5em;
 		border: 0;
 		margin: 1em;
 		//left: 50%;
 		//transform: translate(-50%, -50%);
+
+		wh-menu.phone-menu {
+			wh-menu-item{
+				background-color: rgba(0, 0, 0, 0.500);
+				&:hover{
+					background-color: rgba(0, 0, 0, 0.800);
+				}
+			}
+		}
+
+		wh-menu.tool-menu {
+			
+			wh-menu-item{
+				color:#575757;
+				background-color: rgba(255, 254, 254, 0.774);
+				&:hover{
+					color:#242424;
+					background-color: rgba(157, 157, 157, 0.8);
+				}
+			}
+		}
+
+		
 	}
+
 	wh-popupp {
 		bottom: 4em;
 
@@ -394,6 +466,7 @@ wh-menu.exit-menu {
 				display: flex;
 				border: 4px solid red;
 			}
+
 			wh-menu-caption {
 				display: block !important;
 			}
@@ -401,89 +474,110 @@ wh-menu.exit-menu {
 	}
 }
 
-@media screen and (max-height: 400px) {
-}
+@media screen and (max-height: 400px) {}
 
-.unit > wh-menu-link > wh-menu-icon {
+.unit>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/unit.png");
 }
-.site > wh-menu-link > wh-menu-icon {
+
+.site>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/marker_001.png");
 }
-.geofence > wh-menu-link > wh-menu-icon {
+
+.geofence>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/pentagon.png");
 }
-.alarm > wh-menu-link > wh-menu-icon {
+
+.alarm>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/clock_001.png");
 }
-.bolt > wh-menu-link > wh-menu-icon {
+
+.command>wh-menu-link>wh-menu-icon {
+	background-image: url("../webcar/images/command.png");
+}
+
+.bolt>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/bolt.png");
 }
-.event-admin > wh-menu-link > wh-menu-icon {
+
+.event-admin>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/info.png");
 }
-.search > wh-menu-link > wh-menu-icon {
+
+.search>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/search.png");
 }
 
-.setting > wh-menu-link > wh-menu-icon {
+.setting>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/setting_001.png");
 }
 
-.exit > wh-menu-link > wh-menu-icon {
+.exit>wh-menu-link>wh-menu-icon {
 	background-image: url("../webcar/images/exit_001.png");
 }
 
-.history > wh-menu-link > wh-menu-icon {
+.history>wh-menu-link>wh-menu-icon {
 	background-size: 70% 80%;
 	background-image: url(../webcar/images/calendar_001.png);
 }
 
-.trace > wh-menu-link > wh-menu-icon {
+.trace>wh-menu-link>wh-menu-icon {
 	//background-size: 70% 70%;
 	background-image: url(../webcar/images/trace.png);
 }
 
-.rule > wh-menu-link > wh-menu-icon {
+.rule>wh-menu-link>wh-menu-icon {
 	//background-size: 70% 70%;
 	background-image: url(../webcar/images/rule.png);
 }
 
-.poly > wh-menu-link > wh-menu-icon {
+.poly>wh-menu-link>wh-menu-icon {
 	//background-size: 70% 70%;
 	background-image: url(../webcar/images/poly.png);
 }
 
-.marker > wh-menu-link > wh-menu-icon {
+.marker>wh-menu-link>wh-menu-icon {
 	//background-size: 70% 70%;
 	background-image: url(../webcar/images/marker.png);
 }
 
-.full > wh-menu-link > wh-menu-icon {
+
+.map_01>wh-menu-link>wh-menu-icon {
+	//background-size: 70% 70%;
+	background-image: url(../webcar/images/map_01.png);
+}
+
+.submenu>wh-menu-link>wh-menu-icon {
+	//background-size: 70% 70%;
+	background-image: url(../webcar/images/menu_01.png);
+}
+
+
+.full>wh-menu-link>wh-menu-icon {
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M24 16v5.5c0 1.75-.75 2.5-2.5 2.5H16v-1l3-1.5-4-5.5 1-1 5.5 4 1.5-3h1zM6 16l1.5 3 5.5-4 1 1-4 5.5 3 1.5v1H7.5C5.75 24 5 23.25 5 21.5V16h1zm7-11v1l-3 1.5 4 5.5-1 1-5.5-4L6 13H5V7.5C5 5.75 5.75 5 7.5 5H13zm11 2.5c0-1.75-.75-2.5-2.5-2.5H16v1l3 1.5-4 5.5 1 1 5.5-4 1.5 3h1V7.5z'/%3E %3C/svg%3E");
 }
 
-.zoom-in > wh-menu-link > wh-menu-icon {
+.zoom-in>wh-menu-link>wh-menu-icon {
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M14.5 8.5c-.75 0-1.5.75-1.5 1.5v3h-3c-.75 0-1.5.75-1.5 1.5S9.25 16 10 16h3v3c0 .75.75 1.5 1.5 1.5S16 19.75 16 19v-3h3c.75 0 1.5-.75 1.5-1.5S19.75 13 19 13h-3v-3c0-.75-.75-1.5-1.5-1.5z'/%3E %3C/svg%3E");
 }
 
-.zoom-out > wh-menu-link > wh-menu-icon {
+.zoom-out>wh-menu-link>wh-menu-icon {
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M10 13c-.75 0-1.5.75-1.5 1.5S9.25 16 10 16h9c.75 0 1.5-.75 1.5-1.5S19.75 13 19 13h-9z'/%3E %3C/svg%3E");
 }
 
-.bearing > wh-menu-link > wh-menu-icon {
+.bearing>wh-menu-link>wh-menu-icon {
 	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M10.5 14l4-8 4 8h-8z'/%3E %3Cpath id='south' d='M10.5 16l4 8 4-8h-8z' fill='%23ccc'/%3E %3C/svg%3E");
 }
 
-.alarm2 > wh-menu-link > wh-menu-icon {
+.alarm2>wh-menu-link>wh-menu-icon {
 	background-image: url(../webcar/images/alarm.png);
 }
 
-.alert > wh-menu-link > wh-menu-icon {
+.alert>wh-menu-link>wh-menu-icon {
 	background-image: url(../webcar/images/alert.png);
 }
 
-.info > wh-menu-link > wh-menu-icon {
+.info>wh-menu-link>wh-menu-icon {
 	background-image: url(../webcar/images/info.png);
 }
 
@@ -493,7 +587,7 @@ gt-map {
 	display: block;
 }
 
-map-box {
+mapbox-maps {
 	width: 100%;
 	height: 100%;
 	display: block;

@@ -249,6 +249,11 @@ export class QElement {
         return this;
     }
 
+    remove(){
+        if(this.e){
+            this.e.remove();
+        }
+    }
     fire(name, detail) {
         const event = new CustomEvent(name, {
             detail,

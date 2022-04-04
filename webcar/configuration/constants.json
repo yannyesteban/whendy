@@ -5,7 +5,7 @@
     "CONFIG_PATH": "../config/",
     "TEMPLATES_PATH": "templates/",
     "IMAGES_PATH": "images/",
-    "PATH_IMAGES": "../../images/",
+    "PATH_IMAGES": "images/",
     "SEVIAN_PATH": "../php/",
     "SIGEFOR_PATH": "",
     "PATH"  : "../../",

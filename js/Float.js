@@ -332,7 +332,7 @@ export class Drag {
             const release = (event) => {
                 console.log("release");
                 if (event.changedTouches && event.changedTouches[0]) {
-                    event.preventDefault();
+                    //event.preventDefault();
                     event = event.changedTouches[0];
                 }
                 element.classList.remove("_drag_start_");

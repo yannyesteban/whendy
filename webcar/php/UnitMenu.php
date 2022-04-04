@@ -51,9 +51,11 @@ class UnitMenu extends Element
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Unidades',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    'unitData' => $this->loadUnits('panda'),
+
                 ],
             ],
             'replayToken' => $this->replayToken,
@@ -80,9 +82,9 @@ class UnitMenu extends Element
         INNER JOIN client as cl ON cl.id = ac.client_id
         LEFT JOIN unit_name as vn ON vn.id = u.name_id
 
-        WHERE uu.user = '$user'
+        WHERE uu.user = '$user' and cl.id = 420
         ORDER BY client, account, unitName
-        LIMIT 3
+        #LIMIT 3
         ";
 
         $result = $cn->execute();

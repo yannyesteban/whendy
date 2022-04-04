@@ -61,7 +61,7 @@
 			"id": "unit-menu",
 			"appendTo": "wh-app",
 			"setPanell": "gt-unit-menu",
-			"element": "gt-unit-menu",
+			"element": "gt-unit-menu-",
 			"name": "",
 			"method": "init",
 			"eparams": {}
@@ -97,6 +97,23 @@
 			"name": "",
 			"method": "init",
 			"eparams": {}
+		},
+		{
+			"id": "gt-unit-info",
+			"type": "element",
+			"appendTo": "wh-app",
+			"element": "gt-unit-info",
+			"name": null,
+			"method": "init",
+			"config": {}
+		},
+		{
+			
+			"appendTo": "#main-tool",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ToolMenu.json",
+			"method": "init",
+			"eparams": {}
 		}
 	],
 	"className": ["webcar"],
@@ -107,12 +124,29 @@
 		"../js/MapBox.js",
 		"../js/WHWindow.js",
 		"../js/WHMenu.js",
+		"../js/WHInfo.js",
 		"../js/ListText.js",
 		"../js/WHPopup.js",
 		"../js/gt/GTUnitStore.js",
 		"../js/gt/GTTracking.js",
 		"../js/gt/GTMap.js",
-		"../js/gt/GTUnit.js"
+		"../js/gt/GTUnit.js",
+		"../js/gt/GTSite.js",
+		"../js/gt/GTGeofence.js",
+		"../js/gt/GTAlarm.js",
+		"../js/gt/GTCommand.js",
+		"../js/gt/GTInstant.js",
+		"../js/gt/GTEventQuery.js",
+		"../js/gt/GTSearch.js",
+		"../js/gt/GTConfig.js",
+		"../js/gt/GTConnectedInfo.js",
+		"../js/gt/GTPending.js",
+		"../js/gt/GTAlarmInfo.js",
+		"../js/gt/GTEventInfo.js",
+		"../js/gt/GTHistory.js",
+		"../js/gt/GTTrace.js",
+		"../js/gt/GTUnitInfo.js"
+		
 	],
 	"modules": [
 		{

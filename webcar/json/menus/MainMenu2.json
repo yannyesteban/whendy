@@ -10,7 +10,7 @@
         "items": [
             {
                 "caption": "Unidades",
-                "addClass": "sub-menu",
+                "addClass": "submenu",
                 "title":"Más",
                 "events": {
                     "link-action": "document.querySelector('wh-popup#popup-menu').setAttribute('mode', 'open')"

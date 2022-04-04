@@ -32,13 +32,15 @@ wh-app.webcar wh-html {
 }
 
 wh-app.webcar wh-win {
-  border: 0.1em solid #cecece;
+  background-color: rgba(1, 1, 1, 0.6);
+  border: 2px solid #176469 !important;
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 }
 
 wh-app.webcar wh-win wh-win-header {
-  background-color: #ffffff;
+  background-color: #112715;
   border-bottom: 0.1em solid black;
+  color: white;
 }
 
 wh-app.webcar wh-win wh-menu {
@@ -159,7 +161,8 @@ wh-menu.exit-menu .ind {
 }
 
 @media screen and (min-width: 600px) {
-  .main-menu2 {
+  .main-menu2,
+  wh-menu.phone-menu {
     display: none !important;
   }
   img {
@@ -206,30 +209,36 @@ wh-menu.exit-menu .ind {
     width: 30px;
   }
   wh-layout.webcar wh-popup#popup-tool {
+    display: none;
     position: fixed;
-    right: 1em;
+    right: 0.5em;
     top: 8em;
   }
-  wh-layout.webcar wh-menuu.tool-menu {
+  wh-layout.webcar .main-tool {
+    position: fixed;
+    right: 0.5em;
+    top: 8em;
+  }
+  wh-layout.webcar wh-menu.tool-menu {
     border: 0px;
     display: flex;
     flex-direction: column;
     gap: 2px;
     margin-bottom: 2px;
   }
-  wh-layout.webcar wh-menuu.tool-menu wh-menu-link {
+  wh-layout.webcar wh-menu.tool-menu wh-menu-link {
     display: grid;
     grid-template-columns: auto !important;
     grid-template-rows: auto !important;
     grid-template-areas: "icon" !important;
   }
-  wh-layout.webcar wh-menuu.tool-menu wh-menu-link wh-menu-caption {
+  wh-layout.webcar wh-menu.tool-menu wh-menu-link wh-menu-caption {
     display: none;
   }
-  wh-layout.webcar wh-menuu.tool-menu wh-menu-link wh-menu-check {
+  wh-layout.webcar wh-menu.tool-menu wh-menu-link wh-menu-check {
     display: none;
   }
-  wh-layout.webcar wh-menuu.tool-menu wh-menu-link .ind {
+  wh-layout.webcar wh-menu.tool-menu wh-menu-link .ind {
     display: none;
   }
   wh-layout.webcar wh-menu.tool-menu {
@@ -261,7 +270,9 @@ wh-menu.exit-menu .ind {
 /* phone */
 @media screen and (max-width: 600px) {
   .main-menu1,
-  .exit-menu {
+  .main-tool,
+  .exit-menu,
+  .best_logo {
     display: none !important;
   }
   wh-layout.webcar {
@@ -274,6 +285,12 @@ wh-menu.exit-menu .ind {
     top: 1em;
     left: 1em;
     z-index: 1;
+  }
+  wh-layout.webcar wh-menu.main-menu2 wh-menu-link {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  wh-layout.webcar wh-menu.main-menu2 wh-menu-link:hover {
+    background-color: rgba(0, 0, 0, 0.8);
   }
   wh-layout.webcar wh-menu.main-menu2 wh-menu-icon {
     background-size: 24px 24px;
@@ -295,17 +312,12 @@ wh-menu.exit-menu .ind {
   }
   wh-layout.webcar wh-menu.phone-menu wh-menu-item,
   wh-layout.webcar wh-menu.tool-menu wh-menu-item {
-    background-color: #00000041;
     width: 7em;
     height: 7em;
     border: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  wh-layout.webcar wh-menu.phone-menu wh-menu-item:hover,
-  wh-layout.webcar wh-menu.tool-menu wh-menu-item:hover {
-    background-color: #0000008e;
   }
   wh-layout.webcar wh-menu.phone-menu wh-menu-link,
   wh-layout.webcar wh-menu.tool-menu wh-menu-link {
@@ -341,15 +353,29 @@ wh-menu.exit-menu .ind {
   }
   wh-panel.menu {
     position: fixed;
-    bottom: 1em;
+    bottom: 2em;
     left: 1em;
     height: auto;
   }
   wh-popup {
     position: fixed;
-    bottom: 4em;
+    bottom: 4.5em;
     border: 0;
     margin: 1em;
+  }
+  wh-popup wh-menu.phone-menu wh-menu-item {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  wh-popup wh-menu.phone-menu wh-menu-item:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  wh-popup wh-menu.tool-menu wh-menu-item {
+    color: #575757;
+    background-color: rgba(255, 254, 254, 0.774);
+  }
+  wh-popup wh-menu.tool-menu wh-menu-item:hover {
+    color: #242424;
+    background-color: rgba(157, 157, 157, 0.8);
   }
   wh-popupp {
     bottom: 4em;
@@ -377,6 +403,10 @@ wh-menu.exit-menu .ind {
 
 .alarm > wh-menu-link > wh-menu-icon {
   background-image: url("../webcar/images/clock_001.png");
+}
+
+.command > wh-menu-link > wh-menu-icon {
+  background-image: url("../webcar/images/command.png");
 }
 
 .bolt > wh-menu-link > wh-menu-icon {
@@ -420,6 +450,14 @@ wh-menu.exit-menu .ind {
   background-image: url(../webcar/images/marker.png);
 }
 
+.map_01 > wh-menu-link > wh-menu-icon {
+  background-image: url(../webcar/images/map_01.png);
+}
+
+.submenu > wh-menu-link > wh-menu-icon {
+  background-image: url(../webcar/images/menu_01.png);
+}
+
 .full > wh-menu-link > wh-menu-icon {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='29' height='29' viewBox='0 0 29 29' xmlns='http://www.w3.org/2000/svg' fill='%23333'%3E %3Cpath d='M24 16v5.5c0 1.75-.75 2.5-2.5 2.5H16v-1l3-1.5-4-5.5 1-1 5.5 4 1.5-3h1zM6 16l1.5 3 5.5-4 1 1-4 5.5 3 1.5v1H7.5C5.75 24 5 23.25 5 21.5V16h1zm7-11v1l-3 1.5 4 5.5-1 1-5.5-4L6 13H5V7.5C5 5.75 5.75 5 7.5 5H13zm11 2.5c0-1.75-.75-2.5-2.5-2.5H16v1l3 1.5-4 5.5 1 1 5.5-4 1.5 3h1V7.5z'/%3E %3C/svg%3E");
 }
@@ -454,7 +492,7 @@ gt-map {
   display: block;
 }
 
-map-box {
+mapbox-maps {
   width: 100%;
   height: 100%;
   display: block;

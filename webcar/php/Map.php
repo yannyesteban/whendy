@@ -9,9 +9,12 @@ include_once SEVIAN_PATH . 'Trait/ConfigJson.php';
 
 use Tool, Store, DB, ConfigJson, Sigefor\Element;
 
+
+
 class Map extends Element
 {
 
+    private $popupTemplate = '';
     public function __construct($config = null)
     {
 
@@ -41,6 +44,10 @@ class Map extends Element
     public function load()
     {
 
+
+        $this->popupFile =  TEMPLATES_PATH.'info/unit-popup.html';
+        $this->template = Store::loadFile($this->popupFile);
+
         
         $this->addResponse([
             'mode'  => 'init',
@@ -48,10 +55,12 @@ class Map extends Element
             'wc'    => 'gt-map',
             'id'    => $this->id,
             'props' => [
-                'api'=>'mapbox',
+                'api'=>'google',
+                'popupTemplate' => Store::loadFile($this->popupFile),
                 'dataSource' => [
 
                     'marks' => [],
+                    
                     
                 ],
             ],

@@ -24,12 +24,40 @@ class Unit extends Element
             $this->method = $method; //$method = $this->method;
         }
         
-        
+        //Tool::hx($this->getUnits('panda', '214', 1, 1,1,1));
         switch ($this->method) {
             case 'init':
                 $this->load();
                 break;
 
+            case 'load-units':
+
+                
+
+
+                $data = $this->getUnits('panda', 
+                    
+                    $this->config->clientId?? 0, 
+                    $this->config->accountId?? 0,
+                    $this->config->unitId?? 0, 
+                    $this->config->active?? 0,
+                    $this->config->visible?? 1);
+
+
+                   
+                $this->addResponse([
+                    'mode'  => 'init',
+                    'storeData' => [
+                        'name'=> 'units',
+                        'data'  => $data
+                        
+                    ],
+                    'replayToken' => $this->replayToken,
+                    'setPanel' => $this->setPanel,
+                    'appendTo' => $this->appendTo,
+                ]);
+                break;
+                
             case 'load-unit-data':
                 $this->addResponse([
                     'mode'  => 'init',
@@ -121,6 +149,97 @@ class Unit extends Element
 
       
     }
+
+    public function getUnits($user, $clientId=0, $accountId=0, $unitId=0, $active = 0, $visible = 0){
+        $cn = DB::get();
+        
+        $filter = " AND u.id = '$unitId'";
+        
+        if($clientId > 0){
+            $filter = " AND cl.id = '$clientId'";
+        }else if($accountId > 0){
+            $filter = " AND ac.id = '$accountId'";
+        }
+
+        $path = IMAGES_PATH;
+        
+        $cn->query = "SELECT
+        u.id as unitId,
+        ac.client_id as client_id,
+        cl.name as client,
+        u.account_id,
+        ac.name as account,
+        u.device_id,
+        de.name as device_name,
+        u.vehicle_id,
+        vn.name as vehicle_name,
+        CASE WHEN t.id IS NULL THEN 1 ELSE 0 END as noTracking,
+        CASE WHEN t.id IS NULL THEN 0 ELSE 1 END as valid,
+        vn.name as unitName,
+        CONCAT('$path', ic.icon, '.png') as image, ve.plate, br.name as brand, mo.name as model, ve.color,
+        u.conn_status as connected,
+
+		t.id as trackId,
+        t.date_time,
+            t.longitude, t.latitude, t.speed, t.heading, t.altitude, t.satellite,
+            t.event_id as eventId, t.mileage, t.input_status as inputStatus, t.voltage_level_i1 as voltageI1, t.voltage_level_i2 as voltageI2,
+            t.output_status as outputStatus, t.battery_voltage as batteryVoltage,
+
+            e.event_id as mainEvent,
+            date_format(t.date_time, '%d/%m/%Y %T') as dateTime,
+            date_format(t.date_time, '%T') as uTime,
+            date_format(t.date_time, '%d/%m/%Y') as uDate,
+
+            UNIX_TIMESTAMP(now()) as ts,
+            IFNULL(e.title,'') as myEvent,
+            de.name as event,m.name as device_model, v.version,IFNULL(v.name, '') as protocol, 
+            '$active' as active,
+            '$visible' as visible,
+            0 as follow,
+            0 as tracking
+
+
+        FROM unit as u
+        INNER JOIN user_unit as uu ON uu.unit_id = u.id
+        LEFT JOIN unit_name as vn ON vn.id = u.name_id
+
+        LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id
+
+        LEFT JOIN vehicle_brand as br ON br.id = ve.brand_id
+        LEFT JOIN vehicle_model as mo ON mo.id = ve.model_id
+
+        LEFT JOIN device as de ON de.id = u.device_id
+        LEFT JOIN device_version as v on v.id = de.version_id
+        LEFT JOIN device_model as m ON m.id = v.id_model
+        LEFT JOIN device_name as dn ON dn.name = de.name
+
+
+        LEFT JOIN icon as ic ON ic.id = u.icon_id
+
+        LEFT JOIN account as ac ON ac.id = u.account_id
+        LEFT JOIN client as cl ON cl.id = ac.client_id
+
+        LEFT JOIN tracking as t ON t.unit_id = u.id AND t.date_time = u.tracking_date
+      	LEFT JOIN event as e ON e.unit_id = t.unit_id AND e.date_time = t.date_time
+        WHERE uu.user = '$user' 
+        $filter
+        ORDER BY client, account, vehicle_name
+
+        ";
+		
+		//Tool::hx($cn->query);
+		$data = $cn->getJsonAll($cn->execute());
+
+        $units = [];
+
+        forEach($data as $unit){
+            $units[$unit->unitId] = $unit;
+        }
+         
+		return $units;
+
+    }
+
 
 
     public function getUnitData($user, $unitId, $active = 0){

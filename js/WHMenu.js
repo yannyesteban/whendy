@@ -134,11 +134,9 @@ class WHMenuLink extends HTMLElement {
 }
 customElements.define("wh-menu-link", WHMenuLink);
 class WHMenuItem extends HTMLElement {
-    static get observedAttributes() {
-        return ["onaction", "usecheck", "oncheck", "value", "disabled", "checked", "onlinkaction", "opened", "hidden"];
-    }
     constructor() {
         super();
+        this._request = null;
         const template = document.createElement("template");
         template.innerHTML = `
 			
@@ -215,6 +213,9 @@ class WHMenuItem extends HTMLElement {
                 console.log(x.assignedSlot);
             });
         });
+    }
+    static get observedAttributes() {
+        return ["onaction", "usecheck", "oncheck", "value", "disabled", "checked", "onlinkaction", "opened", "hidden"];
     }
     connectedCallback() {
         this.slot = "item";
@@ -385,6 +386,19 @@ class WHMenuItem extends HTMLElement {
     set removeClass(className) {
         $(this).removeClass(className);
     }
+    set request(value) {
+        this._request = value;
+    }
+    get request() {
+        return this._request;
+    }
+    set send(value) {
+        if (value) {
+            this.whenApp().then((app) => {
+                app.go(this.request);
+            });
+        }
+    }
     _getCheckbox() {
         return this.querySelector(`:scope > wh-menu-link > wh-menu-check input`);
     }
@@ -393,6 +407,18 @@ class WHMenuItem extends HTMLElement {
         if (checkbox) {
             checkbox.checked = this.hasAttribute("checked");
         }
+    }
+    getApp() {
+        return getParentElement(this, "wh-app");
+    }
+    whenApp() {
+        return new Promise((resolve, reject) => {
+            const app = this.getApp();
+            if (app) {
+                resolve(app);
+            }
+            reject({ error: "App not found!" });
+        });
     }
 }
 customElements.define("wh-menu-item", WHMenuItem);

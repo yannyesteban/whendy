@@ -299,6 +299,11 @@ export class App extends HTMLElement {
 
         }
 
+
+        const e = document.getElementById(element.id);
+        if(e){
+            e.remove();
+        }
         
 
         

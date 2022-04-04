@@ -202,6 +202,10 @@ export class App extends HTMLElement {
                 console.log(error);
             });
         }
+        const e = document.getElementById(element.id);
+        if (e) {
+            e.remove();
+        }
         customElements.whenDefined(element.wc).then(() => {
             const e = $.create(element.wc);
             e.id(element.id);

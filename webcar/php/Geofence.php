@@ -45,13 +45,14 @@ class Geofence extends Element
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-unit-menu',
+            'wc'    => 'gt-geofence',
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
+                'caption'=>'Geocercas',
                 'dataSource' => [
 
-                    'unitData' => $this->loadUnits('panda')
+                    
                 ],
             ],
             'replayToken' => $this->replayToken,

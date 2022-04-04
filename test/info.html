@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/test.css">
+</head>
+
+<body>
+
+    <wh-info id="info">
+
+
+        <div class="info-form info-form-main">
+
+
+            <div class="unit-group">
+                <div class="name">{=unitName}</div>
+                <div class="body">
+                    <div class="row">
+                        <div>ID {=unitId}</div>
+                        <div>{=device_name}</div>
+                    </div>
+                    <div class="row">
+                        <div>Marca</div>
+                        <div>{=brand}</div>
+                    </div>
+        
+                    <div class="row">
+                        <div>Modelo</div>
+                        <div>{=model}</div>
+                    </div>
+        
+                    <div class="row">
+                        <div>Color</div>
+                        <div>{=color}</div>
+                    </div>
+        
+                    <div class="row">
+                        <div>Matrícula</div>
+                        <div>{=plate}</div>
+                    </div><!--
+                    <div class="row">
+                        <div>Firmware</div>
+                        <div>{=device_model} [ {=version} - {=protocol} ]</div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div>Fecha</div>
+                <div>{=uDate}</div>
+            </div>
+            <div class="row">
+                <div>Hora</div>
+                <div>{=uTime}</div>
+            </div>
+            <div class="row">
+                <div>Longitud</div>
+                <div>{=longitude}</div>
+            </div>
+            <div class="row">
+                <div>Latitud</div>
+                <div>{=latitude}</div>
+            </div>
+            <div class="row">
+                <div>Velocidad</div>
+                <div>{=speed}</div>
+            </div>
+            <div class="row">
+                <div>Orientación</div>
+                <div>{=heading}</div>
+            </div>
+            <div class="row">
+                <div>Satelites</div>
+                <div>{=satellite}</div>
+            </div>
+        
+            <div class="row">
+                <div>Distancia Recorrida</div>
+                <div>{=length}</div>
+            </div>
+        
+            <div class="row">
+                <div>Distancia Total</div>
+                <div>{=total_length}</div>
+            </div>
+        
+            <div class="inputs">
+                <div data-detail="inputs" data-input-id="{=inputs.id}" data-input-value="{=inputs.on}">
+                    <span>{=inputs.name}</span><span data-input-value="{=inputs.value}">{=inputs.value}</span>
+                </div>
+            </div>
+            <div class="outputs">
+        
+                <div data-detail="outputs" data-input-id="{=outputs.id}" data-input-value="{=outputs.on}"><span>{=outputs.name}</span><span data-input-value="{=outputs.value}">{=outputs.value}</span></div>
+        
+            </div>
+            <div class="last-event">{=myEvent}</div>
+        
+        </div>
+    </wh-info>
+    <button id="a">AA</button>
+    <button id="b">BB</button>
+    <button id="c">DD</button>
+    <button id="d">API</button>
+    <script type="module" src="./../js/WHInfo.js"></script>
+    <script type="module">
+        import { Q } from "./../js/q.js";
+
+        
+
+      
+        Q("#a").on("click", ev => {
+            const data = {
+                unitName: "yanny",
+                inputs:[
+                    {
+                        name:"motor",
+                        value:"prendido"
+                    }
+                ]
+
+                
+            }
+           info.data = data
+        });
+
+        Q("#b").on("click", ev => {
+            const data = {
+                unitName: "Esteban"
+            }
+           info.data = data
+        });
+
+        Q("#c").on("click", ev => {
+
+        });
+        
+        Q("#d").on("click", ev => {
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

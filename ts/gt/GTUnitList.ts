@@ -70,28 +70,39 @@ class GTUnitList extends HTMLElement {
 		$(this).html("");
 
 		customElements.whenDefined('wh-list-text').then(() => {
-			
+
 			const list = $(this).create("wh-list-text");
-	
-	
+
+
 			const button = $(this).create("button");
 			button.html("»");
 			console.log("....");
 			list.prop("dataSource", { data: source.data });
-			
-			list.on("change", (event)=>{
-				this.getStore().run("load-unit", event.target.value)
+
+			list.on("change", (event) => {
+
+
+				const store = this.getStore();
+
+				if (store) {
+					store.run("load-units", {
+						unitId: event.target.value,
+						visible: 1,
+						active: 1
+
+					});
+				}
 
 			});
-				
-			
+
+
 		});
 
 
 
 	}
 
-	getStore(){
+	getStore() {
 		return document.querySelector(`gt-unit-store`);
 	}
 

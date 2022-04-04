@@ -5,7 +5,7 @@
         "hideCheck": true,
         "hideIcon": false,
         "events": {
-            "link-action": "console.log('hola')"
+            "link-action": "console.log('hola...')"
         },
         "items": [
 
@@ -59,7 +59,7 @@
             },
 
             {
-                "caption": "+",
+                "caption": "Zoom",
                 "addClass": "zoom-in",
                 "title":"Zoom In",
                 "events": {
@@ -68,7 +68,7 @@
             },
 
             {
-                "caption": "-",
+                "caption": "Zoom",
                 "addClass": "zoom-out",
                 "title":"Zoom Out",
                 "events": {

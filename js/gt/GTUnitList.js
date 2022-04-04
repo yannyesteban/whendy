@@ -55,7 +55,14 @@ class GTUnitList extends HTMLElement {
             console.log("....");
             list.prop("dataSource", { data: source.data });
             list.on("change", (event) => {
-                this.getStore().run("load-unit", event.target.value);
+                const store = this.getStore();
+                if (store) {
+                    store.run("load-units", {
+                        unitId: event.target.value,
+                        visible: 1,
+                        active: 1
+                    });
+                }
             });
         });
     }

@@ -40,6 +40,17 @@ class GTUnitMenu extends HTMLElement {
         console.log("attributeChangedCallback");
         this[name] = newVal;
     }
+    set caption(value) {
+        if (Boolean(value)) {
+            this.setAttribute("caption", value);
+        }
+        else {
+            this.removeAttribute("caption");
+        }
+    }
+    get caption() {
+        return this.getAttribute("caption");
+    }
     test() {
         alert("test");
     }
@@ -50,14 +61,14 @@ class GTUnitMenu extends HTMLElement {
         console.log(source);
         const win = $(this).create("wh-win");
         win.attr({
-            resizable: "true", width: "400px", "height": "400px",
+            resizable: "true", width: "350px", "height": "200px",
             movible: "true"
         });
         const header = win.create("wh-win-header");
-        header.create("wh-win-caption").html("hello");
+        header.create("wh-win-caption").html(this.caption);
         win.get().style.position = "fixed";
-        win.get().style.top = "50px";
-        win.get().style.left = "50px";
+        win.get().style.top = "150px";
+        win.get().style.left = "1em";
         const body = win.create("wh-win-body");
         //body.html("yanny esteban");
         const menu = body.create("wh-menu");
@@ -73,30 +84,56 @@ class GTUnitMenu extends HTMLElement {
                         if (item.hasClass("unit")) {
                             console.log(event.target.value);
                             //this.getStore().getUnitData(event.target.value)
-                            this.getStore().run("load-unit", event.target.value, 1);
-                            return;
-                            const data = this.getStore().store;
-                            data.unit.active = 1024;
-                            data.unitss[2027].status = 45;
-                            console.log(data.unit);
+                            //this.getStore().run("load-unit", event.target.value, 1)
+                            const store = this.getStore();
+                            if (store) {
+                                store.run("load-units", {
+                                    unitId: event.target.value,
+                                    visible: 1,
+                                    active: 1
+                                });
+                                console.log(store.getItem("units"));
+                            }
                         }
                     }),
                     "link-check": (event => {
                         const item = $(event.target);
+                        const store = this.getStore();
+                        if (item.hasClass("client")) {
+                            console.log(event.target.value);
+                            if (store) {
+                                store.run("load-units", {
+                                    clientId: event.target.value,
+                                    visible: event.target.checked,
+                                    active: 0
+                                });
+                            }
+                            const childs = item.queryAll(`:scope wh-menu-item.account`);
+                            childs.forEach(e => {
+                                e.attr("checked", event.target.checked);
+                            });
+                        }
+                        ;
+                        if (item.hasClass("account")) {
+                            console.log(event.target.value);
+                            if (store) {
+                                store.run("load-units", {
+                                    accountId: event.target.value,
+                                    visible: event.target.checked,
+                                    active: 0
+                                });
+                            }
+                        }
+                        ;
                         if (item.hasClass("unit")) {
                             console.log(event.target.checked);
-                            const store = this.getStore();
                             if (store) {
-                                store.run("load-unit", event.target.value, event.target.checked);
+                                store.run("load-units", {
+                                    unitId: event.target.value,
+                                    visible: event.target.checked,
+                                    active: 0
+                                });
                             }
-                            return;
-                            console.log(event.target.value);
-                            //this.getStore().getUnitData(event.target.value)
-                            this.getStore().run("load-unit", event.target.value);
-                            const data = this.getStore().store;
-                            data.unit.active = 1024;
-                            data.unitss[2027].status = 45;
-                            console.log(data.unit);
                         }
                     })
                 }
@@ -115,29 +152,32 @@ class GTUnitMenu extends HTMLElement {
                 console.log(detail);
                 const item = this.getUnitItem(detail.unitId);
                 if (item) {
-                    item.checked = detail.active;
+                    item.checked = detail.visible;
                 }
                 else {
                     console.log("error");
                 }
             });
-            /*
-            store.registerRequest = {name:"laodUnit", request:{
-                "type":"element",
-                
-                "element": "gt-unit",
-                "name": null,
-                "method": "load-unit-data",
-                "config": {
-                    unitId: 4036
-                }
-            }};
-
-            */
+            $(store).on("units-data-changed", ({ detail }) => {
+                //console.log(detail)
+                //console.log(Object.values(detail))
+                const units = Object.values(detail); //.filter(unit=>unit.visible === 1);
+                units.forEach(unit => {
+                    //console.log(unit)
+                    const item = this.getUnitItem(unit.unitId);
+                    if (item) {
+                        //console.log(unit.visible)
+                        item.checked = unit.visible;
+                    }
+                    else {
+                        console.log("error");
+                    }
+                });
+            });
         });
     }
     getUnitItem(id) {
-        return document.querySelector(`wh-menu wh-menu-item.unit[value="${id}"]`);
+        return this.querySelector(`wh-menu wh-menu-item.unit[value="${id}"]`);
     }
     getStore() {
         return document.querySelector(`gt-unit-store`);

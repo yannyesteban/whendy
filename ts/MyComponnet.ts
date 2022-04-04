@@ -49,6 +49,29 @@ class MyComponent extends HTMLElement {
 		console.log("attributeChangedCallback");
 		this[name] = newVal;
 	}
+
+	set name(value) {
+        this.setAttribute("name", value);
+    }
+
+    get name() {
+        return this.getAttribute("name");
+    }
+
+	set visible(value) {
+
+        if (Boolean(value)) {
+            this.setAttribute("visible", "");
+        } else {
+            this.removeAttribute("visible");
+        }
+    }
+
+
+
+    get visible() {
+        return this.hasAttribute("visible");
+    }
 	
 }
 
