@@ -1,0 +1,197 @@
+{
+	"id": "gtcomm",
+	"name": "home",
+	"templateFile": "{@TEMPLATES_PATH}/webcar.html",
+	"elements": [
+		{
+			
+			"appendTo": "#wh-menu .menu-1",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/MainMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#wh-menu .menu-2",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/MainMenu2.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#wh-menu .menu-4",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ExitMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#popup-menu",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/PhoneMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			
+			"appendTo": "#popup-tool",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ToolMenu.json",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"appendTo": "#wh-body",
+			"element": "gt-unit-list",
+			"id": "unit-list",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"setPanel": "wh-banner",
+			"element": "fragment",
+			"name": "{@JSON_PATH}fragments/webcar-banner.json",
+			"method": "load",
+			"eparams": {}
+		},
+		{
+			"id": "unit-menu",
+			"appendTo": "wh-app",
+			"setPanell": "gt-unit-menu",
+			"element": "gt-unit-menu-",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-unit-store",
+			"appendTo": "wh-app",
+			"element": "gt-unit-store",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-tracking",
+			"appendTo": "wh-app",
+			"element": "gt-tracking",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-map",
+			"appendTo": "#wh-body",
+			"element": "gt-map",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-unit",
+			"appendTo": "wh-app",
+			"element": "gt-unit",
+			"name": "",
+			"method": "init",
+			"eparams": {}
+		},
+		{
+			"id": "gt-unit-info",
+			"type": "element",
+			"appendTo": "wh-app",
+			"element": "gt-unit-info",
+			"name": null,
+			"method": "init",
+			"config": {
+				
+			}
+		},
+		{
+			
+			"appendTo": "#main-tool",
+			"element": "menu",
+			"name": "{@JSON_PATH}menus/ToolMenu.json",
+			"method": "init",
+			"eparams": {}
+		}
+	],
+	"className": ["webcar"],
+	"acceptedRoles": ["** public **"],
+	"cssSheetss": ["css/reset.css", "css/main.css", "https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css"],
+	"jsModules": [
+		"../js/GoogleMaps.js",
+		"../js/MapBox.js",
+		"../js/WHWindow.js",
+		"../js/WHMenu.js",
+		"../js/WHInfo.js",
+		"../js/ListText.js",
+		"../js/WHPopup.js",
+		"../js/gt/GTUnitStore.js",
+		"../js/gt/GTTracking.js",
+		"../js/gt/GTMap.js",
+		"../js/gt/GTUnit.js",
+		"../js/gt/GTSite.js",
+		"../js/gt/GTGeofence.js",
+		"../js/gt/GTAlarm.js",
+		"../js/gt/GTCommand.js",
+		"../js/gt/GTInstant.js",
+		"../js/gt/GTEventQuery.js",
+		"../js/gt/GTSearch.js",
+		"../js/gt/GTConfig.js",
+		"../js/gt/GTConnectedInfo.js",
+		"../js/gt/GTPending.js",
+		"../js/gt/GTAlarmInfo.js",
+		"../js/gt/GTEventInfo.js",
+		"../js/gt/GTHistory.js",
+		"../js/gt/GTTrace.js",
+		"../js/gt/GTUnitInfo.js"
+		
+	],
+	"modules": [
+		{
+			"src": "./WHHtml.js",
+			"name": "WHHtml",
+			"alias": "WHHtml",
+			"component": "wh-html"
+		},
+		{
+			"src": "./WHForm.js",
+			"name": "WHForm",
+			"alias": "WHForm",
+			"component": "wh-form"
+		},
+		{
+			"src": "./WHMenu.js",
+			"name": "WHMenu",
+			"alias": "WHMenu",
+			"component": "wh-menu"
+		},
+		{
+			"src": "js/Map.js",
+			"name": "WHMap",
+			"alias": "WHMap",
+			"component": "wh-mapx"
+		},
+		{
+			"src": "js/GTMap.js",
+			"name": "GTMap",
+			"alias": "GTMap",
+			"component": "gt-mapx"
+		},
+		{
+			"src": "./gt/GTUnitMenu.js",
+			"name": "GTUnitMenu",
+			"alias": "GTUnitMenu",
+			"component": "gt-unit-menu"
+		},
+		{
+			"src": "./gt/GTUnitList.js",
+			"name": "GTUnitList",
+			"alias": "GTUnitList",
+			"component": "gt-unit-list"
+		}
+	]
+}

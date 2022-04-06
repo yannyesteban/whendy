@@ -44,7 +44,26 @@ class AlarmInfo extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'120px',
+            'bottom'=>'180px',
+            'left'=>'1em',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
         
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -54,7 +73,7 @@ class AlarmInfo extends Element
                 'name'  => $this->name,
                 'caption'=>'Registro de Alarmas',
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

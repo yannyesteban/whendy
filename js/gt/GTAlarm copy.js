@@ -61,13 +61,13 @@ class GTAlarm extends HTMLElement {
             const win = $.create("wh-win");
             const header = win.create("wh-win-header");
             win.attr({
-                resizable: "true", width: "400px", "height": "400px",
+                resizable: "true", width: "350px", "height": "200px",
                 movible: "true"
             });
             header.create("wh-win-caption").html(this.caption);
             win.get().style.position = "fixed";
-            win.get().style.top = "50px";
-            win.get().style.left = "50px";
+            win.get().style.top = "150px";
+            win.get().style.left = "1em";
             const body = win.create("wh-win-body");
             $(this).append(win);
             this._win = win.get();

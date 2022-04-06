@@ -2,6 +2,8 @@ import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
 import "../WHTab.js";
 import { GTUnitStore } from "./GTUnitStore.js";
+import * as Tool from "../Tool.js";
+import { WHInfo } from "../WHInfo.js";
 
 class GTUnitInfo extends HTMLElement {
 
@@ -16,6 +18,9 @@ class GTUnitInfo extends HTMLElement {
 	constructor() {
 		super();
 
+
+		
+        this._unitChange =  this._unitChange.bind(this);
 		return;
 		const template = document.createElement("template");
 
@@ -51,7 +56,10 @@ class GTUnitInfo extends HTMLElement {
 
 	public connectedCallback() {
 
-
+		Tool.whenApp(this).then((app)=>{
+            $(app).on("unit-data-set", this._unitChange);
+            
+        });
 
 
 	}
@@ -92,28 +100,57 @@ class GTUnitInfo extends HTMLElement {
 			const win = $.create("wh-win");
 			const header = win.create("wh-win-header");
 			
-			win.attr(
-				{
-					resizable: "true", width: "350px", "height": "200px",
-					movible: "true"
-				}
-			);
+			win.prop(source.win);
 
 			header.create("wh-win-caption").html(this.caption);
 
 			win.get().style.position = "fixed";
-			win.get().style.top = "150px";
-			win.get().style.right = "50px"
+			//win.get().style.top = "150px";
+			//win.get().style.right = "50px"
 			const body = win.create("wh-win-body");
 
 			$(this).append(win);
 			this._win = win.get();
+			//this._win.mode = "modal"
+			
+			const info = body.create("wh-info");
+			info.html(this.template);
+
 		});
+
+
 	}
 
 	getStore(): GTUnitStore {
 		return document.querySelector(`gt-unit-store`);
 	}
+
+	whenStore(){
+		return new Promise((resolve, reject)=>{
+			customElements.whenDefined('gt-unit-store').then(() => {
+				const store = document.querySelector(`gt-unit-store`);
+
+				if(store){
+					resolve(store);
+				}
+				reject('error')
+				
+			});
+		});
+	}
+
+	set show(value){
+		if(this._win){
+			this._win.visibility = (value)?"visible":"hidden"
+		}
+	}
+
+    _unitChange({detail}){
+		
+		const info = $(this).query(`wh-info`) as WHInfo;
+		info.prop("data", detail);
+        
+    }
 
 }
 

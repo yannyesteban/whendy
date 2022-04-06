@@ -47,6 +47,7 @@ class MapboxMark extends HTMLElement {
         return ["latitude", "longitude", "heading", "image", "icon", "info", "visible", "follow"];
     }
     connectedCallback() {
+        this.setAttribute("role", "mark");
         let el = document.createElement("img");
         el.className = "marker";
         el.src = this.icon;
@@ -222,6 +223,18 @@ class MapboxMark extends HTMLElement {
     _setHeading() {
         this._marker.setRotation(this.heading);
     }
+    panTo() {
+        const map = this.getMap();
+        if (map) {
+            map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
+        }
+    }
+    flyTo(zoom) {
+        const map = this.getMap();
+        if (map) {
+            map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
+        }
+    }
 }
 customElements.define("mapbox-mark", MapboxMark);
 export class MapboxMaps extends HTMLElement {
@@ -323,6 +336,24 @@ export class MapboxMaps extends HTMLElement {
     }
     getApi() {
         return __classPrivateFieldGet(this, _MapboxMaps_map, "f");
+    }
+    panTo(position) {
+        const latLng = { lat: position.latitude, lng: position.longitude };
+        this.getApi().panTo(latLng);
+    }
+    flyTo(info) {
+        this.getApi().flyTo({
+            center: [info.longitude, info.latitude],
+            zoom: info.zoom,
+            speed: 3.0,
+            curve: 1,
+            easing(t) {
+                return t;
+            }
+        });
+    }
+    setZoom(zoom) {
+        this.getApi().setZoom(zoom);
     }
 }
 _MapboxMaps_config = new WeakMap(), _MapboxMaps_map = new WeakMap();

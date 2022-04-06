@@ -117,3 +117,17 @@ dd {
 	background-image: url(../images/win_icons.png?i=18);
 	background-position: -60px -20px;
 }
+
+
+:host([mode="modal"]) {
+	
+	.min{
+		display:none;
+	}
+	.max{
+		display:none;
+	}
+	.auto{
+		display:none;
+	}
+}

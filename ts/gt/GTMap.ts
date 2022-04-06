@@ -23,7 +23,7 @@ export class GTMap extends HTMLElement {
         console.log("disconnectedCallback");
 
         Tool.whenApp(this).then((app)=>{
-            $(app).off("unit-data-changed", this._unitChange);
+            $(app).off("unit-data-set", this._unitChange);
             $(app).off("units-data-changed",  this._unitsChange);
         });
     }
@@ -32,7 +32,7 @@ export class GTMap extends HTMLElement {
         console.log("connectedCallback");
 
         Tool.whenApp(this).then((app)=>{
-            $(app).on("unit-data-changed", this._unitChange);
+            $(app).on("unit-data-set", this._unitChange);
             $(app).on("units-data-changed",  this._unitsChange);
         });
         
@@ -63,6 +63,11 @@ export class GTMap extends HTMLElement {
     }
 
     _unitChange({detail}){
+
+        if(detail.active){
+            console.log("ACTIVE");
+            this.flyTo(detail.unitName);
+        }
         console.log(detail);
     }
 
@@ -162,6 +167,30 @@ export class GTMap extends HTMLElement {
 			});
 		});
 	}
+
+    public flyTo(name) {
+        console.log(name);
+        const mark =  this.getMark(name);
+        console.log(mark);
+        if(mark){
+            mark.flyTo(16);
+        }
+
+    }
+
+    panTo(name){
+        console.log(name);
+        const mark =  this.getMark(name);
+        console.log(mark);
+        if(mark){
+            mark.panTo();
+        }
+        
+    }
+
+    getMark(name){
+        return this._api.querySelector(`[role="mark"][name="${name}"]`);
+    }
 }
 
 customElements.define('gt-map', GTMap);

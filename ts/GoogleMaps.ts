@@ -47,7 +47,7 @@ class GoogleMark extends HTMLElement {
         const latLng = { lat: Number(this.latitude), lng: Number(this.longitude) };
 
 
-        
+        this.setAttribute("role", "mark");
 
         
         this._marker = new google.maps.Marker({
@@ -172,6 +172,42 @@ class GoogleMark extends HTMLElement {
         return this.getAttribute("longitude");
     }
 
+    set width(value) {
+        if (Boolean(value)) {
+            this.setAttribute("width", value);
+        } else {
+            this.removeAttribute("width");
+        }
+    }
+
+    get width() {
+        return this.getAttribute("width");
+    }
+
+    set height(value) {
+        if (Boolean(value)) {
+            this.setAttribute("height", value);
+        } else {
+            this.removeAttribute("height");
+        }
+    }
+
+    get height() {
+        return this.getAttribute("height");
+    }
+
+
+    set scale(value) {
+        if (Boolean(value)) {
+            this.setAttribute("scale", value);
+        } else {
+            this.removeAttribute("scale");
+        }
+    }
+
+    get scale() {
+        return this.getAttribute("scale");
+    }
 
     set visible(value) {
 
@@ -278,6 +314,12 @@ class GoogleMark extends HTMLElement {
     }
 
     _setIcon(){
+
+        const width = Number(this.width) || 10;
+        const height = Number(this.height) || 10;
+
+
+        console.log({width, height});
         
         console.log("heading",this.heading);
         const icon = {
@@ -291,12 +333,27 @@ class GoogleMark extends HTMLElement {
             strokeWeight: 0,
             strokeDasharray:4,
             rotation: Number(this.heading),
-            scale: 0.5,
-            //anchor: new google.maps.Point(15, 30),
+            
+            scale:0.6,
+            anchor: new google.maps.Point(20,20),
           }
 
         if(this._marker){
             this._marker.setIcon(icon);
+        }
+    }
+
+    panTo(){
+        const map = this.getMap();
+        if(map){
+            map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
+        }
+    }
+
+    flyTo(zoom:number){
+        const map = this.getMap();
+        if(map){
+            map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
         }
     }
 }
@@ -484,6 +541,24 @@ export class GoogleMaps extends HTMLElement {
 
     getApi() {
         return this.#map;
+    }
+
+
+    public panTo(position) {
+        const latLng = { lat: position.latitude, lng: position.longitude };
+        this.getApi().panTo(latLng);
+
+    }
+
+    public flyTo(info) {
+        const latLng = { lat: info.latitude, lng: info.longitude };
+        this.getApi().panTo(latLng);
+        this.setZoom(info.zoom);
+
+    }
+
+    public setZoom(zoom: number) {
+        this.getApi().setZoom(zoom);
     }
 
 }

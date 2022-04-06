@@ -44,6 +44,27 @@ class UnitMenu extends Element
         //$json = $this->getConfigJson();
         //print_r($this->setPanel);exit;
         //Tool::hx($this->loadUnits('panda'));
+
+        $win = [
+            'width'=>'350px',
+            'height'=>'200px',
+            'top'=>'150px',
+            'left'=>'1em',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
+        
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -53,7 +74,7 @@ class UnitMenu extends Element
                 'name'  => $this->name,
                 'caption'=>'Unidades',
                 'dataSource' => [
-
+                    'win'=> $win,
                     'unitData' => $this->loadUnits('panda'),
 
                 ],

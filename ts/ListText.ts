@@ -583,10 +583,11 @@ class ListText extends HTMLElement {
 
 
 	set data(data){
-		console.log("set data(data)");
+		//console.log("set data(data)", data);
 		data.forEach(info=>{
 			const option = $(this).create("wh-option");
 			option.attr("value", info.value);
+			option.ds("text", info.text);
 			option.html(info.text);
 		});
 	}

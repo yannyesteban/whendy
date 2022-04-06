@@ -76,6 +76,11 @@ class GTPending extends HTMLElement {
     getStore() {
         return document.querySelector(`gt-unit-store`);
     }
+    set show(value) {
+        if (this._win) {
+            this._win.visibility = (value) ? "visible" : "hidden";
+        }
+    }
 }
 customElements.define("gt-pending", GTPending);
 //# sourceMappingURL=GTPending.js.map

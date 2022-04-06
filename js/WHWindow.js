@@ -95,7 +95,6 @@ class WHWinHeader extends HTMLElement {
     }
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
-        this[name] = newVal;
     }
     getWin() {
         return getParentElement(this, "wh-win");
@@ -103,16 +102,11 @@ class WHWinHeader extends HTMLElement {
 }
 customElements.define("wh-win-header", WHWinHeader);
 class WHWin extends HTMLElement {
+    static get observedAttributes() {
+        return ["visibility", "mode", "resizable", "movible", "left", "top", "right", "bottom", "width", "height"];
+    }
     constructor() {
         super();
-        this.mode = "";
-        this.visibility = "";
-        this.resizable = "";
-        this.movible = "";
-        this.left = "";
-        this.top = "";
-        this.width = "";
-        this.height = "";
         const template = document.createElement("template");
         template.innerHTML = `
 
@@ -140,13 +134,11 @@ class WHWin extends HTMLElement {
                 });
         */
     }
-    static get observedAttributes() {
-        return ["visibility", "mode", "resizable", "movible", "left", "top", "width", "height"];
-    }
     connectedCallback() {
         const holder = this.querySelector(`wh-win-header`);
         Float.init(this);
-        Move.init({ main: this, hand: holder, onDrag: (info) => {
+        Move.init({
+            main: this, hand: holder, onDrag: (info) => {
                 if (this.mode === "max") {
                     const w = this.offsetWidth;
                     this.setAttribute("mode", "custom");
@@ -154,19 +146,6 @@ class WHWin extends HTMLElement {
                     this.style.left = (info.x - (w2 * (info.x - info.left) / w)) + "px";
                     return true;
                 }
-            } });
-        Resize.init({
-            main: this,
-            onStart: (info) => {
-                this.style.left = info.left + "px";
-                this.style.width = info.width + "px";
-                this.style.top = info.top + "px";
-                this.style.height = info.height + "px";
-                this.setAttribute("mode", "custom");
-            },
-            onRelease: (info) => {
-                this.width = info.width + "px";
-                this.height = info.height + "px";
             }
         });
     }
@@ -175,12 +154,14 @@ class WHWin extends HTMLElement {
     }
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
-        this[name] = newVal;
         switch (name) {
             case "mode":
                 fire(this, "mode-changed", { mode: newVal });
+                this._setMode();
                 break;
             case "left":
+            case "right":
+            case "bottom":
             case "top":
                 this.updatePos();
                 break;
@@ -188,18 +169,159 @@ class WHWin extends HTMLElement {
             case "height":
                 this.updateSize();
                 break;
+            case "resizable":
+                this._resizable();
+            case "visibility":
         }
+        Float.upIndex(this);
+    }
+    set mode(value) {
+        if (Boolean(value)) {
+            this.setAttribute("mode", value);
+        }
+        else {
+            this.removeAttribute("mode");
+        }
+    }
+    get mode() {
+        return this.getAttribute("mode");
+    }
+    set width(value) {
+        if (Boolean(value)) {
+            this.setAttribute("width", value);
+        }
+        else {
+            this.removeAttribute("width");
+        }
+    }
+    get width() {
+        return this.getAttribute("width");
+    }
+    set height(value) {
+        if (Boolean(value)) {
+            this.setAttribute("height", value);
+        }
+        else {
+            this.removeAttribute("height");
+        }
+    }
+    get height() {
+        return this.getAttribute("width");
+    }
+    set left(value) {
+        if (Boolean(value)) {
+            this.setAttribute("left", value);
+        }
+        else {
+            this.removeAttribute("left");
+        }
+    }
+    get left() {
+        return this.getAttribute("left");
+    }
+    set right(value) {
+        if (Boolean(value)) {
+            this.setAttribute("right", value);
+        }
+        else {
+            this.removeAttribute("right");
+        }
+    }
+    get right() {
+        return this.getAttribute("right");
+    }
+    set top(value) {
+        if (Boolean(value)) {
+            this.setAttribute("top", value);
+        }
+        else {
+            this.removeAttribute("top");
+        }
+    }
+    get top() {
+        return this.getAttribute("top");
+    }
+    set bottom(value) {
+        if (Boolean(value)) {
+            this.setAttribute("bottom", value);
+        }
+        else {
+            this.removeAttribute("bottom");
+        }
+    }
+    get bottom() {
+        return this.getAttribute("bottom");
+    }
+    set visibility(value) {
+        if (Boolean(value)) {
+            this.setAttribute("visibility", value);
+        }
+        else {
+            this.removeAttribute("visibility");
+        }
+    }
+    get visibility() {
+        return this.getAttribute("visibility");
+    }
+    set resizable(value) {
+        if (Boolean(value)) {
+            this.setAttribute("resizable", "");
+        }
+        else {
+            this.removeAttribute("resizable");
+        }
+    }
+    get resizable() {
+        return this.hasAttribute("resizable");
     }
     test() {
         alert("soy tu padre");
     }
     updatePos() {
-        this.style.left = this.left;
-        this.style.top = this.top;
+        if (this.hasAttribute("left")) {
+            this.style.left = this.left;
+        }
+        if (this.hasAttribute("right")) {
+            this.style.right = this.right;
+        }
+        if (this.hasAttribute("top")) {
+            this.style.top = this.top;
+        }
+        if (this.hasAttribute("bottom")) {
+            this.style.bottom = this.bottom;
+        }
     }
     updateSize() {
         this.style.width = this.width;
         this.style.height = this.height;
+    }
+    _setMode() {
+        if (this.mode === "modal") {
+            const header = this.querySelector(`wh-win-header`);
+            if (header) {
+                header.mode = "modal";
+            }
+        }
+    }
+    _resizable() {
+        if (this.resizable) {
+            Resize.init({
+                main: this,
+                onStart: (info) => {
+                    this.style.left = info.left + "px";
+                    this.style.width = info.width + "px";
+                    this.style.top = info.top + "px";
+                    this.style.height = info.height + "px";
+                    this.setAttribute("mode", "custom");
+                },
+                onRelease: (info) => {
+                    this.width = info.width + "px";
+                    this.height = info.height + "px";
+                }
+            });
+        }
+        else {
+        }
     }
 }
 customElements.define("wh-win", WHWin);

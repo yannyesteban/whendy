@@ -92,18 +92,11 @@ class GTConnectedInfo extends HTMLElement {
 			const win = $.create("wh-win");
 			const header = win.create("wh-win-header");
 			
-			win.attr(
-				{
-					resizable: "true", width: "350px", "height": "120px",
-					movible: "true"
-				}
-			);
-			
+			win.prop(source.win);
+
 			header.create("wh-win-caption").html(this.caption);
-	
+
 			win.get().style.position = "fixed";
-			win.get().style.bottom = "180px";
-			win.get().style.right = "50px"
 			const body = win.create("wh-win-body");
 
 			$(this).append(win);
@@ -113,6 +106,12 @@ class GTConnectedInfo extends HTMLElement {
 
 	getStore(): GTUnitStore {
 		return document.querySelector(`gt-unit-store`);
+	}
+
+	set show(value){
+		if(this._win){
+			this._win.visibility = (value)?"visible":"hidden"
+		}
 	}
 
 }

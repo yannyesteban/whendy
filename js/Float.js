@@ -111,7 +111,7 @@ export class Float {
         if (top !== null) {
             top = top + (deltaY || 0);
         }
-        console.log({ e: e, left: left, top: top, z: z });
+        //console.log({ e: e, left: left, top: top, z: z })
         return this.showElem({ e: e, left: left, top: top, z: z });
     }
     static showMenu(opt) {
@@ -298,7 +298,7 @@ export class Drag {
         this.onDrag = (config) => { };
         this.onRelease = (config) => { };
         this._mouseDown = (event) => {
-            console.log("start");
+            //console.log("start")
             if (event.changedTouches && event.changedTouches[0]) {
                 event = event.changedTouches[0];
             }
@@ -313,7 +313,7 @@ export class Drag {
             const top = element.offsetTop;
             this.onCapture({ startX, startY, left, top });
             const drag = (event) => {
-                console.log("drag");
+                // console.log(event.target)
                 if (event.changedTouches && event.changedTouches[0]) {
                     event.preventDefault();
                     event = event.changedTouches[0];
@@ -330,7 +330,7 @@ export class Drag {
                 });
             };
             const release = (event) => {
-                console.log("release");
+                //console.log("release")
                 if (event.changedTouches && event.changedTouches[0]) {
                     //event.preventDefault();
                     event = event.changedTouches[0];

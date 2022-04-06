@@ -60,14 +60,9 @@ class GTInstant extends HTMLElement {
         customElements.whenDefined("wh-win").then(() => {
             const win = $.create("wh-win");
             const header = win.create("wh-win-header");
-            win.attr({
-                resizable: "true", width: "350px", "height": "120px",
-                movible: "true"
-            });
+            win.prop(source.win);
             header.create("wh-win-caption").html(this.caption);
             win.get().style.position = "fixed";
-            win.get().style.bottom = "30px";
-            win.get().style.right = "50px";
             const body = win.create("wh-win-body");
             $(this).append(win);
             this._win = win.get();
@@ -75,6 +70,11 @@ class GTInstant extends HTMLElement {
     }
     getStore() {
         return document.querySelector(`gt-unit-store`);
+    }
+    set show(value) {
+        if (this._win) {
+            this._win.visibility = (value) ? "visible" : "hidden";
+        }
     }
 }
 customElements.define("gt-instant", GTInstant);

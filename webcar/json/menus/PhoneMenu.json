@@ -9,28 +9,96 @@
         },
         "items": [
             {
+                "caption": "Unids",
+                "addClass": "unit",
+                "title":"Unidades",
+                "request": {
+					"request": [
+						{
+							"id": "gt-unit-menu",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-unit-menu",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
+            },
+            {
                 "caption": "Sitios",
                 "addClass": "site",
                 "title":"Sitios",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-site",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-site",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Geo",
                 "addClass": "geofence",
                 "title":"Geocercas",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-geofence",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-geofence",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Alarm",
                 "addClass": "alarm",
                 "title":"Alarmas",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-alarm",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-alarm",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Inm",
@@ -44,26 +112,71 @@
                 "caption": "Adm",
                 "addClass": "event-admin",
                 "title":"Administrador de Eventos",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-event-query",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-event-query",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Búsq",
                 "addClass": "search",
                 "title":"Búsqueda",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-search",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-search",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
 
             {
                 "caption": "Conf",
                 "addClass": "setting",
                 "title":"Configuración del Sistema",
-                "events": {
-                    "link-action": "document.getElementById('unit-menu').test()"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-config",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-config",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             
             {

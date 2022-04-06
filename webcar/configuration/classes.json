@@ -196,5 +196,11 @@
         "enable": true,
         "file": "{@MODULE_PATH}php/Trace.php",
         "class": "\\GT\\Trace"
+    },
+    {
+        "name": "gt-app-layout",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/AppLayout.php",
+        "class": "\\GT\\AppLayout"
     }
 ]

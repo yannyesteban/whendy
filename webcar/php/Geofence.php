@@ -41,6 +41,25 @@ class Geofence extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'200px',
+            'top'=>'150px',
+            'left'=>'1em',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
+        
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
         
         $this->addResponse([
             'mode'  => 'init',
@@ -51,7 +70,7 @@ class Geofence extends Element
                 'name'  => $this->name,
                 'caption'=>'Geocercas',
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

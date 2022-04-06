@@ -47,7 +47,7 @@ dd {
   display: none;
 }
 
-:host([mode="max"]) {
+:host([mode="max"]), :host([mode="modal"]) {
   width: calc(100% - 20px) !important;
   height: calc(100% - 20px) !important;
   top: 10px !important;

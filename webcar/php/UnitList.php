@@ -67,7 +67,7 @@ class UnitList extends Element
         $cn->query = "SELECT u.id as `value` , COALESCE(vn.name, '  -- undefined --') as `text` 
             FROM unit as u 
             INNER JOIN user_unit as uu ON uu.unit_id = u.id 
-            LEFT JOIN unit_name as vn ON vn.id = u.name_id 
+            INNER JOIN unit_name as vn ON vn.id = u.name_id 
             LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id 
             WHERE uu.user = '$user' 
             ORDER BY text

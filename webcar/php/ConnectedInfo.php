@@ -44,7 +44,26 @@ class ConnectedInfo extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'200px',
+            'bottom'=>'180px',
+            'right'=>'50px',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
         
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -54,7 +73,7 @@ class ConnectedInfo extends Element
                 'name'  => $this->name,
                 'caption'=>'Unidades Conectadas',
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

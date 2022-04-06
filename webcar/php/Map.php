@@ -46,7 +46,7 @@ class Map extends Element
 
 
         $this->popupFile =  TEMPLATES_PATH.'info/unit-popup.html';
-        $this->template = Store::loadFile($this->popupFile);
+        //$this->template = Store::loadFile($this->popupFile);
 
         
         $this->addResponse([

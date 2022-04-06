@@ -48,7 +48,7 @@ class MapboxMark extends HTMLElement {
 
 	public connectedCallback() {
 
-
+        this.setAttribute("role", "mark");
         let el = document.createElement("img");
         el.className = "marker";
 
@@ -284,6 +284,20 @@ class MapboxMark extends HTMLElement {
     _setHeading(){
         this._marker.setRotation(this.heading);
     }
+
+    panTo(){
+        const map = this.getMap();
+        if(map){
+            map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
+        }
+    }
+
+    flyTo(zoom:number){
+        const map = this.getMap();
+        if(map){
+            map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
+        }
+    }
 }
 
 customElements.define("mapbox-mark", MapboxMark);
@@ -458,6 +472,31 @@ export class MapboxMaps extends HTMLElement {
 
     getApi(){
         return this.#map;
+    }
+
+    public panTo(position) {
+        const latLng = { lat: position.latitude, lng: position.longitude };
+        this.getApi().panTo(latLng);
+
+    }
+
+    public flyTo(info) {
+        
+
+        this.getApi().flyTo({
+            center: [info.longitude, info.latitude],
+            zoom: info.zoom,
+            speed: 3.0,
+            curve: 1,
+            easing(t) {
+                return t;
+            }
+        });
+
+    }
+
+    public setZoom(zoom: number) {
+        this.getApi().setZoom(zoom);
     }
 
 }

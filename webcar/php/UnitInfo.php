@@ -12,6 +12,9 @@ use Tool, Store, DB, ConfigJson, Sigefor\Element;
 class UnitInfo extends Element
 {
 
+    private $templateFile = "";
+
+
     public function __construct($config = null)
     {
 
@@ -41,7 +44,34 @@ class UnitInfo extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'200px',
+            'top'=>'150px',
+            'right'=>'50px',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
         
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
+
+        //Tool::hx($win);
+        
+
+        $this->popupFile =  TEMPLATES_PATH.'info/unit-popup.html';
+        $template = Store::loadFile($this->popupFile);
+
+        //Tool::hx($template);
+
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -50,8 +80,9 @@ class UnitInfo extends Element
             'props' => [
                 'name'  => $this->name,
                 'caption'=>'Info',
+                'template' => $template,
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

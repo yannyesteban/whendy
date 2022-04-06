@@ -5,6 +5,9 @@ import { GTUnitStore } from "./GTUnitStore.js";
 
 class GTUnitMenu extends HTMLElement {
 
+	_win = null;
+
+
 	constructor() {
 		super();
 
@@ -83,20 +86,20 @@ class GTUnitMenu extends HTMLElement {
 
 		console.log(source);
 
-		const win = $(this).create("wh-win");
-		win.attr(
-			{
-				resizable: "true", width: "350px", "height": "200px",
-				movible: "true"
-			}
-		)
-		const header = win.create("wh-win-header");
-		header.create("wh-win-caption").html(this.caption);
+		const win = $.create("wh-win");
+			const header = win.create("wh-win-header");
+			
+			win.prop(source.win);
 
-		win.get().style.position = "fixed";
-		win.get().style.top = "150px";
-		win.get().style.left = "1em"
-		const body = win.create("wh-win-body");
+			header.create("wh-win-caption").html(this.caption);
+
+			win.get().style.position = "fixed";
+			const body = win.create("wh-win-body");
+
+			$(this).append(win);
+			this._win = win.get();
+
+
 		//body.html("yanny esteban");
 
 		const menu = body.create("wh-menu");
@@ -250,6 +253,12 @@ class GTUnitMenu extends HTMLElement {
 
 	getStore(): GTUnitStore {
 		return document.querySelector(`gt-unit-store`);
+	}
+
+	set show(value){
+		if(this._win){
+			this._win.visibility = (value)?"visible":"hidden"
+		}
 	}
 
 }

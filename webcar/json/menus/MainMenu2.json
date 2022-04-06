@@ -9,7 +9,7 @@
         },
         "items": [
             {
-                "caption": "Unidades",
+                "caption": "Menú Principal",
                 "addClass": "submenu",
                 "title":"Más",
                 "events": {
@@ -17,52 +17,128 @@
                 }
             },
             {
-                "caption": "Unidades",
+                "caption": "Tools",
                 "addClass": "unit",
-                "title":"Unidades",
+                "title":"Herramientas de Mapa",
                 "events": {
                     "link-action": "document.querySelector('wh-popup#popup-tool').setAttribute('mode', 'open')"
-                }
-            },
-            {
-                "caption": "Inmediato",
-                "addClass": "bolt",
-                "title":"Inmediato",
-                "events": {
-                    "link-action": "console.log(this)"
                 }
             },
             {
                 "caption": "Alarm",
                 "addClass": "alarm2",
                 "title":"Alarm",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-alarm-info",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-alarm-info",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Alert",
                 "addClass": "alert",
                 "title":"Alert",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-event-info",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-event-info",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Inmediato",
                 "addClass": "bolt",
                 "title":"Inmediato",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-instant",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-instant",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
+            },
+            
+            {
+                "caption": "Conectados",
+                "addClass": "connection",
+                "title":"Conectados",
+                "request": {
+					"request": [
+						{
+							"id": "gt-connected-info",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-connected-info",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             },
             {
                 "caption": "Info",
                 "addClass": "info",
                 "title":"Info",
-                "events": {
-                    "link-action": "console.log(this)"
-                }
+                "request": {
+					"request": [
+						{
+							"id": "gt-unit-info",
+                            "type": "element",
+							"appendTo": "wh-app",
+							"element": "gt-unit-info",
+							"name": null,
+							"method": "init",
+							"config": {
+                                "modal": true
+                            }
+						}
+					]
+				},
+				"events": {
+					"link-action": "if(document.getElementById(this.request.request[0].id)){document.getElementById(this.request.request[0].id).show = true;}else{this.send = true;}"
+				}
             }
         ]
     }

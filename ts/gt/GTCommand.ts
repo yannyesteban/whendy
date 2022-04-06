@@ -114,6 +114,12 @@ class GTCommand extends HTMLElement {
 		return document.querySelector(`gt-unit-store`);
 	}
 
+	set show(value){
+		if(this._win){
+			this._win.visibility = (value)?"visible":"hidden"
+		}
+	}
+
 }
 
 customElements.define("gt-command", GTCommand);

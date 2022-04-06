@@ -76,9 +76,10 @@ class GTUnitList extends HTMLElement {
 
 			const button = $(this).create("button");
 			button.html("»");
-			console.log("....");
+			//console.log(source.data);
 			list.prop("dataSource", { data: source.data });
 
+			
 			list.on("change", (event) => {
 
 

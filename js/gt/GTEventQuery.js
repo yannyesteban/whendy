@@ -60,14 +60,9 @@ class GTEventQuery extends HTMLElement {
         customElements.whenDefined("wh-win").then(() => {
             const win = $.create("wh-win");
             const header = win.create("wh-win-header");
-            win.attr({
-                resizable: "true", width: "350px", "height": "200px",
-                movible: "true"
-            });
+            win.prop(source.win);
             header.create("wh-win-caption").html(this.caption);
             win.get().style.position = "fixed";
-            win.get().style.top = "150px";
-            win.get().style.left = "1em";
             const body = win.create("wh-win-body");
             $(this).append(win);
             this._win = win.get();
@@ -75,6 +70,11 @@ class GTEventQuery extends HTMLElement {
     }
     getStore() {
         return document.querySelector(`gt-unit-store`);
+    }
+    set show(value) {
+        if (this._win) {
+            this._win.visibility = (value) ? "visible" : "hidden";
+        }
     }
 }
 customElements.define("gt-event-query", GTEventQuery);

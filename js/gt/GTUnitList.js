@@ -52,7 +52,7 @@ class GTUnitList extends HTMLElement {
             const list = $(this).create("wh-list-text");
             const button = $(this).create("button");
             button.html("»");
-            console.log("....");
+            //console.log(source.data);
             list.prop("dataSource", { data: source.data });
             list.on("change", (event) => {
                 const store = this.getStore();

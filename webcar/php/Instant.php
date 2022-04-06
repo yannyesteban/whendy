@@ -44,7 +44,26 @@ class Instant extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'120px',
+            'bottom'=>'30px',
+            'right'=>'50px',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
         
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -54,7 +73,7 @@ class Instant extends Element
                 'name'  => $this->name,
                 'caption'=>'Inmediato Todos',
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

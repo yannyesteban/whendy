@@ -44,6 +44,25 @@ class EventInfo extends Element
     public function load()
     {
 
+        $win = [
+            'width'=>'350px',
+            'height'=>'120px',
+            'bottom'=>'30px',
+            'left'=>'1em',
+
+            
+            'resizable'=> true,
+            'movible'=> false
+        ];
+        
+        if($this->config->modal?? false){
+            $win = [
+                'mode'=>'modal',
+                //'visibility'=>'hidden',
+                'resizable'=>false,
+                'movible'=> false
+            ];
+        }
         
         $this->addResponse([
             'mode'  => 'init',
@@ -54,7 +73,7 @@ class EventInfo extends Element
                 'name'  => $this->name,
                 'caption'=>'Registro de Eventos',
                 'dataSource' => [
-
+                    'win'=>$win
                     
                 ],
             ],

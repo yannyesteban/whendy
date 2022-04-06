@@ -106,4 +106,16 @@ dd {
   background-image: url(../images/win_icons.png?i=18);
   background-position: -60px -20px;
 }
+
+:host([mode="modal"]) .min {
+  display: none;
+}
+
+:host([mode="modal"]) .max {
+  display: none;
+}
+
+:host([mode="modal"]) .auto {
+  display: none;
+}
 /*# sourceMappingURL=WHHeader.css.map */
