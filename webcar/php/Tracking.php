@@ -134,11 +134,16 @@ class Tracking extends Element
 
         $cn = DB::get();
 
-        $cn->query = "SELECT u.id as unitId, u.conn_status as connected, t.id as tracking_id,
+        $cn->query = "SELECT u.id as unitId, 
+        vn.name as unitName, v.name as deviceId,
+
+        
+        
+        u.conn_status as connected, t.id as tracking_id,
         	UNIX_TIMESTAMP(now()) as ants, now() as time_now,
 			u.conn_status  as connected,
-        	CASE u.conn_status WHEN 1 THEN 'Conectado' ELSE '-' END as str_status,
-             t.device_id as deviceId, t.date_time,
+        	CASE u.conn_status WHEN 1 THEN 'Conectado' ELSE '-' END as statusName,
+            t.date_time,
             t.longitude, t.latitude, t.speed, t.heading, t.altitude, t.satellite,
             t.event_id as eventId, t.mileage, t.input_status as inputStatus, t.voltage_level_i1 as voltageI1, t.voltage_level_i2 as voltageI2,
             t.output_status as outputStatus, t.battery_voltage as batteryVoltage,
@@ -171,7 +176,7 @@ class Tracking extends Element
 
         FROM unit as u
         INNER JOIN user_unit as uu ON uu.unit_id = u.id
-
+        INNER JOIN unit_name as vn ON vn.id = u.name_id
 
         INNER JOIN tracking as t ON u.id = t.unit_id AND t.date_time = u.tracking_date
 

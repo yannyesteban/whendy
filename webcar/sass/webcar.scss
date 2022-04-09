@@ -520,7 +520,17 @@ wh-menu.exit-menu {
 	background-image: url("../webcar/images/connection.png");
 }
 
+.trace_01>wh-menu-link>wh-menu-icon {
+	background-image: url("../webcar/images/trace_01.png");
+}
 
+.history_01>wh-menu-link>wh-menu-icon {
+	background-image: url("../webcar/images/history_01.png");
+}
+
+.query>wh-menu-link>wh-menu-icon {
+	background-image: url("../webcar/images/query.png");
+}
 
 .history>wh-menu-link>wh-menu-icon {
 	background-size: 70% 80%;

@@ -12,7 +12,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _MapboxMaps_config, _MapboxMaps_map;
 import { loadScript } from "./LoadScript.js";
 import { Q as $ } from "./Q.js";
-import { getParentElement } from "./Tool.js";
+import { getParentElement, fire } from "./Tool.js";
 class MapboxMark extends HTMLElement {
     constructor() {
         super();
@@ -242,8 +242,8 @@ export class MapboxMaps extends HTMLElement {
         super();
         this.apiKey = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
         this.apiUrl = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
-        this.longitude = -66.903603;
-        this.latitude = 10.480594;
+        //public longitude: number = -66.903603;
+        //public latitude: number = 10.480594;
         _MapboxMaps_config.set(this, {});
         _MapboxMaps_map.set(this, null);
         return;
@@ -288,6 +288,42 @@ export class MapboxMaps extends HTMLElement {
     static get observedAttributes() {
         return ["type"];
     }
+    connectedCallback() {
+        console.log("connectedCallback");
+        this.init();
+    }
+    disconnectedCallback() {
+        console.log("disconnectedCallback");
+    }
+    attributeChangedCallback(name, oldVal, newVal) {
+        console.log("attributeChangedCallback");
+        switch (name) {
+            case "longitude":
+                //this.render();
+                break;
+            case "latitude":
+                //this.render();
+                break;
+        }
+    }
+    set latitude(value) {
+        this.setAttribute("latitude", value);
+    }
+    get latitude() {
+        return this.getAttribute("latitude");
+    }
+    set longitude(value) {
+        this.setAttribute("longitude", value);
+    }
+    get longitude() {
+        return this.getAttribute("longitude");
+    }
+    set zoom(value) {
+        this.setAttribute("zoom", value);
+    }
+    get zoom() {
+        return this.getAttribute("zoom");
+    }
     init(message) {
         if (!MapboxMaps.scriptLoaded) {
             MapboxMaps.loadApiFile()
@@ -304,17 +340,21 @@ export class MapboxMaps extends HTMLElement {
         const map = new mapboxgl.Map({
             style: 'mapbox://styles/mapbox/streets-v11',
             container: this,
-            zoom: 10,
+            zoom: this.zoom || 10,
             center: [this.longitude, this.latitude],
             attributionControl: false
         });
+        map.on("load", (event) => {
+            fire(this, "api-load", {});
+        });
         __classPrivateFieldSet(this, _MapboxMaps_map, map, "f");
+        return;
+        if (!this.hasAttribute("latitude") || !this.hasAttribute("longitude")) {
+            return;
+        }
+        if (!__classPrivateFieldGet(this, _MapboxMaps_map, "f")) {
+        }
         //this.onLoad(map);;
-    }
-    attributeChangedCallback(name, oldVal, newVal) {
-    }
-    connectedCallback() {
-        this.init();
     }
     set mark(info) {
         console.log(info);
@@ -351,6 +391,52 @@ export class MapboxMaps extends HTMLElement {
                 return t;
             }
         });
+        console.log(this.getBounds());
+    }
+    getCenter() {
+        const center = this.getApi().getCenter();
+        return {
+            latitude: center.lat,
+            longitude: center.lng
+        };
+    }
+    _center() {
+        if (!this.hasAttribute("latitude") || !this.hasAttribute("longitude")) {
+            this.getApi().center({ lat: Number(this.latitude), lng: Number(this.longitude) });
+        }
+    }
+    getBounds() {
+        const bounds = this.getApi().getBounds();
+        console.log(bounds);
+        return {
+            north: bounds.getNorth(),
+            south: bounds.getSouth(),
+            east: bounds.getEast(),
+            west: bounds.getWest(),
+        };
+    }
+    fitBounds(bounds, padding) {
+        console.log(bounds);
+        const coordinates = [
+            [bounds.west, bounds.south],
+            [bounds.east, bounds.north] // northeastern corner of the bounds
+        ];
+        console.log(coordinates);
+        const zoom = this.getApi().getZoom();
+        if (padding === undefined) {
+            padding = 0;
+        }
+        const _bounds = coordinates.reduce(function (bounds, coord) {
+            return bounds.extend(coord);
+        }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+        this.getApi().fitBounds(_bounds, {
+            padding: padding,
+            maxZoom: zoom,
+            linear: false
+        });
+    }
+    getZoom() {
+        return this.getApi().getZoom();
     }
     setZoom(zoom) {
         this.getApi().setZoom(zoom);
@@ -358,5 +444,5 @@ export class MapboxMaps extends HTMLElement {
 }
 _MapboxMaps_config = new WeakMap(), _MapboxMaps_map = new WeakMap();
 MapboxMaps.scriptLoaded = false;
-customElements.define('mapbox-maps', MapboxMaps);
+customElements.define("mapbox-maps", MapboxMaps);
 //# sourceMappingURL=MapBox.js.map

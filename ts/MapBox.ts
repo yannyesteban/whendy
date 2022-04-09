@@ -1,13 +1,13 @@
 import { loadScript } from "./LoadScript.js";
-import { Q as $} from "./Q.js";
+import { Q as $ } from "./Q.js";
 import { getParentElement, fire } from "./Tool.js";
 
 class MapboxMark extends HTMLElement {
     _marker = null;
     _infowindow = null;
     _popup = null;
-	constructor() {
-		super();
+    constructor() {
+        super();
         const template = document.createElement("template");
 
         template.innerHTML = `
@@ -39,14 +39,14 @@ class MapboxMark extends HTMLElement {
             //this._popup.innerHTML  = nodes[0].innerHTML;
             //this._popup.data = this.info;
         });
-		
-	}
 
-	static get observedAttributes() {
-		return ["latitude", "longitude", "heading", "image", "icon", "info", "visible", "follow"];
-	}
+    }
 
-	public connectedCallback() {
+    static get observedAttributes() {
+        return ["latitude", "longitude", "heading", "image", "icon", "info", "visible", "follow"];
+    }
+
+    public connectedCallback() {
 
         this.setAttribute("role", "mark");
         let el = document.createElement("img");
@@ -59,7 +59,7 @@ class MapboxMark extends HTMLElement {
             .setLngLat([Number(this.longitude), Number(this.latitude)])
             .addTo(this.getMapApi());
 
-        
+
 
 
         const markerHeight = 24, markerRadius = 0, linearOffset = 0;
@@ -73,22 +73,22 @@ class MapboxMark extends HTMLElement {
             "left": [markerRadius, (markerHeight - markerRadius) * -1],
             "right": [-markerRadius, (markerHeight - markerRadius) * -1]
         };
-       
+
         this._infowindow = new mapboxgl.Popup({
             offset: popupOffsets,
             className: "my-class"
         }).setMaxWidth("300px");
 
         this._marker.setPopup(this._infowindow);
-	}
+    }
 
-	public disconnectedCallback() {
+    public disconnectedCallback() {
         console.log("disconnectedCallback");
         this._marker.remove();
-		
-	}
 
-	public attributeChangedCallback(name, oldVal, newVal) {
+    }
+
+    public attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
 
         switch (name) {
@@ -119,21 +119,21 @@ class MapboxMark extends HTMLElement {
             case "follow":
                 break;
         }
-        
+
 
     }
 
     set icon(value) {
-		if (Boolean(value)) {
-			this.setAttribute("icon", value);
-		} else {
-			this.removeAttribute("icon");
-		}
-	}
+        if (Boolean(value)) {
+            this.setAttribute("icon", value);
+        } else {
+            this.removeAttribute("icon");
+        }
+    }
 
-	get icon() {
-		return this.getAttribute("icon")
-	}
+    get icon() {
+        return this.getAttribute("icon")
+    }
 
     set name(value) {
         this.setAttribute("name", value);
@@ -145,10 +145,10 @@ class MapboxMark extends HTMLElement {
 
     set heading(value) {
         if (Boolean(value)) {
-			this.setAttribute("heading", value);
-		} else {
-			this.removeAttribute("heading");
-		}
+            this.setAttribute("heading", value);
+        } else {
+            this.removeAttribute("heading");
+        }
     }
 
     get heading() {
@@ -219,47 +219,47 @@ class MapboxMark extends HTMLElement {
         }
     }
 
-    _visible(){
-        if(!this.visible){
+    _visible() {
+        if (!this.visible) {
 
         }
 
     }
 
-    set mark(info){
-        
+    set mark(info) {
+
 
     }
-	
-    public getMap(): MapboxMaps{
+
+    public getMap(): MapboxMaps {
         //const map = getParentElement(this, "google-maps");
 
         return getParentElement(this, "mapbox-maps");
     }
 
-    public getMapApi(){
+    public getMapApi() {
         const map = this.getMap();
-        if(map){
+        if (map) {
             return map.getApi();
         }
-        
+
 
         return null;
     }
 
-    set info(data){
+    set info(data) {
 
         console.log(data)
         const popup = document.createElement("wh-info");
         popup.innerHTML = this.innerHTML;
         popup.data = data;
-        
+
 
         this._infowindow.setDOMContent(popup);
     }
 
-    set update(info){
-        for(let x in info){
+    set update(info) {
+        for (let x in info) {
             this[x] = info[x];
         }
     }
@@ -277,24 +277,24 @@ class MapboxMark extends HTMLElement {
         }
     }
 
-    _setIcon(){
+    _setIcon() {
         this._marker.getElement().src = this.icon;
     }
 
-    _setHeading(){
+    _setHeading() {
         this._marker.setRotation(this.heading);
     }
 
-    panTo(){
+    panTo() {
         const map = this.getMap();
-        if(map){
+        if (map) {
             map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
         }
     }
 
-    flyTo(zoom:number){
+    flyTo(zoom: number) {
         const map = this.getMap();
-        if(map){
+        if (map) {
             map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
         }
     }
@@ -305,21 +305,16 @@ customElements.define("mapbox-mark", MapboxMark);
 
 export class MapboxMaps extends HTMLElement {
 
-
-   
-
     public apiKey = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
     public apiUrl = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
 
-
-    public longitude: number = -66.903603;
-    public latitude: number = 10.480594;
+    //public longitude: number = -66.903603;
+    //public latitude: number = 10.480594;
 
     #config = {};
     #map = null;
 
     static scriptLoaded = false;
-
 
     static loadApiFile() {
 
@@ -364,7 +359,7 @@ export class MapboxMaps extends HTMLElement {
         return;
         const template = document.createElement("template");
 
-		template.innerHTML = `
+        template.innerHTML = `
             <style>
             :host {
             }
@@ -373,17 +368,72 @@ export class MapboxMaps extends HTMLElement {
 
         `;
 
-		this.attachShadow({ mode: "open" });
+        this.attachShadow({ mode: "open" });
 
-		this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-		const slot = this.shadowRoot.querySelector("slot");
+        const slot = this.shadowRoot.querySelector("slot");
 
-		slot.addEventListener("slotchange", (e) => {
+        slot.addEventListener("slotchange", (e) => {
             console.log(9999)
-			//const nodes = slot.assignedNodes();
-		});
+            //const nodes = slot.assignedNodes();
+        });
     }
+
+    
+    connectedCallback() {
+        console.log("connectedCallback");
+
+        this.init();
+
+
+    }
+
+    public disconnectedCallback() {
+        console.log("disconnectedCallback");
+        
+
+    }
+
+
+    attributeChangedCallback(name, oldVal, newVal) {
+        console.log("attributeChangedCallback");
+        switch (name) {
+            case "longitude":
+                //this.render();
+                break;
+            case "latitude":
+                //this.render();
+                break;
+        }
+
+    }
+
+    set latitude(value) {
+        this.setAttribute("latitude", value);
+    }
+
+    get latitude() {
+        return this.getAttribute("latitude");
+    }
+
+
+    set longitude(value) {
+        this.setAttribute("longitude", value);
+    }
+
+    get longitude() {
+        return this.getAttribute("longitude");
+    }
+
+    set zoom(value) {
+        this.setAttribute("zoom", value);
+    }
+
+    get zoom() {
+        return this.getAttribute("zoom");
+    }
+
 
     public init(message?) {
 
@@ -404,19 +454,37 @@ export class MapboxMaps extends HTMLElement {
 
     public render() {
 
-
         const map = new mapboxgl.Map({
             style: 'mapbox://styles/mapbox/streets-v11', // style URL
             container: this,
-            zoom: 10,
+            zoom: this.zoom || 10,
             center: [this.longitude, this.latitude],
             attributionControl: false
         });
 
+        map.on("load", (event) => {
+            fire(this, "api-load", {});
+        });
 
         this.#map = map;
 
 
+        return;
+
+        if (!this.hasAttribute("latitude") || !this.hasAttribute("longitude")) {
+            return;
+        }
+
+        if (!this.#map) {
+            
+        }
+
+
+
+        
+
+
+       
         //this.onLoad(map);;
 
     }
@@ -428,16 +496,7 @@ export class MapboxMaps extends HTMLElement {
 
 
 
-    attributeChangedCallback(name, oldVal, newVal) {
 
-    }
-    connectedCallback() {
-
-        
-        this.init();
-
-
-    }
 
     set mark(info) {
         console.log(info)
@@ -447,30 +506,30 @@ export class MapboxMaps extends HTMLElement {
             if (!info.visible) {
                 return;
             }
-            
-            
+
+
             mark = $(this).create("mapbox-mark");
-            
+
 
         }
 
-        if(!info.visible){
-            
+        if (!info.visible) {
+
             mark.remove();
             return;
         }
-        
+
 
         mark.prop("update", info);
 
     }
 
-    getMark(name){
+    getMark(name) {
 
         return this.querySelector(`mapbox-mark[name="${name}"]`);
     }
 
-    getApi(){
+    getApi() {
         return this.#map;
     }
 
@@ -481,7 +540,7 @@ export class MapboxMaps extends HTMLElement {
     }
 
     public flyTo(info) {
-        
+
 
         this.getApi().flyTo({
             center: [info.longitude, info.latitude],
@@ -493,12 +552,76 @@ export class MapboxMaps extends HTMLElement {
             }
         });
 
+        console.log(this.getBounds());
+
     }
 
-    public setZoom(zoom: number) {
+    
+
+    getCenter(){
+        const center = this.getApi().getCenter();
+
+        return {
+            latitude: center.lat,
+            longitude: center.lng
+        };
+    }
+
+    _center(){
+        if (!this.hasAttribute("latitude") || !this.hasAttribute("longitude")) {
+            this.getApi().center({ lat: Number(this.latitude), lng: Number(this.longitude) });
+        }
+    }
+
+    getBounds() {
+        const bounds = this.getApi().getBounds();
+        console.log(bounds)
+        return {
+            north: bounds.getNorth(),
+            south: bounds.getSouth(),
+            east: bounds.getEast(),
+            west: bounds.getWest(),
+        }
+
+    }
+
+    public fitBounds(bounds, padding?) {
+
+        console.log(bounds);
+
+        const coordinates = [
+            [bounds.west, bounds.south], // southwestern corner of the bounds
+            [bounds.east, bounds.north] // northeastern corner of the bounds
+        ];
+
+
+        console.log(coordinates);
+        const zoom = this.getApi().getZoom();
+
+        if (padding === undefined) {
+            padding = 0;
+        }
+
+        const _bounds = coordinates.reduce(function (bounds, coord) {
+            return bounds.extend(coord);
+        }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
+
+        this.getApi().fitBounds(_bounds, {
+            padding: padding,
+            maxZoom: zoom,
+            linear: false
+        });
+    }
+
+
+    getZoom() {
+        return this.getApi().getZoom();
+    }
+
+    setZoom(zoom: number) {
         this.getApi().setZoom(zoom);
     }
 
 }
 
-customElements.define('mapbox-maps', MapboxMaps);
+customElements.define("mapbox-maps", MapboxMaps);

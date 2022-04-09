@@ -73,7 +73,8 @@ class ConnectedInfo extends Element
                 'name'  => $this->name,
                 'caption'=>'Unidades Conectadas',
                 'dataSource' => [
-                    'win'=>$win
+                    'win'=>$win, 
+                    'units'=>$this->lastUnits('panda')
                     
                 ],
             ],
@@ -114,5 +115,52 @@ class ConnectedInfo extends Element
 
 
       
+    }
+
+
+    public function lastUnits($user){
+
+		$cn = DB::get();
+		$path = PATH_IMAGES;
+        $cn->query = "SELECT 
+            u.id as unitId,
+            vn.name as unitName,de.name as deviceId, 
+            date_format(u.conn_date,'%d/%m/%Y') as lastDate, 
+            date_format(u.conn_date,'%H:%m:%s') as lastTime, 
+            u.conn_status as connected,
+            TIMESTAMPDIFF(MINUTE, conn_date, now()) as delay,
+            CASE u.conn_status WHEN 1 THEN 'Conectado' ELSE '-' END as statusName,
+            0 as active
+        
+            FROM unit as u
+            INNER JOIN user_unit as uu ON uu.unit_id = u.id
+            INNER JOIN device as de ON de.id = u.device_id
+    
+            LEFT JOIN unit_name as vn ON vn.id = u.name_id
+            LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id
+            LEFT JOIN tracking as t ON t.unit_id = u.id AND u.tracking_date = t.date_time
+    
+            WHERE
+            
+                u.time > CURRENT_DATE() and uu.user = '$user'
+            
+            ORDER BY 2
+
+        ";
+		
+		$result = $cn->execute();
+        
+        return $cn->getJsonAll($result);
+
+        $data =  $cn->getJsonAll($result);
+
+
+        $units = [];
+
+        forEach($data as $unit){
+            $units[$unit->unitId] = $unit;
+        }
+         
+		return $units;
     }
 }

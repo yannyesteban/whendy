@@ -124,6 +124,7 @@
 		"../js/MapBox.js",
 		"../js/WHWindow.js",
 		"../js/WHMenu.js",
+		"../js/WHGrid.js",
 		"../js/WHInfo.js",
 		"../js/ListText.js",
 		"../js/WHPopup.js",

@@ -29,13 +29,20 @@ class GTUnit extends HTMLElement {
                 ];
             });
             $(store).on("units-data-changed", ({ detail }) => {
-                //store.updateItem("unit-cache", Object.assign(store.getItem("unit-cache") || {}, detail));
-                console.log(Object.values(detail));
-                const unit = Object.values(detail).find(unit => unit.active === 1);
+                console.log(detail);
+                const units = Object.values(detail);
+                const active = units.filter(unit => unit.visible === 1);
+                const obj1 = store.getData("active") || {};
+                const obj = {};
+                active.forEach(unit => {
+                    obj[unit.unitId] = unit;
+                });
+                store.updateData("active", Object.assign(obj1, obj));
+                const unit = units.find(unit => unit.active === 1);
                 if (unit) {
                     store.updateItem("unit", unit);
                 }
-                console.log(store.getItem("unit-cache"));
+                console.log("DATA: ", store.getData("active"));
             });
             $(store).on("unit-cache-data-set", ({ detail }) => {
                 //const data = store.getIdentity("unit-cache");

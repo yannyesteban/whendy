@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Window</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/grid2.css">
+    <style>
+        wh-select {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="a"> Value</button>
+    <button id="b">Data</button>
+
+    <wh-grid id ="g" ></wh-grid>
+    <div class="grid">
+
+        <div class="row">
+            <div class="cell">Uno</div>
+            <div class="cell">Uno2</div>
+            <div class="cell">Uno3</div>
+            <div class="cell">Uno4</div>
+            
+        </div>
+        <div class="row">
+            <div class="cell">A I</div>
+            <div class="cell">A II</div>
+            <div class="cell">A III</div>
+            <div class="cell">A IV</div>
+            
+        </div>
+        <div class="row">
+            <div class="cell">B I</div>
+            <div class="cell">B II</div>
+            <div class="cell">B III</div>
+            <div class="cell">B IV</div>
+            
+        </div>
+        <div class="row">
+            <div class="cell">C I</div>
+            <div class="cell">C II</div>
+            <div class="cell">C III</div>
+            <div class="cell">C IV</div>
+            
+        </div>
+        
+       
+      
+        
+    </div>
+
+    <script>
+
+
+    //const x = document.getElementById("x");
+
+    //x.innerHTML= " AVENGER";
+    </script>
+
+    <script type="module" src="./../js/WHGrid2.js"></script>
+    
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+        (function () {
+
+            g.dataSource = {
+                caption:"datos personales",
+                selectMode:"",
+                fields:[
+                    {
+                        name:"nombre",
+                        caption:"Nombre"
+                    },
+                    {
+                        name:"apellido",
+                        caption:"Apellido",
+                        hiddenn:true
+                    },
+                    {
+                        name:"edad",
+                        caption:"Edad",
+                        hidden:true
+                    },
+                    {
+                        name:"estado",
+                        caption:"estado",
+                        hidden:true
+                    },
+                ],
+                data:[
+                    {
+                        nombre:"pedro",
+                        apellido:"lopez",
+                        edad:"12",
+                        estado:"carabobo",
+                        estado2:"carabobo 2"
+                    },
+                    {
+                        nombre:"yanny",
+                        apellido:"esteban",
+                        edad:"44",
+                        estado:"carabobo"
+                    },
+                    {
+                        nombre:"anneliesse",
+                        apellido:"morales",
+                        edad:"35",
+                        estado:"cojedes"
+                    },
+                    {
+                        nombre:"yrianny",
+                        apellido:"nuñez",
+                        edad:"17",
+                        estado:"distrito capital"
+                    },
+                    {
+                        nombre:"yriangel",
+                        apellido:"nuñez",
+                        edad:"15",
+                        estado:"distrito capital"
+                    }
+                ]
+
+            }
+
+
+            $(a).on("click", e=>{
+                console.log(g.value)
+            });
+            $(b).on("click", e=>{
+                console.log(g.data)
+            });
+
+
+        })()
+
+
+
+
+
+    </script>
+
+</body>
+
+
+</html>

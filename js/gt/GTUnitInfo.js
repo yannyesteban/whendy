@@ -7,7 +7,9 @@ class GTUnitInfo extends HTMLElement {
         super();
         this._win = null;
         this._menu = null;
+        this._last = null;
         this._unitChange = this._unitChange.bind(this);
+        this._unitsChange = this._unitsChange.bind(this);
         return;
         const template = document.createElement("template");
         template.innerHTML = `
@@ -38,10 +40,15 @@ class GTUnitInfo extends HTMLElement {
     connectedCallback() {
         Tool.whenApp(this).then((app) => {
             $(app).on("unit-data-set", this._unitChange);
+            $(app).on("units-data-changed", this._unitsChange);
         });
     }
     disconnectedCallback() {
         console.log("disconnectedCallback");
+        Tool.whenApp(this).then((app) => {
+            $(app).off("unit-data-set", this._unitChange);
+            $(app).off("units-data-changed", this._unitsChange);
+        });
     }
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
@@ -98,8 +105,19 @@ class GTUnitInfo extends HTMLElement {
         }
     }
     _unitChange({ detail }) {
+        this._last = detail;
+        this._setData();
+    }
+    _unitsChange({ detail }) {
+        console.log(detail);
+        if (detail.unitId) {
+            this._last = detail.unitId;
+            this._setData();
+        }
+    }
+    _setData() {
         const info = $(this).query(`wh-info`);
-        info.prop("data", detail);
+        info.prop("data", this._last);
     }
 }
 customElements.define("gt-unit-info", GTUnitInfo);

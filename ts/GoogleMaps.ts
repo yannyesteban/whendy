@@ -31,39 +31,37 @@ class GoogleMark extends HTMLElement {
         const slot = this.shadowRoot.querySelector("slot");
 
         slot.addEventListener("slotchange", (e) => {
-
-
             //const nodes = slot.assignedElements();
             //this._infowindow.setContent(this.innerHTML);
         });
-
     }
 
     static get observedAttributes() {
-        return ["latitude", "longitude", "heading", "image", "icon", "info", "visible", "follow"];
+        return [
+            "latitude",
+            "longitude",
+            "heading",
+            "image",
+            "icon",
+            "info",
+            "visible",
+            "follow",
+        ];
     }
 
     public connectedCallback() {
         const latLng = { lat: Number(this.latitude), lng: Number(this.longitude) };
 
-
         this.setAttribute("role", "mark");
 
-        
         this._marker = new google.maps.Marker({
             position: latLng,
             map: this.getMapApi(),
-           
         });
 
-        
-        
         this._infowindow = new google.maps.InfoWindow();
-        
-        
+
         this._marker.addListener("click", () => {
-            
-            
             this._infowindow.open({
                 anchor: this._marker,
                 map: this.getMapApi(),
@@ -81,7 +79,7 @@ class GoogleMark extends HTMLElement {
     public attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
 
-        console.log({name, oldVal, newVal})
+        console.log({ name, oldVal, newVal });
 
         switch (name) {
             case "latitude":
@@ -111,44 +109,38 @@ class GoogleMark extends HTMLElement {
             case "follow":
                 break;
         }
-        
-
     }
 
-
     set icon(value) {
-		if (Boolean(value)) {
-			this.setAttribute("icon", value);
-		} else {
-			this.removeAttribute("icon");
-		}
-	}
+        if (Boolean(value)) {
+            this.setAttribute("icon", value);
+        } else {
+            this.removeAttribute("icon");
+        }
+    }
 
-	get icon() {
-		return this.getAttribute("icon")
-	}
-
-
+    get icon() {
+        return this.getAttribute("icon");
+    }
 
     set name(value) {
         if (Boolean(value)) {
-			this.setAttribute("name", value);
-		} else {
-			this.removeAttribute("name");
-		}
+            this.setAttribute("name", value);
+        } else {
+            this.removeAttribute("name");
+        }
     }
 
     get name() {
         return this.getAttribute("name");
     }
 
-
     set heading(value) {
         if (Boolean(value)) {
-			this.setAttribute("heading", value);
-		} else {
-			this.removeAttribute("heading");
-		}
+            this.setAttribute("heading", value);
+        } else {
+            this.removeAttribute("heading");
+        }
     }
 
     get heading() {
@@ -162,7 +154,6 @@ class GoogleMark extends HTMLElement {
     get latitude() {
         return this.getAttribute("latitude");
     }
-
 
     set longitude(value) {
         this.setAttribute("longitude", value);
@@ -196,7 +187,6 @@ class GoogleMark extends HTMLElement {
         return this.getAttribute("height");
     }
 
-
     set scale(value) {
         if (Boolean(value)) {
             this.setAttribute("scale", value);
@@ -210,7 +200,6 @@ class GoogleMark extends HTMLElement {
     }
 
     set visible(value) {
-
         if (Boolean(value)) {
             this.setAttribute("visible", "");
         } else {
@@ -218,21 +207,15 @@ class GoogleMark extends HTMLElement {
         }
     }
 
-
-
     get visible() {
         return this.hasAttribute("visible");
     }
-
-
 
     get follow() {
         return this.hasAttribute("follow");
     }
 
-
     set follow(value) {
-
         if (Boolean(value)) {
             this.setAttribute("follow", "");
         } else {
@@ -240,14 +223,11 @@ class GoogleMark extends HTMLElement {
         }
     }
 
-
     get trace() {
         return this.hasAttribute("trace");
     }
 
-
     set trace(value) {
-
         if (Boolean(value)) {
             this.setAttribute("trace", "");
         } else {
@@ -255,18 +235,11 @@ class GoogleMark extends HTMLElement {
         }
     }
 
-    _visible(){
-        if(!this.visible){
-
+    _visible() {
+        if (!this.visible) {
         }
-
     }
-    set mark(info) {
-
-
-    }
-
-   
+    set mark(info) { }
 
     public getMap(): GoogleMaps {
         //const map = getParentElement(this, "google-maps");
@@ -280,13 +253,11 @@ class GoogleMark extends HTMLElement {
             return map.getApi();
         }
 
-
         return null;
     }
 
-    set info(data){
-
-        console.log(data)
+    set info(data) {
+        console.log(data);
         const popup = document.createElement("wh-info");
         popup.innerHTML = this.innerHTML;
         popup.data = data;
@@ -295,7 +266,6 @@ class GoogleMark extends HTMLElement {
 
     set update(info) {
         for (let x in info) {
-            
             this[x] = info[x];
         }
     }
@@ -305,23 +275,21 @@ class GoogleMark extends HTMLElement {
         //this.latitude = latitude;
         const latLng = { lat: Number(this.latitude), lng: Number(this.longitude) };
         this._marker.setPosition(latLng);
-        console.log("position", latLng)
+        console.log("position", latLng);
         return;
         if (this.activeFollow) {
-            console.log("ok")
+            console.log("ok");
             //this.panTo();
         }
     }
 
-    _setIcon(){
-
+    _setIcon() {
         const width = Number(this.width) || 10;
         const height = Number(this.height) || 10;
 
+        console.log({ width, height });
 
-        console.log({width, height});
-        
-        console.log("heading",this.heading);
+        console.log("heading", this.heading);
         const icon = {
             path: `M29.395,0H17.636c-3.117,0-5.643,3.467-5.643,6.584v34.804c0,3.116,2.526,5.644,5.643,5.644h11.759
             c3.116,0,5.644-2.527,5.644-5.644V6.584C35.037,3.467,32.511,0,29.395,0z M34.05,14.188v11.665l-2.729,0.351v-4.806L34.05,14.188z
@@ -331,86 +299,77 @@ class GoogleMark extends HTMLElement {
             fillColor: "#d00000",
             fillOpacity: 1.0,
             strokeWeight: 0,
-            strokeDasharray:4,
+            strokeDasharray: 4,
             rotation: Number(this.heading),
-            
-            scale:0.6,
-            anchor: new google.maps.Point(20,20),
-          }
 
-        if(this._marker){
+            scale: 0.6,
+            anchor: new google.maps.Point(20, 20),
+        };
+
+        if (this._marker) {
             this._marker.setIcon(icon);
         }
     }
 
-    panTo(){
+    panTo() {
         const map = this.getMap();
-        if(map){
-            map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
+        if (map) {
+            map.panTo({
+                latitude: Number(this.latitude),
+                longitude: Number(this.longitude),
+            });
         }
     }
 
-    flyTo(zoom:number){
+    flyTo(zoom: number) {
         const map = this.getMap();
-        if(map){
-            map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
+        if (map) {
+            map.flyTo({
+                latitude: Number(this.latitude),
+                longitude: Number(this.longitude),
+                zoom,
+            });
         }
     }
 }
 
 customElements.define("google-mark", GoogleMark);
 
-
 export class GoogleMaps extends HTMLElement {
-
-
-
-
     public apiKey = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
-    public apiUrl = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
+    public apiUrl =
+        "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
 
-
-    public longitude: number = -66.903603;
-    public latitude: number = 10.480594;
+    //public longitude: number = -66.903603;
+    //public latitude: number = 10.480594;
 
     #config = {};
     #map = null;
 
     static scriptLoaded = false;
 
-
     static loadApiFile() {
-
         return new Promise((resolve, reject) => {
-
             const key = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
-            const url = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
-
+            const url =
+                "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
 
             loadScript(url, true)
-                .then(message => {
+                .then((message) => {
                     console.log(message);
 
                     GoogleMaps.scriptLoaded = true;
                     resolve({
-                        status: true
+                        status: true,
                     });
-
                 })
-                .catch(message => {
+                .catch((message) => {
                     GoogleMaps.scriptLoaded = false;
                     reject({
-                        status: true
+                        status: true,
                     });
-
-                })
-
-
+                });
         });
-
-
-
-
     }
 
     static get observedAttributes() {
@@ -438,129 +397,167 @@ export class GoogleMaps extends HTMLElement {
         const slot = this.shadowRoot.querySelector("slot");
 
         slot.addEventListener("slotchange", (e) => {
-            console.log(888)
+            console.log(888);
             //const nodes = slot.assignedNodes();
         });
     }
 
-    public init(message?) {
+    connectedCallback() {
+        console.log("connectedCallback");
 
+        this.style.height = "100%";
+        this.style.width = "100%";
+        this.style.display = "block";
+        this.init();
+    }
+
+    public disconnectedCallback() {
+        console.log("disconnectedCallback");
+    }
+
+    attributeChangedCallback(name, oldVal, newVal) { }
+
+    set latitude(value) {
+        this.setAttribute("latitude", value);
+    }
+
+    get latitude() {
+        return this.getAttribute("latitude");
+    }
+
+
+    set longitude(value) {
+        this.setAttribute("longitude", value);
+    }
+
+    get longitude() {
+        return this.getAttribute("longitude");
+    }
+
+    set zoom(value) {
+        this.setAttribute("zoom", value);
+    }
+
+    get zoom() {
+        return this.getAttribute("zoom");
+    }
+    
+    public init(message?) {
         if (!GoogleMaps.scriptLoaded) {
             GoogleMaps.loadApiFile()
                 .then(() => {
                     this.render();
-                }).catch(() => {
+                })
+                .catch(() => {
                     alert("error");
                 });
             return;
         }
 
         this.render();
-
-
     }
 
     public render() {
-
-
         const map = new google.maps.Map(this, {
-            zoom: 10,
-            center: { lat: this.latitude, lng: this.longitude },
+            zoom: (Number(this.zoom) || 10),
+            center: { lat: Number(this.latitude), lng: Number(this.longitude) },
             disableDefaultUI: true,
             //zoomControl: true,
             //mapTypeControl: true,
             //scaleControl: true,
             //streetViewControl: true,
             //rotateControl: true,
-            fullscreenControl: false
-
-
+            fullscreenControl: false,
         });
 
-
         this.#map = map;
-
-
+        console.log(".......api-load............")
+        fire(this, "api-load", {});
         //this.onLoad(map);;
-
     }
-
-
-
-
-
-
-
-
-
-    attributeChangedCallback(name, oldVal, newVal) {
-
-    }
-    connectedCallback() {
-
-        this.style.height = "100%";
-        this.style.width = "100%";
-        this.style.display = "block";
-        this.init();
-
-
-    }
-
 
     set mark(info) {
-        console.log(info)
+        console.log(info);
         let mark = $(this.getMark(info.name));
         if (!mark) {
-
             if (!info.visible) {
                 return;
             }
-            
-            
-            mark = $(this).create("google-mark");
-            
 
+            mark = $(this).create("google-mark");
         }
 
-        if(!info.visible){
-            
+        if (!info.visible) {
             mark.remove();
             return;
         }
-        
 
         mark.prop("update", info);
-
     }
 
     getMark(name) {
-
         return this.querySelector(`google-mark[name="${name}"]`);
     }
-
 
     getApi() {
         return this.#map;
     }
 
-
     public panTo(position) {
         const latLng = { lat: position.latitude, lng: position.longitude };
         this.getApi().panTo(latLng);
-
     }
 
     public flyTo(info) {
         const latLng = { lat: info.latitude, lng: info.longitude };
         this.getApi().panTo(latLng);
         this.setZoom(info.zoom);
-
     }
 
-    public setZoom(zoom: number) {
+    
+
+    getCenter() {
+        const center = this.getApi().getCenter().toJSON();
+
+        return {
+            latitude: center.lat,
+            longitude: center.lng,
+        };
+    }
+
+    getBounds() {
+        return this.getApi().getBounds().toJSON();
+    }
+
+    fitBounds(bounds) {
+        this.getApi().fitBounds(bounds);
+    }
+
+    getZoom() {
+        return this.getApi().getZoom();
+    }
+
+    setZoom(zoom: number) {
         this.getApi().setZoom(zoom);
+
+        /*
+        const bounds = google.maps.LatLngBoundsLiteral = {
+            north: 10.50941146023254,
+            south: 10.496288400459798,
+            east: -66.83816550256347,
+            west: -66.85996649743652
+          }
+          */
+        //const  southWest = new google.maps.LatLng({ lat: 10.496288400459798, lng:  -66.85996649743652 });
+        //const northEast = new google.maps.LatLng({ lat: 10.50941146023254, lng: -66.83816550256347});
+
+        //const  southWest = new google.maps.LatLng(10.496288400459798, -66.85996649743652);
+        //const northEast = new google.maps.LatLng(10.50941146023254, -66.83816550256347);
+
+        //var bounds = new google.maps.LatLngBounds({sw: southWest, ne: northEast});
     }
 
+    
 }
 
-customElements.define('google-maps', GoogleMaps);
+customElements.define("google-maps", GoogleMaps);

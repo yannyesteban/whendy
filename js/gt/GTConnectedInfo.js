@@ -1,6 +1,5 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
-import "../WHTab.js";
 class GTConnectedInfo extends HTMLElement {
     constructor() {
         super();
@@ -57,6 +56,7 @@ class GTConnectedInfo extends HTMLElement {
     }
     set dataSource(source) {
         console.log(source);
+        this.units = source.units;
         customElements.whenDefined("wh-win").then(() => {
             const win = $.create("wh-win");
             const header = win.create("wh-win-header");
@@ -66,6 +66,7 @@ class GTConnectedInfo extends HTMLElement {
             const body = win.create("wh-win-body");
             $(this).append(win);
             this._win = win.get();
+            this.createGrid(body);
         });
     }
     getStore() {
@@ -75,6 +76,42 @@ class GTConnectedInfo extends HTMLElement {
         if (this._win) {
             this._win.visibility = (value) ? "visible" : "hidden";
         }
+    }
+    createGrid(body) {
+        customElements.whenDefined("wh-grid").then(e => {
+            const data = this.units.map(e => {
+                return { unitId: e.unitId,
+                    unitName: e.unitName,
+                    statusName: e.statusName,
+                    deviceId: e.deviceId };
+            });
+            console.log(data);
+            const grid = $(body).create("wh-grid").get();
+            grid.dataSource = {
+                caption: "datos personales",
+                selectMode: "",
+                fields: [
+                    {
+                        name: "unitId",
+                        caption: "id",
+                        hidden: true
+                    },
+                    {
+                        name: "unitName",
+                        caption: "Unidad"
+                    },
+                    {
+                        name: "statusName",
+                        caption: "Status"
+                    },
+                    {
+                        name: "deviceId",
+                        caption: "Devide ID"
+                    },
+                ],
+                data: data
+            };
+        });
     }
 }
 customElements.define("gt-connected-info", GTConnectedInfo);

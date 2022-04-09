@@ -1,11 +1,18 @@
 import { Q as $ } from "../Q.js";
 import * as Tool from "../Tool.js";
+import { GTUnitStore } from "./GTUnitStore.js";
 
 export class GTMap extends HTMLElement {
     
     _api = null;
     _data = {}
 
+    _bounds = null;
+    _center = {
+        latitude: 10.480594,
+        longitude: -66.903603
+    } 
+    
     popupTemplate = "";
     static get observedAttributes() {
         return ["api", "type"];
@@ -114,16 +121,49 @@ export class GTMap extends HTMLElement {
         };
     }
     render(){
-        console.log("render", this.api)
+        console.log("render A");
         
+
+
+        console.log("render", this.api)
+
+        const bounds = this.getBounds();
+        const center = this.getCenter() || this._center;
+        const zoom = this.getZoom() || 10;
+        //console.log(center)
         if(this.api === "google"){
+            
             
             customElements.whenDefined("google-maps").then(() => {
                 if(this.querySelector("google-maps")){
                     return;
                 }
                 this.innerHTML = "";
-                this._api = $(this).create("google-maps").get();
+                this._api = $.create("google-maps").get();
+
+                this._api.latitude = center.latitude;
+                this._api.longitude = center.longitude;
+                this._api.zoom = zoom*1.01;
+                
+                this._api.addEventListener("api-load", event=>{
+                   
+                    this.whenStore().then((store:GTUnitStore)=>{
+
+                        const data = store.getData("active");
+                        console.log(data)
+                        for(let x in data){
+                            this.mark = data[x];
+                        }
+                    });
+
+                    if(bounds){
+                        //this._api.fitBounds(bounds);
+                    }
+                });
+
+                this.append(this._api);
+
+                
             });
         }
 
@@ -134,7 +174,29 @@ export class GTMap extends HTMLElement {
                     return;
                 }
                 this.innerHTML = "";
-                this._api = $(this).create("mapbox-maps").get();
+                this._api = $.create("mapbox-maps").get();
+               
+                this._api.latitude = center.latitude;
+                this._api.longitude = center.longitude;
+                this._api.zoom = zoom;
+
+                this._api.addEventListener("api-load", event=>{
+                    this.whenStore().then((store:GTUnitStore)=>{
+
+                        const data = store.getData("active");
+                        console.log(data)
+                        for(let x in data){
+                            this.mark = data[x];
+                        }
+                    });
+
+                    if(bounds){
+                        //this._api.fitBounds(bounds);
+                    }
+                });
+                
+                this.append(this._api);
+                
             });
         }
         
@@ -191,6 +253,50 @@ export class GTMap extends HTMLElement {
     getMark(name){
         return this._api.querySelector(`[role="mark"][name="${name}"]`);
     }
+
+    getApi(){
+        return this._api;
+    }
+
+    getCenter(){
+        if(this.getApi()){
+            return this.getApi().getCenter();
+        }
+
+        return null;
+    }
+
+    getBounds(){
+        if(this.getApi()){
+            return this.getApi().getBounds();
+        }
+
+        return null;
+    }
+
+    fitBounds(bounds){
+        if(this.getApi()){
+            return this.getApi().setBounds(bounds);
+        }
+    }
+
+    getZoom() {
+        if(this.getApi()){
+            return this.getApi().getZoom();
+        }
+        
+        return null;
+    }
+
+    setZoom(zoom) {
+        if(this.getApi()){
+            return this.getApi().setZoom(zoom);
+        }
+        
+        return null;
+    }
+
+
 }
 
 customElements.define('gt-map', GTMap);

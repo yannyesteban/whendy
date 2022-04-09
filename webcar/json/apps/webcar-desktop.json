@@ -85,7 +85,7 @@
 		{
 			"id": "gt-map",
 			"appendTo": "#wh-body",
-			"element": "gt-map",
+			"element": "gt-mappp",
 			"name": "",
 			"method": "init",
 			"eparams": {}
@@ -126,6 +126,7 @@
 		"../js/MapBox.js",
 		"../js/WHWindow.js",
 		"../js/WHMenu.js",
+		"../js/WHGrid.js",
 		"../js/WHInfo.js",
 		"../js/ListText.js",
 		"../js/WHPopup.js",
@@ -148,6 +149,7 @@
 		"../js/gt/GTHistory.js",
 		"../js/gt/GTTrace.js",
 		"../js/gt/GTUnitInfo.js"
+
 		
 	],
 	"modules": [

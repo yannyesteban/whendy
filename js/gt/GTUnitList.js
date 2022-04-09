@@ -32,13 +32,24 @@ class GTUnitList extends HTMLElement {
         return ["f", "latitude", "longitude"];
     }
     connectedCallback() {
+        this._click = this._click.bind(this);
     }
     disconnectedCallback() {
         console.log("disconnectedCallback");
     }
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
-        this[name] = newVal;
+    }
+    set value(value) {
+        if (Boolean(value)) {
+            this.setAttribute("value", value);
+        }
+        else {
+            this.removeAttribute("value");
+        }
+    }
+    get value() {
+        return this.getAttribute("value");
     }
     test() {
         alert("test");
@@ -54,17 +65,22 @@ class GTUnitList extends HTMLElement {
             button.html("»");
             //console.log(source.data);
             list.prop("dataSource", { data: source.data });
-            list.on("change", (event) => {
-                const store = this.getStore();
-                if (store) {
-                    store.run("load-units", {
-                        unitId: event.target.value,
-                        visible: 1,
-                        active: 1
-                    });
-                }
+            list.on("change", event => {
+                this.value = event.target.value;
+                this._click();
             });
+            button.on("click", this._click);
         });
+    }
+    _click() {
+        const store = this.getStore();
+        if (store) {
+            store.run("load-units", {
+                unitId: this.value,
+                visible: 1,
+                active: 1
+            });
+        }
     }
     getStore() {
         return document.querySelector(`gt-unit-store`);

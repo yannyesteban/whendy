@@ -9,6 +9,7 @@ class GTUnitInfo extends HTMLElement {
 
 	_win = null;
 	_menu = null;
+	_last = null;
 
 	static get observedAttributes() {
 		return [""];
@@ -21,6 +22,7 @@ class GTUnitInfo extends HTMLElement {
 
 		
         this._unitChange =  this._unitChange.bind(this);
+		this._unitsChange =  this._unitsChange.bind(this);
 		return;
 		const template = document.createElement("template");
 
@@ -58,6 +60,7 @@ class GTUnitInfo extends HTMLElement {
 
 		Tool.whenApp(this).then((app)=>{
             $(app).on("unit-data-set", this._unitChange);
+            $(app).on("units-data-changed",  this._unitsChange);
             
         });
 
@@ -66,6 +69,12 @@ class GTUnitInfo extends HTMLElement {
 
 	public disconnectedCallback() {
 		console.log("disconnectedCallback");
+
+        Tool.whenApp(this).then((app)=>{
+            $(app).off("unit-data-set", this._unitChange);
+            $(app).off("units-data-changed",  this._unitsChange);
+        });
+    
 	}
 
 	public attributeChangedCallback(name, oldVal, newVal) {
@@ -146,11 +155,31 @@ class GTUnitInfo extends HTMLElement {
 	}
 
     _unitChange({detail}){
+		this._last = detail;
 		
-		const info = $(this).query(`wh-info`) as WHInfo;
-		info.prop("data", detail);
+		
+
+		this._setData();
         
     }
+
+	_unitsChange({detail}){
+        
+        console.log(detail);
+
+		if(detail.unitId){
+			this._last = detail.unitId;
+			this._setData();
+		}
+        
+        
+    
+    }
+
+	_setData(){
+		const info = $(this).query(`wh-info`) as WHInfo;
+		info.prop("data", this._last);
+	}
 
 }
 

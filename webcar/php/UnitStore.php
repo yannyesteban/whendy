@@ -52,14 +52,18 @@ class UnitStore extends Element
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
-                'dataSource' => ['data'=>$this->loadUnits('panda')],
+                'interval'=>"10",
+                'delay'=>"10",
+                'dataSource'=>'STORE'
+                //'dataSource' => ['data'=>$this->loadUnits('panda')],
             ],
             'replayToken' => $this->replayToken,
             'setPanel' => $this->setPanel,
             'appendTo' => $this->appendTo,
         ]);
 
-        
+
+        //Tool::hx(8);
         
     }
 

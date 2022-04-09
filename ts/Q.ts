@@ -113,7 +113,7 @@ export class QElement {
         return this;
     }
 
-    attr(attrs, value?) {
+    attr(attrs, value?): QElement | any {
 
 
         if (typeof attrs === "string" && value === undefined) {

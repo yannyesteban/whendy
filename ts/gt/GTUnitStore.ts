@@ -29,7 +29,7 @@ const _handler = (element) => {
 		},
 		set(target, key, value) {
 			let oldValue = target[key];
-			//console.log({ target, key, value , oldValue, type: typeof value})
+			console.log({ target, key, value , oldValue, type: typeof value})
 			if (oldValue !== value) {
 				fire(element, `${String(key)}-data-changed`, value);
 
@@ -50,30 +50,22 @@ export class GTUnitStore extends HTMLElement {
 	_request = [];
 	_actions = [];
 	_timer = null;
-	_delay = 1000;
+	
 	dataStore = {};
 	_dataStore = null;
-
-	constructor() {
-		super();
-
-
-
-	}
+	_cache = {};
 
 	static get observedAttributes() {
 		return [""];
 	}
 
-	public connectedCallback() {
-
-		//this._handler = this._handler.bind(this);
-		this._dataStore = this.watch(this.dataStore);
+	constructor() {
+		super();
 	}
 
-	
-	watch(some) {
-		return new Proxy(some, _handler(this));
+	public connectedCallback() {
+		//this._handler = this._handler.bind(this);
+		this._dataStore = this.watch(this.dataStore);
 	}
 
 	public disconnectedCallback() {
@@ -84,6 +76,41 @@ export class GTUnitStore extends HTMLElement {
 		console.log("attributeChangedCallback");
 
 	}
+
+	set interval(value){
+		
+		if(Boolean(value)){
+			this.setAttribute("interval", value);
+		}else{
+			this.removeAttribute("interval");
+		}
+	}
+
+	get interval(){
+		return this.getAttribute("interval");
+	}
+
+	set delay(value){
+		
+		if(Boolean(value)){
+			this.setAttribute("delay", value);
+		}else{
+			this.removeAttribute("delay");
+		}
+	}
+
+	get delay(){
+		return this.getAttribute("delay");
+	}
+
+
+
+	
+	watch(some) {
+		return new Proxy(some, _handler(this));
+	}
+
+	
 
 	set dataSource(source) {
 
@@ -126,7 +153,7 @@ export class GTUnitStore extends HTMLElement {
 				*/
 		window.setTimeout(() => {
 			this._play();
-		}, 5000);
+		}, Number(this.delay) * 1000);
 	}
 
 	get store(){
@@ -134,7 +161,7 @@ export class GTUnitStore extends HTMLElement {
 	}
 
 	updateItem(name, value){
-
+		//console.log(name, typeof this._dataStore[name], value)
 
 		if(typeof this._dataStore[name] === 'object'){
 			this._dataStore[name] = Object.assign(this._dataStore[name], value);
@@ -146,11 +173,32 @@ export class GTUnitStore extends HTMLElement {
 
 
 	getItem(name){
-
+		
 		if(typeof this._dataStore[name] === 'object'){
 			return Object.assign({}, this._dataStore[name]);
 		}else{
 			return this._dataStore[name];
+		}
+		
+	}
+
+	updateData(name, value){
+		//console.log(name, typeof this._dataStore[name], value)
+
+		if(typeof this._cache[name] === 'object'){
+			this._cache[name] = Object.assign(this._cache[name], value);
+		}else{
+			this._cache[name] = value;
+		}
+		
+	}
+
+	getData(name){
+		
+		if(typeof this._cache[name] === 'object'){
+			return Object.assign({}, this._cache[name]);
+		}else{
+			return this._cache[name];
 		}
 		
 	}
@@ -169,13 +217,14 @@ export class GTUnitStore extends HTMLElement {
 	}
 
 	_play() {
+		console.log("play")
 		this._stop();
 
 		this._timer = setInterval(() => {
 			console.log("play");
 
 			this._go(this._request.map(r => r.request));
-		}, this._delay * 1000);
+		}, Number(this.interval) * 1000);
 	}
 
 	_stop() {

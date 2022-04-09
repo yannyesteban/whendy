@@ -14,8 +14,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(var(--grid-columns), auto);
   position: relative;
+  border: 3px solid red;
   overflow: auto;
 }
 
@@ -25,6 +26,15 @@
 }
 
 :host(wh-grid-row:not([select-mode])) input {
+  display: none;
+}
+
+:host(wh-grid-cell[hidden]) {
+  border: 4px solid red;
+  display: none;
+}
+
+:host(:not([select-mode])) .input {
   display: none;
 }
 /*# sourceMappingURL=WHGrid.css.map */

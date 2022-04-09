@@ -56,21 +56,7 @@ class WHGridCell extends HTMLElement {
 
 	get value() {
 
-		return this.getAttribute("value")
-	}
-
-	set hidden(value) {
-
-		if (Boolean(value)) {
-			this.setAttribute("hidden", "");
-		} else {
-			this.removeAttribute("hidden");
-		}
-	}
-
-	get hidden() {
-
-		return this.hasAttribute("hidden")
+		return this.getAttribute('value')
 	}
 
 
@@ -85,7 +71,7 @@ class WHGridCell extends HTMLElement {
 
 	get field() {
 
-		return this.getAttribute("field")
+		return this.getAttribute('field')
 	}
 
 
@@ -112,7 +98,7 @@ class WHGridRow extends HTMLElement {
 		template.innerHTML = `
 			
 		<link rel="stylesheet" href="./../css/WHGrid.css">
-		<div class="input"><input type="checkbox"></div><slot name="cell"></slot>
+		<div><input type="checkbox"></div><slot name="cell"></slot>
 	
 		`;
 
@@ -123,22 +109,17 @@ class WHGridRow extends HTMLElement {
 	public connectedCallback() {
 		console.log("connectedCallback");
 		this.slot = "row";
+		
+		
+		$(this.shadowRoot.querySelector(`input`)).on("click", this._click.bind(this));
 
-		this._click = this._click.bind(this);
-		$(this.shadowRoot.querySelector(`input`)).on("click", this._click);
-
-
-	}
-
-	public disconnectedCallback() {
-		console.log("disconnectedCallback");
-		$(this.shadowRoot.querySelector(`input`)).off("click", this._click);
+		
 	}
 
 	public attributeChangedCallback(name, oldVal, newVal) {
 		console.log("attributeChangedCallback");
-
-		switch (name) {
+		
+		switch(name){
 			case "select-mode":
 				this._selectMode(newVal);
 				break;
@@ -146,7 +127,7 @@ class WHGridRow extends HTMLElement {
 				this._selectInput();
 				break;
 
-
+				
 		}
 	}
 
@@ -161,7 +142,7 @@ class WHGridRow extends HTMLElement {
 
 	get selected() {
 
-		return this.hasAttribute("selected");
+		return this.hasAttribute('selected')
 	}
 
 	set selectMode(value) {
@@ -175,11 +156,11 @@ class WHGridRow extends HTMLElement {
 
 	get selectMode() {
 
-		return this.getAttribute("select-mode")
+		return this.getAttribute('select-mode')
 	}
 
-	_link() {
-		if (this.hasAttribute("select-mode")) {
+	_link(){
+		if(this.hasAttribute("select-mode")){
 			this.shadowRoot.querySelector(`input`).removeAttribute("hidden");
 		}
 	}
@@ -187,51 +168,29 @@ class WHGridRow extends HTMLElement {
 	_click(event) {
 		console.log("_click")
 		this.selected = event.target.checked;
-
-		$(this).fire("row-check", event.target.checked);
-
 	}
 
-	_selectMode(value) {
-		switch (value) {
+	_selectMode(value){
+		switch(value){
 			case "one":
 				$(this.shadowRoot.querySelector(`input`)).attr("type", "radio");
 				break;
 			case "multi":
 				$(this.shadowRoot.querySelector(`input`)).attr("type", "checkbox");
-				break;
+				break;				
 
 		}
 	}
 
-	_selectInput() {
-
+	_selectInput(){
+		
 		this.shadowRoot.querySelector(`input`).checked = this.selected;
-	}
-
-	set data(data) {
-
-	}
-
-	get data() {
-
-		const data = this._allCell().reduce((e, i: WHGridCell) => {
-			e[i.field] = i.value;
-			return e;
-
-		}, {});
-
-		return data;
-	}
-
-	_allCell() {
-		return Array.from(this.querySelectorAll(`wh-grid-cell`))
 	}
 }
 customElements.define("wh-grid-row", WHGridRow);
 
 class WHGrid extends HTMLElement {
-	_fields = [];
+
 	constructor() {
 		super();
 
@@ -267,49 +226,6 @@ class WHGrid extends HTMLElement {
 
 		//let htmlStyles = window.getComputedStyle(document.querySelector("html"));
 		//let rowNum = parseInt(htmlStyles.getPropertyValue("--rowNum"));
-
-
-		$(this).on("click", (event) => {
-			let row = null;
-			const comp = event.composedPath()[0];
-			if (comp && comp.getAttribute("type") === "checkbox") {
-				console.log(comp, comp.checked);
-
-
-				$(this).fire("grid-row-check", { selected: comp.checked, data: event.target.data, row: event.target });
-			}
-
-			if (comp && comp.getAttribute("type") === "radio") {
-
-				const rows = Array.from(this.querySelectorAll(`wh-grid-row`));
-
-				rows.forEach((row: WHGridRow) => {
-
-					if (event.target !== row) {
-						row.selected = false;
-					}
-				})
-
-				$(this).fire("grid-row-check", { selected: comp.checked, data: event.target.data });
-			}
-
-			if (event.target.tagName === "wh-grid-cell".toUpperCase()) {
-				row = event.target.parentNode;
-				$(this).fire("grid-cell-click", { selected: row.selected, data: row.data, cell: event.target });
-				$(this).fire("grid-row-click", { selected: row.selected, data: row.data, row });
-
-			}
-
-		});
-
-		$(this).on("grid-row-click", event => {
-			console.log(event.detail)
-		});
-
-		$(this).on("grid-row-check", event => {
-			console.log(event.detail)
-		})
-
 	}
 
 	public disconnectedCallback() {
@@ -333,30 +249,18 @@ class WHGrid extends HTMLElement {
 
 	get selectMode() {
 
-		return this.getAttribute("select-mode");
+		return this.getAttribute('select-mode')
 	}
 
 	set dataSource(source) {
 		this.innerHTML = "";
 
-
-		if (source.selectMode) {
+		if(source.selectMode){
 			this.selectMode = source.selectMode;
 		}
 		if (source.caption) {
 			this._createCaption(source.caption);
 		}
-		if (!source.fields) {
-			return;
-		}
-
-		this._fields = source.fields;
-		const ncols = source.fields.filter(f => !f.hidden);
-
-		this._setGridColumn(ncols.length);
-
-
-		console.log(ncols.length)
 
 		if (source.fields) {
 			this._craeteHeaderRow(source.fields);
@@ -376,44 +280,24 @@ class WHGrid extends HTMLElement {
 		const row = $(this).create("wh-grid-row").addClass("header");
 		row.prop("selectMode", this.selectMode);
 
-		
-
 		info.forEach(data => {
-
-			row.create("wh-grid-cell").attr("hidden", data.hidden || false).ds("field", data.name).html(data.caption);
+			row.create("wh-grid-cell").ds("field", data.name).html(data.caption);
 		});
 
 	}
 	_createRow(info) {
 		const row = $(this).create("wh-grid-row").addClass("row");
-		row.prop("selectMode", this.selectMode);
+		row.get().selectMode = this.selectMode;
 
 		
-
-
+		
 		for (let key in info) {
-			const field = this._fields.find(e => e.name == key);
-
-			if (field) {
-				console.log(key, field.name)
-				row.create("wh-grid-cell")
-					.attr("hidden", field.hidden || false)
-					.attr("field", key)
-					.attr("value", info[key])
-					.html(info[key]);
-			}
-
-
-
+			row.create("wh-grid-cell").attr("field", key).attr("value", info[key]).html(info[key]);
 		}
 	}
 
-	_getAllRows() {
+	_getAllRow() {
 		return [... this.querySelectorAll(`wh-grid-row.row`)];
-	}
-
-	_getSelectedRows() {
-		return [... this.querySelectorAll(`wh-grid-row[selected]`)];
 	}
 
 	_getRowValues(row) {
@@ -425,34 +309,14 @@ class WHGrid extends HTMLElement {
 		return data;
 	}
 	get value() {
+		const rows = this._getAllRow();
+		const data = [];
+		rows.forEach(row => {
+			data.push(this._getRowValues(row));
+		})
 
-		return this._getSelectedRows().reduce((sum, row: WHGridRow) => {
-			sum.push(row.data);
-			return sum;
-		}, []);
-	}
 
-	get data() {
-		return this._getAllRows().reduce((sum, row: WHGridRow) => {
-			sum.push(row.data);
-			return sum;
-		}, []);
-	}
-
-	_setGridColumn(n) {
-		let htmlStyles = window.getComputedStyle(document.querySelector("html"));
-		//let rowNum = parseInt(htmlStyles.getPropertyValue("--grid-columns"));
-		//document.documentElement.style.setProperty("--grid-columns", "5");
-
-		const delta = (this.selectMode == "one" || this.selectMode == "multi")? 1 : 0;
-		this.style.setProperty("--grid-columns", n + delta);
-	}
-	_fixColumn() {
-
-		let htmlStyles = window.getComputedStyle(document.querySelector("html"));
-		//let rowNum = parseInt(htmlStyles.getPropertyValue("--grid-columns"));
-		//document.documentElement.style.setProperty("--grid-columns", "5");
-		this.style.setProperty("--grid-columns", "5");
+		return data;
 	}
 
 }

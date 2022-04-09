@@ -12,7 +12,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var _GoogleMaps_config, _GoogleMaps_map;
 import { loadScript } from "./LoadScript.js";
 import { Q as $ } from "./Q.js";
-import { getParentElement } from "./Tool.js";
+import { getParentElement, fire } from "./Tool.js";
 class GoogleMark extends HTMLElement {
     constructor() {
         super();
@@ -41,7 +41,16 @@ class GoogleMark extends HTMLElement {
         });
     }
     static get observedAttributes() {
-        return ["latitude", "longitude", "heading", "image", "icon", "info", "visible", "follow"];
+        return [
+            "latitude",
+            "longitude",
+            "heading",
+            "image",
+            "icon",
+            "info",
+            "visible",
+            "follow",
+        ];
     }
     connectedCallback() {
         const latLng = { lat: Number(this.latitude), lng: Number(this.longitude) };
@@ -205,8 +214,7 @@ class GoogleMark extends HTMLElement {
         if (!this.visible) {
         }
     }
-    set mark(info) {
-    }
+    set mark(info) { }
     getMap() {
         //const map = getParentElement(this, "google-maps");
         return getParentElement(this, "google-maps");
@@ -268,13 +276,20 @@ class GoogleMark extends HTMLElement {
     panTo() {
         const map = this.getMap();
         if (map) {
-            map.panTo({ latitude: Number(this.latitude), longitude: Number(this.longitude) });
+            map.panTo({
+                latitude: Number(this.latitude),
+                longitude: Number(this.longitude),
+            });
         }
     }
     flyTo(zoom) {
         const map = this.getMap();
         if (map) {
-            map.flyTo({ latitude: Number(this.latitude), longitude: Number(this.longitude), zoom });
+            map.flyTo({
+                latitude: Number(this.latitude),
+                longitude: Number(this.longitude),
+                zoom,
+            });
         }
     }
 }
@@ -284,8 +299,8 @@ export class GoogleMaps extends HTMLElement {
         super();
         this.apiKey = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
         this.apiUrl = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
-        this.longitude = -66.903603;
-        this.latitude = 10.480594;
+        //public longitude: number = -66.903603;
+        //public latitude: number = 10.480594;
         _GoogleMaps_config.set(this, {});
         _GoogleMaps_map.set(this, null);
         const template = document.createElement("template");
@@ -310,17 +325,17 @@ export class GoogleMaps extends HTMLElement {
             const key = "AIzaSyBhPsH8OjHCypjgwt_Dl7A_W8wlBbyPink";
             const url = "https://maps.google.com/maps/api/js?key=AIzaSyCr8MljMe17YC07PuG9CtOdHSZDZgAvmew&libraries=drawing";
             loadScript(url, true)
-                .then(message => {
+                .then((message) => {
                 console.log(message);
                 GoogleMaps.scriptLoaded = true;
                 resolve({
-                    status: true
+                    status: true,
                 });
             })
-                .catch(message => {
+                .catch((message) => {
                 GoogleMaps.scriptLoaded = false;
                 reject({
-                    status: true
+                    status: true,
                 });
             });
         });
@@ -328,12 +343,42 @@ export class GoogleMaps extends HTMLElement {
     static get observedAttributes() {
         return ["type"];
     }
+    connectedCallback() {
+        console.log("connectedCallback");
+        this.style.height = "100%";
+        this.style.width = "100%";
+        this.style.display = "block";
+        this.init();
+    }
+    disconnectedCallback() {
+        console.log("disconnectedCallback");
+    }
+    attributeChangedCallback(name, oldVal, newVal) { }
+    set latitude(value) {
+        this.setAttribute("latitude", value);
+    }
+    get latitude() {
+        return this.getAttribute("latitude");
+    }
+    set longitude(value) {
+        this.setAttribute("longitude", value);
+    }
+    get longitude() {
+        return this.getAttribute("longitude");
+    }
+    set zoom(value) {
+        this.setAttribute("zoom", value);
+    }
+    get zoom() {
+        return this.getAttribute("zoom");
+    }
     init(message) {
         if (!GoogleMaps.scriptLoaded) {
             GoogleMaps.loadApiFile()
                 .then(() => {
                 this.render();
-            }).catch(() => {
+            })
+                .catch(() => {
                 alert("error");
             });
             return;
@@ -342,26 +387,20 @@ export class GoogleMaps extends HTMLElement {
     }
     render() {
         const map = new google.maps.Map(this, {
-            zoom: 10,
-            center: { lat: this.latitude, lng: this.longitude },
+            zoom: (Number(this.zoom) || 10),
+            center: { lat: Number(this.latitude), lng: Number(this.longitude) },
             disableDefaultUI: true,
             //zoomControl: true,
             //mapTypeControl: true,
             //scaleControl: true,
             //streetViewControl: true,
             //rotateControl: true,
-            fullscreenControl: false
+            fullscreenControl: false,
         });
         __classPrivateFieldSet(this, _GoogleMaps_map, map, "f");
+        console.log(".......api-load............");
+        fire(this, "api-load", {});
         //this.onLoad(map);;
-    }
-    attributeChangedCallback(name, oldVal, newVal) {
-    }
-    connectedCallback() {
-        this.style.height = "100%";
-        this.style.width = "100%";
-        this.style.display = "block";
-        this.init();
     }
     set mark(info) {
         console.log(info);
@@ -393,11 +432,40 @@ export class GoogleMaps extends HTMLElement {
         this.getApi().panTo(latLng);
         this.setZoom(info.zoom);
     }
+    getCenter() {
+        const center = this.getApi().getCenter().toJSON();
+        return {
+            latitude: center.lat,
+            longitude: center.lng,
+        };
+    }
+    getBounds() {
+        return this.getApi().getBounds().toJSON();
+    }
+    fitBounds(bounds) {
+        this.getApi().fitBounds(bounds);
+    }
+    getZoom() {
+        return this.getApi().getZoom();
+    }
     setZoom(zoom) {
         this.getApi().setZoom(zoom);
+        /*
+        const bounds = google.maps.LatLngBoundsLiteral = {
+            north: 10.50941146023254,
+            south: 10.496288400459798,
+            east: -66.83816550256347,
+            west: -66.85996649743652
+          }
+          */
+        //const  southWest = new google.maps.LatLng({ lat: 10.496288400459798, lng:  -66.85996649743652 });
+        //const northEast = new google.maps.LatLng({ lat: 10.50941146023254, lng: -66.83816550256347});
+        //const  southWest = new google.maps.LatLng(10.496288400459798, -66.85996649743652);
+        //const northEast = new google.maps.LatLng(10.50941146023254, -66.83816550256347);
+        //var bounds = new google.maps.LatLngBounds({sw: southWest, ne: northEast});
     }
 }
 _GoogleMaps_config = new WeakMap(), _GoogleMaps_map = new WeakMap();
 GoogleMaps.scriptLoaded = false;
-customElements.define('google-maps', GoogleMaps);
+customElements.define("google-maps", GoogleMaps);
 //# sourceMappingURL=GoogleMaps.js.map

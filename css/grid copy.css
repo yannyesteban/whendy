@@ -1,0 +1,45 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  position: relative;
+  height: 500px;
+  overflow: auto;
+}
+
+.grid .header,
+.grid .footer,
+.grid .row {
+  display: contents;
+}
+
+.grid .header .cell,
+.grid .footer .cell,
+.grid .row .cell {
+  min-width: 200px;
+}
+
+.grid .header .cell {
+  background-color: aqua;
+  position: sticky;
+  top: 0;
+  z-index: 3 !important;
+}
+
+.grid .footer .cell {
+  background-color: aqua;
+  position: sticky;
+  bottom: 0;
+  z-index: 3 !important;
+}
+
+.grid .row:hover .cell {
+  background-color: aqua;
+}
+
+.grid > div div:nth-child(1) {
+  background-color: chocolate;
+  position: sticky;
+  left: 0;
+  z-index: 0;
+}
+/*# sourceMappingURL=grid copy.css.map */

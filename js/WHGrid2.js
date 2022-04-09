@@ -336,4 +336,4 @@ class WHGrid extends HTMLElement {
     }
 }
 customElements.define("wh-grid", WHGrid);
-//# sourceMappingURL=WHGrid.js.map
+//# sourceMappingURL=WHGrid2.js.map

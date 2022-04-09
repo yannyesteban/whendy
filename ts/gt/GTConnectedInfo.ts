@@ -1,6 +1,6 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
-import "../WHTab.js";
+import {WHGrid} from "../WHGrid";
 import { GTUnitStore } from "./GTUnitStore.js";
 
 class GTConnectedInfo extends HTMLElement {
@@ -88,6 +88,7 @@ class GTConnectedInfo extends HTMLElement {
 
 		console.log(source);
 
+		this.units = source.units;
 		customElements.whenDefined("wh-win").then(()=>{
 			const win = $.create("wh-win");
 			const header = win.create("wh-win-header");
@@ -101,6 +102,8 @@ class GTConnectedInfo extends HTMLElement {
 
 			$(this).append(win);
 			this._win = win.get();
+
+			this.createGrid(body)
 		});
 	}
 
@@ -112,6 +115,48 @@ class GTConnectedInfo extends HTMLElement {
 		if(this._win){
 			this._win.visibility = (value)?"visible":"hidden"
 		}
+	}
+
+	createGrid(body){
+		customElements.whenDefined("wh-grid").then(e=>{
+
+			const data = this.units.map(e=>  {
+				return {unitId: e.unitId,
+				unitName: e.unitName,
+				statusName: e.statusName,
+				deviceId: e.deviceId}
+			});
+
+
+			console.log(data)
+			const grid = $(body).create("wh-grid").get() as WHGrid;
+			grid.dataSource = {
+                caption:"datos personales",
+                selectMode:"",
+                fields:[
+                    {
+                        name:"unitId",
+                        caption:"id",
+						hidden: true
+                    },
+                    {
+                        name:"unitName",
+                        caption:"Unidad"
+                    },
+                    {
+                        name:"statusName",
+                        caption:"Status"
+                    },
+                    {
+                        name:"deviceId",
+                        caption:"Devide ID"
+                    },
+                ],
+                data: data
+
+            }
+
+		})
 	}
 
 }

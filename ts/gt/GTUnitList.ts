@@ -1,6 +1,7 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
 import "../WHTab.js";
+import { GTUnitStore } from "./GTUnitStore.js";
 
 class GTUnitList extends HTMLElement {
 
@@ -43,20 +44,32 @@ class GTUnitList extends HTMLElement {
 	}
 
 	public connectedCallback() {
-
+		this._click = this._click.bind(this);
 
 
 	}
 
 	public disconnectedCallback() {
 		console.log("disconnectedCallback");
+		
 	}
 
 	public attributeChangedCallback(name, oldVal, newVal) {
 		console.log("attributeChangedCallback");
-		this[name] = newVal;
+		
 	}
 
+	set value(value){
+		if(Boolean(value)){
+			this.setAttribute("value", value);
+		}else{
+			this.removeAttribute("value");
+		}
+	}
+
+	get value(){
+		return this.getAttribute("value");
+	}
 
 	test() {
 		alert("test")
@@ -79,23 +92,12 @@ class GTUnitList extends HTMLElement {
 			//console.log(source.data);
 			list.prop("dataSource", { data: source.data });
 
-			
-			list.on("change", (event) => {
 
-
-				const store = this.getStore();
-
-				if (store) {
-					store.run("load-units", {
-						unitId: event.target.value,
-						visible: 1,
-						active: 1
-
-					});
-				}
-
+			list.on("change", event=>{
+				this.value = event.target.value;
+				this._click();
 			});
-
+			button.on("click", this._click);
 
 		});
 
@@ -103,7 +105,20 @@ class GTUnitList extends HTMLElement {
 
 	}
 
-	getStore() {
+	_click() {
+		const store = this.getStore();
+
+		if (store) {
+			store.run("load-units", {
+				unitId: this.value,
+				visible: 1,
+				active: 1
+
+			});
+		}
+	}
+
+	getStore():GTUnitStore {
 		return document.querySelector(`gt-unit-store`);
 	}
 

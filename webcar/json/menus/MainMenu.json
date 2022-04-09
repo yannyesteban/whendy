@@ -137,7 +137,7 @@
 			},
 			{
 				"caption": "Consulta de Eventos",
-				"addClass": "event-admin",
+				"addClass": "query",
 				"title": "Consulta de Eventos",
 				"request": {
 					"request": [
@@ -179,7 +179,7 @@
 			},
 			{
 				"caption": "U. Conectadas",
-				"addClass": "search",
+				"addClass": "connection",
 				"title": "Unidades Conectadas",
 				"request": {
 					"request": [
@@ -221,7 +221,7 @@
 			},
 			{
 				"caption": "History",
-				"addClass": "search",
+				"addClass": "history_01",
 				"title": "Historial",
 				"request": {
 					"request": [
@@ -242,7 +242,7 @@
 			},
 			{
 				"caption": "Trazas",
-				"addClass": "search",
+				"addClass": "trace_01",
 				"title": "Trazas",
 				"request": {
 					"request": [
@@ -263,7 +263,7 @@
 			},
 			{
 				"caption": "Registro de Alarmas",
-				"addClass": "search",
+				"addClass": "alarm",
 				"title": "Registro de Alarmas",
 				"request": {
 					"request": [
@@ -284,7 +284,7 @@
 			},
 			{
 				"caption": "Registro de Eventos",
-				"addClass": "search",
+				"addClass": "alert",
 				"title": "Registro de Eventos",
 				"request": {
 					"request": [
@@ -305,7 +305,7 @@
 			},
 			{
 				"caption": "Info",
-				"addClass": "search",
+				"addClass": "info",
 				"title": "info",
 				"request": {
 					"request": [
