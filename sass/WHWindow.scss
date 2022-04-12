@@ -34,13 +34,11 @@ dd {
 }
 
 ::slotted(wh-win-body) {
-	font-style: italic;
+	
 	overflow: auto !important;
 }
 
-:host-context(h1) {
-	font-style: italic;
-}
+
 
 :host:not(:defined) {
 	display: inline-block;

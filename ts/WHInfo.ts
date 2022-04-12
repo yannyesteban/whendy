@@ -1,8 +1,9 @@
 import { Q as $ } from "./Q.js";
 
 
-class WHInfo extends HTMLElement {
+export class WHInfo extends HTMLElement {
 
+    _template = "";
 	constructor() {
 		super();
 
@@ -12,7 +13,7 @@ class WHInfo extends HTMLElement {
 			<style>
 			:host {
 				display:block;
-				border:2px solid red;
+				
 				
 			}
 
@@ -34,12 +35,12 @@ class WHInfo extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ["f", "latitude", "longitude"];
+		return ["mode"];
 	}
 
 	public connectedCallback() {
 
-		$(this).create("div");
+        
 
 
 	}
@@ -77,18 +78,67 @@ class WHInfo extends HTMLElement {
 	}
 
 
+    set mode(value) {
+
+		if (Boolean(value)) {
+			this.setAttribute("mode", value);
+		} else {
+			this.removeAttribute("mode");
+		}
+	}
+
+
+
+	get mode() {
+		return this.getAttribute("mode");
+	}
+
+
+    set template(value) {
+
+		if (Boolean(value)) {
+			this.setAttribute("template", value);
+		} else {
+			this.removeAttribute("template");
+		}
+	}
+
+
+
+	get template() {
+		return this.getAttribute("template");
+	}
+
 	set data(data){
+        if(!this.template){
+            return:
+        }
+        console.log(this.template);
+        const template = document.createElement("template");
+        template.innerHTML = this.template;
+
+        console.log(template, template.content.firstElementChild)
+        let html = template.content.firstElementChild;
+		this.setTemplate(html, data);
+		this.innerHTML = "";
+		this.appendChild(html);
+
+        return
+
+/*
 		let html = this.cloneNode(true);
 		this.setTemplate(html, data);
 		this.shadowRoot.innerHTML = "";
-		this.shadowRoot.appendChild(html);
+		this.shadowRoot.appendChild(html);*/
 	}
 
 
 	setTemplate(template, data, master?) {
 
+        console.log(template)
         /* eval all variables */
 
+        /*
         const myExp: string = template.dataset.exp;
 
         if (myExp !== undefined) {
@@ -96,7 +146,7 @@ class WHInfo extends HTMLElement {
         }
 
         template.removeAttribute("data-exp");
-
+        */
         this.evalAttributes(template, data, master);
 
         template.innerHTML = this.evalHTML(template.innerHTML, data, master);

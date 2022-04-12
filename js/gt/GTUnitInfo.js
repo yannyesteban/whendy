@@ -81,8 +81,10 @@ class GTUnitInfo extends HTMLElement {
             $(this).append(win);
             this._win = win.get();
             //this._win.mode = "modal"
-            const info = body.create("wh-info");
-            info.html(this.template);
+            customElements.whenDefined("wh-win").then(() => {
+                const info = body.create("wh-info").get();
+                info.template = this.template;
+            });
         });
     }
     getStore() {
@@ -109,15 +111,18 @@ class GTUnitInfo extends HTMLElement {
         this._setData();
     }
     _unitsChange({ detail }) {
-        console.log(detail);
+        console.log("detail", detail);
         if (detail.unitId) {
             this._last = detail.unitId;
             this._setData();
         }
     }
     _setData() {
-        const info = $(this).query(`wh-info`);
-        info.prop("data", this._last);
+        const info = this.querySelector(`wh-info`);
+        info.mode = "ready";
+        info.data = this._last;
+        const caption = this.querySelector(`wh-win wh-win-caption`);
+        caption.innerHTML = this._last.unitName;
     }
 }
 customElements.define("gt-unit-info", GTUnitInfo);

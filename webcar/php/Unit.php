@@ -23,7 +23,7 @@ class Unit extends Element
         if ($method) {
             $this->method = $method; //$method = $this->method;
         }
-        
+
         //Tool::hx($this->getUnits('panda', '214', 1, 1,1,1));
         switch ($this->method) {
             case 'init':
@@ -32,42 +32,44 @@ class Unit extends Element
 
             case 'load-units':
 
-                
 
 
-                $data = $this->getUnits('panda', 
-                    
-                    $this->config->clientId?? 0, 
-                    $this->config->accountId?? 0,
-                    $this->config->unitId?? 0, 
-                    $this->config->active?? 0,
-                    $this->config->visible?? 1);
+
+                $data = $this->getUnits(
+                    'panda',
+
+                    $this->config->clientId ?? 0,
+                    $this->config->accountId ?? 0,
+                    $this->config->unitId ?? 0,
+                    $this->config->active ?? 0,
+                    $this->config->visible ?? 1
+                );
 
 
-                   
+
                 $this->addResponse([
                     'mode'  => 'init',
                     'storeData' => [
-                        'name'=> 'units',
+                        'name' => 'units',
                         'data'  => $data
-                        
+
                     ],
                     'replayToken' => $this->replayToken,
                     'setPanel' => $this->setPanel,
                     'appendTo' => $this->appendTo,
                 ]);
                 break;
-                
+
             case 'load-unit-data':
                 $this->addResponse([
                     'mode'  => 'init',
-                    
-                    
-                    
+
+
+
                     'storeData' => [
-                        'name'=> 'unit',
-                        'data'  => $this->getUnitData('panda', $this->config->unitId?? 0, $this->config->active?? 0)
-                        
+                        'name' => 'unit',
+                        'data'  => $this->getUnitData('panda', $this->config->unitId ?? 0, $this->config->active ?? 0)
+
                     ],
                     'replayToken' => $this->replayToken,
                     'setPanel' => $this->setPanel,
@@ -76,11 +78,11 @@ class Unit extends Element
                 break;
 
             case 'load-units-status':
-                
+
                 $this->addResponse([
 
                     'storeData' => [
-                        'name'=> 'units',
+                        'name' => 'units',
                         'data'  => $this->lastUnits('panda')
                     ],
                     'replayToken' => $this->replayToken,
@@ -88,7 +90,6 @@ class Unit extends Element
                     'appendTo' => $this->appendTo,
                 ]);
                 break;
-
         }
 
         return true;
@@ -98,7 +99,7 @@ class Unit extends Element
     public function load()
     {
 
-        
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
@@ -108,7 +109,7 @@ class Unit extends Element
                 'name'  => $this->name,
                 'dataSource' => [
 
-                    "a"=>"esteban"
+                    "a" => "esteban"
                 ],
             ],
             'replayToken' => $this->replayToken,
@@ -143,109 +144,161 @@ class Unit extends Element
         $result = $cn->execute();
 
         return $cn->getDataAll($result);
-
-      
-
-
-      
     }
 
-    public function getUnits($user, $clientId=0, $accountId=0, $unitId=0, $active = 0, $visible = 0){
+    public function getUnits($user, $clientId = 0, $accountId = 0, $unitId = 0, $active = 0, $visible = 0)
+    {
         $cn = DB::get();
-        
+
         $filter = " AND u.id = '$unitId'";
-        
-        if($clientId > 0){
+
+        if ($clientId > 0) {
             $filter = " AND cl.id = '$clientId'";
-        }else if($accountId > 0){
+        } else if ($accountId > 0) {
             $filter = " AND ac.id = '$accountId'";
         }
 
         $path = IMAGES_PATH;
-        
-        $cn->query = "SELECT
-        u.id as unitId,
-        ac.client_id as client_id,
-        cl.name as client,
-        u.account_id,
-        ac.name as account,
-        u.device_id,
-        de.name as device_name,
-        u.vehicle_id,
-        vn.name as vehicle_name,
-        CASE WHEN t.id IS NULL THEN 1 ELSE 0 END as noTracking,
-        CASE WHEN t.id IS NULL THEN 0 ELSE 1 END as valid,
-        vn.name as unitName,
-        CONCAT('$path', ic.icon, '.png') as image, ve.plate, br.name as brand, mo.name as model, ve.color,
-        u.conn_status as connected,
 
-		t.id as trackId,
-        t.date_time,
+        $cn->query = "SELECT
+            u.id as unitId, un.name as unitName, u.device_id as deviceId, de.name as deviceName,
+
+            CONCAT('$path', ic.icon, '.png') as image, ve.plate, br.name as brand, mo.name as model, ve.color,
+
+            m.name as deviceModel, v.version as deviceVersion, IFNULL(v.name, '') as protocol,
+            u.conn_status as connected,
+
+            ac.client_id as clientId, cl.name as client, u.account_id as accountId, ac.name as account,
+
+            CASE WHEN t.id IS NULL THEN 0 ELSE 1 END as tracking,
+            t.id as trackId,
+            #t.date_time as dateTime,
+
+            date_format(t.date_time, '%d/%m/%Y %T') as dateTime,
+            date_format(t.date_time, '%T') as tTime,
+            date_format(t.date_time, '%d/%m/%Y') as tDate,
+
             t.longitude, t.latitude, t.speed, t.heading, t.altitude, t.satellite,
-            t.event_id as eventId, t.mileage, t.input_status as inputStatus, t.voltage_level_i1 as voltageI1, t.voltage_level_i2 as voltageI2,
+            t.event_id as eventId, t.mileage, t.input_status as inputStatus,
+            t.voltage_level_i1 as voltageI1, t.voltage_level_i2 as voltageI2,
             t.output_status as outputStatus, t.battery_voltage as batteryVoltage,
 
-            e.event_id as mainEvent,
-            date_format(t.date_time, '%d/%m/%Y %T') as dateTime,
-            date_format(t.date_time, '%T') as uTime,
-            date_format(t.date_time, '%d/%m/%Y') as uDate,
+            e.event_id as mainEvent, IFNULL(e.title,'') as eventName,
 
             UNIX_TIMESTAMP(now()) as ts,
-            IFNULL(e.title,'') as myEvent,
-            de.name as event,m.name as device_model, v.version,IFNULL(v.name, '') as protocol, 
+
+            de.name as event,
+
+            (SELECT
+
+                JSON_ARRAYAGG(JSON_OBJECT(
+                
+                    'type', ui.type,
+                    'ctype', case ui.type when 1 then 'i' else 'o' end,
+                    'number', number,
+                    'name', i.name,
+                    'on', (t.input_status >> (number - 1 )) % 2,
+                    'value', CASE (t.input_status >> (number - 1 )) % 2 WHEN 1 THEN value_on ELSE value_off END
+                )) 
+
+
+                FROM unit_input as ui
+                INNER JOIN input as i ON i.id = ui.input_id
+                WHERE ui.unit_id = t.unit_id AND ui.type = 1) as inputs,
+
+            (SELECT
+
+                JSON_ARRAYAGG(JSON_OBJECT(
+                    'type', ui.type,
+                    'ctype', case ui.type when 1 then 'i' else 'o' end,
+                    'number', number,
+                    'name', i.name,
+                    'on', (t.output_status >> (number - 1 )) % 2,
+                    'value', CASE (t.output_status >> (number - 1 )) % 2 WHEN 1 THEN value_on ELSE value_off END
+
+                ))
+
+                FROM unit_input as ui
+                INNER JOIN input as i ON i.id = ui.input_id
+                WHERE ui.unit_id = t.unit_id AND ui.type = 2) as outputs,
+
+
             '$active' as active,
             '$visible' as visible,
             0 as follow,
-            0 as tracking
+            0 as tracking,
+            0 as upd
 
 
-        FROM unit as u
-        INNER JOIN user_unit as uu ON uu.unit_id = u.id
-        LEFT JOIN unit_name as vn ON vn.id = u.name_id
+            FROM unit as u
+            INNER JOIN user_unit as uu ON uu.unit_id = u.id
+            LEFT JOIN unit_name as un ON un.id = u.name_id
 
-        LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id
+            LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id
 
-        LEFT JOIN vehicle_brand as br ON br.id = ve.brand_id
-        LEFT JOIN vehicle_model as mo ON mo.id = ve.model_id
+            LEFT JOIN vehicle_brand as br ON br.id = ve.brand_id
+            LEFT JOIN vehicle_model as mo ON mo.id = ve.model_id
 
-        LEFT JOIN device as de ON de.id = u.device_id
-        LEFT JOIN device_version as v on v.id = de.version_id
-        LEFT JOIN device_model as m ON m.id = v.id_model
-        LEFT JOIN device_name as dn ON dn.name = de.name
+            LEFT JOIN device as de ON de.id = u.device_id
+            LEFT JOIN device_version as v on v.id = de.version_id
+            LEFT JOIN device_model as m ON m.id = v.id_model
+            LEFT JOIN device_name as dn ON dn.name = de.name
 
 
-        LEFT JOIN icon as ic ON ic.id = u.icon_id
+            LEFT JOIN icon as ic ON ic.id = u.icon_id
 
-        LEFT JOIN account as ac ON ac.id = u.account_id
-        LEFT JOIN client as cl ON cl.id = ac.client_id
+            LEFT JOIN account as ac ON ac.id = u.account_id
+            LEFT JOIN client as cl ON cl.id = ac.client_id
 
-        LEFT JOIN tracking as t ON t.unit_id = u.id AND t.date_time = u.tracking_date
-      	LEFT JOIN event as e ON e.unit_id = t.unit_id AND e.date_time = t.date_time
-        WHERE uu.user = '$user' 
-        $filter
-        ORDER BY client, account, vehicle_name
+            LEFT JOIN tracking as t ON t.unit_id = u.id AND t.date_time = u.tracking_date
+            LEFT JOIN event as e ON e.unit_id = t.unit_id AND e.date_time = t.date_time
+            WHERE uu.user = '$user' 
+            $filter
+            ORDER BY client, account, unitName
 
         ";
-		
-		//Tool::hx($cn->query);
-		$data = $cn->getJsonAll($cn->execute());
+
+        //Tool::hx($cn->query);
+        $tracking = $cn->getJsonAll($cn->execute());
+
+        $tracking = array_map(function($i){
+            if($i->inputs){
+                $i->inputs = json_decode($i->inputs);
+            }
+
+            if($i->outputs){
+                $i->outputs = json_decode($i->outputs);
+            }
+
+            return $i;
+            
+        }, $tracking);
+        //$tracking = $this->getDataInput($user, $tracking);
+        //$tracking = json_decode(json_encode($tracking, JSON_NUMERIC_CHECK));
+        return $tracking;
 
         $units = [];
 
-        forEach($data as $unit){
-            $units[$unit->unitId] = $unit;
-        }
-         
-		return $units;
+        //Tool::hx($data);
 
+        foreach ($data as $unit) {
+            $units[$unit->unitId] = $unit;
+            $units[$unit->unitId]->inputs = json_decode($units[$unit->unitId]->inputs, JSON_NUMERIC_CHECK);
+            $units[$unit->unitId]->outputs = json_decode($units[$unit->unitId]->outputs, JSON_NUMERIC_CHECK);
+        }
+
+        //Tool::hx($units);
+
+        return $units;
     }
 
 
 
-    public function getUnitData($user, $unitId, $active = 0){
+    public function getUnitData($user, $unitId, $active = 0)
+    {
 
-		$cn = DB::get();
-		$path = PATH_IMAGES;
+        $cn = DB::get();
+        $path = PATH_IMAGES;
         $cn->query = "SELECT
         u.id as unitId,
         ac.client_id as client_id,
@@ -304,25 +357,25 @@ class Unit extends Element
         ORDER BY client, account, vehicle_name
 
         ";
-		
-		$result = $cn->execute();
-		$data = $cn->getJson($result);
+
+        $result = $cn->execute();
+        $data = $cn->getJson($result);
 
         //Tool::hx($cn->query);
-		if($data->trackId??false){
-			$io = $this->evalInput($user, $unitId, $data->inputStatus, $data->outputStatus);
-			$data->inputs = $io['inputs'] ?? [];
-			$data->outputs = $io['outputs'] ?? [];
-		}
-		
-		//hx($cn->query);
+        if ($data->trackId ?? false) {
+            $io = $this->evalInput($user, $unitId, $data->inputStatus, $data->outputStatus);
+            $data->inputs = $io['inputs'] ?? [];
+            $data->outputs = $io['outputs'] ?? [];
+        }
+
+        //hx($cn->query);
         //print_r(json_decode(json_encode($data)));
         return json_decode(json_encode($data, JSON_NUMERIC_CHECK));
-        
     }
 
-	private function evalInput($user, $unitId, $input, $output){
-		
+    private function evalInput($user, $unitId, $input, $output)
+    {
+
         $cn = DB::get();
 
         $cn->query = "SELECT ui.unit_id as unitId,
@@ -356,36 +409,34 @@ class Unit extends Element
 		";
 
         $result = $cn->execute();
-		$data = $cn->getDataAll($result);
-		$inputs = [];
-		$outputs = [];
+        $data = $cn->getDataAll($result);
+        $inputs = [];
+        $outputs = [];
 
-		if(is_array($data)){
+        if (is_array($data)) {
 
-			$inputs = array_filter( $data, function( $v ) {
-				return $v['type'] == 1;
-			});
+            $inputs = array_filter($data, function ($v) {
+                return $v['type'] == 1;
+            });
 
-			$outputs = array_filter( $data, function( $v ) {
-				return $v['type'] == 2;
-			});
-		}
+            $outputs = array_filter($data, function ($v) {
+                return $v['type'] == 2;
+            });
+        }
 
-		return [
-			'inputs' => array_values($inputs),
-			'outputs' => array_values($outputs),
-		];
-
-
-
+        return [
+            'inputs' => array_values($inputs),
+            'outputs' => array_values($outputs),
+        ];
     }
 
 
 
-    public function lastUnits($user){
+    public function lastUnits($user)
+    {
 
-		$cn = DB::get();
-		$path = PATH_IMAGES;
+        $cn = DB::get();
+        $path = PATH_IMAGES;
         $cn->query = "SELECT 
             u.id as unitId,
             vn.name as name,de.name as device, 
@@ -411,17 +462,18 @@ class Unit extends Element
             ORDER BY 2
 
         ";
-		
-		$result = $cn->execute();
+
+        $result = $cn->execute();
 
         $data =  $cn->getJsonAll($result);
+
+        return $data;
         $units = [];
 
-        forEach($data as $unit){
+        foreach ($data as $unit) {
             $units[$unit->unitId] = $unit;
         }
-         
-		return $units;
-    }
 
+        return $units;
+    }
 }

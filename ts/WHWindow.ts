@@ -138,7 +138,7 @@ class WHWinHeader extends HTMLElement {
 customElements.define("wh-win-header", WHWinHeader);
 
 
-class WHWin extends HTMLElement {
+export class WHWin extends HTMLElement {
 
 
 	static get observedAttributes() {

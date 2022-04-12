@@ -1,6 +1,7 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
 import "../WHTab.js";
+import { GTUnitStore } from "./GTUnitStore";
 
 class GTTracking extends HTMLElement {
 
@@ -59,13 +60,29 @@ class GTTracking extends HTMLElement {
 				};
 
 				$(store).on("tracking-data-changed", ({ detail }) => {
-					detail.forEach((unit) => {
-						const data = store.store;
+
+					console.log(detail);
+
+					let active = store.getData("active") || {};
+
+					const data = detail.reduce((data, unit) => {
+						data[unit.unitId] = unit;
+						return data;
+					}, {});
+
+					active = Object.assign(active, data);
+
+					store.updateData("active", active);
 
 
-						data.units[unit.unitId] = Object.assign(data.units[unit.unitId], unit);
-						
-					});
+					const unit = store.getItem("unit");
+					if(unit && data[unit.unitId]){
+						store.updateItem("unit", Object.assign(unit, data[unit.unitId]));
+					}
+
+					
+
+					
 
 				});
 			}
@@ -75,7 +92,7 @@ class GTTracking extends HTMLElement {
 
 	}
 
-	getStore() {
+	getStore(): GTUnitStore {
 		return document.querySelector(`gt-unit-store`);
 	}
 

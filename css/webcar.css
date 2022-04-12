@@ -513,4 +513,120 @@ mapbox-maps {
   height: 100%;
   display: block;
 }
+
+wh-info {
+  height: 100%;
+  display: block;
+  overflow: auto;
+}
+
+wh-info:not([mode]) {
+  display: none;
+}
+
+.info-form-main {
+  background-color: #95173d;
+  padding: 0.2em;
+  overflow: auto;
+  height: 100%;
+  font-size: 0.6em;
+  color: white;
+  text-transform: uppercase;
+}
+
+.info-form-main .row {
+  display: block;
+  min-width: 150px;
+  display: flex !important;
+  flex-direction: row;
+}
+
+.info-form-main .row > * {
+  flex: 1 1 auto;
+}
+
+.info-form-main .row > div:nth-child(1) {
+  text-align: left;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.info-form-main .row > div:nth-child(2) {
+  text-align: right;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.info-form-main .inputs,
+.info-form-main .outputs {
+  margin-top: 3px;
+}
+
+.info-form-main .inputs.inputs,
+.info-form-main .outputs.inputs {
+  background-color: rgba(0, 0, 0, 0.295);
+}
+
+.info-form-main .inputs.inputs > [data-input-value="true"] span:nth-child(2),
+.info-form-main .inputs.inputs [data-input-value="1"] span:nth-child(2),
+.info-form-main .outputs.inputs > [data-input-value="true"] span:nth-child(2),
+.info-form-main .outputs.inputs [data-input-value="1"] span:nth-child(2) {
+  font-weight: bold;
+  color: #fbff09;
+}
+
+.info-form-main .inputs.outputs,
+.info-form-main .outputs.outputs {
+  background-color: rgba(0, 0, 0, 0.205);
+}
+
+.info-form-main .inputs.outputs > [data-input-value="true"] span:nth-child(2),
+.info-form-main .inputs.outputs [data-input-value="1"] span:nth-child(2),
+.info-form-main .outputs.outputs > [data-input-value="true"] span:nth-child(2),
+.info-form-main .outputs.outputs [data-input-value="1"] span:nth-child(2) {
+  font-weight: bold;
+  color: #fae738;
+}
+
+.info-form-main .inputs span:nth-child(1),
+.info-form-main .outputs span:nth-child(1) {
+  width: 50%;
+  text-align: left;
+  display: inline-block;
+}
+
+.info-form-main .inputs span:nth-child(2),
+.info-form-main .outputs span:nth-child(2) {
+  width: 50%;
+  text-align: right;
+  display: inline-block;
+  padding-left: 2px;
+}
+
+.info-form-main .inputs > *,
+.info-form-main .outputs > * {
+  display: block;
+}
+
+.info-form-main.unit-conn-1 .unit-conn .true {
+  color: #075a15;
+  background-color: #9bf767;
+  text-align: center;
+  font-weight: bold;
+}
+
+.info-form-main.unit-conn-1 .unit-conn .false {
+  display: none;
+}
+
+.info-form-main.unit-conn-0 .unit-conn .true {
+  display: none;
+}
+
+.info-form-main.unit-conn-0 .unit-conn .false {
+  color: red;
+  background-color: #fcff33;
+  text-align: center;
+  font-weight: bold;
+}
 /*# sourceMappingURL=webcar.css.map */

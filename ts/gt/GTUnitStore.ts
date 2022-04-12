@@ -182,14 +182,16 @@ export class GTUnitStore extends HTMLElement {
 		
 	}
 
-	updateData(name, value){
+	updateData(key, value){
 		//console.log(name, typeof this._dataStore[name], value)
 
-		if(typeof this._cache[name] === 'object'){
-			this._cache[name] = Object.assign(this._cache[name], value);
+		if(typeof this._cache[key] === 'object'){
+			this._cache[key] = Object.assign(this._cache[key], value);
 		}else{
-			this._cache[name] = value;
+			this._cache[key] = value;
 		}
+
+		fire(this, `${String(key)}-data-set`, value);
 		
 	}
 

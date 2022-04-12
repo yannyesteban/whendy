@@ -23,28 +23,33 @@ export class GTMap extends HTMLElement {
 
         this._unitsChange =  this._unitsChange.bind(this);
         this._unitChange =  this._unitChange.bind(this);
+        this._trackingChange =  this._trackingChange.bind(this);
 
     }
     
+    connectedCallback() {
+        console.log("connectedCallback");
+
+        Tool.whenApp(this).then((app)=>{
+            
+            $(app).on("unit-data-set", this._unitChange);
+            $(app).on("units-data-changed",  this._unitsChange);
+            $(app).on("tracking-data-changed",  this._trackingChange);
+        });
+        
+    }
+
     disconnectedCallback() {
         console.log("disconnectedCallback");
 
         Tool.whenApp(this).then((app)=>{
             $(app).off("unit-data-set", this._unitChange);
             $(app).off("units-data-changed",  this._unitsChange);
+            $(app).off("tracking-data-changed",  this._trackingChange);
         });
     }
 
-    connectedCallback() {
-        console.log("connectedCallback");
-
-        Tool.whenApp(this).then((app)=>{
-            $(app).on("unit-data-set", this._unitChange);
-            $(app).on("units-data-changed",  this._unitsChange);
-        });
-        
-        
-    }
+    
 
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
@@ -60,7 +65,32 @@ export class GTMap extends HTMLElement {
     }
 
     _unitsChange({detail}){
+
+        console.log(detail);
         
+        detail.forEach(info=>{
+            if(info.upd == 1){
+                console.log(89898)
+                this._api.updateMark = {
+                    latitude:info.latitude,
+                    longitude:info.longitude,
+                    heading:info.heading,
+                    name:info.unitName,
+                    icon:info.image,
+                    //visible:(info.visible || info.visible === undefined)? true: false,
+                    //follow:info.follow? true: false,
+                    //trace:info.trace? true: false,
+                    //innerHTML: this.popupTemplate, 
+                    info:info,
+                };
+            }else{
+                console.log(50005)
+                this.mark = info
+            }
+
+        });
+        return;
+        const upd = detail.filter
         console.log(detail);
         for(let x in detail){
             this.mark = detail[x];
@@ -69,9 +99,35 @@ export class GTMap extends HTMLElement {
     
     }
 
-    _unitChange({detail}){
+    _trackingChange({detail}){
+        console.log(detail);
 
-        if(detail.active){
+        this.whenStore().then((store:GTUnitStore)=>{
+
+            const data = store.getData("active");
+
+            for(let x in detail){
+                if(data[x]){
+                    this.mark = detail[x];
+                }
+                
+            }
+            console.log(data)
+            for(let x in data){
+                this.mark = data[x];
+            }
+        });
+        
+        
+        
+        
+    
+    }
+
+
+    _unitChange({detail}){
+        console.log(detail)
+        if(detail.active && detail.upd == 0){
             console.log("ACTIVE");
             this.flyTo(detail.unitName);
         }
@@ -95,6 +151,9 @@ export class GTMap extends HTMLElement {
     set mark(info){
         console.log(info, this._api)
 
+        if(!info.latitude || !info.longitude){
+            return;
+        }
 
         console.log({
             latitude:info.latitude,
@@ -113,13 +172,56 @@ export class GTMap extends HTMLElement {
             heading:info.heading,
             name:info.unitName,
             icon:info.image,
-            visible:info.visible? true: false,
+            visible:(info.visible || info.visible === undefined)? true: false,
             follow:info.follow? true: false,
             trace:info.trace? true: false,
             innerHTML: this.popupTemplate, 
             info:info,
         };
     }
+
+    set updateMark(info){
+
+
+        this.whenStore().then((store:GTUnitStore)=>{
+
+            const data = store.getData("active");
+            console.log(data)
+            for(let x in data){
+                this.mark = data[x];
+            }
+        });
+        console.log(info, this._api)
+
+        if(!info.latitude || !info.longitude){
+            return;
+        }
+
+        console.log({
+            latitude:info.latitude,
+            longitude:info.longitude,
+            heading:info.heading,
+            name:info.unitName,
+            image:info.image,
+            visible:info.visible? true: false,
+            follow:info.follow? true: false,
+            trace:info.trace? true: false,
+            info:info,
+        });
+        this._api.mark = {
+            latitude:info.latitude,
+            longitude:info.longitude,
+            heading:info.heading,
+            name:info.unitName,
+            icon:info.image,
+            visible:(info.visible || info.visible === undefined)? true: false,
+            follow:info.follow? true: false,
+            trace:info.trace? true: false,
+            innerHTML: this.popupTemplate, 
+            info:info,
+        };
+    }
+
     render(){
         console.log("render A");
         

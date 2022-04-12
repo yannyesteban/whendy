@@ -1,6 +1,15 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { Q as $ } from "../Q.js";
-import { getParentElement } from "../Tool.js";
-class GTConnectedInfo extends HTMLElement {
+import * as Tool from "../Tool.js";
+export class GTConnectedInfo extends HTMLElement {
     constructor() {
         super();
         this._win = null;
@@ -33,6 +42,9 @@ class GTConnectedInfo extends HTMLElement {
         return [""];
     }
     connectedCallback() {
+        this._click = this._click.bind(this);
+        this._unitsChange = this._unitsChange.bind(this);
+        console.log("connectedCallback");
     }
     disconnectedCallback() {
         console.log("disconnectedCallback");
@@ -52,7 +64,7 @@ class GTConnectedInfo extends HTMLElement {
         return this.getAttribute("caption");
     }
     getApp() {
-        return getParentElement(this, "wh-app");
+        return Tool.getParentElement(this, "wh-app");
     }
     set dataSource(source) {
         console.log(source);
@@ -67,6 +79,10 @@ class GTConnectedInfo extends HTMLElement {
             $(this).append(win);
             this._win = win.get();
             this.createGrid(body);
+            Tool.whenApp(this).then((app) => {
+                console.log(8);
+                $(app).on("tracking-data-changed", this._unitsChange);
+            });
         });
     }
     getStore() {
@@ -83,6 +99,7 @@ class GTConnectedInfo extends HTMLElement {
                 return { unitId: e.unitId,
                     unitName: e.unitName,
                     statusName: e.statusName,
+                    connected: e.connected,
                     deviceId: e.deviceId };
             });
             console.log(data);
@@ -90,11 +107,12 @@ class GTConnectedInfo extends HTMLElement {
             grid.dataSource = {
                 caption: "datos personales",
                 selectMode: "",
+                rowValues: ["unitId", "unitName", "connected"],
                 fields: [
                     {
                         name: "unitId",
                         caption: "id",
-                        hidden: true
+                        hiddenn: true
                     },
                     {
                         name: "unitName",
@@ -108,9 +126,60 @@ class GTConnectedInfo extends HTMLElement {
                         name: "deviceId",
                         caption: "Devide ID"
                     },
+                    {
+                        name: "connected",
+                        caption: "connected"
+                    }
                 ],
                 data: data
             };
+            $(grid).on("grid-row-click", this._click);
+        });
+    }
+    _unitsChange(event) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("detail", event.detail);
+            const grid = this._getGrid();
+            event.detail.forEach(unit => {
+                let row = grid.querySelector(`wh-grid-row[data-unit-id="${unit.unitId}"]`);
+                if (row) {
+                    const connected = row.getAttribute("data-connected");
+                    console.log(connected, unit.connected, connected == unit.connected);
+                    if (connected == unit.connected) {
+                        return;
+                    }
+                    row.remove();
+                }
+                row = grid.createRow(unit);
+                console.log("detail", unit.connected);
+                console.log(row);
+                if (unit.connected) {
+                    grid.appendFirst(row);
+                    return;
+                }
+                const temp = grid.querySelector(`wh-grid-row[data-connected="0"]`);
+                if (temp) {
+                    temp.insertAdjacentElement("afterend", row);
+                    return;
+                }
+                //grid.insertBefore(row, temp);
+                grid.appendChild(row);
+            });
+        });
+    }
+    _getGrid() {
+        return this.querySelector(`wh-grid`);
+    }
+    _click(event) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const store = this.getStore();
+            if (store) {
+                store.run("load-units", {
+                    unitId: event.detail.data.unitId,
+                    visible: 1,
+                    active: 1
+                });
+            }
         });
     }
 }

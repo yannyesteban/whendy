@@ -1,5 +1,5 @@
 import { Q as $ } from "./Q.js";
-class WHGridCaption extends HTMLElement {
+export class WHGridCaption extends HTMLElement {
     constructor() {
         super();
         const template = document.createElement("template");
@@ -17,7 +17,7 @@ class WHGridCaption extends HTMLElement {
     }
 }
 customElements.define("wh-grid-caption", WHGridCaption);
-class WHGridCell extends HTMLElement {
+export class WHGridCell extends HTMLElement {
     constructor() {
         super();
         const template = document.createElement("template");
@@ -73,7 +73,7 @@ class WHGridCell extends HTMLElement {
     }
 }
 customElements.define("wh-grid-cell", WHGridCell);
-class WHGridRow extends HTMLElement {
+export class WHGridRow extends HTMLElement {
     static get observedAttributes() {
         return ["select-mode", "selected"];
     }
@@ -171,10 +171,11 @@ class WHGridRow extends HTMLElement {
     }
 }
 customElements.define("wh-grid-row", WHGridRow);
-class WHGrid extends HTMLElement {
+export class WHGrid extends HTMLElement {
     constructor() {
         super();
         this._fields = [];
+        this._rowValues = [];
         const template = document.createElement("template");
         template.innerHTML = `
 		<link rel="stylesheet" href="./../css/WHGrid.css">
@@ -257,6 +258,7 @@ class WHGrid extends HTMLElement {
         if (!source.fields) {
             return;
         }
+        this.rowValues = source.rowValues || [];
         this._fields = source.fields;
         const ncols = source.fields.filter(f => !f.hidden);
         this._setGridColumn(ncols.length);
@@ -266,8 +268,18 @@ class WHGrid extends HTMLElement {
         }
         if (source.data) {
             source.data.forEach(info => {
-                this._createRow(info);
+                this.append(this.createRow(info));
             });
+        }
+    }
+    appendFirst(row) {
+        const header = this.querySelector(`[role="header"]`);
+        if (header) {
+            header.insertAdjacentElement("afterend", row);
+        }
+        else {
+            //this.insertAdjacentElement("afterbegin", row);
+            this.append(row);
         }
     }
     _createCaption(caption) {
@@ -275,25 +287,26 @@ class WHGrid extends HTMLElement {
     }
     _craeteHeaderRow(info) {
         const row = $(this).create("wh-grid-row").addClass("header");
+        row.attr("role", "header");
         row.prop("selectMode", this.selectMode);
         info.forEach(data => {
             row.create("wh-grid-cell").attr("hidden", data.hidden || false).ds("field", data.name).html(data.caption);
         });
     }
-    _createRow(info) {
-        const row = $(this).create("wh-grid-row").addClass("row");
+    createRow(info) {
+        const row = $.create("wh-grid-row").addClass("row");
         row.prop("selectMode", this.selectMode);
-        for (let key in info) {
-            const field = this._fields.find(e => e.name == key);
-            if (field) {
-                console.log(key, field.name);
-                row.create("wh-grid-cell")
-                    .attr("hidden", field.hidden || false)
-                    .attr("field", key)
-                    .attr("value", info[key])
-                    .html(info[key]);
-            }
-        }
+        this.rowValues.forEach(key => {
+            row.ds(key, info[key]);
+        });
+        this._fields.forEach(field => {
+            row.create("wh-grid-cell")
+                .attr("hidden", field.hidden || false)
+                .attr("field", field.name || null)
+                .attr("value", info[field.name] || null)
+                .html(info[field.name] || "");
+        });
+        return row.get();
     }
     _getAllRows() {
         return [...this.querySelectorAll(`wh-grid-row.row`)];
@@ -320,6 +333,15 @@ class WHGrid extends HTMLElement {
             sum.push(row.data);
             return sum;
         }, []);
+    }
+    set rowValues(values) {
+        this._rowValues = values;
+    }
+    get rowValues() {
+        return this._rowValues;
+    }
+    set rowData(data) {
+        this.createRow(data);
     }
     _setGridColumn(n) {
         let htmlStyles = window.getComputedStyle(document.querySelector("html"));

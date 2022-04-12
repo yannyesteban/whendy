@@ -1,13 +1,14 @@
 import { Q as $ } from "./Q.js";
-class WHInfo extends HTMLElement {
+export class WHInfo extends HTMLElement {
     constructor() {
         super();
+        this._template = "";
         const template = document.createElement("template");
         template.innerHTML = `
 			<style>
 			:host {
 				display:block;
-				border:2px solid red;
+				
 				
 			}
 
@@ -23,10 +24,9 @@ class WHInfo extends HTMLElement {
         });
     }
     static get observedAttributes() {
-        return ["f", "latitude", "longitude"];
+        return ["mode"];
     }
     connectedCallback() {
-        $(this).create("div");
     }
     disconnectedCallback() {
         console.log("disconnectedCallback");
@@ -51,19 +51,59 @@ class WHInfo extends HTMLElement {
     get visible() {
         return this.hasAttribute("visible");
     }
+    set mode(value) {
+        if (Boolean(value)) {
+            this.setAttribute("mode", value);
+        }
+        else {
+            this.removeAttribute("mode");
+        }
+    }
+    get mode() {
+        return this.getAttribute("mode");
+    }
+    set template(value) {
+        if (Boolean(value)) {
+            this.setAttribute("template", value);
+        }
+        else {
+            this.removeAttribute("template");
+        }
+    }
+    get template() {
+        return this.getAttribute("template");
+    }
     set data(data) {
-        let html = this.cloneNode(true);
+        if (!this.template) {
+            return ;
+        }
+        console.log(this.template);
+        const template = document.createElement("template");
+        template.innerHTML = this.template;
+        console.log(template, template.content.firstElementChild);
+        let html = template.content.firstElementChild;
         this.setTemplate(html, data);
-        this.shadowRoot.innerHTML = "";
-        this.shadowRoot.appendChild(html);
+        this.innerHTML = "";
+        this.appendChild(html);
+        return;
+        /*
+                let html = this.cloneNode(true);
+                this.setTemplate(html, data);
+                this.shadowRoot.innerHTML = "";
+                this.shadowRoot.appendChild(html);*/
     }
     setTemplate(template, data, master) {
+        console.log(template);
         /* eval all variables */
-        const myExp = template.dataset.exp;
+        /*
+        const myExp: string = template.dataset.exp;
+
         if (myExp !== undefined) {
             this.evalExp(myExp, data);
         }
+
         template.removeAttribute("data-exp");
+        */
         this.evalAttributes(template, data, master);
         template.innerHTML = this.evalHTML(template.innerHTML, data, master);
         let child;

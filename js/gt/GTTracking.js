@@ -37,10 +37,18 @@ class GTTracking extends HTMLElement {
                     }
                 };
                 $(store).on("tracking-data-changed", ({ detail }) => {
-                    detail.forEach((unit) => {
-                        const data = store.store;
-                        data.units[unit.unitId] = Object.assign(data.units[unit.unitId], unit);
-                    });
+                    console.log(detail);
+                    let active = store.getData("active") || {};
+                    const data = detail.reduce((data, unit) => {
+                        data[unit.unitId] = unit;
+                        return data;
+                    }, {});
+                    active = Object.assign(active, data);
+                    store.updateData("active", active);
+                    const unit = store.getItem("unit");
+                    if (unit && data[unit.unitId]) {
+                        store.updateItem("unit", Object.assign(unit, data[unit.unitId]));
+                    }
                 });
             }
         });

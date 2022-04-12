@@ -1,5 +1,11 @@
-<div class="info-form-main">
-    <div class="name">{=vehicle_name}</div>
+<div class="info-form-main unit-conn-{=connected}">
+
+    <div class="unit-conn">
+        <div class="true">Unidad Conectada</div>
+        <div class="false">Unidad Desconectada</div>
+    </div>
+    
+    <div class="name">{=unitName}</div>
 
     <div class="row">
         <div>Marca</div>
@@ -23,11 +29,11 @@
 
     <div class="row">
         <div>Fecha</div>
-        <div>{=uDate}</div>
+        <div>{=tDate}</div>
     </div>
     <div class="row">
         <div>Hora</div>
-        <div>{=uTime}</div>
+        <div>{=tTime}</div>
     </div>
     <div class="row">
         <div>Longitud</div>

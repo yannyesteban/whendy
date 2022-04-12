@@ -85,7 +85,7 @@
 		{
 			"id": "gt-map",
 			"appendTo": "#wh-body",
-			"element": "gt-mappp",
+			"element": "gt-map",
 			"name": "",
 			"method": "init",
 			"eparams": {}

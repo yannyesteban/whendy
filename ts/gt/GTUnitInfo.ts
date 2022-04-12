@@ -4,6 +4,7 @@ import "../WHTab.js";
 import { GTUnitStore } from "./GTUnitStore.js";
 import * as Tool from "../Tool.js";
 import { WHInfo } from "../WHInfo.js";
+import {WHWin} from "../WHWindow.js"
 
 class GTUnitInfo extends HTMLElement {
 
@@ -122,8 +123,15 @@ class GTUnitInfo extends HTMLElement {
 			this._win = win.get();
 			//this._win.mode = "modal"
 			
-			const info = body.create("wh-info");
-			info.html(this.template);
+			
+			
+
+			customElements.whenDefined("wh-win").then(() => {
+				const info = body.create("wh-info").get();
+				
+				info.template = this.template;
+				
+			})
 
 		});
 
@@ -165,7 +173,7 @@ class GTUnitInfo extends HTMLElement {
 
 	_unitsChange({detail}){
         
-        console.log(detail);
+        console.log("detail", detail);
 
 		if(detail.unitId){
 			this._last = detail.unitId;
@@ -177,8 +185,17 @@ class GTUnitInfo extends HTMLElement {
     }
 
 	_setData(){
-		const info = $(this).query(`wh-info`) as WHInfo;
-		info.prop("data", this._last);
+		
+		const info = this.querySelector(`wh-info`) as WHInfo;
+		info.mode = "ready";
+		info.data = this._last;
+
+		const caption = this.querySelector(`wh-win wh-win-caption`) as WHWin;
+
+		caption.innerHTML = this._last.unitName;
+
+
+
 	}
 
 }

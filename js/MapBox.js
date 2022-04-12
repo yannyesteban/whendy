@@ -196,8 +196,9 @@ class MapboxMark extends HTMLElement {
     set info(data) {
         console.log(data);
         const popup = document.createElement("wh-info");
-        popup.innerHTML = this.innerHTML;
+        popup.template = this.innerHTML;
         popup.data = data;
+        popup.mode = "ready";
         this._infowindow.setDOMContent(popup);
     }
     set update(info) {
@@ -367,6 +368,13 @@ export class MapboxMaps extends HTMLElement {
         }
         if (!info.visible) {
             mark.remove();
+            return;
+        }
+        mark.prop("update", info);
+    }
+    set updateMark(info) {
+        const mark = $(this.getMark(info.name));
+        if (!mark) {
             return;
         }
         mark.prop("update", info);

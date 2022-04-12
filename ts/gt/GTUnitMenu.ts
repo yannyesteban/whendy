@@ -43,7 +43,7 @@ class GTUnitMenu extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ["f", "latitude", "longitude"];
+		return [];
 	}
 
 	public connectedCallback() {
@@ -59,7 +59,7 @@ class GTUnitMenu extends HTMLElement {
 
 	public attributeChangedCallback(name, oldVal, newVal) {
 		console.log("attributeChangedCallback");
-		this[name] = newVal;
+		
 	}
 
 	set caption(value) {
@@ -215,12 +215,13 @@ class GTUnitMenu extends HTMLElement {
 			});
 
 			$(store).on("units-data-changed", ({ detail }) => {
-				//console.log(detail)
+				console.log(detail)
 
+				console.log(store.getItem("unit"));
 				//console.log(Object.values(detail))
-				const units = Object.values(detail);//.filter(unit=>unit.visible === 1);
-
-				units.forEach(unit => {
+				//const units = Object.values(detail);//.filter(unit=>unit.visible === 1);
+				//console.log(units)
+				detail.forEach(unit => {
 					//console.log(unit)
 					const item = this.getUnitItem(unit.unitId);
 					if (item) {

@@ -44,49 +44,40 @@ class GTUnit extends HTMLElement {
 
 			$(store).on("units-data-changed", ({detail})=>{
 
-				console.log(detail);
-
-
-				const units = Object.values(detail);
-
+				//console.log(detail);
 				
+				const active = Object.assign(store.getData("active") || {}, detail.filter(unit=>unit.visible === 1));
+				store.updateData("active", active);
 
-				const active = units.filter(unit=>unit.visible === 1);
-
-				const obj1 = store.getData("active") || {};
+				//const units = Object.values(detail);
 				
-
-				const obj = {};
-				
-				active.forEach(unit=>{
-					obj[unit.unitId] = unit;
-				});
-
-				
-
-				store.updateData("active", Object.assign(obj1, obj));
-				
-				const unit = units.find(unit=>unit.active === 1);
+				const unit = detail.find(unit=>unit.active === 1);
 				if(unit){
 					store.updateItem("unit", unit);
+				}else{
+					
+					const lastUnit = store.getItem("unit");
+
+					if(lastUnit){
+						detail.filter(unit=>unit.unitId === lastUnit.unitId)
+						.map(unit=>{
+							console.log(lastUnit);
+							store.updateItem("unit", Object.assign(lastUnit, unit));
+						});
+					}
+
+					
+					
 				}
+				
+				
 
 				console.log("DATA: ", store.getData("active"));
 				
 			});
 
 
-			$(store).on("unit-cache-data-set", ({detail})=>{
-				
-
-				//const data = store.getIdentity("unit-cache");
-				//console.log(data, detail)
-				Object.values(detail).forEach(e=>{
-					//store.updateItem('unit', e)
-					console.log(e)
-				})
-
-			});
+			
 			store.registerAction("load-unit", (unitId, active?)=>{
 				return [
 					{
