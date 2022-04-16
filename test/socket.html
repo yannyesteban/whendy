@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/png" href="http://localhost/whendy/favicon.png" sizes="16x16">
+    <link rel="stylesheet" href="./../css/reset.css">
+    <link rel="stylesheet" href="./../css/test.css">
+</head>
+
+<body>
+
+    <gt-socket id="ws" port="3342">WS</gt-socket>
+
+    <button id="a">A</button><button id="b">B</button>
+    
+
+    <script type="module" src="./../js/GT/GTSocket.js"></script>
+    <script type="module">
+        import { Q as $ } from "./../js/q.js";
+
+
+        const comm = {
+            type:"cmd2",
+            unitId:4032,
+            commandId:85,
+            index:4,
+            mode:1,
+            user:"panda",
+            params:[
+                "one", "two", "three", String(4)
+            ]
+        };
+
+        console.log(JSON.stringify(comm).replace(/"/g, '\\\"'));
+
+        $("#a").on("click", event=>{
+            ws.send("yanny esteban");
+        });
+
+
+        $("#b").on("click", event=>{
+            alert("b")
+        });
+    </script>
+</body>
+
+</html>
