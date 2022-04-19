@@ -62,10 +62,10 @@ class GTSocket extends HTMLElement {
 
 		this._connect = $.bind(this._connect, this);
 		
-		this._onOpen = $.bind(this._onOpen, this);
-		this._onClose = $.bind(this._onClose, this);
-		this._onMessage = $.bind(this._onMessage, this);
-		this._onError = $.bind(this._onError, this);
+		//this._onOpen = $.bind(this._onOpen, this);
+		//this._onClose = $.bind(this._onClose, this);
+		//this._onMessage = $.bind(this._onMessage, this);
+		//this._onError = $.bind(this._onError, this);
 
 		this._connect();
 
@@ -188,10 +188,11 @@ class GTSocket extends HTMLElement {
 				console.log("error....")
 			}
 
-			this._socket.onopen = this._onOpen;
-			this._socket.onmessage = this._onMessage;
-			this._socket.onclose = this._onClose;
-			this._socket.onerror = this._onError;
+			this._socket.onopen = this._onOpen.bind(this);
+			this._socket.onmessage = this._onMessage.bind(this);
+			this._socket.onclose = this._onClose.bind(this);
+			this._socket.onerror = this._onError.bind(this);
+			
 		}catch(e){
 			console.log(e)
 		}
@@ -200,6 +201,7 @@ class GTSocket extends HTMLElement {
 
 	_onOpen(event){
 		this.status = "connected";
+		
 	}
 
 	_onMessage(event){
@@ -211,6 +213,8 @@ class GTSocket extends HTMLElement {
 		if(this._socket){
 			this._socket.close();
 		}
+
+		this._socket = null;
 		
 	}
 
@@ -220,8 +224,9 @@ class GTSocket extends HTMLElement {
 		console.log("Try to reconnect in 5 seconds");
 		setTimeout(() => {
 			//db ("Connection lost...!!!");
+			console.log(this)
 			this._connect();
-		}, 5000);
+		}, 1000);
 	}
 
 	_close(){

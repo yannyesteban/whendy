@@ -38,12 +38,32 @@
         console.log(JSON.stringify(comm).replace(/"/g, '\\\"'));
 
         $("#a").on("click", event=>{
-            ws.send("yanny esteban");
+
+            const cmd = {
+                type:"cmd",
+                unitId:4032,
+                command:"100",
+                index:0,
+                mode:1,
+                status:1,
+                name:"comm-100",
+                params:`["1.2","6.4","5.9"] `,
+                query:`["2","6","10"] `,
+                values:`["3","7","11"] `,
+                user:"panda"
+
+            }
+            ws.send(JSON.stringify(cmd));
         });
 
 
         $("#b").on("click", event=>{
-            alert("b")
+            const cmd = {
+                type:"connect",
+                name:"yanny",
+                user:"panda"
+            }
+            ws.send(JSON.stringify(cmd));
         });
     </script>
 </body>

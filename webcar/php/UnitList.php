@@ -25,6 +25,9 @@ class UnitList extends Element
             $this->method = $method; //$method = $this->method;
         }
 
+        Tool::hx($this->proto('panda'));
+
+
         switch ($this->method) {
             case 'init':
                 $this->load();
@@ -61,6 +64,24 @@ class UnitList extends Element
 
 
     private function loadUnits($user)
+    {
+
+        $cn = DB::get();
+        $cn->query = "SELECT u.id as `value` , COALESCE(vn.name, '  -- undefined --') as `text` 
+            FROM unit as u 
+            INNER JOIN user_unit as uu ON uu.unit_id = u.id 
+            INNER JOIN unit_name as vn ON vn.id = u.name_id 
+            LEFT JOIN vehicle as ve ON ve.id = u.vehicle_id 
+            WHERE uu.user = '$user' 
+            ORDER BY text
+        ";
+
+        $result = $cn->execute();
+
+        return $cn->getDataAll($result);
+    }
+
+    private function proto($user)
     {
 
         $cn = DB::get();
