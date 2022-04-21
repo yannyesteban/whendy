@@ -39,7 +39,7 @@
 
         $("#a").on("click", event=>{
 
-            const cmd = {
+            let cmd = {
                 type:"cmd",
                 unitId:4032,
                 command:"100",
@@ -47,7 +47,22 @@
                 mode:1,
                 status:1,
                 name:"comm-100",
-                params:`["1.2","6.4","5.9"] `,
+                params:`["192.168.1.1","6640","44"] `,
+                query:`["2","6","10"] `,
+                values:`["3","7","11"] `,
+                user:"panda"
+
+            };
+
+            cmd = {
+                type:"cmd",
+                unitId:4032,
+                command:"800",
+                index:0,
+                mode:1,
+                status:1,
+                name:"comm-100",
+                params:`["3"]`,
                 query:`["2","6","10"] `,
                 values:`["3","7","11"] `,
                 user:"panda"
