@@ -89,7 +89,7 @@
 
     //x.innerHTML= " AVENGER";
     </script>
-    <script type="module" src="./../js/WHForm2.js"></script>
+    <script type="module" src="./../js/WHForm.js"></script>
     <script type="module">
         import { Q as $ } from "./../js/q.js";
         (function () {
@@ -100,14 +100,19 @@
             $(boton).on("click", e => {
                 $("#f").get().dataSource = {
                     caption: "Form 2",
+                    nav:{
+                        buttons:[
+                            {caption:"www"}
+                        ]
+                    },
                     elements: [
                         {
                             "control": "field",
-                            "label": "nombre:",
+                            "label": "nombre2:",
                             "input": "input",
                             "attr": {
                                 "type": "text",
-                                "name": "name",
+                                "name": "fcff",
                                 "id": "name"
                             },
                             "events": {

@@ -230,7 +230,7 @@ class WHNav extends HTMLElement {
     }
 }
 customElements.define("wh-nav", WHNav);
-class WHForm extends HTMLElement {
+export class WHForm extends HTMLElement {
     constructor() {
         super();
         this._caption = null;
@@ -274,7 +274,14 @@ class WHForm extends HTMLElement {
         formField.addClass(field.className || null);
         formField.create("label").html(field.label).attr("for", field.attr.id || null);
         const input = formField.create(field.input);
+        if (field.defPropertys) {
+            field.defPropertys.forEach(prop => {
+                input.define(prop.name, prop.descriptor);
+            });
+        }
         input.attr(field.attr);
+        input.prop(field.prop);
+        input.ds(field.ds || {});
         input.ds("type", "form-input");
         if (field.events) {
             for (let key in field.events) {
@@ -353,15 +360,11 @@ class WHForm extends HTMLElement {
         return "";
     }
     getValues() {
-        const inputs = this.querySelectorAll(`[data-type="form-input"]`);
-        const data = {};
-        inputs.forEach((e) => {
-            if (e.name) {
-                data[e.name] = e.value;
-            }
-        });
-        console.log(data);
-        return data;
+        const inputs = Array.from(this.querySelectorAll(`[name][data-type="form-input"]`));
+        return inputs.reduce((data, e) => {
+            data[e.name] = e.value;
+            return data;
+        }, {});
     }
     _setCaption(caption) {
         let eleCaption = $(this).query(`:scope > wh-form-caption`);

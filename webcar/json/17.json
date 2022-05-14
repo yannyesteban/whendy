@@ -1,0 +1,2838 @@
+{
+	"date": null,
+	"name": "X0LITE_C8_2.072XT_SG900",
+	"pass": "0000",
+	"sync": 55248,
+	"brand": "Wonde Proud",
+	"model": "VT10",
+	"actions": {
+		"onLast": "Último",
+		"onSave": "Guardar",
+		"onSend": "Enviar",
+		"onConfig": "Config",
+		"onRequest": "Pedir"
+	},
+	"version": "2.072",
+	"commands": [
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Device ID",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Device identification number. The maximum length is 10 digits.\r\nOnly integer can be used. Default device ID is 2000000001\r\nNote:\r\nThe most left digit is reserved in which must be ‘2’."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "New Password",
+					"label": null,
+					"control": "text",
+					"default": "0000",
+					"description": "New password of the device. Default is “0000”"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "PIN Code",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The PIN Code of the SIM card. The maximum length is 8 digits.\r\nNote:\r\nPlease use to clear parameter."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Input 1 delay time interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effect time interval 0~255 100ms"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Input 2 delay time interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effect time interval 0~255 100ms"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Input 3 delay time interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effect time interval 0~255 100ms"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Input 4 delay time interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effect time interval 0~255 100ms"
+				}
+			],
+			"useTag": 3,
+			"command": "UNCFG",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to configure the device ID, device password, PIN code of the\r\nSIM card, and the delay time for input ports (input 1~4)"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "1) If primary communication is GPRS then both parameters “SMSPhone No.” and\r\n“CSD Phone No.” are not required.\r\n2) The port number of GPRS_Server_Port parameter must be opened for the control\r\ncenter software and not conflict with others port which is occupied by OS or other\r\nsoftware.\r\n3) Please enable the GPRS service for the SIM card before start GPRS configuration.\r\nAlso, please obtain related information such as “Access Point Name” (APN), user\r\nname (if applicable), and password (if applicable) for GPRS configuration\r\n($WP+COMMTYPE command).\r\n4) The Static IP address is required for the GPRS communication. Sometimes the\r\nfailure of GPRS connection is caused by the firewall setting enabled.\r\n5) The software developer must implement the function in the control center software\r\nin which must echo back exact GPRS Keep_Alive packet back to the device once\r\nthe base station receives the GPRS Keep_Alive packet which was sent from the\r\ndevice to confirm the GPRS connection.\r\n6) The performance of the GPRS connectivity might be affected by the Keep_Alive\r\npacket interval due to the TELCO policy for the dynamic IP address source control.\r\nThe optimized Keep_Alive Packet interval needs to be tested in the local area in\r\norder to obtain the optimized interval (cost effective).\r\n7) Keep_Alive message format (Data transmission by Hex format)\r\ntypedef struct\r\n{\r\nunsigned short Keep_Alive_Header;\r\nunsigned short Keep_Alive_ID;\r\nunsigned long Keep_Alive_Device_ID;\r\n} Keep_Alivestruct;\r\nKeep_Alive_Header is always 0xD7D0\r\nKeep_Alive_ID is the sequence number for the Keep_Alive message\r\nKeep_Alive_Device ID is the device identification number. The base station could\r\nuse this information to recognize the current holding dynamic IP for each device.\r\nEx:, received Synchronization message following:\r\n0xD0 0xD7 0x1A 0x01 0xC7 0x54 0x44 0x3C\r\nKeep_Alive_Header = 0xD7 0xD0\r\nKeep_Alive_ID = 0x01 0x1A (Decimal = 282)\r\nKeep_Alive_Device_ID = 0x3C 0x44 0x54 0xC7 (Decimal = 1011111111)\r\n8) If the control center software is installed in a computer which is located in the\r\n“Intranet” then the parameter “GPRS_Server_IP” address should be the external\r\none which connects to the router and the parameter “GPRS_Server_Port” should\r\nbe the port number of the computer which is assigned by the router. If the\r\nparameter “GPRS_Server_IP” address is using “Virtual IP address” in the intranet\r\nthen it will lead to the GPRS connection failure.\r\n9) If the device is configured under GPRS mode (GPRS UDP/TCP), the device will\r\nsend the acknowledgement for the receiving command or returning message back\r\nto the GMS SMS base phone number once the device receives the command from\r\na GSM SMS phone number other than GSM SMS base phone number. If the GSM\r\nSMS base phone number is not set then the device will take the parameters but will\r\nnot returning any message back to GSM SMS base phone number or GPRS\r\nserver.\r\n10) Please be aware that if the GSM base phone number is not set, the device has\r\nfollowing behaviors:\r\n- If the device receives any valid incoming command via GSM SMS, the device will\r\nexecute the command, but all acknowledgements or returning message will NOT\r\nbe sent and will be ignored.\r\n- If the device is configured under GPRS mode (GSM base phone number is set),\r\nif the device receives any valid incoming GSM command from a phone number\r\nother than GSM base phone number then the device will execute this command\r\nand return all acknowledgements and returning messages back to the GSM base\r\nphone number.\r\n11) If this command is issued over GSM SMS, please be aware the text length\r\nlimitation of the GSM message.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["1", "1"],
+						["2", "2"],
+						["3", "3"],
+						["4", "4"],
+						["5", "5"]
+					],
+					"mode": "a",
+					"name": "CommSelect",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "Set primary communication type:\r\n1. GSM SMS communication\r\n2. CSD: Circuit Switched Data communication\r\n(Reserved, currently not support)\r\n3. GPRS UDP communication\r\n4. GPRS TCP/IP communication\r\n5. USB port communication\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detection."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "SMS Base Phone No.",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Base phone number for the GSM SMS base station. Maximum\r\nlength is 16 digits (could be ignored if uses GPRS\r\ncommunication).\r\nNote: Please use “” to clear the parameter."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "CSD Base Phone\r\nNo.",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Base phone number for the GSM Circuit Switched Data\r\ncommunication. Maximum length is 16 digits (could be ignored\r\nif uses GPRS communication).\r\nNote: Please use “” to clear the parameter."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_APN",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Access Point Name for GPRS service (required for GPRS\r\ncommunication) The maximum length is 40 characters.\r\nNote: Please use “” to clear the parameter."
+				},
+				{
+					"data": [
+						["0", "0: Disable"],
+						["2", "2. Stop sending messages"],
+						["1", "1: Stop sending messages"]
+					],
+					"mode": "a",
+					"name": "GPRS_Username",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "User name for GPRS service if applicable.\r\nThe maximum length is 31 characters.\r\nNote: Please use “” to clear the parameter."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_Password",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Password for GPRS service if applicable.\r\nThe maximum length is 20 characters"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_Server_\r\nIP_Address",
+					"label": null,
+					"control": "text",
+					"default": "0.0.0.0",
+					"description": "Default setting: 0.0.0.0\r\n1. Static IP address:\r\nformat xxx.xxx.xxx.xxx (Please do not use virtual IP\r\naddress)\r\n2. Host/Domain Name (GPRS_DNS server must be defined)\r\nfor the base station. The maximum length is 40 characters."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_Server_\r\nPort",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The port IP of the computer which the control center software\r\nis operating. The available range is from 1000~65535.\r\nDefault setting: 1000"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_Keep_Alive\r\nPacket Interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "GPRS Keep_Alive Packet is used to establish the GPRS\r\nconnection and maintain the GPRS connectivity between the\r\ndevice and the base station. The range is between 0~65535\r\nseconds.\r\nDefault setting: 30 seconds\r\nNote:\r\nSet to ‘0’ to disable sending GPRS Keep_Alive Packet. This\r\nparameter will not send any Keep_Alive Packet to the control\r\ncenter."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "GPRS_DNS\r\nServer",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Domain Name System IP address. Please contact local ISP for\r\nthe IP address of DNS server. Please use the xxx.xxx.xxx.xxx\r\nas the format for this parameter.\r\nDefault setting: 168.95.1.1"
+				}
+			],
+			"useTag": 3,
+			"command": "COMMTYPE",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set the primary communication type and its related\r\nparameters"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "Deshabilitar"],
+						["1", "Habilitar"]
+					],
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0. Disable GPRS roaming function\r\n1. Enable GPRS roaming function"
+				}
+			],
+			"useTag": 3,
+			"command": "ROAMING",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable GPRS roaming function. This command does\r\nnot affect GSM SMS roaming service. If GPRS roaming function is disabled, the device\r\nwill automatically closed the GPRS session and all undelivered messages would be\r\nstored in the queue buffer. Those undelivered messages would be sent out whenever\r\nthe device returns the non-GPRS roaming network."
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": null,
+			"useTag": 3,
+			"command": "GETLOCATION",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to get current position of the device"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable (Stop tracking)"],
+						["1", "1. Time mode"],
+						["2", "2. Distance mode"],
+						["3", "3. Time AND Distance"],
+						["4", "4. Time OR Distance"],
+						["5", "5. Heading mode"],
+						["6", "6. Heading OR Time"],
+						["7", "7. Heading OR Distance"],
+						["8", "8. Heading OR (Time AND Distance)"],
+						["9", "9. Heading OR Time OR Distance"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0. Disable (Stop tracking)\r\n1. Time mode:\r\nThe position information is sent to the base station according to\r\nthe required time interval, only whole number can be used.\r\nEffective range for different communication types:\r\nDirect Connection: 1~65535 seconds.\r\nGSM SMS: 15~65535 seconds\r\nGSM CSD: 5~65535 seconds\r\nGPRS UDP/TCP/IP: 5~65535 seconds.\r\n\r\n2. Distance mode:\r\nThe position information is sent to the base station according to\r\nthe required distance interval, only whole number can be used.\r\nEffective range for different communication types:\r\nDirect Connection: 25~65535 meters.\r\nGSM SMS: 300 ~65535 meters.\r\nGSM CSD: 100~65535 meters.\r\nGPRS UDP/TCP/IP: 100~65535 meters.\r\n\r\n3. Time AND Distance:\r\nThe position information is sent back to the base station when\r\nfollowing BOTH conditions are satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n4. Time OR Distance\r\nThe position information is sent to the base station when one of the\r\nfollowing condition is satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n5. Heading mode:\r\nThe position information is sent when the “Heading (direction)”\r\nparameter is changed beyond the assigned degrees. Please\r\nenter the required value in the “Heading” column.\r\n\r\n6. Heading OR Time\r\nThe position information is sent back to the base station when\r\none of the following condition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond the\r\nassigned degrees\r\nb. Required “Time Interval” is reached.\r\n\r\n7. Heading OR Distance\r\nThe position information is sent whenever one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required “Distance Interval” is reached.\r\n\r\n8. Heading OR (Time AND Distance)\r\nThe position information is sent back to the base station when\r\none of the following condition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required BOTH “Time AND Distance Interval” are satisfied.\r\n\r\n9. Heading OR Time OR Distance\r\nThe position information is sent whenever one of the following\r\ncondition is satisfied:\r\na. When the “Heading (direction)” parameter is changed\r\nbeyond assigned degrees.\r\nb. Required “Time Interval” is reached.\r\nc. Required “Distance Interval” is reached."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Time Interval",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Specify elapsed time interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option ‘1’ => “Time mode”."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Distance Interval",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Specify elapsed distance interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option ‘2’ => “Distance mode”."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Number of Tracking Times",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Frequency (number of times the report needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously tracking.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while\r\nthe command is executing when we query the command\r\nparameters."
+				},
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"],
+						["2", "2"],
+						["3", "3"]
+					],
+					"mode": "a",
+					"name": "Track Basis",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0. Tracking report is sent ONLY IF GPS is fixed.\r\n1. Tracking report is sent regardless the GPS signal reception\r\n2. Track report is sent when ACC is on and GPS is fixed\r\n3. Track report is sent when ACC is on regardless whether the GPS\r\nsignal is fixed or not."
+				},
+				{
+					"data": [
+						["1", "1. GSM SMS communication"],
+						["2", "2. CSD: Circuit Switched Data communication"],
+						["3", "3. GPRS UDP communication"],
+						["4", "4. GPRS TCP/IP communication"],
+						["5", "5. USB port"]
+					],
+					"mode": "a",
+					"name": "CommSelect",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "Set the output communication channel:\r\n1. GSM SMS communication\r\n2. CSD: Circuit Switched Data communication (Reserved, currently\r\nnot support)\r\n3. GPRS UDP communication\r\n4. GPRS TCP/IP communication\r\n5. USB port\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detectable."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Heading",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The effective value is from 10~90 degrees."
+				}
+			],
+			"useTag": 3,
+			"command": "TRACK",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable automatically reporting current position to the base\r\nstation according to the parameter “mode” and related conditions."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "1) This function follows the FIFO (first in first out algorithm) algorithm.\r\n2) The mode 2,3,5,7,and 8 require the GPS reception. If the GPS reception is not\r\nstable then the accuracy will be decreased.\r\n3) “Record Basis” parameter can be set to 1 or 3 when mode is set to 1,4,6,or 9.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Time mode"],
+						["2", "2. Distance mode"],
+						["3", "3. Time AND Distance"],
+						["4", "4. Time OR Distance"],
+						["5", "5. Heading mode"],
+						["6", "6. Heading OR Time"],
+						["7", "7. Heading OR Distance"],
+						["8", "8. Heading OR (Time AND Distance)"],
+						["9", "9. Heading OR Time OR Distance"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Disable (Stop storing position data into flash memory)\r\n\r\n1. Time mode:\r\nThe position information is logged into the memory of the device\r\naccording to the required time interval, only integer can be used.\r\nEffective parameters:\r\nRange: 1~65535 seconds.\r\n\r\n2. Distance mode:\r\nThe position information is logged into the memory of the device\r\naccording to the required distance interval, only integer can be\r\nused.\r\nRange: 25~65535 meters.\r\nNote:\r\nFor vehicle application, suggest to set 50 meters or above for\r\nbetter performance.\r\n\r\n3. Time AND Distance:\r\nThe position information is logged into the memory of the device\r\naccording to the required “Time interval” AND “Distance interval”;\r\nthe position information is not logged if one of the “Time interval”\r\nand “Distance interval” does not satisfy.\r\n\r\n4. Time OR Distance\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n5. Heading mode:\r\nThe position information is logged when the “Heading (direction)”\r\nparameter is changed beyond the assigned degrees. Please\r\nenter the required value in the “Heading” column.\r\n\r\n6. Heading OR Time\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond the\r\nassigned degrees\r\nb. Required “Time Interval” is reached.\r\n\r\n7. Heading OR Distance\r\nThe position information is logged whenever one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond\r\nassigned degrees\r\nb. Required “Distance Interval” is reached.\r\n\r\n8. Heading OR (Time AND Distance)\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required BOTH “Time AND Distance Interval” are satisfied.\r\n\r\n9. Heading OR Time OR Distance\r\nThe position information is logged whenever one of the following\r\ncondition is reached:\r\na. When the “Heading (direction)” parameter is changed\r\nbeyond assigned degrees.\r\nb. Required “Time Interval” is reached.\r\nc. Required “Distance Interval” is reached."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Time Interval",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Specify elapsed time interval to report current position. Default value\r\nis ‘0’. The effective range, please refer to the “mode” parameters\r\noption 1 “Time mode”."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Distance Interval",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Specify elapsed distance interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option 2 “Distance mode”."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Number of Times",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Frequency (number of times the report needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously logging”.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while\r\nthe command is executing when we query the command parameters."
+				},
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"],
+						["2", "2"],
+						["3", "3"]
+					],
+					"mode": "a",
+					"name": "Record Basis",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Logging function is executed ONLY IF GPS is fixed.\r\n1. Logging function is executed regardless the GPS signal reception.\r\n2. Logging function is executed when ACC is on and GPS is fixed.\r\n3. Logging function is executed when ACC is on regardless whether\r\nthe GPS signal is fixed or not."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Heading",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The effective value is from 10~90 degrees."
+				}
+			],
+			"useTag": 3,
+			"command": "REC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable automatically logging current position into the\r\nmemory of the device according to the parameter “Mode” and corresponding\r\nconditions."
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": null,
+			"useTag": 3,
+			"command": "CLREC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to erase all logging data from the memory of the device."
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Start\r\nDate/Time",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Format of this parameter: YYYYMMDDHHMMSS or ‘0’ (please refer to\r\nthe “Note” section for detail)"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "End\r\nDate/time",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Format of this parameter: YYYYMMDDHHMMSS or ‘0’ (please refer to\r\nthe “Note” section for detail)"
+				}
+			],
+			"useTag": 3,
+			"command": "DLREC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to download request logging data from the memory of the\r\ndevice"
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": null,
+			"useTag": 3,
+			"command": "SPDLREC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to stop downloading process"
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": null,
+			"useTag": 3,
+			"command": "REBOOT",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to reboot the device. All setting will be remained."
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 1,
+			"fields": null,
+			"useTag": 3,
+			"command": "RESET",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to reset the device to factory default settings or pre-set\r\nsettings"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Low Voltage",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set the voltage for the main power low report.\r\nEffective range: 0.00~30.00 V; Default voltage level: 11.50V"
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Input 1"],
+						["2", "2. Input 2"],
+						["4", "4. Input 3"],
+						["8", "8. Input 4"],
+						["16", "16. Main power low"],
+						["32", "32. Main power lost"],
+						["64", "64. Internal battery voltage low"],
+						["256", "256.Main power voltage recover"],
+						["512", "512.Main power recover"],
+						["1024", "1024. Internal battery voltage recover"]
+					],
+					"mode": "a",
+					"name": "Polling",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "If any of specific report triggered then the report will be sent back to\r\nthe control center. This setting is based on the bitwise operation. This\r\nparameter can specify what report would be available. The bitwise\r\ndefinition is following (default setting:127) :\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. Main power low\r\n32. Main power lost\r\n64. Internal battery voltage low\r\n256.Main power voltage recover\r\n512.Main power recover\r\n1024. Internal battery voltage recover"
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Input 1"],
+						["2", "2. Input 2"],
+						["4", "4. Input 3"],
+						["8", "8. Input 4"],
+						["16", "16. Main power low"],
+						["32", "32. Main power lost"],
+						["64", "64. Internal battery voltage low"],
+						["256", "256.Main power voltage recover"],
+						["512", "512.Main power recover"],
+						["1024", "1024. Internal battery voltage recover"]
+					],
+					"mode": "a",
+					"name": "Loggin",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "If any of specific report triggered then report will be stored into the\r\ndevice memory and can be downloaded later. This setting is based\r\non the bitwise operation. This parameter can specify what report\r\nwould be available. The bitwise definition is following:\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. Main power low\r\n32. Main power lost\r\n64. Internal battery voltage low\r\n256.Main power voltage recover\r\n512.Main power recover\r\n1024. Internal battery voltage recover"
+				}
+			],
+			"useTag": 3,
+			"command": "SETDR",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable the default event sending for input\r\ntriggering, main power voltage low/lost, and internal backup battery voltage\r\nlow/recover."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0: Disable the defined report"],
+						["1", "1: Enable report/Enable SMS Roaming"],
+						["2", "2: Enable report/Block SMS Roaming"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0: Disable the defined report.\r\n1: Enable report/Enable SMS Roaming:\r\nAs soon as the User-Defined-Report triggered, the report will be\r\nsent back to the GSM SMS Base Station while the device is in\r\nroaming area.\r\n2: Enable report/Block SMS Roaming: As soon as the\r\nUser-Defined-Report triggered, the report will NOT be sent back to\r\nthe GSM SMS Base Station and will be put in the queue buffer\r\nwhile it is on the roaming. As soon as the device returns back to\r\nhome GSM network then the report will be sent back to the GPRS\r\nserver."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Longitude",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The longitude of center point of defined circle zone."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Latitude",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The latitude of center point of defined circle zone."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Radius",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The radius of the circle zone. The effective range is from 50 to 65535\r\nmeters."
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Inside Zone"],
+						["2", "2. Outside Zone"]
+					],
+					"mode": "a",
+					"name": "Zone Control",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Disable\r\n1. Inside Zone\r\nThe event will be sent when the GPS coordinate is inside the\r\ndefined zones.\r\n2. Outside Zone\r\nThe event will be sent when the GPS coordinate is outside the\r\ndefined zones.\r\nImportant Note:\r\nThis parameter is no longer as used for reference. Zone\r\nControl (Inside Zone or Outside Zone) will be determined by\r\nthe “Function Control” or “Trigger Control” parameters"
+				},
+				{
+					"data": [
+						["1", "1. Logging"],
+						["2", "2. Polling"],
+						["3", "3. Logging and Polling"]
+					],
+					"mode": "a",
+					"name": "Actions",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "This parameter is to define the actions when the conditions become\r\ntrue. The following actions are available:\r\n1. Logging:\r\nWhen the conditions of the defined report are true then the device\r\nwill store the current GPS position information for the specify event\r\ninto the memory.\r\n2. Polling:\r\nWhen the conditions of the defined report are true then the device\r\nwill send the current GPS position information for the specify event\r\nback to the base station.\r\n3. Logging and Polling:\r\nWhen the conditions of the defined report are true then\r\nthe device will store the current GPS position information\r\nfor specific event into memory and send the event back to\r\nthe base station as well."
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Input 1"],
+						["2", "2. Input 2"],
+						["4", "4. Input 3"],
+						["8", "8. input 4"],
+						["16", "16. IG Detection"],
+						["32", "32. Output 1"],
+						["64", "64: Output 2"],
+						["128", "128: Output 3"],
+						["256", "256: Output 4"],
+						["512", "512: Geo-fencing"],
+						["1024", "1024: Scheduling"],
+						["2048", "2048: GPS is fixed"],
+						["4096", "4096: GSM is registered"],
+						["8192", "8192: GPRS is connected"],
+						["16384", "16384: Enter GPRS roaming area."],
+						["32768", "32768: G-Sensor triggering"]
+					],
+					"mode": "a",
+					"name": "Function\r\nUsed",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "This parameter can specify what input port is used as the input\r\ncondition for this specific report. This setting is based on the\r\nbitwise operation. The definitions are :\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. input 4\r\n16. IG Detection\r\n32” Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing\r\n1024: Scheduling\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Input 1"],
+						["2", "2. Input 2"],
+						["4", "4. Input 3"],
+						["8", "8. Input 4"],
+						["16", "16. IG Detection"],
+						["32", "32: Output 1"],
+						["64", "64: Output 2"],
+						["128", "128: Output 3"],
+						["256", "256: Output 4"],
+						["512", "512: Geo-fencing (inside zone)"],
+						["1024", "1024: Scheduling (inside schedule)"],
+						["2048", "2048: GPS is fixed"],
+						["4096", "4096: GSM is registered"],
+						["8192", "8192: GPRS is connected"],
+						["16384", "16384: Enter GPRS roaming area."],
+						["32768", "32768: G-Sensor triggering"]
+					],
+					"mode": "a",
+					"name": "Function\r\nControl",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "This parameter is used to specify the input port which defines in\r\nthe “Input Control” parameters which must be “ON” state.\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. IG Detection\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing (inside zone)\r\n1024: Scheduling (inside schedule)\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected 16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected).\r\nNote:\r\n1. Remaining “Function Used in the “Function Used” must be\r\n“opposite” state as the input triggering condition.\r\n2. If “IG Detection” is selected, then input 1 is available for\r\nconnecting a sensor other than ACC of the vehicle.\r\n3. “Inside Zone”, “Outside Zone”, ‘Inside Schedule”, and\r\n“Outside Schedule” will be controlled by the “Function\r\nControl” parameter."
+				},
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"],
+						["2", "2"],
+						["4", "4"],
+						["8", "8"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "This parameter can specify what output port will be used when\r\nthe condition(s) of the event is true. The setting is based on the\r\nbitwise operation and the definitions is following:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Output 1"],
+						["2", "2. Output 2"],
+						["4", "4. Output 3"],
+						["8", "8. Output 4"]
+					],
+					"mode": "a",
+					"name": "Output\r\nControl",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "This parameter can specify what output port will be activated to\r\n“On” or “Off” when the condition(s) of the event is true. The\r\nsetting is based on the bitwise operation and the definitions is\r\nfollowing:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output\r\nToggle\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Effective range: 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output\r\nToggle\r\nTimes",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. SMS VIP 1"],
+						["2", "2. SMS VIP 2"],
+						["4", "4. SMS VIP 3"],
+						["8", "8. SMS VIP 4"],
+						["16", "16. SMS VIP 5"]
+					],
+					"mode": "a",
+					"name": "SMS VIP\r\nMask",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "If the event is triggered then the device could send a SMS alert to\r\nup to 5 different pre-defined SMS phone number. The SMS VIP\r\nis defined in the $WP+SETVIP command.\r\nThe bitwise definition is following:\r\n0. Disable\r\n1. SMS VIP 1\r\n2. SMS VIP 2\r\n4. SMS VIP 3\r\n8. SMS VIP 4\r\n16. SMS VIP 5\r\nEx:\r\nSet to 12 means enabled (SMS VIP 3 + SMS VIP 4)"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Sat Used",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Valid value 0~12\r\nNote:\r\nIf the number of satellite is less or equal to defined number then\r\nthe report will not be executed."
+				},
+				{
+					"data": [
+						["0", "0: Disable"],
+						["1", "1: Inside Schedule"],
+						["2", "2: Outside Schedule"]
+					],
+					"mode": "a",
+					"name": "Schedule\r\nControl",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0: Disable\r\n1: Inside Schedule\r\n2: Outside Schedule\r\nImportant Note:\r\nThis parameter is no longer used for reference.\r\nSchedule Control (Inside Schedule or Outside schedule)\r\nwill be determined by the “Function Control” or “Trigger\r\nControl” parameters"
+				},
+				{
+					"data": [
+						["1", "1: Sunday"],
+						["2", "2: Monday"],
+						["4", "4: Tuesday"],
+						["8", "8: Wednesday"],
+						["16", "16: Thursday"],
+						["32", "32: Friday"],
+						["64", "64: Saturday"]
+					],
+					"mode": "a",
+					"name": "Day of the\r\nweek",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "1: Sunday\r\n2: Monday\r\n4: Tuesday\r\n8: Wednesday\r\n16:Thursday\r\n32: Friday\r\n64: Saturday"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Schedule Start\r\nTime",
+					"label": null,
+					"control": "text",
+					"default": "000000",
+					"description": "Format: HHMMSS\r\nHH indicates hours: 00~23\r\nMM indicates minutes: 00~59\r\nSS indicates seconds: 00~59"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Schedule\r\nEnd Time",
+					"label": null,
+					"control": "text",
+					"default": "000000",
+					"description": "Format: HHMMSS\r\nHH indicates hours: 00~23\r\nMM indicates minutes: 00~59\r\nSS indicates seconds: 00~59"
+				},
+				{
+					"data": [
+						["1", "1: input 1"],
+						["2", "2: input 2"],
+						["4", "4: input 3"],
+						["8", "8: Input 4"],
+						["16", "16: IG"],
+						["32", "32: Output 1"],
+						["64", "64: Output 2"],
+						["128", "128: Output 3"],
+						["256", "256: Output 4"],
+						["512", "512: Geo-fencing"],
+						["1024", "1024: Scheduling"],
+						["2048", "2048: GPS is fixed"],
+						["4096", "4096: GSM is registered"],
+						["8192", "8192: GPRS is connected"],
+						["16384", "16384: Enter GPRS roaming area"],
+						["32768", "32768: G-Sensor triggering"]
+					],
+					"mode": "a",
+					"name": "Trigger Used",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "1: input 1\r\n2: input 2\r\n4: input 3\r\n8: Input 4\r\n16: IG\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing\r\n1024: Scheduling\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
+				},
+				{
+					"data": [
+						["1", "1: input 1"],
+						["2", "2: input 2"],
+						["4", "4: input 3"],
+						["8", "8: Input 4"],
+						["16", "16: IG"],
+						["32", "32: Output 1"],
+						["64", "64: Output 2"],
+						["128", "128: Output 3"],
+						["256", "256: Output 4"],
+						["512", "512: Geo-fencing (Inside Zone)"],
+						["1024", "1024: Scheduling (Inside Schedule)"],
+						["2048", "1024: Scheduling (Inside Schedule)"],
+						["4096", "4096: GSM is registered"],
+						["8192", "8192: GPRS is connected"],
+						["16384", "16384: Enter GPRS roaming area."],
+						["32768", "32768: G-Sensor triggering"]
+					],
+					"mode": "a",
+					"name": "Trigger\r\nControl",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "1: input 1\r\n2: input 2\r\n4: input 3\r\n8: Input 4\r\n16: IG\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing (Inside Zone)\r\n1024: Scheduling (Inside Schedule)\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Trigger Delay\r\nTime Interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "This time interval is to specify the delay time for “”Trigger\r\nUsed” and “Trigger Control”. After the “Trigger Used”,\r\n“ Trigger Control”, and “Delay” time are all satisfied then it\r\nwill check the conditions “Geo-fencing”, “Input/Output\r\nUsed\r\nEffective range: 0~65535 second"
+				}
+			],
+			"useTag": 3,
+			"command": "SETEVT",
+			"indexed": 1,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set GEO-Fencing, input triggered/output control, and report\r\nschedule"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "VIP 1",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set VIP number 1"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "VIP 2",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set VIP number 2"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "VIP 3",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set VIP number 3"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "VIP 4",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set VIP number 4"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "VIP 5",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Set VIP number 5"
+				}
+			],
+			"useTag": 3,
+			"command": "SETVIP",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set up to 5 different mobile phone numbers for the user\r\ndefined reports."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "0: Disable\r\n1: Enable"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Voltage threshold of ACC off",
+					"label": null,
+					"control": "text",
+					"default": "0.0",
+					"description": "Effective range: 0.0~30.0V"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Voltage threshold of ACC on",
+					"label": null,
+					"control": "text",
+					"default": "0.0",
+					"description": "Effective range: 0.0~30.0V"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Duration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Effective range: 0~65535 seconds"
+				}
+			],
+			"useTag": 3,
+			"command": "SACC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to define voltage level of vehicle battery to detect the ACC\r\non/off event."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Set/Query\r\nCurrent Voltage",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective range: 0.00~30.00V"
+				},
+				{
+					"data": null,
+					"mode": "z",
+					"name": "Voltage Level of Backup Battery",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "AVL",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to calibrate the difference between the voltage reading of the\r\ndevice and the exact voltage level before device installation. This action is suggested\r\nto be done after resetting the device, uploading the firmware, or installing a new\r\ndevice (if the SACC command is used). Once the voltage is calibrated then all related\r\nvoltage level detection such as main power low/recover report, engine on/off report,\r\netc would be based on the calibrated voltage reading."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "0: Disable\r\n1: Stop sending messages with “Event ID” message. (All inputs and\r\noutputs state will not be changed even though the condition of\r\nuser-defined report becomes true.)\r\n2. Stop sending messages with “Event ID” message. (All inputs and\r\noutputs state will be changed if the condition of user-defined\r\nreport becomes true.)"
+				}
+			],
+			"useTag": 3,
+			"command": "DISEV",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable or disable sending all returning messages with\r\n“Event ID” information back to control center. Other commands such as “$WP+VER”\r\nwould be working normally."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Event ID",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Specify the report identifier which will be cleared.\r\nThe effective identifier range is from 100~149.\r\n255: clear all $WP+SETEVT settings."
+				}
+			],
+			"useTag": 3,
+			"command": "CLEVT",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to clear single/all event settings"
+		},
+		{
+			"cat": "X",
+			"mode": "w",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": null,
+			"useTag": 3,
+			"command": "QBCLR",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to clear queue buffer"
+		},
+		{
+			"cat": "I",
+			"mode": "m",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "m",
+					"name": "imei",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "IMEI",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to query the IMEI No. for the internal GSM module"
+		},
+		{
+			"cat": "I",
+			"mode": "m",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "m",
+					"name": "sim_id",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "SIMID",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to query the identification number of the SIM card"
+		},
+		{
+			"cat": "I",
+			"mode": "m",
+			"note": "1. The command is available after the device registered to the GSM/GPRS network.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "m",
+					"name": "GSM Operator",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Name of the Telecommunication corp."
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "GSM signal strength",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "This parameter indicates the signal strength\r\nfor GSM network. The closer the value\r\napproaches to 31, the stronger the signal is.\r\nCSQ dBm\r\n0 -113dBm or less\r\n1 -111dBm\r\n2..30 -109…-53dBm\r\n31 -51dBm or greater\r\n99 not known or not detectable"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "GPRS Status",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "0:GPRS is not connected\r\n1: GPRS is connected"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Roaming Status",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "0: Currently is in home GSM/GPRS network.\r\n1: Currently is in roaming GSM/GPRS network"
+				}
+			],
+			"useTag": 3,
+			"command": "GSMINFO",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to query the Name of the operator, GSM signal strength,\r\nGPRS connection status, and Roaming status."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0: Disable"],
+						["1", "1"],
+						["2", "2"]
+					],
+					"mode": "a",
+					"name": "Auto Mode",
+					"label": null,
+					"control": "bitwise",
+					"default": "0",
+					"description": "0: Disable\r\n1: The event will be sent whenever the information (LAC and CI) is\r\nchanged regardless GPS reception\r\n2: The event will be sent whenever the information (LAC and CI) is\r\nchanged if there is no GPS reception."
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Device ID",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Identification of the device"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Date Time",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Date and Time\r\n(Base on the Time Zone setting)"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "LAC",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Location area code"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "CI",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Cell ID"
+				}
+			],
+			"useTag": 3,
+			"command": "GBLAC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to query or set “auto-reporting” function of the close GSM BTS\r\nlocation information"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "1. If the parameter “Basis” sets to 2, then the input 1 must connect to ACC of the vehicle\r\nor $WP+SACC command must be enabled.\r\n2. The maximum number of Cell ID is 7 sets; only sensed Cell ID will be displayed\r\n3. Due to limited length (less than 160 characters), only 5 sets of Cell ID will be\r\ndisplayed if GSM communication is chosen.\r\n4. The command is available after the device registered to the GSM/GPRS network.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Time",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "he position information is sent to the base station according to the\r\nrequired time interval, only whole number can be used.\r\nEffective range for different communication types:\r\n0: Disable\r\nDirect Connection: 1~65535 seconds.\r\nGSM SMS: 15~65535 seconds\r\nGSM CSD: 5~65535 seconds\r\nGPRS UDP/TCP/IP: 5~65535 seconds."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Number of Times",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Frequency (number of times the event needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously tracking.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while the\r\ncommand is executing when we query the command parameters."
+				},
+				{
+					"data": [
+						["1", "1"],
+						["2", "2"],
+						["0", "0"]
+					],
+					"mode": "a",
+					"name": "Basis",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Event will be sent regardless the state of ACC or GPS.\r\n1. Event will be sent if there is no GPS reception.\r\n2. Event will be sent only if ACC of vehicle is on."
+				},
+				{
+					"data": [
+						["1", "1: GSM SMS communication"],
+						["2", "2: CSD: Circuit Switched Data communication"],
+						["3", "3: GPRS UDP communication"],
+						["4", "4: GPRS TCP/IP communication"],
+						["5", "5: USB port"]
+					],
+					"mode": "a",
+					"name": "CommSelect",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "Set the output communication channel:\r\n1: GSM SMS communication\r\n2: CSD: Circuit Switched Data communication\r\n(Reserved, currently not support)\r\n3: GPRS UDP communication\r\n4: GPRS TCP/IP communication\r\n5: USB port\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detectable"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Device ID",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Device ID of the device"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Date Time",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Date and Time\r\n(Base on the Time Zone setting)"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Satellite",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Number of satellites fixed"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Input Status",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Status of input port"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Analog 1",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Status of analog port 1"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Analog 2",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Status of analog port 2"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Output status",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Status of output port"
+				},
+				{
+					"data": null,
+					"mode": "m",
+					"name": "Cell ID Info.",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "This parameter contains the information of 7\r\ndifferent Cell IDs. For each Cell ID, it provide the\r\nfollowing items:\r\nMobile country code :3 digits\r\nMobile network code :3 digits\r\nLocation area code :4 digits\r\nCell ID: 4 digits\r\nRSSI (Received Signal Strength indication 0~63) :\r\n2 digits"
+				}
+			],
+			"useTag": 3,
+			"command": "MGBLAC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "(Only for Siemens module) Execute this command to query GSM BTS location information (up to 7 different Cell\r\nID)"
+		},
+		{
+			"cat": "I",
+			"mode": "m",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "m",
+					"name": "firmware version",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "VER",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to query the current firmware and hardware version of the\r\ndevice."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "1. If the Speeding mode ‘1’ is selected, when the conditions of speeding report are\r\nsatisfied (speeding) or not satisfied (no speeding), the report only sending once.\r\nFor example, issue $WP+SPD=0000,1,60,120,15,0,0,1,30\r\nIf the vehicle speed is 70 KPH for 40 seconds, the Event (ID 3) would be sent once\r\nin the first 15 seconds. Then if the speed is down to 40 KPH for 20 minutes, then\r\nthe Event (ID 9) would be sent once in the first 15 seconds.\r\n2. If we need only using one specific speed as the condition (send Event ID 3 above\r\nthe speed for defined interval and send Event ID 9 below the speed for defined\r\ninterval) then we can set the specific speed condition in “Minimum Speed”\r\nparameter and set the speed which is not possible to reach in the “Maximum\r\nSpeed” parameters.\r\nFor example, issue $WP+SPD=0000,3,120,255,15,0,0,1,30\r\nThe device will generate a Speeding Event (ID 3) as the vehicle speed is over 120\r\nfor 15 seconds and a Speeding Event (ID 9) as the vehicle speed is below 120 for\r\n30 seconds.\r\n3. If the “Speeding Mode” sets to ‘0’, like $WP+SPD=0000,3,120,255,15,0,0,0,0 then\r\nthe speeding report (ID 3) will be sent every 15 seconds when the vehicle speed is\r\nbetween 120 and 255 KPH continuously.\r\n4. In the Speeding Mode ‘1’, the Event ID 9 will be sent if the ACC is off.\r\nFor example, issue $WP+SPD=0000,3,120,255,15,0,0,1,30. As the speed is lower\r\nthan 120 KPH for only 20 seconds but the ACC is off, the device will generate an\r\nEvent ID 9.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Logging"],
+						["2", "2. Polling"],
+						["3", "3. Logging and Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "This parameter is to define the actions when the conditions become\r\ntrue. The following actions are available:\r\n0. Disable\r\n1. Logging:\r\nWhen the conditions of the defined event are true then the device\r\nwill store the current GPS position information for the specify event\r\ninto the memory.\r\n2. Polling:\r\nWhen the conditions of the defined event are true then the device\r\nwill send the current GPS position information for the specify event\r\nback to the base station.\r\n3. Logging and Polling:\r\nWhen the conditions of the defined event are true then the device\r\nwill store the current GPS position information for specific event\r\ninto memory and send the event back to the base station as well."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Minimum\r\nSpeed",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Set Minimum Speed.\r\nValid range: 0~255 km/hr."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Maximum\r\nSpeed",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Set Maximum Speed.\r\nValid range: 0~255 km/hr"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Speeding\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "The parameter defined the time duration to activate the speeding\r\nevent (Event ID 3).\r\nIn Speeding Mode ‘0’, the range: 15~65535 seconds\r\nIn Speeding Mode ‘1’, the range: 0~ 65535 seconds"
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Output 1"],
+						["2", "2. Output 2"],
+						["3", "3. Output 3"],
+						["4", "4. Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "This parameter can specify what output port is activated when\r\nthe condition(s) of the event is true. The definitions are\r\nfollowing:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n3. Output 3\r\n4. Output 4"
+				},
+				{
+					"data": [
+						["0", "0. Off"],
+						["1", "1.On"]
+					],
+					"mode": "a",
+					"name": "Output\r\nControl",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "This parameter is to set the output state to 0 (off) or 1(on) of\r\nthe defined output port in the “Output Port” parameter.\r\n0. Off\r\n1.On"
+				},
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"]
+					],
+					"mode": "a",
+					"name": "Speeding\r\nMode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: As the GPS speed is in the defined range, the device will send\r\nEvent ID 3 according to the defined duration continually.\r\n1: Enter and End speeding reports:\r\n- As the GPS speed is in the defined range for the defined duration,\r\nEvent ID 3 will be sent once.\r\n- As the GPS speed is out the defined range for the defined duration,\r\nEvent ID 9 will be sent once."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Off-speeding\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "The parameter defined the time duration to activate the off-speeding\r\nevent (Event ID 9).\r\nIn Speeding Mode ‘0’, this parameter is disabled.\r\nIn Speeding Mode ‘1’, the range: 0~ 65535 seconds"
+				}
+			],
+			"useTag": 3,
+			"command": "SPD",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable the speeding event. If the vehicle speed is in/out the\r\nspeeding range (between minimum and maximum speed) for the certain time period\r\n(Duration) then it will trigger the speeding event."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["1", "1.Output 1"],
+						["2", "2.Output 2"],
+						["3", "3.Output 3"],
+						["4", "4.Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "This parameter can specify what output port will be activated.\r\nThe definitions are following:\r\n1.Output 1\r\n2.Output 2\r\n3.Output 3\r\n4.Output 4"
+				},
+				{
+					"data": [
+						["0", "0.Off"],
+						["1", "1. On"]
+					],
+					"mode": "a",
+					"name": "Output Control",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "This parameter is to set the output state to 0 (off) or 1(on) of the\r\ndefined output port in the “Output Port” parameter.\r\n0.Off\r\n1. On"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "To define the time interval of the specific output port staying in\r\nthe specific state.\r\nEffective range: 0~65535 100ms.\r\nEx:\r\n255 100ms = 25.5 seconds"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nTimes",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "To define the times of the specific output port changing from\r\ncurrent state to alternative state and back to the original state\r\nafter reaching the duration.\r\nEffective range: 0~65535 times."
+				}
+			],
+			"useTag": 3,
+			"command": "OUTC",
+			"indexed": 0,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set the output behavior."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0.Disable"],
+						["1", "1.Enable"]
+					],
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0.Disable\r\n1.Enable"
+				}
+			],
+			"useTag": 3,
+			"command": "BATC",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable internal backup battery function."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Logging"],
+						["2", "2. Polling"],
+						["3", "3. Logging + Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0.Disable\r\n1.Logging\r\n2.Polling\r\n3.Logging + Polling"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Satellite Fixed",
+					"label": null,
+					"control": "text",
+					"default": "3",
+					"description": "Effective range: 3~12"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Speed\r\nThreshold",
+					"label": null,
+					"control": "text",
+					"default": "10",
+					"description": "10~255 km/hr"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Tow Duration",
+					"label": null,
+					"control": "text",
+					"default": "30",
+					"description": "30~65535 seconds"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Auto Reset\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "The Tow function will be re-enabled when reaching the end of\r\n“Auto Reset Duration” after the first tow event is triggered.\r\n0~65535 seconds"
+				}
+			],
+			"useTag": 3,
+			"command": "SETTOW",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable Tow alert."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0.Disable"],
+						["1", "1"],
+						["2", "2"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0.Disable\r\n1. Mileage will be accumulated regardless the ACC status.\r\n2. Mileage will be accumulated only if the ACC is on."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Mileage",
+					"label": null,
+					"control": "text",
+					"default": "0.0",
+					"description": "Initial the mileage value (Km).\r\nEffective range is from 0.0~4294967.2"
+				}
+			],
+			"useTag": 3,
+			"command": "SETMILE",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to initial/read mileage accumulator function."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0.Disable"],
+						["1", "1.Enable"]
+					],
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0.Disable\r\n1.Enable"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Timer 1",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Format: HHMMSS (Time format: 24 hours)"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Timer 2",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Format: HHMMSS (Time format: 24 hours)"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Timer 3",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Format: HHMMSS (Time format: 24 hours)"
+				}
+			],
+			"useTag": 3,
+			"command": "TMRR",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set the time for reporting position in specific time. It can be\r\nset up to 3 times per day."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["+", "+: ahead GMT time"],
+						["-", "-: behind GMT time"]
+					],
+					"mode": "a",
+					"name": "Sign",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "+: ahead GMT time\r\n-: behind GMT time"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Hour",
+					"label": null,
+					"control": "text",
+					"default": "00",
+					"description": "Offset hours. Effective range is from 00~13"
+				},
+				{
+					"data": [
+						["00", "00"],
+						["15", "15"],
+						["30", "30"],
+						["45", "45"]
+					],
+					"mode": "a",
+					"name": "Minute",
+					"label": null,
+					"control": "select",
+					"default": "00",
+					"description": "Offset minute (based on 15 minutes basis). Please select one of\r\nfollowing:\r\n00,15,30,45"
+				}
+			],
+			"useTag": 3,
+			"command": "SETTZ",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to setup the local time. The time of returning message will be\r\nbased on the time zone setting. The default time zone is the GMT time."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "1) The Header only shows in the returning report with the Event ID, such as tracking\r\nreport, towing report, over speeding report, or user defined report, etc.",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0.Disable"],
+						["1", "1.Enable"]
+					],
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0.Disable\r\n1.Enable"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Text",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The context in the maximum of 16 characters in ASCII format,\r\nexcept ‘,’."
+				}
+			],
+			"useTag": 3,
+			"command": "RPHEAD",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Enable/Disable to carry the header in returning message."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["1", "1. GPS is fixed."],
+						["2", "2. GSM is registered."],
+						["3", "3. GPRS is connected"],
+						["4", "4. Enter GPRS Roaming"],
+						["5", "5. Vibration detected."],
+						["1", "1. GPS is fixed."],
+						["2", "2. GSM is registered."],
+						["3", "3. GPRS is connected"],
+						["4", "4. Enter GPRS Roaming"],
+						["5", "5. Vibration detected."]
+					],
+					"mode": "w",
+					"name": "Index",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "1. GPS is fixed.\r\n2. GSM is registered.\r\n3. GPRS is connected\r\n4. Enter GPRS Roaming\r\n5. Vibration detected."
+				},
+				{
+					"data": [
+						["0", "0. Output Off"],
+						["1", "1. Output ON"]
+					],
+					"mode": "w",
+					"name": "On/Off",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0. Output Off\r\n1. Output ON"
+				},
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. Output 1"],
+						["2", "2. Output 2"],
+						["3", "3. Output 3"],
+						["4", "4. Output 4"]
+					],
+					"mode": "w",
+					"name": "Output ID",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0. Disable\r\n1. Output 1\r\n2. Output 2\r\n3. Output 3\r\n4. Output 4"
+				},
+				{
+					"data": [
+						["1", "1. GPS is fixed."],
+						["2", "2. GSM is registered."],
+						["3", "3. GPRS is connected"],
+						["4", "4. Enter GPRS Roaming"],
+						["5", "5. Vibration detected."],
+						["1", "1. GPS is fixed."],
+						["2", "2. GSM is registered."],
+						["3", "3. GPRS is connected"],
+						["4", "4. Enter GPRS Roaming"],
+						["5", "5. Vibration detected."]
+					],
+					"mode": "r",
+					"name": "index",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "SETIDC",
+			"indexed": 1,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to Set GPS, GSM, GPRS, Roaming, Vibration Status."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0: Disable"],
+						["1", "1: Logging"],
+						["2", "2: Polling"],
+						["3", "3: Logging + Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
+				},
+				{
+					"data": [
+						["0", "0: No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["3", "3: Output 3"],
+						["4", "4: Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: No Used\r\n1: Output 1\r\n2: Output 2\r\n3: Output 3\r\n4: Output 4"
+				},
+				{
+					"data": [
+						["0", "0: Off"],
+						["1", "1: On"]
+					],
+					"mode": "a",
+					"name": "Output control",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: Off\r\n1: On"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective range 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nTimes",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle\r\nTimes” parameters should be ‘0’ or value other than ‘0’\r\nat the same time."
+				}
+			],
+			"useTag": 3,
+			"command": "CUTANT",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable the external GPS antenna cut off alert."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. SMS VIP 1"],
+						["2", "2. SMS VIP 2"],
+						["4", "4. SMS VIP 3"],
+						["8", "8. SMS VIP 4"],
+						["16", "16. SMS VIP 5"]
+					],
+					"mode": "a",
+					"name": "SETVIP Mask",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "Activate the SMS phone No. which will be accepted by the unit\r\nto return a current position of the unit when receive a call or SMS\r\nwith string “XPOS” from the activating SMS phone No. The SMS\r\nPhone numbers are configured by the $WP+SETVIP command.\r\nThis parameter is using bitwise algorithm and the definition is\r\nfollowing:\r\n0. Disable\r\n1. SMS VIP 1\r\n2. SMS VIP 2\r\n4. SMS VIP 3\r\n8. SMS VIP 4\r\n16. SMS VIP 5\r\nEx:\r\nSet to 12 means enabled (SMS VIP 3 + SMS VIP 4)"
+				},
+				{
+					"data": [
+						["0", "0: No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["3", "3: Output 3"],
+						["4", "4: Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: No Used\r\n1: Output 1\r\n2: Output 2\r\n3: Output 3\r\n4: Output 4"
+				},
+				{
+					"data": [
+						["0", "0: Off"],
+						["1", "1: On"]
+					],
+					"mode": "a",
+					"name": "Output control",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0: Off\r\n1: On"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective range 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nTimes",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				}
+			],
+			"useTag": 3,
+			"command": "XTVPOS",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to activate the defined SMS phone number to get the\r\ncurrent position of the unit by making a call or sending a SMS (content of the\r\nSMS must be “XPOS”)."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0. Disable"],
+						["1", "1. GPS off; GSM on; GPRS on, G-sensor on"],
+						["2", "2. GPS on; GSM on; GPRS off, G-sensor on"],
+						["3", "3. GPS off, GSM on, GPRS off, G-sensor on"],
+						["4", "4. GPS on; GSM off; GPRS off, G-sensor on"],
+						["5", "5. GPS off; GSM off; GPRS off, G-sensor on"],
+						["6", "6. GPS off, GSM off, GPRS off, G-sensor off"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Disable\r\n1. GPS off; GSM on; GPRS on, G-sensor on\r\n2. GPS on; GSM on; GPRS off, G-sensor on\r\n3. GPS off, GSM on, GPRS off, G-sensor on\r\n4. GPS on; GSM off; GPRS off, G-sensor on\r\n5. GPS off; GSM off; GPRS off, G-sensor on\r\n6. GPS off, GSM off, GPRS off, G-sensor off"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Power Down\r\nDelay",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
+				},
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"]
+					],
+					"mode": "a",
+					"name": "Sleeping\r\nMask",
+					"label": null,
+					"control": "select",
+					"default": "0",
+					"description": "0. Device does not go to sleeping mode while the $WP+TRACK\r\ncommand is executing.\r\n1. Device goes to sleeping mode regardless the execution of\r\n$WP+TRACK command"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Power Down\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Power Up\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": "0",
+					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
+				}
+			],
+			"useTag": 3,
+			"command": "PSM",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable the “Power Saving Function” of the device."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0: Disable"],
+						["1", "1: Logging"],
+						["2", "2: Polling"],
+						["3", "3: Logging + Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
+				}
+			],
+			"useTag": 3,
+			"command": "MOTION",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable motion report in which the unit will wake up\r\nand generate a “Motion Report” if movement is detected while in sleeping state."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0: Disable"],
+						["1", "1: Logging"],
+						["2", "2: Polling"],
+						["3", "3: Logging + Polling"],
+						["0", "0: Disable"],
+						["1", "1: Logging"],
+						["2", "2: Polling"],
+						["3", "3: Logging + Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
+				},
+				{
+					"data": [
+						["0", "No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"],
+						["16", "16. Virtual Output 1"],
+						["32", "32. Virtual Output 2"],
+						["64", "64. Virtual Output 3"],
+						["128", "128. Virtual Output 4"],
+						["0", "No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"],
+						["16", "16. Virtual Output 1"],
+						["32", "32. Virtual Output 2"],
+						["64", "64. Virtual Output 3"],
+						["128", "128. Virtual Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": [
+						["0", "No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"],
+						["16", "16. Virtual Output 1"],
+						["32", "32. Virtual Output 2"],
+						["64", "64. Virtual Output 3"],
+						["128", "128. Virtual Output 4"],
+						["0", "No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"],
+						["16", "16. Virtual Output 1"],
+						["32", "32. Virtual Output 2"],
+						["64", "64. Virtual Output 3"],
+						["128", "128. Virtual Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Control",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Toggle Duracion",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Toggle Times",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "SLEEP",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable the GPRS connection and sleeping report for\r\npower saving mode."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": "$WP+FKEY – for X-0 LITE Firmware Version",
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": [
+						["0", "0"],
+						["1", "1"],
+						["2", "2"]
+					],
+					"mode": "a",
+					"name": "Enable/Disable",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "0: Disable the function key.\r\n1: Enable report/Enable SMS Roaming: As soon as the Function\r\nKey triggered, the report will be sent back to the GSM SMS Base\r\nStation while the device is in roaming area.\r\n2: Enable report/Block SMS Roaming: As soon as the Function\r\nKey triggered, the report will NOT be sent back to the GSM SMS\r\nBase Station and will be put in the queue buffer while it is on the\r\nroaming. As soon as the device returns back to home GSM\r\nnetwork then the report will be sent back to the GPRS server."
+				},
+				{
+					"data": [
+						["1", "1: Logging"],
+						["2", "2: Polling"],
+						["3", "3: Logging + Polling"]
+					],
+					"mode": "a",
+					"name": "Mode",
+					"label": null,
+					"control": "select",
+					"default": null,
+					"description": "1: Logging\r\n2: Polling\r\n3: Logging + Polling"
+				},
+				{
+					"data": [
+						["0", "0: Not Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": "0: Not Used\r\n1: Output 1\r\n2: Output 2\r\n4: Output 3\r\n8: Output 4"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Control",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "This parameter can specify what output port will be activated to\r\n“On” or “Off” when the condition(s) of the event is true. The setting\r\nis based on the bitwise operation and the definitions is following:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nDuration",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective range 0~65535 100ms.\r\nNote: Both “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle\r\nTimes",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective Range 0~65535 times.\r\nNote: Both “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Trigger Delay\r\nTime Interval",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "Effective range: 0~65535 seconds.\r\nThis Time Interval is to specify the delay time for Function Key\r\npress and hold. After the “Trigger Delay” time is satisfied the report\r\nwill be sent back to the GSM SMS Base Station according to\r\n“Mode 0: Disable”, “Mode 1: Enable report/Enable SMS Roaming”\r\nor “Mode 2: Enable report/Block SMS Roaming” settings."
+				}
+			],
+			"useTag": 3,
+			"command": "FKEY",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable/disable the Function Key report (external SOS\r\nbutton)."
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": null,
+					"name": "Event ID",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "1. Supports $WP+SETEVT command (Event ID 100~119)\r\n2.. Please use the 255 to clear all labels.\r\ni.e. $WP+LABEL=0000,255"
+				},
+				{
+					"data": null,
+					"mode": null,
+					"name": "Text",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "- Maximum text length is 12 chars.\r\n- Use “ “ to clear the existing defined text."
+				}
+			],
+			"useTag": 3,
+			"command": "LABEL",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to set the header of SMS alert for each\r\nUser-Defined-Event ($WP+SETEVT) and Event ID in the $WP+SETDR\r\ncommand"
+		},
+		{
+			"cat": "C",
+			"mode": "a",
+			"note": null,
+			"label": null,
+			"level": 0,
+			"fields": [
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Phone number",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": "The specific phone number which the device will call out. This phone number supports the international phone calls"
+				},
+				{
+					"data": [
+						["0", "0: No Used"],
+						["1", "1: Output 1"],
+						["2", "2: Output 2"],
+						["4", "4: Output 3"],
+						["8", "8: Output 4"],
+						["16", "16. Virtual Output 1"],
+						["32", "32. Virtual Output 2"],
+						["64", "64. Virtual Output 3"],
+						["128", "128. Virtual Output 4"]
+					],
+					"mode": "a",
+					"name": "Output Port",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": [
+						[null, "0: No Used"],
+						[null, "1: Output 1"],
+						[null, "2: Output 2"],
+						[null, "4: Output 3"],
+						[null, "8: Output 4"],
+						[null, "16. Virtual Output 1"],
+						[null, "32. Virtual Output 2"],
+						[null, "64. Virtual Output 3"],
+						[null, "128. Virtual Output 4"]
+					],
+					"mode": "a",
+					"name": "Output control",
+					"label": null,
+					"control": "bitwise",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Duration",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				},
+				{
+					"data": null,
+					"mode": "a",
+					"name": "Output Toggle Times",
+					"label": null,
+					"control": "text",
+					"default": null,
+					"description": null
+				}
+			],
+			"useTag": 3,
+			"command": "VWT",
+			"indexed": null,
+			"usePass": 1,
+			"exportable": null,
+			"description": "Execute this command to enable voice wiretapping function. Once the device receives this command then it will call out to the assigned phone number automatically. The device will enable microphone and disable speaker function once the phone line is connected. Thus, the user’s conversation will be monitored by the assigned phone number. This function will be disabled automatically once the phone line has been hung up."
+		},
+		{
+			"cat": "e",
+			"mode": "a",
+			"command": "setevent",
+			"description": "Execute this command to set GEO-Fencing, input triggered/output control, and report schedule",
+			"indexed": true,
+			"level": 0,
+			"indexField": "event_id",
+            "indexRange": [100, 129],
+			"indexData": [
+				[100, 100],
+				[129, 129]
+			],
+			"usePassword": true,
+			"useTag": false,
+			"fields": [
+				{
+					"name": "event_id",
+					"label": "event_id",
+					"mode": "a",
+					"type": "index",
+					"data": [],
+					"description": ""
+				},
+				{
+					"name": "mode",
+					"label": "mode",
+					"mode": "a",
+					"type": "select",
+					"value": 0,
+					"data": [
+						[0, "disable"],
+						[1, "Enable report/Enable SMS Roaming"],
+						[2, "Enable report/Block SMS Roaming"]
+					],
+					"description": ""
+				},
+				{
+					"name": "longitude",
+					"label": "longitude",
+					"mode": "a",
+					"type": "text",
+					"description": "The longitude of center point of defined circle zone."
+				},
+				{
+					"name": "latitude",
+					"label": "latitude",
+					"mode": "a",
+					"type": "text",
+					"description": "The latitude of center point of defined circle zone."
+				},
+				{
+					"name": "radius",
+					"label": "radius",
+					"mode": "a",
+					"type": "text",
+					"description": "The radius of the circle zone. The effective range is from 50 to 65535 meters."
+				},
+
+				{
+					"name": "zone_control",
+					"label": "Zone Control",
+					"type": "select",
+					"mode": "a",
+					"value": "0",
+					"data": [
+						[0, "Disable"],
+						[1, "Inside Zone"],
+						[2, "Outside Zone"]
+					],
+					"description": ""
+				},
+				{
+					"name": "actions",
+					"label": "Actions",
+					"mode": "a",
+					"type": "select",
+					"data": [
+						[1, "Logging:"],
+						[2, "Polling:"],
+						[3, "Logging and Polling"]
+					],
+					"description": ""
+				},
+				{
+					"name": "function",
+					"label": "Function Used",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Input 1"],
+						[2, "Input 2"],
+						[4, "Input 3"],
+						[8, "input 4"],
+						[16, "IG Detection"],
+						[32, "Output 1"],
+						[64, "Output 2"],
+						[128, "Output 3"],
+						[256, "Output 4"],
+						[512, "Geo-fencing"],
+						[1024, "Scheduling"],
+						[2048, "GPS is fixed"],
+						[4096, "GSM is registered"],
+						[8192, "GPRS is connected"],
+						[16384, "Enter GPRS roaming area"],
+						[32768, "G-Sensor triggering (movement detected)"]
+					],
+					"description": ""
+				},
+				{
+					"name": "control",
+					"label": "Function Control",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Input 1"],
+						[2, "Input 2"],
+						[4, "Input 3"],
+						[8, "Input 4"],
+						[16, "IG Detection"],
+						[32, "Output 1"],
+						[64, "Output 2"],
+						[128, "Output 3"],
+						[256, "Output 4"],
+						[512, "Geo-fencing"],
+						[1024, "Scheduling"],
+						[2048, "GPS is fixed"],
+						[4096, "GSM is registered"],
+						[8192, "GPRS is connected"],
+						[16384, "Enter GPRS roaming area"],
+						[32768, "G-Sensor triggering (movement detected)"]
+					],
+					"description": ""
+				},
+				{
+					"name": "output_port",
+					"label": "Output Port",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Output 1"],
+						[2, "Output 2"],
+						[4, "Output 3"],
+						[8, "Output 4"]
+					],
+					"description": ""
+				},
+				{
+					"name": "output_control",
+					"label": "Output Control",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Output 1"],
+						[2, "Output 2"],
+						[4, "Output 3"],
+						[8, "Output 4"]
+					],
+					"description": ""
+				},
+				{
+					"name": "duration",
+					"label": "Output Toggle Duration",
+					"mode": "a",
+					"type": "text",
+					"description": "Effective range: 0~65535 100ms"
+				},
+				{
+					"name": "times",
+					"label": "Output Toggle Times",
+					"mode": "a",
+					"type": "text",
+					"description": "Effective Range 0~65535 times"
+				},
+				{
+					"name": "sms_vip_mask",
+					"label": "SMS VIP Mask",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "SMS VIP 1"],
+						[2, "SMS VIP 2"],
+						[4, "SMS VIP 3"],
+						[8, "SMS VIP 4"],
+						[16, "SMS VIP 5"]
+					],
+					"description": ""
+				},
+				{
+					"name": "sat_used",
+					"label": "Sat Used",
+					"mode": "a",
+					"type": "select",
+					"data": [
+						[0, "0"],
+						[1, "1"],
+						[2, "2"],
+						[3, "3"],
+						[4, "4"],
+						[5, "5"],
+						[6, "6"],
+						[7, "7"],
+						[8, "8"],
+						[9, "9"],
+						[10, "10"],
+						[11, "11"],
+						[12, "12"]
+					],
+					"description": ""
+				},
+				{
+					"name": "schedule_control",
+					"label": "Schedule Control",
+					"mode": "a",
+					"type": "select",
+					"data": [
+						[0, "Disable"],
+						[1, "Inside Schedule"],
+						[2, "Outside Schedule"]
+					],
+					"description": ""
+				},
+				{
+					"name": "day_week",
+					"label": "Day of the week",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Domingo"],
+						[2, "Lunes"],
+						[4, "Martes"],
+						[8, "Miércoles"],
+						[16, "Jueves"],
+						[32, "Viernes"],
+						[64, "Sábado"]
+					],
+					"description": ""
+				},
+				{
+					"name": "start_time",
+					"label": "Schedule Start Time",
+					"mode": "a",
+					"type": "text",
+					"description": "Format: HHMMSS"
+				},
+				{
+					"name": "end_time",
+					"label": "Schedule End Time",
+					"mode": "a",
+					"type": "text",
+					"description": "Format: HHMMSS"
+				},
+				{
+					"name": "trigger_used",
+					"label": "Trigger Used",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Input 1"],
+						[2, "Input 2"],
+						[4, "Input 3"],
+						[8, "Input 4"],
+						[16, "IG Detection"],
+						[32, "Output 1"],
+						[64, "Output 2"],
+						[128, "Output 3"],
+						[256, "Output 4"],
+						[512, "Geo-fencing"],
+						[1024, "Scheduling"],
+						[2048, "GPS is fixed"],
+						[4096, "GSM is registered"],
+						[8192, "GPRS is connected"],
+						[16384, "Enter GPRS roaming area"],
+						[32768, "G-Sensor triggering (movement detected)"]
+					],
+					"description": ""
+				},
+				{
+					"name": "trigger_control",
+					"label": "Trigger Control",
+					"mode": "a",
+					"type": "bit",
+					"data": [
+						[1, "Input 1"],
+						[2, "Input 2"],
+						[4, "Input 3"],
+						[8, "Input 4"],
+						[16, "IG Detection"],
+						[32, "Output 1"],
+						[64, "Output 2"],
+						[128, "Output 3"],
+						[256, "Output 4"],
+						[512, "Geo-fencing"],
+						[1024, "Scheduling"],
+						[2048, "GPS is fixed"],
+						[4096, "GSM is registered"],
+						[8192, "GPRS is connected"],
+						[16384, "Enter GPRS roaming area"],
+						[32768, "G-Sensor triggering (movement detected)"]
+					],
+					"description": ""
+				},
+				{
+					"name": "trigger_delay",
+					"label": "Trigger Delay Time Interval",
+					"mode": "a",
+					"type": "text",
+					"description": "Format: HHMMSS"
+				}
+			]
+		}
+	],
+	"headerSync": "0xD0 0xD7",
+	"encode": {
+		"cmd": "$wp\\+<cmd>=<pass><params>\r\n",
+		"icmd": "$$<index><packlen>,<id>,<cmd><params><checksum>\r\n",
+		"packlen": ",<id>,<cmd><params>",
+		"checksum": "$$<packno><packlen>,<id>,<cmd><params>",
+		"fpacklen": ",<id>,<cmd><params>",
+		"fchecksum": "$$<packno><packlen>,<id>,<cmd><params>",
+		"packnoEnd": 126,
+		"commandExp": "$WP+<cmd>=<pass><params>\r\n",
+		"deltaIndex": 58,
+		"packno_end": 126,
+		"delta_index": 58,
+		"packnoBegin": 58,
+		"packno_begin": 58
+	}
+}

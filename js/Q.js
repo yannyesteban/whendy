@@ -193,6 +193,10 @@ export class QElement {
         });
         return this.e.dispatchEvent(event);
     }
+    define(prop, descriptor) {
+        Object.defineProperty(this.e, prop, descriptor);
+        return this;
+    }
 }
 export const Q = (query) => {
     if (query instanceof QElement) {

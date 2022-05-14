@@ -111,7 +111,7 @@ class WHTabPanel extends HTMLElement {
 
 customElements.define("wh-tab-panel", WHTabPanel);
 
-class WHTab extends HTMLElement {
+export class WHTab extends HTMLElement {
 
 	#lastIndex = -1;
 	constructor() {

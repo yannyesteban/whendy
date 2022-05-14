@@ -95,9 +95,6 @@ class GTUnitInfo extends HTMLElement {
 		return this.getAttribute("caption");
 	}
 
-
-
-
 	public getApp() {
 		return getParentElement(this, "wh-app");
 	}
@@ -122,8 +119,6 @@ class GTUnitInfo extends HTMLElement {
 			$(this).append(win);
 			this._win = win.get();
 			//this._win.mode = "modal"
-			
-			
 			
 
 			customElements.whenDefined("wh-win").then(() => {

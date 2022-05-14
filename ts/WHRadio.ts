@@ -64,7 +64,7 @@ class WHRadioOption extends HTMLElement {
 
 	}
 	public connectedCallback() {
-		//this.slot = "checkbox";
+		this.slot = "option";
 
 		if (!this.hasAttribute("role")) {
 			this.setAttribute("role", "radio");

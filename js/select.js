@@ -1,4 +1,8 @@
-class WHSelect extends HTMLElement {
+import { Q as $ } from "./Q.js";
+export class WHSelect extends HTMLElement {
+    static get observedAttributes() {
+        return [];
+    }
     constructor() {
         super();
         const template = document.createElement("template");
@@ -17,9 +21,6 @@ class WHSelect extends HTMLElement {
             //select.innerHTML = this.innerHTML; 
         });
     }
-    static get observedAttributes() {
-        return ["f", "latitude", "longitude"];
-    }
     connectedCallback() {
         const select = this.shadowRoot.querySelector(`select`);
         //select.innerHTML = this.innerHTML; 
@@ -30,6 +31,23 @@ class WHSelect extends HTMLElement {
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
         this[name] = newVal;
+    }
+    set value(value) {
+        this.shadowRoot.querySelector(`select`).value = value;
+    }
+    get value() {
+        return this.shadowRoot.querySelector(`select`).value;
+    }
+    set data(options) {
+        this.innerHTML = "";
+        options.forEach(info => {
+            const option = $(this).create("option");
+            option.value(info[0] || "");
+            option.html(info[1] || "");
+            if (info[2]) {
+                $(option).ds("group", info[2]);
+            }
+        });
     }
 }
 customElements.define("wh-select", WHSelect);

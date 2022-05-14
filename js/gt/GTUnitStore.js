@@ -171,6 +171,7 @@ export class GTUnitStore extends HTMLElement {
         this._request.push(request);
     }
     _play() {
+        return;
         console.log("play");
         this._stop();
         this._timer = setInterval(() => {

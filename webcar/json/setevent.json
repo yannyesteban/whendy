@@ -1,0 +1,310 @@
+{
+	"cat": "e",
+	"mode": "a",
+	"name": "setevent",
+	"description": "Execute this command to set GEO-Fencing, input triggered/output control, and report schedule",
+	"indexed": true,
+	"level": 0,
+	"indexField": "event_id",
+	"indexData": [
+		[100, 100],
+		[129, 129]
+	],
+	"usePassword": true,
+	"useTag": false,
+	"fields": [
+		{
+			"name": "event_id",
+			"label": "event_id",
+			"mode": "a",
+			"type": "index",
+			"data": [],
+			"description": ""
+		},
+		{
+			"name": "mode",
+			"label": "mode",
+			"mode": "a",
+			"type": "select",
+			"value": 0,
+			"data": [
+				[0, "disable"],
+				[1, "Enable report/Enable SMS Roaming"],
+				[2, "Enable report/Block SMS Roaming"]
+			],
+			"description": ""
+		},
+		{
+			"name": "longitude",
+			"label": "longitude",
+			"mode": "a",
+			"type": "text",
+			"description": "The longitude of center point of defined circle zone."
+		},
+		{
+			"name": "latitude",
+			"label": "latitude",
+			"mode": "a",
+			"type": "text",
+			"description": "The latitude of center point of defined circle zone."
+		},
+		{
+			"name": "radius",
+			"label": "radius",
+			"mode": "a",
+			"type": "text",
+			"description": "The radius of the circle zone. The effective range is from 50 to 65535 meters."
+		},
+
+		{
+			"name": "zone_control",
+			"label": "Zone Control",
+			"type": "select",
+			"mode": "a",
+			"value": "0",
+			"data": [
+				[0, "Disable"],
+				[1, "Inside Zone"],
+				[2, "Outside Zone"]
+			],
+			"description": ""
+		},
+		{
+			"name": "actions",
+			"label": "Actions",
+			"mode": "a",
+			"type": "select",
+			"data": [
+				[1, "Logging:"],
+				[2, "Polling:"],
+				[3, "Logging and Polling"]
+			],
+			"description": ""
+		},
+		{
+			"name": "function",
+			"label": "Function Used",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Input 1"],
+				[2, "Input 2"],
+				[4, "Input 3"],
+				[8, "input 4"],
+				[16, "IG Detection"],
+				[32, "Output 1"],
+				[64, "Output 2"],
+				[128, "Output 3"],
+				[256, "Output 4"],
+				[512, "Geo-fencing"],
+				[1024, "Scheduling"],
+				[2048, "GPS is fixed"],
+				[4096, "GSM is registered"],
+				[8192, "GPRS is connected"],
+				[16384, "Enter GPRS roaming area"],
+				[32768, "G-Sensor triggering (movement detected)"]
+			],
+			"description": ""
+		},
+		{
+			"name": "control",
+			"label": "Function Control",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Input 1"],
+				[2, "Input 2"],
+				[4, "Input 3"],
+				[8, "Input 4"],
+				[16, "IG Detection"],
+				[32, "Output 1"],
+				[64, "Output 2"],
+				[128, "Output 3"],
+				[256, "Output 4"],
+				[512, "Geo-fencing"],
+				[1024, "Scheduling"],
+				[2048, "GPS is fixed"],
+				[4096, "GSM is registered"],
+				[8192, "GPRS is connected"],
+				[16384, "Enter GPRS roaming area"],
+				[32768, "G-Sensor triggering (movement detected)"]
+			],
+			"description": ""
+		},
+		{
+			"name": "output_port",
+			"label": "Output Port",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Output 1"],
+				[2, "Output 2"],
+				[4, "Output 3"],
+				[8, "Output 4"]
+			],
+			"description": ""
+		},
+		{
+			"name": "output_control",
+			"label": "Output Control",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Output 1"],
+				[2, "Output 2"],
+				[4, "Output 3"],
+				[8, "Output 4"]
+			],
+			"description": ""
+		},
+		{
+			"name": "duration",
+			"label": "Output Toggle Duration",
+			"mode": "a",
+			"type": "text",
+			"description": "Effective range: 0~65535 100ms"
+		},
+		{
+			"name": "times",
+			"label": "Output Toggle Times",
+			"mode": "a",
+			"type": "text",
+			"description": "Effective Range 0~65535 times"
+		},
+		{
+			"name": "sms_vip_mask",
+			"label": "SMS VIP Mask",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "SMS VIP 1"],
+				[2, "SMS VIP 2"],
+				[4, "SMS VIP 3"],
+				[8, "SMS VIP 4"],
+				[16, "SMS VIP 5"]
+			],
+			"description": ""
+		},
+		{
+			"name": "sat_used",
+			"label": "Sat Used",
+			"mode": "a",
+			"type": "select",
+			"data": [
+				[0, "0"],
+				[1, "1"],
+				[2, "2"],
+				[3, "3"],
+				[4, "4"],
+				[5, "5"],
+				[6, "6"],
+				[7, "7"],
+				[8, "8"],
+				[9, "9"],
+				[10, "10"],
+				[11, "11"],
+				[12, "12"]
+			],
+			"description": ""
+		},
+		{
+			"name": "schedule_control",
+			"label": "Schedule Control",
+			"mode": "a",
+			"type": "select",
+			"data": [
+				[0, "Disable"],
+				[1, "Inside Schedule"],
+				[2, "Outside Schedule"]
+			],
+			"description": ""
+		},
+		{
+			"name": "day_week",
+			"label": "Day of the week",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Domingo"],
+				[2, "Lunes"],
+				[4, "Martes"],
+				[8, "Miércoles"],
+				[16, "Jueves"],
+				[32, "Viernes"],
+				[64, "Sábado"]
+			],
+			"description": ""
+		},
+		{
+			"name": "start_time",
+			"label": "Schedule Start Time",
+			"mode": "a",
+			"type": "text",
+			"description": "Format: HHMMSS"
+		},
+		{
+			"name": "end_time",
+			"label": "Schedule End Time",
+			"mode": "a",
+			"type": "text",
+			"description": "Format: HHMMSS"
+		},
+		{
+			"name": "trigger_used",
+			"label": "Trigger Used",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Input 1"],
+				[2, "Input 2"],
+				[4, "Input 3"],
+				[8, "Input 4"],
+				[16, "IG Detection"],
+				[32, "Output 1"],
+				[64, "Output 2"],
+				[128, "Output 3"],
+				[256, "Output 4"],
+				[512, "Geo-fencing"],
+				[1024, "Scheduling"],
+				[2048, "GPS is fixed"],
+				[4096, "GSM is registered"],
+				[8192, "GPRS is connected"],
+				[16384, "Enter GPRS roaming area"],
+				[32768, "G-Sensor triggering (movement detected)"]
+			],
+			"description": ""
+		},
+		{
+			"name": "trigger_control",
+			"label": "Trigger Control",
+			"mode": "a",
+			"type": "bit",
+			"data": [
+				[1, "Input 1"],
+				[2, "Input 2"],
+				[4, "Input 3"],
+				[8, "Input 4"],
+				[16, "IG Detection"],
+				[32, "Output 1"],
+				[64, "Output 2"],
+				[128, "Output 3"],
+				[256, "Output 4"],
+				[512, "Geo-fencing"],
+				[1024, "Scheduling"],
+				[2048, "GPS is fixed"],
+				[4096, "GSM is registered"],
+				[8192, "GPRS is connected"],
+				[16384, "Enter GPRS roaming area"],
+				[32768, "G-Sensor triggering (movement detected)"]
+			],
+			"description": ""
+		},
+		{
+			"name": "trigger_delay",
+			"label": "Trigger Delay Time Interval",
+			"mode": "a",
+			"type": "text",
+			"description": "Format: HHMMSS"
+		}
+	]
+}

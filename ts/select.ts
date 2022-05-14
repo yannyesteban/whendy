@@ -1,4 +1,10 @@
-class WHSelect extends HTMLElement {
+import { Q as $ } from "./Q.js";
+
+export class WHSelect extends HTMLElement {
+	
+	static get observedAttributes() {
+		return [];
+	}
 	
 	constructor() {
 		super();
@@ -30,9 +36,6 @@ class WHSelect extends HTMLElement {
 		
 	}
 
-	static get observedAttributes() {
-		return ["f", "latitude", "longitude"];
-	}
 
 	public connectedCallback() {
 		const select = this.shadowRoot.querySelector(`select`);
@@ -47,6 +50,34 @@ class WHSelect extends HTMLElement {
 		console.log("attributeChangedCallback");
 		this[name] = newVal;
 	}
+
+	set value(value) {
+		
+		this.shadowRoot.querySelector(`select`).value = value;
+		
+		
+	}
+
+	get value() {
+		
+		return this.shadowRoot.querySelector(`select`).value;
+	}
+
+	set data(options){
+		this.innerHTML = "";
+
+		options.forEach(info=>{
+			const option = $(this).create("option");
+			option.value(info[0] || "") ;
+			option.html(info[1] || "");
+			if(info[2]){
+				$(option).ds("group", info[2])
+			}
+		})
+	}
+	
+
+	
 	
 }
 

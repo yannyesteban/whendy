@@ -71,7 +71,7 @@ class ConnectedInfo extends Element
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
-                'caption'=>'Unidades Conectadas',
+                'caption'=>'Unidades Conectadas...',
                 'dataSource' => [
                     'win'=>$win, 
                     'units'=>$this->lastUnits('panda')

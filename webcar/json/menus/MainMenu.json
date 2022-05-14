@@ -106,12 +106,12 @@
 							"element": "gt-command",
 							"name": null,
 							"method": "init",
-							"config": {}
+							"config": {"unitId":null}
 						}
 					]
 				},
 				"events": {
-					"link-action": "this.send = true;"
+					"link-action": "const unit = this.getApp().querySelector('gt-unit-store').getItem('unit'); if(unit){this.request.request[0].config.unitId = unit.unitId;};this.send = true;"
 				}
 			},
 			{

@@ -12,7 +12,9 @@ class GTSocket extends HTMLElement {
 			<style>
 			:host {
 				display:block;
-				border:2px solid red;
+				border:0px solid red;
+				height:10px;
+				width:10px;
 				
 			}
 
@@ -85,6 +87,28 @@ class GTSocket extends HTMLElement {
     }
     get port() {
         return this.getAttribute("port");
+    }
+    set user(value) {
+        if (Boolean(value)) {
+            this.setAttribute("user", value);
+        }
+        else {
+            this.removeAttribute("user");
+        }
+    }
+    get user() {
+        return this.getAttribute("user");
+    }
+    set name(value) {
+        if (Boolean(value)) {
+            this.setAttribute("name", value);
+        }
+        else {
+            this.removeAttribute("name");
+        }
+    }
+    get name() {
+        return this.getAttribute("name");
     }
     set status(value) {
         if (Boolean(value)) {

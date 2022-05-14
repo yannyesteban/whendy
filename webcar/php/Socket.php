@@ -45,23 +45,22 @@ class Socket extends Element
     {
 
 
-        $this->popupFile =  TEMPLATES_PATH.'info/unit-popup.html';
-        $this->template = Store::loadFile($this->popupFile);
 
-        
+
         $this->addResponse([
             'mode'  => 'init',
             'type'  => 'element',
-            'wc'    => 'gt-map',
+            'wc'    => 'gt-socket',
             'id'    => $this->id,
             'props' => [
-                'api'=>'google',
-                'popupTemplate' => Store::loadFile($this->popupFile),
+
+                'port' => 3342,
+                'user' => 'panda',
                 'dataSource' => [
 
                     'marks' => [],
-                    
-                    
+
+
                 ],
             ],
             'replayToken' => $this->replayToken,
@@ -96,10 +95,5 @@ class Socket extends Element
         $result = $cn->execute();
 
         return $cn->getDataAll($result);
-
-      
-
-
-      
     }
 }

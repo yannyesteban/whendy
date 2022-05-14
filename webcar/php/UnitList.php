@@ -25,7 +25,7 @@ class UnitList extends Element
             $this->method = $method; //$method = $this->method;
         }
 
-        Tool::hx($this->proto('panda'));
+        //Tool::hx($this->proto('panda'));
 
 
         switch ($this->method) {

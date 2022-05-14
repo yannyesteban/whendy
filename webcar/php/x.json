@@ -57,36 +57,108 @@
 			"checksum"
 		],
 		"tracking_field": [
-			{ "name": "alarm", "type": "info" },
-			{ "name": "fix_flag", "type": "info" },
-			{ "name": "hdop", "type": "info" },
-			{ "name": "odometer", "type": "info" },
-			{ "name": "bs_inf", "type": "info" },
-			{ "name": "csq", "type": "info" },
-			{ "name": "system_sta", "type": "info" },
-			{ "name": "input_status", "type": "hex" },
-			{ "name": "output_status", "type": "hex" },
-			{ "name": "voltage", "type": "info" },
-			{ "name": "pro_code", "type": "info" },
-			{ "name": "fule_liter", "type": "info" },
-			{ "name": "temp_sensor", "type": "info" },
-			{ "name": "obd", "type": "info" }
+			{
+				"name": "alarm",
+				"type": "info"
+			},
+			{
+				"name": "fix_flag",
+				"type": "info"
+			},
+			{
+				"name": "hdop",
+				"type": "info"
+			},
+			{
+				"name": "odometer",
+				"type": "info"
+			},
+			{
+				"name": "bs_inf",
+				"type": "info"
+			},
+			{
+				"name": "csq",
+				"type": "info"
+			},
+			{
+				"name": "system_sta",
+				"type": "info"
+			},
+			{
+				"name": "input_status",
+				"type": "hex"
+			},
+			{
+				"name": "output_status",
+				"type": "hex"
+			},
+			{
+				"name": "voltage",
+				"type": "info"
+			},
+			{
+				"name": "pro_code",
+				"type": "info"
+			},
+			{
+				"name": "fule_liter",
+				"type": "info"
+			},
+			{
+				"name": "temp_sensor",
+				"type": "info"
+			},
+			{
+				"name": "obd",
+				"type": "info"
+			}
 		],
 		"ttracking_field": {
-			"csq": { "type": "info" },
-			"obd": { "type": "info" },
-			"hdop": { "type": "info" },
-			"alarm": { "type": "info" },
-			"bs_inf": { "type": "info" },
-			"voltage": { "type": "info" },
-			"fix_flag": { "type": "info" },
-			"odometer": { "type": "info" },
-			"pro_code": { "type": "info" },
-			"fule_liter": { "type": "info" },
-			"system_sta": { "type": "info" },
-			"temp_sensor": { "type": "info" },
-			"input_status": { "to": "input_status", "type": "hex" },
-			"output_status": { "to": "input_status", "type": "hex" }
+			"csq": {
+				"type": "info"
+			},
+			"obd": {
+				"type": "info"
+			},
+			"hdop": {
+				"type": "info"
+			},
+			"alarm": {
+				"type": "info"
+			},
+			"bs_inf": {
+				"type": "info"
+			},
+			"voltage": {
+				"type": "info"
+			},
+			"fix_flag": {
+				"type": "info"
+			},
+			"odometer": {
+				"type": "info"
+			},
+			"pro_code": {
+				"type": "info"
+			},
+			"fule_liter": {
+				"type": "info"
+			},
+			"system_sta": {
+				"type": "info"
+			},
+			"temp_sensor": {
+				"type": "info"
+			},
+			"input_status": {
+				"to": "input_status",
+				"type": "hex"
+			},
+			"output_status": {
+				"to": "input_status",
+				"type": "hex"
+			}
 		}
 	},
 	"encode": {
@@ -137,6 +209,15 @@
 					"label": null,
 					"control": "text",
 					"default": null,
+					"description": null
+				},
+				{
+					"data": null,
+					"mode": "q",
+					"name": "index",
+					"label": null,
+					"control": "text",
+					"default": 1111,
 					"description": null
 				}
 			],

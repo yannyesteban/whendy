@@ -111,7 +111,7 @@ export class App extends HTMLElement {
                 case "panel":
                     break;
                 case "update":
-
+                    console.log(item)
                     this.updateElement(item)
                     break;
                 case "response":
@@ -379,12 +379,13 @@ export class App extends HTMLElement {
             })
             .catch((error) => { })
             .then((json) => {
-                console.log(json);
+               
                 if (info.requestFunction) {
+                    console.log(json);
                     info.requestFunction(json);
                     return true;
                 }
-
+                console.log(json);
                 this.decodeResponse(json, info.requestFunctions || null);
             });
     }
