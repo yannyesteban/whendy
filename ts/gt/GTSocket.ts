@@ -3,7 +3,7 @@ import { getParentElement } from "../Tool.js";
 import "../WHTab.js";
 import { GTUnitStore } from "./GTUnitStore.js";
 
-class GTSocket extends HTMLElement {
+export class GTSocket extends HTMLElement {
 
 	_win = null;
 	_menu = null;

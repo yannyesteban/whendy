@@ -90,7 +90,7 @@ class WHOption extends HTMLElement {
 }
 customElements.define("wh-option", WHOption);
 
-class ListText extends HTMLElement {
+export class ListText extends HTMLElement {
 
 
 

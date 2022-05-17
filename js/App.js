@@ -44,6 +44,10 @@ export class App extends HTMLElement {
     decodeResponse(data, requestFunctions) {
         console.log(data);
         data.forEach((item) => {
+            if (item.replayToken && requestFunctions && requestFunctions[item.replayToken]) {
+                requestFunctions[item.replayToken](item.data);
+                return;
+            }
             if (item.iToken && requestFunctions && requestFunctions[item.iToken]) {
                 requestFunctions[item.iToken](item.data);
                 return;

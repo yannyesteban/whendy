@@ -121,6 +121,17 @@
 			}
 		},
 		{
+			"id": "gt-rapid-command",
+			"type": "element",
+			"appendTo": ".menu-5",
+			"element": "gt-rapid-command",
+			"name": null,
+			"method": "init",
+			"config": {
+				
+			}
+		},
+		{
 			
 			"appendTo": "#main-tool",
 			"element": "menu",
@@ -167,7 +178,8 @@
 		"../js/gt/GTTrace.js",
 		"../js/gt/GTUnitInfo.js",
 		"../js/gt/GTProtoForm.js",
-		"../js/gt/GTSocket.js"
+		"../js/gt/GTSocket.js",
+		"../js/gt/GTRapidCommand.js"
 
 		
 	],

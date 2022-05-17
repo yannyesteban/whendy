@@ -113,11 +113,11 @@ export class WHInfo extends HTMLElement {
         if(!this.template){
             return:
         }
-        console.log(this.template);
+        
         const template = document.createElement("template");
         template.innerHTML = this.template;
 
-        console.log(template, template.content.firstElementChild)
+        
         let html = template.content.firstElementChild;
 		this.setTemplate(html, data);
 		this.innerHTML = "";
@@ -135,7 +135,7 @@ export class WHInfo extends HTMLElement {
 
 	setTemplate(template, data, master?) {
 
-        console.log(template)
+        
         /* eval all variables */
 
         /*

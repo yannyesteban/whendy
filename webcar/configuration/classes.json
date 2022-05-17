@@ -202,5 +202,11 @@
         "enable": true,
         "file": "{@MODULE_PATH}php/AppLayout.php",
         "class": "\\GT\\AppLayout"
+    },
+    {
+        "name": "gt-rapid-command",
+        "enable": true,
+        "file": "{@MODULE_PATH}php/RapidCommand.php",
+        "class": "\\GT\\RapidCommand"
     }
 ]

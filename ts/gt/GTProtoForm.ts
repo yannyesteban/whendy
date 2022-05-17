@@ -19,39 +19,12 @@ class GTProtoForm extends HTMLElement {
 	}
 
 	constructor() {
+
 		super();
 
-		return;
-		const template = document.createElement("template");
-
-		template.innerHTML = `
-			<style>
-			:host {
-				display:block;
-				border:2px solid red;
-				
-			}
-
-			:host:not(:defined) {
-				display:none;
-				
-			}
-			</style><slot></slot>
-
-			`;
-
-		this.attachShadow({ mode: "open" });
-
-		this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-		const slot = this.shadowRoot.querySelector("slot");
-
-		slot.addEventListener("slotchange", (e) => {
-			//const nodes = slot.assignedNodes();
-		});
 	}
 
-	public connectedCallback() {}
+	public connectedCallback() { }
 
 	public disconnectedCallback() {
 		console.log("disconnectedCallback");
@@ -116,25 +89,36 @@ class GTProtoForm extends HTMLElement {
 			index = 0;
 		}
 
+
 		console.log(source, "....");
 		this.innerHTML = "";
 		const form = $(this).create("wh-form").get() as WHForm;
 
-		const values = ["yan", "este", "nun", "jim", "alb", "x1", "x2"];
+		let values = [];
+
+		if(source.last){
+			values = source.values;
+		}else if (source._mode == "2") {
+			values = source.params;
+		}
+
+		//const values = ["yan", "este", "nun", "jim", "alb", "x1", "x2"];
 
 		let indexInput = null;
+
+
 
 		if (source.indexed) {
 			let data = "";
 
 
 
-			
+
+
 			if (source.indexData) {
 				data = source.indexData.reduce((str, item) => {
-					str += `<option value="${item[0] || ""}" ${
-						index == (item[0] || "") ? "selected" : ""
-					}>${item[1] || ""}</option>`;
+					str += `<option value="${item[0] || ""}" ${index == (item[0] || "") ? "selected" : ""
+						}>${item[1] || ""}</option>`;
 					return str;
 				}, "");
 			}
@@ -150,20 +134,43 @@ class GTProtoForm extends HTMLElement {
 					type: "select",
 					name: `index`,
 					id: `index`,
-					value: index,
+
 				},
 				prop: {
 					innerHTML: data,
+					value: index,
 				},
 				events: {
 					change: (e) => {
-						this._createForm(source, mode, e.target.value);
+
+						this.load({
+							unitId: source.unitId,
+							command: source.command,
+							mode: mode,
+							index: e.target.value,
+							buttons: source.buttons
+
+						});
+
+
+
 					},
 				},
 			};
 
-			
+
 			console.log(index);
+
+			const validIndex = source.indexData.find(data => data[0] == index);
+
+			if (!validIndex) {
+				form.dataSource = {
+					caption: source.label,
+					elements: [indexInput]
+				};
+				return;
+			}
+
 		}
 
 		const descriptInput = {
@@ -177,6 +184,7 @@ class GTProtoForm extends HTMLElement {
 				type: "text",
 				name: `name`,
 				id: `name`,
+				value: source.name || "",
 			},
 		};
 
@@ -191,43 +199,57 @@ class GTProtoForm extends HTMLElement {
 		console.log(mode);
 		console.log(source.fields);
 		if (!source.fields) {
-			return;
+			source.fields = [];
 		}
 
 		const fields = source.fields
 			.filter((field) => field.mode === mode)
 			.map((field, i: number) => {
 
-
+				
 				let input = "input";
 				let type = "text";
 				let data = field.data;
 				let defPropertys = null;
 				let value = values[i] || "";
 
-				switch(field.type){
+				switch (field.type) {
 					case "index":
 						value = index;
 						break;
 					case "select":
 						input = "wh-select";
+						
 						break;
 					case "bit":
 						input = "wh-check";
+						
 						defPropertys = [
 							{
-								name:"value",
-								descriptor:{
-									get: function() { 
-									
-										return [...this.querySelectorAll(`wh-check-option[checked]`)].reduce((sum, option)=>{
+								name: "value",
+								descriptor: {
+									get: function () {
+
+										return [...this.querySelectorAll(`wh-check-option[checked]`)].reduce((sum, option) => {
 											sum += Number(option.value);
 											return sum;
 										}, 0);
 
 									},
-									set: function(newValue) { 
-										this.value = newValue; 
+									set: function (newValue) {
+										console.log(newValue);
+										[...this.querySelectorAll(`wh-check-option`)].forEach(input => {
+											if (
+												(parseInt(value, 10) & parseInt(input.value, 10)) ==
+												parseInt(input.value)
+											) {
+												input.checked = true;
+											} else {
+												input.checked = false;
+											}
+										})
+
+
 									},
 								}
 							}
@@ -243,17 +265,21 @@ class GTProtoForm extends HTMLElement {
 					},
 					attr: {
 						type: type,
-						name: `param_${index}`,
-						id: `param_${index}`,
+						name: `param_${i}`,
+						id: `param_${i}`,
+
+					},
+					prop: {
+						data,
 						value: value,
 					},
-					prop:{
-						data
-					},
 					defPropertys
-					
+
 				};
 			});
+
+
+			
 
 		const buttons = [];
 
@@ -340,7 +366,17 @@ class GTProtoForm extends HTMLElement {
 			buttons.push({
 				caption: source.onLast,
 				events: {
-					click: "console.log('onLast')",
+					click: (event)=>{
+						this.load({
+							unitId: source.unitId,
+							command: source.command,
+							mode: mode,
+							index: index,
+							buttons: source.buttons,
+							last: true
+
+						});
+					},
 				},
 			});
 		}
@@ -361,7 +397,9 @@ class GTProtoForm extends HTMLElement {
 				},
 			};
 		}
+		
 	}
+
 	getValues(form) {
 		const inputs = Array.from(
 			form.querySelectorAll(
@@ -410,6 +448,74 @@ class GTProtoForm extends HTMLElement {
 
 		return "";
 	}
+
+	loadCommand(command) {
+
+		this._createForm(command, command.mode, command.index);
+
+
+	}
+
+	load(info) {
+		this._go([
+			{
+				"type": "element",
+				"element": "gt-rapid-command",
+				"name": null,
+				"method": "load-command-data",
+				"config": {
+					unitId: info.unitId,
+					command: info.command,
+					index: info.index || 0,
+					mode: info.mode || 1,
+					role: info.role || "",
+					buttons: info.buttons || [],
+					last: info.last || false
+				},
+				"replayToken": "processData",
+
+			}
+		]);
+	}
+
+	_go(request) {
+
+
+		const req = {
+			confirm: "?",
+			valid: true,
+
+			data: {},
+			requestFunctions: {
+				processData: (data) => {
+
+
+					console.log(data)
+
+
+					this.loadCommand(data);
+
+				}
+			},
+			//requestFunction : null,
+			requestFunctionn: (data) => {
+				console.log(data)
+
+				return;
+
+
+
+
+			},
+			request,
+		};
+
+		console.log(req)
+
+		console.log(this)
+		this.getApp().go(req);
+
+	}
 }
 
 customElements.define("gt-proto-form", GTProtoForm);
@@ -456,7 +562,7 @@ class GTProto extends HTMLElement {
 		});
 	}
 
-	public connectedCallback() {}
+	public connectedCallback() { }
 
 	public disconnectedCallback() {
 		console.log("disconnectedCallback");
@@ -491,11 +597,11 @@ class GTProto extends HTMLElement {
 		this._data = source;
 		console.log(source);
 		if (source.commands) {
-			this._buid();
+			this._build();
 		}
 	}
 
-	_buid() {
+	_build() {
 		const tab = new WHTab();
 		tab.dataSource = {
 			className: "",
@@ -571,7 +677,7 @@ class GTProto extends HTMLElement {
 	createPage(cat: string) {
 		const page = document.createElement("div");
 
-		const list = $(page).create("wh-list-text") as ListText;
+		const list = $(page).create("wh-list-text");
 		const body = $(page).create("gt-proto-form");
 
 		//body.prop("unitId", this._data.unit.unitId);
@@ -588,6 +694,28 @@ class GTProto extends HTMLElement {
 		};
 
 		list.on("change", (event) => {
+
+			let buttons = ["onSave", "onSend", "onConfig", "onLast", "onRequest"];
+			if (cat === "i") {
+				buttons = ["onSend", "onConfig", "onLast"];
+			}
+
+			if (cat === "x") {
+				buttons = ["onSave", "onSend", "onLast"];
+			}
+
+			body.get().load({
+				unitId: this._data.unitId,
+				command: event.target.value,
+				index: 0,
+				mode: 1,
+				role: null,
+				buttons
+
+			});
+
+			return;
+
 			const command = this._data.commands.find(
 				(c) => c.command == event.target.value
 			);
@@ -680,7 +808,7 @@ class GTProtoWin extends HTMLElement {
 		});
 	}
 
-	public connectedCallback() {}
+	public connectedCallback() { }
 
 	public disconnectedCallback() {
 		console.log("disconnectedCallback");

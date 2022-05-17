@@ -5,6 +5,21 @@
 	"sync": 55248,
 	"brand": "Wonde Proud",
 	"model": "VT10",
+	"encode": {
+		"cmd": "$wp\\+<cmd>=<pass><params>\r\n",
+		"icmd": "$$<index><packlen>,<id>,<cmd><params><checksum>\r\n",
+		"packlen": ",<id>,<cmd><params>",
+		"checksum": "$$<packno><packlen>,<id>,<cmd><params>",
+		"fpacklen": ",<id>,<cmd><params>",
+		"fchecksum": "$$<packno><packlen>,<id>,<cmd><params>",
+		"packnoEnd": 126,
+		"commandExp": "$WP+<cmd>=<pass><params>\r\n",
+		"deltaIndex": 58,
+		"packno_end": 126,
+		"delta_index": 58,
+		"packnoBegin": 58,
+		"packno_begin": 58
+	},
 	"actions": {
 		"onLast": "Último",
 		"onSave": "Guardar",
@@ -26,7 +41,7 @@
 					"mode": "a",
 					"name": "Device ID",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Device identification number. The maximum length is 10 digits.\r\nOnly integer can be used. Default device ID is 2000000001\r\nNote:\r\nThe most left digit is reserved in which must be ‘2’."
 				},
@@ -35,7 +50,7 @@
 					"mode": "a",
 					"name": "New Password",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0000",
 					"description": "New password of the device. Default is “0000”"
 				},
@@ -44,7 +59,7 @@
 					"mode": "a",
 					"name": "PIN Code",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The PIN Code of the SIM card. The maximum length is 8 digits.\r\nNote:\r\nPlease use to clear parameter."
 				},
@@ -53,7 +68,7 @@
 					"mode": "a",
 					"name": "Input 1 delay time interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effect time interval 0~255 100ms"
 				},
@@ -62,7 +77,7 @@
 					"mode": "a",
 					"name": "Input 2 delay time interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effect time interval 0~255 100ms"
 				},
@@ -71,7 +86,7 @@
 					"mode": "a",
 					"name": "Input 3 delay time interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effect time interval 0~255 100ms"
 				},
@@ -80,7 +95,7 @@
 					"mode": "a",
 					"name": "Input 4 delay time interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effect time interval 0~255 100ms"
 				}
@@ -110,7 +125,7 @@
 					"mode": "a",
 					"name": "CommSelect",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "Set primary communication type:\r\n1. GSM SMS communication\r\n2. CSD: Circuit Switched Data communication\r\n(Reserved, currently not support)\r\n3. GPRS UDP communication\r\n4. GPRS TCP/IP communication\r\n5. USB port communication\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detection."
 				},
@@ -119,7 +134,7 @@
 					"mode": "a",
 					"name": "SMS Base Phone No.",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Base phone number for the GSM SMS base station. Maximum\r\nlength is 16 digits (could be ignored if uses GPRS\r\ncommunication).\r\nNote: Please use “” to clear the parameter."
 				},
@@ -128,7 +143,7 @@
 					"mode": "a",
 					"name": "CSD Base Phone\r\nNo.",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Base phone number for the GSM Circuit Switched Data\r\ncommunication. Maximum length is 16 digits (could be ignored\r\nif uses GPRS communication).\r\nNote: Please use “” to clear the parameter."
 				},
@@ -137,7 +152,7 @@
 					"mode": "a",
 					"name": "GPRS_APN",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Access Point Name for GPRS service (required for GPRS\r\ncommunication) The maximum length is 40 characters.\r\nNote: Please use “” to clear the parameter."
 				},
@@ -150,7 +165,7 @@
 					"mode": "a",
 					"name": "GPRS_Username",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "User name for GPRS service if applicable.\r\nThe maximum length is 31 characters.\r\nNote: Please use “” to clear the parameter."
 				},
@@ -159,7 +174,7 @@
 					"mode": "a",
 					"name": "GPRS_Password",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Password for GPRS service if applicable.\r\nThe maximum length is 20 characters"
 				},
@@ -168,7 +183,7 @@
 					"mode": "a",
 					"name": "GPRS_Server_\r\nIP_Address",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0.0.0.0",
 					"description": "Default setting: 0.0.0.0\r\n1. Static IP address:\r\nformat xxx.xxx.xxx.xxx (Please do not use virtual IP\r\naddress)\r\n2. Host/Domain Name (GPRS_DNS server must be defined)\r\nfor the base station. The maximum length is 40 characters."
 				},
@@ -177,7 +192,7 @@
 					"mode": "a",
 					"name": "GPRS_Server_\r\nPort",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The port IP of the computer which the control center software\r\nis operating. The available range is from 1000~65535.\r\nDefault setting: 1000"
 				},
@@ -186,7 +201,7 @@
 					"mode": "a",
 					"name": "GPRS_Keep_Alive\r\nPacket Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "GPRS Keep_Alive Packet is used to establish the GPRS\r\nconnection and maintain the GPRS connectivity between the\r\ndevice and the base station. The range is between 0~65535\r\nseconds.\r\nDefault setting: 30 seconds\r\nNote:\r\nSet to ‘0’ to disable sending GPRS Keep_Alive Packet. This\r\nparameter will not send any Keep_Alive Packet to the control\r\ncenter."
 				},
@@ -195,7 +210,7 @@
 					"mode": "a",
 					"name": "GPRS_DNS\r\nServer",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Domain Name System IP address. Please contact local ISP for\r\nthe IP address of DNS server. Please use the xxx.xxx.xxx.xxx\r\nas the format for this parameter.\r\nDefault setting: 168.95.1.1"
 				}
@@ -222,7 +237,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0. Disable GPRS roaming function\r\n1. Enable GPRS roaming function"
 				}
@@ -271,7 +286,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0. Disable (Stop tracking)\r\n1. Time mode:\r\nThe position information is sent to the base station according to\r\nthe required time interval, only whole number can be used.\r\nEffective range for different communication types:\r\nDirect Connection: 1~65535 seconds.\r\nGSM SMS: 15~65535 seconds\r\nGSM CSD: 5~65535 seconds\r\nGPRS UDP/TCP/IP: 5~65535 seconds.\r\n\r\n2. Distance mode:\r\nThe position information is sent to the base station according to\r\nthe required distance interval, only whole number can be used.\r\nEffective range for different communication types:\r\nDirect Connection: 25~65535 meters.\r\nGSM SMS: 300 ~65535 meters.\r\nGSM CSD: 100~65535 meters.\r\nGPRS UDP/TCP/IP: 100~65535 meters.\r\n\r\n3. Time AND Distance:\r\nThe position information is sent back to the base station when\r\nfollowing BOTH conditions are satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n4. Time OR Distance\r\nThe position information is sent to the base station when one of the\r\nfollowing condition is satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n5. Heading mode:\r\nThe position information is sent when the “Heading (direction)”\r\nparameter is changed beyond the assigned degrees. Please\r\nenter the required value in the “Heading” column.\r\n\r\n6. Heading OR Time\r\nThe position information is sent back to the base station when\r\none of the following condition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond the\r\nassigned degrees\r\nb. Required “Time Interval” is reached.\r\n\r\n7. Heading OR Distance\r\nThe position information is sent whenever one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required “Distance Interval” is reached.\r\n\r\n8. Heading OR (Time AND Distance)\r\nThe position information is sent back to the base station when\r\none of the following condition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required BOTH “Time AND Distance Interval” are satisfied.\r\n\r\n9. Heading OR Time OR Distance\r\nThe position information is sent whenever one of the following\r\ncondition is satisfied:\r\na. When the “Heading (direction)” parameter is changed\r\nbeyond assigned degrees.\r\nb. Required “Time Interval” is reached.\r\nc. Required “Distance Interval” is reached."
 				},
@@ -280,7 +295,7 @@
 					"mode": "a",
 					"name": "Time Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Specify elapsed time interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option ‘1’ => “Time mode”."
 				},
@@ -289,7 +304,7 @@
 					"mode": "a",
 					"name": "Distance Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Specify elapsed distance interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option ‘2’ => “Distance mode”."
 				},
@@ -298,7 +313,7 @@
 					"mode": "a",
 					"name": "Number of Tracking Times",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Frequency (number of times the report needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously tracking.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while\r\nthe command is executing when we query the command\r\nparameters."
 				},
@@ -312,7 +327,7 @@
 					"mode": "a",
 					"name": "Track Basis",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0. Tracking report is sent ONLY IF GPS is fixed.\r\n1. Tracking report is sent regardless the GPS signal reception\r\n2. Track report is sent when ACC is on and GPS is fixed\r\n3. Track report is sent when ACC is on regardless whether the GPS\r\nsignal is fixed or not."
 				},
@@ -327,7 +342,7 @@
 					"mode": "a",
 					"name": "CommSelect",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "Set the output communication channel:\r\n1. GSM SMS communication\r\n2. CSD: Circuit Switched Data communication (Reserved, currently\r\nnot support)\r\n3. GPRS UDP communication\r\n4. GPRS TCP/IP communication\r\n5. USB port\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detectable."
 				},
@@ -336,7 +351,7 @@
 					"mode": "a",
 					"name": "Heading",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The effective value is from 10~90 degrees."
 				}
@@ -371,7 +386,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Disable (Stop storing position data into flash memory)\r\n\r\n1. Time mode:\r\nThe position information is logged into the memory of the device\r\naccording to the required time interval, only integer can be used.\r\nEffective parameters:\r\nRange: 1~65535 seconds.\r\n\r\n2. Distance mode:\r\nThe position information is logged into the memory of the device\r\naccording to the required distance interval, only integer can be\r\nused.\r\nRange: 25~65535 meters.\r\nNote:\r\nFor vehicle application, suggest to set 50 meters or above for\r\nbetter performance.\r\n\r\n3. Time AND Distance:\r\nThe position information is logged into the memory of the device\r\naccording to the required “Time interval” AND “Distance interval”;\r\nthe position information is not logged if one of the “Time interval”\r\nand “Distance interval” does not satisfy.\r\n\r\n4. Time OR Distance\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Time Interval” is reached.\r\nb. “Distance Interval” is reached.\r\n\r\n5. Heading mode:\r\nThe position information is logged when the “Heading (direction)”\r\nparameter is changed beyond the assigned degrees. Please\r\nenter the required value in the “Heading” column.\r\n\r\n6. Heading OR Time\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond the\r\nassigned degrees\r\nb. Required “Time Interval” is reached.\r\n\r\n7. Heading OR Distance\r\nThe position information is logged whenever one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond\r\nassigned degrees\r\nb. Required “Distance Interval” is reached.\r\n\r\n8. Heading OR (Time AND Distance)\r\nThe position information is logged when one of the following\r\ncondition is satisfied:\r\na. “Heading (direction)” parameter is changed beyond assigned\r\ndegrees\r\nb. Required BOTH “Time AND Distance Interval” are satisfied.\r\n\r\n9. Heading OR Time OR Distance\r\nThe position information is logged whenever one of the following\r\ncondition is reached:\r\na. When the “Heading (direction)” parameter is changed\r\nbeyond assigned degrees.\r\nb. Required “Time Interval” is reached.\r\nc. Required “Distance Interval” is reached."
 				},
@@ -380,7 +395,7 @@
 					"mode": "a",
 					"name": "Time Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Specify elapsed time interval to report current position. Default value\r\nis ‘0’. The effective range, please refer to the “mode” parameters\r\noption 1 “Time mode”."
 				},
@@ -389,7 +404,7 @@
 					"mode": "a",
 					"name": "Distance Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Specify elapsed distance interval to report current position. Default\r\nvalue is ‘0’. The effective range, please refer to the “mode”\r\nparameters option 2 “Distance mode”."
 				},
@@ -398,7 +413,7 @@
 					"mode": "a",
 					"name": "Number of Times",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Frequency (number of times the report needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously logging”.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while\r\nthe command is executing when we query the command parameters."
 				},
@@ -412,7 +427,7 @@
 					"mode": "a",
 					"name": "Record Basis",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Logging function is executed ONLY IF GPS is fixed.\r\n1. Logging function is executed regardless the GPS signal reception.\r\n2. Logging function is executed when ACC is on and GPS is fixed.\r\n3. Logging function is executed when ACC is on regardless whether\r\nthe GPS signal is fixed or not."
 				},
@@ -421,7 +436,7 @@
 					"mode": "a",
 					"name": "Heading",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The effective value is from 10~90 degrees."
 				}
@@ -459,7 +474,7 @@
 					"mode": "a",
 					"name": "Start\r\nDate/Time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Format of this parameter: YYYYMMDDHHMMSS or ‘0’ (please refer to\r\nthe “Note” section for detail)"
 				},
@@ -468,7 +483,7 @@
 					"mode": "a",
 					"name": "End\r\nDate/time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Format of this parameter: YYYYMMDDHHMMSS or ‘0’ (please refer to\r\nthe “Note” section for detail)"
 				}
@@ -534,7 +549,7 @@
 					"mode": "a",
 					"name": "Low Voltage",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set the voltage for the main power low report.\r\nEffective range: 0.00~30.00 V; Default voltage level: 11.50V"
 				},
@@ -555,7 +570,7 @@
 					"mode": "a",
 					"name": "Polling",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "If any of specific report triggered then the report will be sent back to\r\nthe control center. This setting is based on the bitwise operation. This\r\nparameter can specify what report would be available. The bitwise\r\ndefinition is following (default setting:127) :\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. Main power low\r\n32. Main power lost\r\n64. Internal battery voltage low\r\n256.Main power voltage recover\r\n512.Main power recover\r\n1024. Internal battery voltage recover"
 				},
@@ -576,7 +591,7 @@
 					"mode": "a",
 					"name": "Loggin",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "If any of specific report triggered then report will be stored into the\r\ndevice memory and can be downloaded later. This setting is based\r\non the bitwise operation. This parameter can specify what report\r\nwould be available. The bitwise definition is following:\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. Main power low\r\n32. Main power lost\r\n64. Internal battery voltage low\r\n256.Main power voltage recover\r\n512.Main power recover\r\n1024. Internal battery voltage recover"
 				}
@@ -604,7 +619,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0: Disable the defined report.\r\n1: Enable report/Enable SMS Roaming:\r\nAs soon as the User-Defined-Report triggered, the report will be\r\nsent back to the GSM SMS Base Station while the device is in\r\nroaming area.\r\n2: Enable report/Block SMS Roaming: As soon as the\r\nUser-Defined-Report triggered, the report will NOT be sent back to\r\nthe GSM SMS Base Station and will be put in the queue buffer\r\nwhile it is on the roaming. As soon as the device returns back to\r\nhome GSM network then the report will be sent back to the GPRS\r\nserver."
 				},
@@ -613,7 +628,7 @@
 					"mode": "a",
 					"name": "Longitude",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The longitude of center point of defined circle zone."
 				},
@@ -622,7 +637,7 @@
 					"mode": "a",
 					"name": "Latitude",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The latitude of center point of defined circle zone."
 				},
@@ -631,7 +646,7 @@
 					"mode": "a",
 					"name": "Radius",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The radius of the circle zone. The effective range is from 50 to 65535\r\nmeters."
 				},
@@ -644,7 +659,7 @@
 					"mode": "a",
 					"name": "Zone Control",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Disable\r\n1. Inside Zone\r\nThe event will be sent when the GPS coordinate is inside the\r\ndefined zones.\r\n2. Outside Zone\r\nThe event will be sent when the GPS coordinate is outside the\r\ndefined zones.\r\nImportant Note:\r\nThis parameter is no longer as used for reference. Zone\r\nControl (Inside Zone or Outside Zone) will be determined by\r\nthe “Function Control” or “Trigger Control” parameters"
 				},
@@ -657,7 +672,7 @@
 					"mode": "a",
 					"name": "Actions",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "This parameter is to define the actions when the conditions become\r\ntrue. The following actions are available:\r\n1. Logging:\r\nWhen the conditions of the defined report are true then the device\r\nwill store the current GPS position information for the specify event\r\ninto the memory.\r\n2. Polling:\r\nWhen the conditions of the defined report are true then the device\r\nwill send the current GPS position information for the specify event\r\nback to the base station.\r\n3. Logging and Polling:\r\nWhen the conditions of the defined report are true then\r\nthe device will store the current GPS position information\r\nfor specific event into memory and send the event back to\r\nthe base station as well."
 				},
@@ -684,7 +699,7 @@
 					"mode": "a",
 					"name": "Function\r\nUsed",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "This parameter can specify what input port is used as the input\r\ncondition for this specific report. This setting is based on the\r\nbitwise operation. The definitions are :\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. input 4\r\n16. IG Detection\r\n32” Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing\r\n1024: Scheduling\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
 				},
@@ -711,7 +726,7 @@
 					"mode": "a",
 					"name": "Function\r\nControl",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "This parameter is used to specify the input port which defines in\r\nthe “Input Control” parameters which must be “ON” state.\r\n0. Disable\r\n1. Input 1\r\n2. Input 2\r\n4. Input 3\r\n8. Input 4\r\n16. IG Detection\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing (inside zone)\r\n1024: Scheduling (inside schedule)\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected 16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected).\r\nNote:\r\n1. Remaining “Function Used in the “Function Used” must be\r\n“opposite” state as the input triggering condition.\r\n2. If “IG Detection” is selected, then input 1 is available for\r\nconnecting a sensor other than ACC of the vehicle.\r\n3. “Inside Zone”, “Outside Zone”, ‘Inside Schedule”, and\r\n“Outside Schedule” will be controlled by the “Function\r\nControl” parameter."
 				},
@@ -726,7 +741,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "This parameter can specify what output port will be used when\r\nthe condition(s) of the event is true. The setting is based on the\r\nbitwise operation and the definitions is following:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
 				},
@@ -741,7 +756,7 @@
 					"mode": "a",
 					"name": "Output\r\nControl",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "This parameter can specify what output port will be activated to\r\n“On” or “Off” when the condition(s) of the event is true. The\r\nsetting is based on the bitwise operation and the definitions is\r\nfollowing:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
 				},
@@ -750,7 +765,7 @@
 					"mode": "a",
 					"name": "Output\r\nToggle\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Effective range: 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -759,7 +774,7 @@
 					"mode": "a",
 					"name": "Output\r\nToggle\r\nTimes",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -775,7 +790,7 @@
 					"mode": "a",
 					"name": "SMS VIP\r\nMask",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "If the event is triggered then the device could send a SMS alert to\r\nup to 5 different pre-defined SMS phone number. The SMS VIP\r\nis defined in the $WP+SETVIP command.\r\nThe bitwise definition is following:\r\n0. Disable\r\n1. SMS VIP 1\r\n2. SMS VIP 2\r\n4. SMS VIP 3\r\n8. SMS VIP 4\r\n16. SMS VIP 5\r\nEx:\r\nSet to 12 means enabled (SMS VIP 3 + SMS VIP 4)"
 				},
@@ -784,7 +799,7 @@
 					"mode": "a",
 					"name": "Sat Used",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Valid value 0~12\r\nNote:\r\nIf the number of satellite is less or equal to defined number then\r\nthe report will not be executed."
 				},
@@ -797,7 +812,7 @@
 					"mode": "a",
 					"name": "Schedule\r\nControl",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0: Disable\r\n1: Inside Schedule\r\n2: Outside Schedule\r\nImportant Note:\r\nThis parameter is no longer used for reference.\r\nSchedule Control (Inside Schedule or Outside schedule)\r\nwill be determined by the “Function Control” or “Trigger\r\nControl” parameters"
 				},
@@ -814,7 +829,7 @@
 					"mode": "a",
 					"name": "Day of the\r\nweek",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "1: Sunday\r\n2: Monday\r\n4: Tuesday\r\n8: Wednesday\r\n16:Thursday\r\n32: Friday\r\n64: Saturday"
 				},
@@ -823,7 +838,7 @@
 					"mode": "a",
 					"name": "Schedule Start\r\nTime",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "000000",
 					"description": "Format: HHMMSS\r\nHH indicates hours: 00~23\r\nMM indicates minutes: 00~59\r\nSS indicates seconds: 00~59"
 				},
@@ -832,7 +847,7 @@
 					"mode": "a",
 					"name": "Schedule\r\nEnd Time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "000000",
 					"description": "Format: HHMMSS\r\nHH indicates hours: 00~23\r\nMM indicates minutes: 00~59\r\nSS indicates seconds: 00~59"
 				},
@@ -858,7 +873,7 @@
 					"mode": "a",
 					"name": "Trigger Used",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "1: input 1\r\n2: input 2\r\n4: input 3\r\n8: Input 4\r\n16: IG\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing\r\n1024: Scheduling\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
 				},
@@ -884,7 +899,7 @@
 					"mode": "a",
 					"name": "Trigger\r\nControl",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "1: input 1\r\n2: input 2\r\n4: input 3\r\n8: Input 4\r\n16: IG\r\n32: Output 1\r\n64: Output 2\r\n128: Output 3\r\n256: Output 4\r\n512: Geo-fencing (Inside Zone)\r\n1024: Scheduling (Inside Schedule)\r\n2048: GPS is fixed\r\n4096: GSM is registered\r\n8192: GPRS is connected\r\n16384: Enter GPRS roaming area.\r\n32768: G-Sensor triggering (movement detected)."
 				},
@@ -893,7 +908,7 @@
 					"mode": "a",
 					"name": "Trigger Delay\r\nTime Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "This time interval is to specify the delay time for “”Trigger\r\nUsed” and “Trigger Control”. After the “Trigger Used”,\r\n“ Trigger Control”, and “Delay” time are all satisfied then it\r\nwill check the conditions “Geo-fencing”, “Input/Output\r\nUsed\r\nEffective range: 0~65535 second"
 				}
@@ -917,7 +932,7 @@
 					"mode": "a",
 					"name": "VIP 1",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set VIP number 1"
 				},
@@ -926,7 +941,7 @@
 					"mode": "a",
 					"name": "VIP 2",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set VIP number 2"
 				},
@@ -935,7 +950,7 @@
 					"mode": "a",
 					"name": "VIP 3",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set VIP number 3"
 				},
@@ -944,7 +959,7 @@
 					"mode": "a",
 					"name": "VIP 4",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set VIP number 4"
 				},
@@ -953,7 +968,7 @@
 					"mode": "a",
 					"name": "VIP 5",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Set VIP number 5"
 				}
@@ -977,7 +992,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "0: Disable\r\n1: Enable"
 				},
@@ -986,7 +1001,7 @@
 					"mode": "a",
 					"name": "Voltage threshold of ACC off",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0.0",
 					"description": "Effective range: 0.0~30.0V"
 				},
@@ -995,7 +1010,7 @@
 					"mode": "a",
 					"name": "Voltage threshold of ACC on",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0.0",
 					"description": "Effective range: 0.0~30.0V"
 				},
@@ -1004,7 +1019,7 @@
 					"mode": "a",
 					"name": "Duration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Effective range: 0~65535 seconds"
 				}
@@ -1028,7 +1043,7 @@
 					"mode": "a",
 					"name": "Set/Query\r\nCurrent Voltage",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective range: 0.00~30.00V"
 				},
@@ -1037,7 +1052,7 @@
 					"mode": "z",
 					"name": "Voltage Level of Backup Battery",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -1061,7 +1076,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "0: Disable\r\n1: Stop sending messages with “Event ID” message. (All inputs and\r\noutputs state will not be changed even though the condition of\r\nuser-defined report becomes true.)\r\n2. Stop sending messages with “Event ID” message. (All inputs and\r\noutputs state will be changed if the condition of user-defined\r\nreport becomes true.)"
 				}
@@ -1085,7 +1100,7 @@
 					"mode": "a",
 					"name": "Event ID",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Specify the report identifier which will be cleared.\r\nThe effective identifier range is from 100~149.\r\n255: clear all $WP+SETEVT settings."
 				}
@@ -1123,7 +1138,7 @@
 					"mode": "m",
 					"name": "imei",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -1147,7 +1162,7 @@
 					"mode": "m",
 					"name": "sim_id",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -1171,7 +1186,7 @@
 					"mode": "m",
 					"name": "GSM Operator",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Name of the Telecommunication corp."
 				},
@@ -1180,7 +1195,7 @@
 					"mode": "m",
 					"name": "GSM signal strength",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "This parameter indicates the signal strength\r\nfor GSM network. The closer the value\r\napproaches to 31, the stronger the signal is.\r\nCSQ dBm\r\n0 -113dBm or less\r\n1 -111dBm\r\n2..30 -109…-53dBm\r\n31 -51dBm or greater\r\n99 not known or not detectable"
 				},
@@ -1189,7 +1204,7 @@
 					"mode": "m",
 					"name": "GPRS Status",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "0:GPRS is not connected\r\n1: GPRS is connected"
 				},
@@ -1198,7 +1213,7 @@
 					"mode": "m",
 					"name": "Roaming Status",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "0: Currently is in home GSM/GPRS network.\r\n1: Currently is in roaming GSM/GPRS network"
 				}
@@ -1226,7 +1241,7 @@
 					"mode": "a",
 					"name": "Auto Mode",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": "0",
 					"description": "0: Disable\r\n1: The event will be sent whenever the information (LAC and CI) is\r\nchanged regardless GPS reception\r\n2: The event will be sent whenever the information (LAC and CI) is\r\nchanged if there is no GPS reception."
 				},
@@ -1235,7 +1250,7 @@
 					"mode": "m",
 					"name": "Device ID",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Identification of the device"
 				},
@@ -1244,7 +1259,7 @@
 					"mode": "m",
 					"name": "Date Time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Date and Time\r\n(Base on the Time Zone setting)"
 				},
@@ -1253,7 +1268,7 @@
 					"mode": "m",
 					"name": "LAC",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Location area code"
 				},
@@ -1262,7 +1277,7 @@
 					"mode": "m",
 					"name": "CI",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Cell ID"
 				}
@@ -1286,7 +1301,7 @@
 					"mode": "a",
 					"name": "Time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "he position information is sent to the base station according to the\r\nrequired time interval, only whole number can be used.\r\nEffective range for different communication types:\r\n0: Disable\r\nDirect Connection: 1~65535 seconds.\r\nGSM SMS: 15~65535 seconds\r\nGSM CSD: 5~65535 seconds\r\nGPRS UDP/TCP/IP: 5~65535 seconds."
 				},
@@ -1295,7 +1310,7 @@
 					"mode": "a",
 					"name": "Number of Times",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Frequency (number of times the event needs to be sent). Effective\r\nrange is from 0~65535.\r\nSet ‘0’ indicating “Continuously tracking.\r\nNote:\r\nThe counter of “Times” will be displayed how many times left while the\r\ncommand is executing when we query the command parameters."
 				},
@@ -1308,7 +1323,7 @@
 					"mode": "a",
 					"name": "Basis",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Event will be sent regardless the state of ACC or GPS.\r\n1. Event will be sent if there is no GPS reception.\r\n2. Event will be sent only if ACC of vehicle is on."
 				},
@@ -1323,7 +1338,7 @@
 					"mode": "a",
 					"name": "CommSelect",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "Set the output communication channel:\r\n1: GSM SMS communication\r\n2: CSD: Circuit Switched Data communication\r\n(Reserved, currently not support)\r\n3: GPRS UDP communication\r\n4: GPRS TCP/IP communication\r\n5: USB port\r\nNote:\r\nSupport COM numbers: COM 1~ COM 199 auto detectable"
 				},
@@ -1332,7 +1347,7 @@
 					"mode": "m",
 					"name": "Device ID",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Device ID of the device"
 				},
@@ -1341,7 +1356,7 @@
 					"mode": "m",
 					"name": "Date Time",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Date and Time\r\n(Base on the Time Zone setting)"
 				},
@@ -1350,7 +1365,7 @@
 					"mode": "m",
 					"name": "Satellite",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Number of satellites fixed"
 				},
@@ -1359,7 +1374,7 @@
 					"mode": "m",
 					"name": "Input Status",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Status of input port"
 				},
@@ -1368,7 +1383,7 @@
 					"mode": "m",
 					"name": "Analog 1",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Status of analog port 1"
 				},
@@ -1377,7 +1392,7 @@
 					"mode": "m",
 					"name": "Analog 2",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Status of analog port 2"
 				},
@@ -1386,7 +1401,7 @@
 					"mode": "m",
 					"name": "Output status",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Status of output port"
 				},
@@ -1395,7 +1410,7 @@
 					"mode": "m",
 					"name": "Cell ID Info.",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "This parameter contains the information of 7\r\ndifferent Cell IDs. For each Cell ID, it provide the\r\nfollowing items:\r\nMobile country code :3 digits\r\nMobile network code :3 digits\r\nLocation area code :4 digits\r\nCell ID: 4 digits\r\nRSSI (Received Signal Strength indication 0~63) :\r\n2 digits"
 				}
@@ -1419,7 +1434,7 @@
 					"mode": "m",
 					"name": "firmware version",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -1448,7 +1463,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "This parameter is to define the actions when the conditions become\r\ntrue. The following actions are available:\r\n0. Disable\r\n1. Logging:\r\nWhen the conditions of the defined event are true then the device\r\nwill store the current GPS position information for the specify event\r\ninto the memory.\r\n2. Polling:\r\nWhen the conditions of the defined event are true then the device\r\nwill send the current GPS position information for the specify event\r\nback to the base station.\r\n3. Logging and Polling:\r\nWhen the conditions of the defined event are true then the device\r\nwill store the current GPS position information for specific event\r\ninto memory and send the event back to the base station as well."
 				},
@@ -1457,7 +1472,7 @@
 					"mode": "a",
 					"name": "Minimum\r\nSpeed",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Set Minimum Speed.\r\nValid range: 0~255 km/hr."
 				},
@@ -1466,7 +1481,7 @@
 					"mode": "a",
 					"name": "Maximum\r\nSpeed",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Set Maximum Speed.\r\nValid range: 0~255 km/hr"
 				},
@@ -1475,7 +1490,7 @@
 					"mode": "a",
 					"name": "Speeding\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "The parameter defined the time duration to activate the speeding\r\nevent (Event ID 3).\r\nIn Speeding Mode ‘0’, the range: 15~65535 seconds\r\nIn Speeding Mode ‘1’, the range: 0~ 65535 seconds"
 				},
@@ -1490,7 +1505,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "This parameter can specify what output port is activated when\r\nthe condition(s) of the event is true. The definitions are\r\nfollowing:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n3. Output 3\r\n4. Output 4"
 				},
@@ -1502,7 +1517,7 @@
 					"mode": "a",
 					"name": "Output\r\nControl",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "This parameter is to set the output state to 0 (off) or 1(on) of\r\nthe defined output port in the “Output Port” parameter.\r\n0. Off\r\n1.On"
 				},
@@ -1514,7 +1529,7 @@
 					"mode": "a",
 					"name": "Speeding\r\nMode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: As the GPS speed is in the defined range, the device will send\r\nEvent ID 3 according to the defined duration continually.\r\n1: Enter and End speeding reports:\r\n- As the GPS speed is in the defined range for the defined duration,\r\nEvent ID 3 will be sent once.\r\n- As the GPS speed is out the defined range for the defined duration,\r\nEvent ID 9 will be sent once."
 				},
@@ -1523,7 +1538,7 @@
 					"mode": "a",
 					"name": "Off-speeding\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "The parameter defined the time duration to activate the off-speeding\r\nevent (Event ID 9).\r\nIn Speeding Mode ‘0’, this parameter is disabled.\r\nIn Speeding Mode ‘1’, the range: 0~ 65535 seconds"
 				}
@@ -1537,24 +1552,31 @@
 		},
 		{
 			"cat": "C",
+			"role": "output",
 			"mode": "a",
 			"note": null,
-			"label": null,
+			"label": "Output",
 			"level": 0,
+			"indexed": true,
+			"indexField": "event_id",
+			"indexData": [
+				[1, 1],
+				[2, 2],
+				[3, 3],
+				[4, 4],
+				[5, 5],
+				[6, 6],
+				[7, 7],
+				[8, 8]
+			],
 			"fields": [
 				{
-					"data": [
-						["1", "1.Output 1"],
-						["2", "2.Output 2"],
-						["3", "3.Output 3"],
-						["4", "4.Output 4"]
-					],
+					"data": [],
 					"mode": "a",
-					"name": "Output Port",
-					"label": null,
-					"control": "select",
-					"default": null,
-					"description": "This parameter can specify what output port will be activated.\r\nThe definitions are following:\r\n1.Output 1\r\n2.Output 2\r\n3.Output 3\r\n4.Output 4"
+					"name": "output_port",
+					"type": "index",
+					"label": "Output Port",
+					"description": ""
 				},
 				{
 					"data": [
@@ -1564,7 +1586,7 @@
 					"mode": "a",
 					"name": "Output Control",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "This parameter is to set the output state to 0 (off) or 1(on) of the\r\ndefined output port in the “Output Port” parameter.\r\n0.Off\r\n1. On"
 				},
@@ -1573,7 +1595,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "To define the time interval of the specific output port staying in\r\nthe specific state.\r\nEffective range: 0~65535 100ms.\r\nEx:\r\n255 100ms = 25.5 seconds"
 				},
@@ -1582,14 +1604,14 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nTimes",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "To define the times of the specific output port changing from\r\ncurrent state to alternative state and back to the original state\r\nafter reaching the duration.\r\nEffective range: 0~65535 times."
 				}
 			],
 			"useTag": 3,
 			"command": "OUTC",
-			"indexed": 0,
+			
 			"usePass": 1,
 			"exportable": null,
 			"description": "Execute this command to set the output behavior."
@@ -1609,7 +1631,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0.Disable\r\n1.Enable"
 				}
@@ -1638,7 +1660,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0.Disable\r\n1.Logging\r\n2.Polling\r\n3.Logging + Polling"
 				},
@@ -1647,7 +1669,7 @@
 					"mode": "a",
 					"name": "Satellite Fixed",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "3",
 					"description": "Effective range: 3~12"
 				},
@@ -1656,7 +1678,7 @@
 					"mode": "a",
 					"name": "Speed\r\nThreshold",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "10",
 					"description": "10~255 km/hr"
 				},
@@ -1665,7 +1687,7 @@
 					"mode": "a",
 					"name": "Tow Duration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "30",
 					"description": "30~65535 seconds"
 				},
@@ -1674,7 +1696,7 @@
 					"mode": "a",
 					"name": "Auto Reset\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "The Tow function will be re-enabled when reaching the end of\r\n“Auto Reset Duration” after the first tow event is triggered.\r\n0~65535 seconds"
 				}
@@ -1702,7 +1724,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0.Disable\r\n1. Mileage will be accumulated regardless the ACC status.\r\n2. Mileage will be accumulated only if the ACC is on."
 				},
@@ -1711,7 +1733,7 @@
 					"mode": "a",
 					"name": "Mileage",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0.0",
 					"description": "Initial the mileage value (Km).\r\nEffective range is from 0.0~4294967.2"
 				}
@@ -1738,7 +1760,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0.Disable\r\n1.Enable"
 				},
@@ -1747,7 +1769,7 @@
 					"mode": "a",
 					"name": "Timer 1",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Format: HHMMSS (Time format: 24 hours)"
 				},
@@ -1756,7 +1778,7 @@
 					"mode": "a",
 					"name": "Timer 2",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Format: HHMMSS (Time format: 24 hours)"
 				},
@@ -1765,7 +1787,7 @@
 					"mode": "a",
 					"name": "Timer 3",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Format: HHMMSS (Time format: 24 hours)"
 				}
@@ -1792,7 +1814,7 @@
 					"mode": "a",
 					"name": "Sign",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "+: ahead GMT time\r\n-: behind GMT time"
 				},
@@ -1801,7 +1823,7 @@
 					"mode": "a",
 					"name": "Hour",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "00",
 					"description": "Offset hours. Effective range is from 00~13"
 				},
@@ -1815,7 +1837,7 @@
 					"mode": "a",
 					"name": "Minute",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "00",
 					"description": "Offset minute (based on 15 minutes basis). Please select one of\r\nfollowing:\r\n00,15,30,45"
 				}
@@ -1842,7 +1864,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0.Disable\r\n1.Enable"
 				},
@@ -1851,7 +1873,7 @@
 					"mode": "a",
 					"name": "Text",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The context in the maximum of 16 characters in ASCII format,\r\nexcept ‘,’."
 				}
@@ -1886,7 +1908,7 @@
 					"mode": "w",
 					"name": "Index",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "1. GPS is fixed.\r\n2. GSM is registered.\r\n3. GPRS is connected\r\n4. Enter GPRS Roaming\r\n5. Vibration detected."
 				},
@@ -1898,7 +1920,7 @@
 					"mode": "w",
 					"name": "On/Off",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0. Output Off\r\n1. Output ON"
 				},
@@ -1913,7 +1935,7 @@
 					"mode": "w",
 					"name": "Output ID",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0. Disable\r\n1. Output 1\r\n2. Output 2\r\n3. Output 3\r\n4. Output 4"
 				},
@@ -1933,7 +1955,7 @@
 					"mode": "r",
 					"name": "index",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": null
 				}
@@ -1962,7 +1984,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
 				},
@@ -1977,7 +1999,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: No Used\r\n1: Output 1\r\n2: Output 2\r\n3: Output 3\r\n4: Output 4"
 				},
@@ -1989,7 +2011,7 @@
 					"mode": "a",
 					"name": "Output control",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: Off\r\n1: On"
 				},
@@ -1998,7 +2020,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective range 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -2007,7 +2029,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nTimes",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle\r\nTimes” parameters should be ‘0’ or value other than ‘0’\r\nat the same time."
 				}
@@ -2038,7 +2060,7 @@
 					"mode": "a",
 					"name": "SETVIP Mask",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "Activate the SMS phone No. which will be accepted by the unit\r\nto return a current position of the unit when receive a call or SMS\r\nwith string “XPOS” from the activating SMS phone No. The SMS\r\nPhone numbers are configured by the $WP+SETVIP command.\r\nThis parameter is using bitwise algorithm and the definition is\r\nfollowing:\r\n0. Disable\r\n1. SMS VIP 1\r\n2. SMS VIP 2\r\n4. SMS VIP 3\r\n8. SMS VIP 4\r\n16. SMS VIP 5\r\nEx:\r\nSet to 12 means enabled (SMS VIP 3 + SMS VIP 4)"
 				},
@@ -2053,7 +2075,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: No Used\r\n1: Output 1\r\n2: Output 2\r\n3: Output 3\r\n4: Output 4"
 				},
@@ -2065,7 +2087,7 @@
 					"mode": "a",
 					"name": "Output control",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0: Off\r\n1: On"
 				},
@@ -2074,7 +2096,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective range 0~65535 100ms\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -2083,7 +2105,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nTimes",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Effective Range 0~65535 times\r\nNote:\r\nBoth “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				}
@@ -2115,7 +2137,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Disable\r\n1. GPS off; GSM on; GPRS on, G-sensor on\r\n2. GPS on; GSM on; GPRS off, G-sensor on\r\n3. GPS off, GSM on, GPRS off, G-sensor on\r\n4. GPS on; GSM off; GPRS off, G-sensor on\r\n5. GPS off; GSM off; GPRS off, G-sensor on\r\n6. GPS off, GSM off, GPRS off, G-sensor off"
 				},
@@ -2124,7 +2146,7 @@
 					"mode": "a",
 					"name": "Power Down\r\nDelay",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
 				},
@@ -2136,7 +2158,7 @@
 					"mode": "a",
 					"name": "Sleeping\r\nMask",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": "0",
 					"description": "0. Device does not go to sleeping mode while the $WP+TRACK\r\ncommand is executing.\r\n1. Device goes to sleeping mode regardless the execution of\r\n$WP+TRACK command"
 				},
@@ -2145,7 +2167,7 @@
 					"mode": "a",
 					"name": "Power Down\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
 				},
@@ -2154,7 +2176,7 @@
 					"mode": "a",
 					"name": "Power Up\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": "0",
 					"description": "Default value: 0\r\nEffective Range: 60~65535 seconds"
 				}
@@ -2183,7 +2205,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
 				}
@@ -2216,7 +2238,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0: Disable\r\n1: Logging\r\n2: Polling\r\n3: Logging + Polling"
 				},
@@ -2244,7 +2266,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": null
 				},
@@ -2272,7 +2294,7 @@
 					"mode": "a",
 					"name": "Output Control",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": null
 				},
@@ -2281,7 +2303,7 @@
 					"mode": "a",
 					"name": "Toggle Duracion",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				},
@@ -2290,7 +2312,7 @@
 					"mode": "a",
 					"name": "Toggle Times",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -2318,7 +2340,7 @@
 					"mode": "a",
 					"name": "Enable/Disable",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "0: Disable the function key.\r\n1: Enable report/Enable SMS Roaming: As soon as the Function\r\nKey triggered, the report will be sent back to the GSM SMS Base\r\nStation while the device is in roaming area.\r\n2: Enable report/Block SMS Roaming: As soon as the Function\r\nKey triggered, the report will NOT be sent back to the GSM SMS\r\nBase Station and will be put in the queue buffer while it is on the\r\nroaming. As soon as the device returns back to home GSM\r\nnetwork then the report will be sent back to the GPRS server."
 				},
@@ -2331,7 +2353,7 @@
 					"mode": "a",
 					"name": "Mode",
 					"label": null,
-					"control": "select",
+					"type": "select",
 					"default": null,
 					"description": "1: Logging\r\n2: Polling\r\n3: Logging + Polling"
 				},
@@ -2346,7 +2368,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": "0: Not Used\r\n1: Output 1\r\n2: Output 2\r\n4: Output 3\r\n8: Output 4"
 				},
@@ -2355,7 +2377,7 @@
 					"mode": "a",
 					"name": "Output Control",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "This parameter can specify what output port will be activated to\r\n“On” or “Off” when the condition(s) of the event is true. The setting\r\nis based on the bitwise operation and the definitions is following:\r\n0. Disable\r\n1. Output 1\r\n2. Output 2\r\n4. Output 3\r\n8. Output 4"
 				},
@@ -2364,7 +2386,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nDuration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective range 0~65535 100ms.\r\nNote: Both “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -2373,7 +2395,7 @@
 					"mode": "a",
 					"name": "Output Toggle\r\nTimes",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective Range 0~65535 times.\r\nNote: Both “Output Toggle Duration” and “Output Toggle Times”\r\nparameters should be ‘0’ or value other than ‘0’ at the same time."
 				},
@@ -2382,7 +2404,7 @@
 					"mode": "a",
 					"name": "Trigger Delay\r\nTime Interval",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "Effective range: 0~65535 seconds.\r\nThis Time Interval is to specify the delay time for Function Key\r\npress and hold. After the “Trigger Delay” time is satisfied the report\r\nwill be sent back to the GSM SMS Base Station according to\r\n“Mode 0: Disable”, “Mode 1: Enable report/Enable SMS Roaming”\r\nor “Mode 2: Enable report/Block SMS Roaming” settings."
 				}
@@ -2406,7 +2428,7 @@
 					"mode": null,
 					"name": "Event ID",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "1. Supports $WP+SETEVT command (Event ID 100~119)\r\n2.. Please use the 255 to clear all labels.\r\ni.e. $WP+LABEL=0000,255"
 				},
@@ -2415,7 +2437,7 @@
 					"mode": null,
 					"name": "Text",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "- Maximum text length is 12 chars.\r\n- Use “ “ to clear the existing defined text."
 				}
@@ -2439,7 +2461,7 @@
 					"mode": "a",
 					"name": "Phone number",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": "The specific phone number which the device will call out. This phone number supports the international phone calls"
 				},
@@ -2458,7 +2480,7 @@
 					"mode": "a",
 					"name": "Output Port",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": null
 				},
@@ -2477,7 +2499,7 @@
 					"mode": "a",
 					"name": "Output control",
 					"label": null,
-					"control": "bitwise",
+					"type": "bitwise",
 					"default": null,
 					"description": null
 				},
@@ -2486,7 +2508,7 @@
 					"mode": "a",
 					"name": "Output Duration",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				},
@@ -2495,7 +2517,7 @@
 					"mode": "a",
 					"name": "Output Toggle Times",
 					"label": null,
-					"control": "text",
+					"type": "text",
 					"default": null,
 					"description": null
 				}
@@ -2510,92 +2532,76 @@
 		{
 			"cat": "e",
 			"mode": "a",
-			"command": "setevent",
-			"description": "Execute this command to set GEO-Fencing, input triggered/output control, and report schedule",
-			"indexed": true,
 			"level": 0,
-			"indexField": "event_id",
-            "indexRange": [100, 129],
-			"indexData": [
-				[100, 100],
-				[129, 129]
-			],
-			"usePassword": true,
-			"useTag": false,
 			"fields": [
 				{
-					"name": "event_id",
-					"label": "event_id",
-					"mode": "a",
-					"type": "index",
 					"data": [],
+					"mode": "a",
+					"name": "event_id",
+					"type": "index",
+					"label": "event_id",
 					"description": ""
 				},
 				{
-					"name": "mode",
-					"label": "mode",
-					"mode": "a",
-					"type": "select",
-					"value": 0,
 					"data": [
 						[0, "disable"],
 						[1, "Enable report/Enable SMS Roaming"],
 						[2, "Enable report/Block SMS Roaming"]
 					],
+					"mode": "a",
+					"name": "mode",
+					"type": "select",
+					"label": "mode",
+					"value": 0,
 					"description": ""
 				},
 				{
-					"name": "longitude",
-					"label": "longitude",
 					"mode": "a",
+					"name": "longitude",
 					"type": "text",
+					"label": "longitude",
 					"description": "The longitude of center point of defined circle zone."
 				},
 				{
-					"name": "latitude",
-					"label": "latitude",
 					"mode": "a",
+					"name": "latitude",
 					"type": "text",
+					"label": "latitude",
 					"description": "The latitude of center point of defined circle zone."
 				},
 				{
-					"name": "radius",
-					"label": "radius",
 					"mode": "a",
+					"name": "radius",
 					"type": "text",
+					"label": "radius",
 					"description": "The radius of the circle zone. The effective range is from 50 to 65535 meters."
 				},
-
 				{
-					"name": "zone_control",
-					"label": "Zone Control",
-					"type": "select",
-					"mode": "a",
-					"value": "0",
 					"data": [
 						[0, "Disable"],
 						[1, "Inside Zone"],
 						[2, "Outside Zone"]
 					],
+					"mode": "a",
+					"name": "zone_control",
+					"type": "select",
+					"label": "Zone Control",
+					"value": "0",
 					"description": ""
 				},
 				{
-					"name": "actions",
-					"label": "Actions",
-					"mode": "a",
-					"type": "select",
 					"data": [
 						[1, "Logging:"],
 						[2, "Polling:"],
 						[3, "Logging and Polling"]
 					],
+					"mode": "a",
+					"name": "actions",
+					"type": "select",
+					"label": "Actions",
 					"description": ""
 				},
 				{
-					"name": "function",
-					"label": "Function Used",
-					"mode": "a",
-					"type": "bit",
 					"data": [
 						[1, "Input 1"],
 						[2, "Input 2"],
@@ -2614,13 +2620,13 @@
 						[16384, "Enter GPRS roaming area"],
 						[32768, "G-Sensor triggering (movement detected)"]
 					],
+					"mode": "a",
+					"name": "function",
+					"type": "bit",
+					"label": "Function Used",
 					"description": ""
 				},
 				{
-					"name": "control",
-					"label": "Function Control",
-					"mode": "a",
-					"type": "bit",
 					"data": [
 						[1, "Input 1"],
 						[2, "Input 2"],
@@ -2639,53 +2645,53 @@
 						[16384, "Enter GPRS roaming area"],
 						[32768, "G-Sensor triggering (movement detected)"]
 					],
+					"mode": "a",
+					"name": "control",
+					"type": "bit",
+					"label": "Function Control",
 					"description": ""
 				},
 				{
+					"data": [
+						[1, "Output 1"],
+						[2, "Output 2"],
+						[4, "Output 3"],
+						[8, "Output 4"]
+					],
+					"mode": "a",
 					"name": "output_port",
+					"type": "bit",
 					"label": "Output Port",
-					"mode": "a",
-					"type": "bit",
+					"description": ""
+				},
+				{
 					"data": [
 						[1, "Output 1"],
 						[2, "Output 2"],
 						[4, "Output 3"],
 						[8, "Output 4"]
 					],
-					"description": ""
-				},
-				{
+					"mode": "a",
 					"name": "output_control",
-					"label": "Output Control",
-					"mode": "a",
 					"type": "bit",
-					"data": [
-						[1, "Output 1"],
-						[2, "Output 2"],
-						[4, "Output 3"],
-						[8, "Output 4"]
-					],
+					"label": "Output Control",
 					"description": ""
 				},
 				{
-					"name": "duration",
-					"label": "Output Toggle Duration",
 					"mode": "a",
+					"name": "duration",
 					"type": "text",
+					"label": "Output Toggle Duration",
 					"description": "Effective range: 0~65535 100ms"
 				},
 				{
-					"name": "times",
-					"label": "Output Toggle Times",
 					"mode": "a",
+					"name": "times",
 					"type": "text",
+					"label": "Output Toggle Times",
 					"description": "Effective Range 0~65535 times"
 				},
 				{
-					"name": "sms_vip_mask",
-					"label": "SMS VIP Mask",
-					"mode": "a",
-					"type": "bit",
 					"data": [
 						[1, "SMS VIP 1"],
 						[2, "SMS VIP 2"],
@@ -2693,13 +2699,13 @@
 						[8, "SMS VIP 4"],
 						[16, "SMS VIP 5"]
 					],
+					"mode": "a",
+					"name": "sms_vip_mask",
+					"type": "bit",
+					"label": "SMS VIP Mask",
 					"description": ""
 				},
 				{
-					"name": "sat_used",
-					"label": "Sat Used",
-					"mode": "a",
-					"type": "select",
 					"data": [
 						[0, "0"],
 						[1, "1"],
@@ -2715,25 +2721,25 @@
 						[11, "11"],
 						[12, "12"]
 					],
+					"mode": "a",
+					"name": "sat_used",
+					"type": "select",
+					"label": "Sat Used",
 					"description": ""
 				},
 				{
-					"name": "schedule_control",
-					"label": "Schedule Control",
-					"mode": "a",
-					"type": "select",
 					"data": [
 						[0, "Disable"],
 						[1, "Inside Schedule"],
 						[2, "Outside Schedule"]
 					],
+					"mode": "a",
+					"name": "schedule_control",
+					"type": "select",
+					"label": "Schedule Control",
 					"description": ""
 				},
 				{
-					"name": "day_week",
-					"label": "Day of the week",
-					"mode": "a",
-					"type": "bit",
 					"data": [
 						[1, "Domingo"],
 						[2, "Lunes"],
@@ -2743,27 +2749,52 @@
 						[32, "Viernes"],
 						[64, "Sábado"]
 					],
+					"mode": "a",
+					"name": "day_week",
+					"type": "bit",
+					"label": "Day of the week",
 					"description": ""
 				},
 				{
+					"mode": "a",
 					"name": "start_time",
+					"type": "text",
 					"label": "Schedule Start Time",
-					"mode": "a",
-					"type": "text",
 					"description": "Format: HHMMSS"
 				},
 				{
+					"mode": "a",
 					"name": "end_time",
-					"label": "Schedule End Time",
-					"mode": "a",
 					"type": "text",
+					"label": "Schedule End Time",
 					"description": "Format: HHMMSS"
 				},
 				{
+					"data": [
+						[1, "Input 1"],
+						[2, "Input 2"],
+						[4, "Input 3"],
+						[8, "Input 4"],
+						[16, "IG Detection"],
+						[32, "Output 1"],
+						[64, "Output 2"],
+						[128, "Output 3"],
+						[256, "Output 4"],
+						[512, "Geo-fencing"],
+						[1024, "Scheduling"],
+						[2048, "GPS is fixed"],
+						[4096, "GSM is registered"],
+						[8192, "GPRS is connected"],
+						[16384, "Enter GPRS roaming area"],
+						[32768, "G-Sensor triggering (movement detected)"]
+					],
+					"mode": "a",
 					"name": "trigger_used",
+					"type": "bit",
 					"label": "Trigger Used",
-					"mode": "a",
-					"type": "bit",
+					"description": ""
+				},
+				{
 					"data": [
 						[1, "Input 1"],
 						[2, "Input 2"],
@@ -2782,57 +2813,32 @@
 						[16384, "Enter GPRS roaming area"],
 						[32768, "G-Sensor triggering (movement detected)"]
 					],
-					"description": ""
-				},
-				{
+					"mode": "a",
 					"name": "trigger_control",
-					"label": "Trigger Control",
-					"mode": "a",
 					"type": "bit",
-					"data": [
-						[1, "Input 1"],
-						[2, "Input 2"],
-						[4, "Input 3"],
-						[8, "Input 4"],
-						[16, "IG Detection"],
-						[32, "Output 1"],
-						[64, "Output 2"],
-						[128, "Output 3"],
-						[256, "Output 4"],
-						[512, "Geo-fencing"],
-						[1024, "Scheduling"],
-						[2048, "GPS is fixed"],
-						[4096, "GSM is registered"],
-						[8192, "GPRS is connected"],
-						[16384, "Enter GPRS roaming area"],
-						[32768, "G-Sensor triggering (movement detected)"]
-					],
+					"label": "Trigger Control",
 					"description": ""
 				},
 				{
-					"name": "trigger_delay",
-					"label": "Trigger Delay Time Interval",
 					"mode": "a",
+					"name": "trigger_delay",
 					"type": "text",
+					"label": "Trigger Delay Time Interval",
 					"description": "Format: HHMMSS"
 				}
-			]
+			],
+			"useTag": false,
+			"command": "setevent",
+			"indexed": true,
+			"indexData": [
+				[100, 100],
+				[129, 129]
+			],
+			"indexField": "event_id",
+			"indexRange": [100, 129],
+			"description": "Execute this command to set GEO-Fencing, input triggered/output control, and report schedule",
+			"usePassword": true
 		}
 	],
-	"headerSync": "0xD0 0xD7",
-	"encode": {
-		"cmd": "$wp\\+<cmd>=<pass><params>\r\n",
-		"icmd": "$$<index><packlen>,<id>,<cmd><params><checksum>\r\n",
-		"packlen": ",<id>,<cmd><params>",
-		"checksum": "$$<packno><packlen>,<id>,<cmd><params>",
-		"fpacklen": ",<id>,<cmd><params>",
-		"fchecksum": "$$<packno><packlen>,<id>,<cmd><params>",
-		"packnoEnd": 126,
-		"commandExp": "$WP+<cmd>=<pass><params>\r\n",
-		"deltaIndex": 58,
-		"packno_end": 126,
-		"delta_index": 58,
-		"packnoBegin": 58,
-		"packno_begin": 58
-	}
+	"headerSync": "0xD0 0xD7"
 }

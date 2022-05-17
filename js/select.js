@@ -15,28 +15,49 @@ export class WHSelect extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
         const slot = this.shadowRoot.querySelector("slot");
         slot.addEventListener("slotchange", (evt) => {
+            console.log("slotchange");
             let select = this.shadowRoot.querySelector('select');
             select.append(...evt.target.assignedNodes());
             //const nodes = slot.assignedNodes();
             //select.innerHTML = this.innerHTML; 
+            select.value = this.value;
         });
     }
     connectedCallback() {
         const select = this.shadowRoot.querySelector(`select`);
-        //select.innerHTML = this.innerHTML; 
+        select.addEventListener("change", (event) => {
+            this.value = select.value;
+        });
+        console.log("sconnectedCallback", this.name, this.data);
     }
     disconnectedCallback() {
         console.log("disconnectedCallback");
     }
     attributeChangedCallback(name, oldVal, newVal) {
         console.log("attributeChangedCallback");
-        this[name] = newVal;
+        //this[name] = newVal;
+    }
+    set name(value) {
+        if (Boolean(value)) {
+            this.setAttribute("name", value);
+        }
+        else {
+            this.removeAttribute("name");
+        }
+    }
+    get name() {
+        return this.getAttribute("name");
     }
     set value(value) {
-        this.shadowRoot.querySelector(`select`).value = value;
+        if (Boolean(value)) {
+            this.setAttribute("value", value);
+        }
+        else {
+            this.removeAttribute("value");
+        }
     }
     get value() {
-        return this.shadowRoot.querySelector(`select`).value;
+        return this.getAttribute("value");
     }
     set data(options) {
         this.innerHTML = "";

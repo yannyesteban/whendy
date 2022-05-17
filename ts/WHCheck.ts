@@ -96,7 +96,7 @@ class WHCheckOption extends HTMLElement {
 	}
 
 	set checked(value) {
-		console.trace(this.value, value)
+		
 		if (Boolean(value)) {
 			
 			this.setAttribute("checked", "");

@@ -161,7 +161,6 @@ class WHNavButton extends HTMLElement {
         }
     }
     set dataSource(source) {
-        console.log(source);
         this.innerHTML = "";
         for (let key in source) {
             this[key] = source[key];
@@ -269,7 +268,6 @@ export class WHForm extends HTMLElement {
         });
     }
     addField(main, field) {
-        console.log(main, field);
         const formField = $(main).create("wh-form-field");
         formField.addClass(field.className || null);
         formField.create("label").html(field.label).attr("for", field.attr.id || null);
@@ -279,8 +277,8 @@ export class WHForm extends HTMLElement {
                 input.define(prop.name, prop.descriptor);
             });
         }
-        input.attr(field.attr);
         input.prop(field.prop);
+        input.attr(field.attr);
         input.ds(field.ds || {});
         input.ds("type", "form-input");
         if (field.events) {

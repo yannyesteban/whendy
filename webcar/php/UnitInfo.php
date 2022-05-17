@@ -79,7 +79,7 @@ class UnitInfo extends Element
             'id'    => $this->id,
             'props' => [
                 'name'  => $this->name,
-                'caption'=>'Info--->',
+                'caption'=>'Info*',
                 'template' => $template,
                 'dataSource' => [
                     'win'=>$win

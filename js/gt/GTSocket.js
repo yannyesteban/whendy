@@ -1,7 +1,7 @@
 import { Q as $ } from "../Q.js";
 import { getParentElement } from "../Tool.js";
 import "../WHTab.js";
-class GTSocket extends HTMLElement {
+export class GTSocket extends HTMLElement {
     constructor() {
         super();
         this._win = null;

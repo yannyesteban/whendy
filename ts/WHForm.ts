@@ -210,13 +210,13 @@ class WHNavButton extends HTMLElement {
 			case 'caption':
 				this.innerHTML = newValue;
 				break;
-			
+
 		}
 	}
 
 
 	set dataSource(source) {
-		console.log(source)
+
 		this.innerHTML = "";
 		for (let key in source) {
 			this[key] = source[key];
@@ -245,22 +245,22 @@ class WHNavButton extends HTMLElement {
 		return getParentElement(this, "wh-form");
 	}
 
-	set send(info){
+	set send(info) {
 
-		
-		$(this).on("click", (event)=>{
+
+		$(this).on("click", (event) => {
 			const app = this.getApp();
-			if(app){
+			if (app) {
 				info.data = this.getForm().getValues();
-				
+
 				app.go(info);
 			}
-			
+
 		});
 	}
-	set events(events){
-		
-		for(let key in events){
+	set events(events) {
+
+		for (let key in events) {
 
 			$(this).on(key, $.bind(events[key], this, "event"));
 
@@ -342,7 +342,7 @@ export class WHForm extends HTMLElement {
 
 	}
 
-	
+
 
 	public connectedCallback() {
 
@@ -370,29 +370,32 @@ export class WHForm extends HTMLElement {
 
 
 	addField(main, field) {
-		console.log(main, field);
+
 		const formField = $(main).create("wh-form-field");
 		formField.addClass(field.className || null);
 		formField.create("label").html(field.label).attr("for", field.attr.id || null);
 
 		const input = formField.create(field.input);
 
-		if(field.defPropertys){
-			field.defPropertys.forEach(prop=>{
+		if (field.defPropertys) {
+			field.defPropertys.forEach(prop => {
 				input.define(prop.name, prop.descriptor);
 			})
 		}
 
-		input.attr(field.attr);
+
 		input.prop(field.prop);
+		input.attr(field.attr);
+		
 		input.ds(field.ds || {});
-		input.ds("type","form-input")
+		input.ds("type", "form-input");
 		if (field.events) {
 
 			for (let key in field.events) {
 				input.on(key, $.bind(field.events[key], this, "event"))
 			}
 		}
+		
 	}
 
 	addPage(main, info) {
@@ -477,21 +480,21 @@ export class WHForm extends HTMLElement {
 	}
 
 	set nav(value) {
-		
+
 	}
 
 	get nav() {
 		return "";
 	}
 
-	public getValues(){
+	public getValues() {
 		const inputs = Array.from(this.querySelectorAll(`[name][data-type="form-input"]`));
 
-		return inputs.reduce((data, e:HTMLInputElement)=>{
+		return inputs.reduce((data, e: HTMLInputElement) => {
 			data[e.name] = e.value;
 			return data;
 		}, {});
-		
+
 	}
 
 	_setCaption(caption) {

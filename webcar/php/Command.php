@@ -57,7 +57,7 @@ class Command extends Element
                 'name'  => $this->name,
                 'caption'=>'COMM: ',
                 'dataSource' => [
-                    'caption'=>'COMM: ',
+                    'caption'=>'COMMAND: ',
                     "protocol"=>$this->loadProtocol('panda', $this->config->unitId?? 0)
                 ],
             ],
