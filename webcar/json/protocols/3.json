@@ -1,0 +1,1928 @@
+{
+    "date": "2008-02-25",
+    "name": null,
+    "pass": "0000",
+    "sync": 63738,
+    "brand": "IntelliTrac",
+    "model": "X1 Pro",
+    "actions": {
+        "onLast": "Último",
+        "onSave": "Guardar",
+        "onSend": "Enviar",
+        "onConfig": "Config",
+        "onRequest": "Pedir"
+    },
+    "version": "1.0.2",
+    "commands": [
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": "(1) If the Pin-Code does not enabled in the SIM card, the value in the Pin-Code\r\ncolumn will not take effect.",
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "UnitID",
+                    "label": null,
+                    "control": "text",
+                    "default": "1010000001",
+                    "description": "The identification number of the unit. The default unit ID is\r\n1010000001."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "NewPassword",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The new password of the unit. (Max. 4 characters)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "PINCODE",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The PIN code of the GSM/GPRS SIM card. (Max. 4 digits)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Input1Delay",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The de-bounce delay for positive Input 1. Default is 7 (700ms).\r\nMax. 255 (25500ms)."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Input2Delay",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The de-bounce delay for positive Input 2. Default is 7 (700ms).\r\nMax. 255 (25500ms)."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Input3Delay",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The de-bounce delay for negative Input 3. Default is 7 (700ms).\r\nMax. 255 (25500ms)."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Input4Delay",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The de-bounce delay for negative Input 4. Default is 7 (700ms).\r\nMax. 255 (25500ms)."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0 Default"
+                        ],
+                        [
+                            "1",
+                            "1"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Disconnect GPRS\r\nRoaming",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "0: Default\r\n1: When X1 enters roaming status and GPRS is online, it will\r\ncut GPRS connection automatically."
+                }
+            ],
+            "useTag": 3,
+            "command": "UNPM",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Execute this command to set or query unit parameters"
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Serial (Direct connect mode)"
+                        ],
+                        [
+                            "2",
+                            "2: SMS communication"
+                        ],
+                        [
+                            "3",
+                            "3: GPRS communication"
+                        ],
+                        [
+                            "1",
+                            "1: Reserved for CSD communication"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "CommType",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Set the primary communication type.\r\n0: Serial (Direct connect mode)\r\n1: Reserved for CSD (Circuit Switched Data) communication\r\n2: SMS communication\r\n3: GPRS communication"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "SMSBaseNumber",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "SMS base phone number (Max. 16 digits)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "CSDBaseNumber",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "CSD base phone number (Max. 16 digits)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_APN",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "GPRS Access Point Name. (Max. 35 characters)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_Username",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "GPRS login user name (Max. 15 characters)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_Password",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "GPRS login password (Max. 15 characters)"
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: UDP"
+                        ],
+                        [
+                            "1",
+                            "1:TCP"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "GPRS_IPType",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "GPRS package format\r\n0: UDP\r\n1:TCP"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_HostAddress",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The base station static WAN IP/DNS address.\r\n(Max. 30 characters)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_HostPort",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The base station application port number of the UDP/TCP\r\n(Please note that do not conflict with Well Known Ports)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_SyncInterval",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Synchronization message sending interval in seconds.\r\n(10 ~ 65535 seconds)\r\n0: Only one sync message be transmited when the unit\r\nconnected to the server."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "GPRS_DNS",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "DNS IP address."
+                }
+            ],
+            "useTag": 3,
+            "command": "COMM",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Execute this command to set or query unit communication parameters."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "GETPOSITION",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Execute this command to ask the unit to report back current GPS positional information\r\nto the base station."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "1",
+                            "1:Time mode"
+                        ],
+                        [
+                            "2",
+                            "2:Distance mode"
+                        ],
+                        [
+                            "3",
+                            "3:IntelliTrac mode"
+                        ],
+                        [
+                            "5",
+                            "5: Time + ACC ON mode"
+                        ],
+                        [
+                            "6",
+                            "6: Distance + ACC ON mode"
+                        ],
+                        [
+                            "7",
+                            "7: IntelliTrac + ACC ON mode"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Mode",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "1:Time mode\r\nA positional record is sent to the application when the time\r\nelapsed since the last position sent is greater than or equal to\r\nthe time specified in parameter Time.\r\n2:Distance mode\r\nA positional record is sent to the application when the distance\r\nbetween the current GPS position and the last position sent is\r\ngreater than or equal to the distance specified in parameter\r\nDistance.\r\n3:IntelliTrac mode\r\nA positional record is sent to the application as determined by\r\nproprietary algorithms. These algorithms attempt to minimize\r\nthe amount of data sent back to the application while\r\nmaintaining a high degree of map replay accuracy.\r\n5: Time + ACC ON mode\r\nIf ACC is off, the tracking function will be stopped.\r\n6: Distance + ACC ON mode\r\nIf ACC is off, the tracking function will be stopped.\r\n7: IntelliTrac + ACC ON mode\r\nIf ACC is off, the tracking function will be stopped."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Time",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify elapsed time. The time specified is in seconds and can\r\nbe any number from 0 to 65535 seconds. Only whole numbers\r\ncan be used. The minimum time interval in SMS mode is 15\r\nseconds, CSD/GPRS mode is 5 seconds, and Direct\r\nConnection is 1 second."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Distance",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify elapsed distance. The distance specified is in meters\r\nand can be any number from 0 to 65535 meters. Only whole\r\nnumbers can be used. The minimum distance interval in SMS\r\nmode is 300 meters, CSD/GPRS mode is 100 meters, and\r\nDirect Connection is 15 meters."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Times",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify total tracking times. The range is from 0 to 65535. If\r\nTimes=0, it means forever tracking."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Ignore no GPS signal tracking report."
+                        ],
+                        [
+                            "1",
+                            "1: Continuously tracking"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Basis",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Ignore no GPS signal tracking report.\r\n1: Continuously tracking regardless of GPS signal."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Serial Port"
+                        ],
+                        [
+                            "1",
+                            "1: CS Data"
+                        ],
+                        [
+                            "2",
+                            "2: SMS"
+                        ],
+                        [
+                            "3",
+                            "3: GPRS"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "CommType",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Serial Port\r\n1: CS Data\r\n2: SMS\r\n3: GPRS"
+                }
+            ],
+            "useTag": 2,
+            "command": "TRACKING",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Tracking the unit continuously\r\nDescription Execute this command to ask the unit to report back current GPS positional\r\ninformation to the control center according to the tracking mode parameter."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "STOPTRACKING",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Stop tracking the unit\r\nDescription Execute this command to ask the unit stop reporting tracking positions to the base\r\nstation."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "1",
+                            "1:Time mode"
+                        ],
+                        [
+                            "2",
+                            "2:Distance mode"
+                        ],
+                        [
+                            "3",
+                            "3:IntelliTrac mode"
+                        ],
+                        [
+                            "5",
+                            "5: Time + ACC ON mode"
+                        ],
+                        [
+                            "6",
+                            "6: Distance + ACC ON mode"
+                        ],
+                        [
+                            "7",
+                            "7: IntelliTrac + ACC ON mode"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Mode",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "1: Time mode\r\nA positional record is sent to the application when the time\r\nelapsed since the last position sent is greater than or equal to\r\nthe time specified in parameter Time Min 1 seconds; Max.\r\n65535 seconds.\r\n2: Distance mode\r\nA positional record is sent to the application when the distance\r\nbetween the current GPS position and the last position sent is\r\ngreater than or equal to the distance specified in parameter\r\nDistance. Max. 15 meters; Max. 65535 meters.\r\n3: IntelliTrac mode\r\nA positional record is sent to the application as determined by\r\nproprietary algorithms. These algorithms attempt to minimize\r\nthe amount of data sent back to the application while\r\nmaintaining a high degree of map replay accuracy.\r\n5: Time + ACC ON mode\r\nIf ACC is off, the logging function will be stopped.\r\n6: Distance + ACC ON mode\r\nIf ACC is off, the logging function will be stopped.\r\n7: IntelliTrac + ACC ON mode\r\nIf ACC is off, the logging function will be stopped."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Time",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify elapsed time. The time specified is in seconds and can\r\nbe any number from 1 to 65535 seconds. Only whole numbers\r\ncan be used."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Distance",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify elapsed distance. The distance specified is in meters\r\nand can be any number from 15 to 65535 meters. Only whole\r\nnumbers can be used."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Times",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Specify total Logging times. The range is from 0 to 65535. If\r\nTimes=0, it means forever logging."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Ignore no GPS signal logging report."
+                        ],
+                        [
+                            "1",
+                            "1: Continuously logging"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Basis",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Ignore no GPS signal logging report.\r\n1: Continuously logging regardless of GPS signal."
+                }
+            ],
+            "useTag": 3,
+            "command": "STARTLOG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read default logging parameters\r\nDescription Execute this command to start recording current GPS positional information to the\r\nnon-volatile memory of the unit according to the logging mode parameter."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "STOPLOG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Stop default logging function\r\nDescription Execute this command to stop default logging."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "CLEARLOG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Clear all default logging data\r\nDescription Execute this command to clear all default logging data."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "GETLOG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Download logging data from the unit.\r\nDescription Execute this command to download all logging data from the unit."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "w",
+                    "name": "StartDateTime",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The year, month, day, hour, minute and second of the starting\r\ndate time in GMT."
+                },
+                {
+                    "data": null,
+                    "mode": "w",
+                    "name": "EndDateTime",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The year, month, day, hour, minute and second of the ending\r\ndate time in GMT."
+                }
+            ],
+            "useTag": 3,
+            "command": "GETLOGSEL",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Selective download logging data from the unit.\r\nDescription Execute this command to download all logging data from the unit."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "CANCELLOG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Stop download logging data from the unit.\r\nDescription Execute this command to stop download all logging data from the unit."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Turn off backup battery"
+                        ],
+                        [
+                            "1",
+                            "1: Turn on backup battery"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "0: Turn off backup battery\r\n1: Turn on backup battery"
+                }
+            ],
+            "useTag": 3,
+            "command": "BBCTRL",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read backup battery parameters\r\nDescription Execute this command to set or query backup battery status. When backup battery\r\nvoltage is lower than 3.7V, a backup battery low report will be sent to the base station.\r\nWhen backup battery voltage is lower than 3.4V, the unit will be shut down\r\nautomatically to avoid battery over discharge."
+        },
+        {
+            "cat": "C",
+            "role": "output",
+            "mode": "a",
+            "note": null,
+            "label": "Output",
+            "level": 0,
+            "indexField": "event_id",
+			"indexData": [
+				[1, 1],
+				[2, 2],
+				[3, 3],
+				[4, 4],
+				[5, 5],
+				[6, 6],
+				[7, 7],
+				[8, 8]
+			],
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "1",
+                            "Outputs 1"
+                        ],
+                        [
+                            "2",
+                            "Outputs 2"
+                        ],
+                        [
+                            "3",
+                            "Outputs 3"
+                        ],
+                        [
+                            "4",
+                            "Outputs 4"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "OutputID",
+                    "label": null,
+                    "type": "index",
+                    "default": null,
+                    "description": "The unit hardware output number. Outputs are numbered 1\r\nthough 4."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Set output inactive"
+                        ],
+                        [
+                            "1",
+                            "1: Set output active"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "OutputControl",
+                    "label": null,
+                    "type": "select",
+                    "default": "0",
+                    "description": "0: Set output inactive\r\n1: Set output active"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Duration",
+                    "label": null,
+                    "type": "text",
+                    "default": null,
+                    "description": "Unit of duration is 100 milliseconds. Ex: if want to setup\r\nduration for 2 seconds, you have to give a 20 value. (Min. 1=\r\n0.1 second; Max. 255 = 25.5 seconds)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "ToggleTimes",
+                    "label": null,
+                    "type": "text",
+                    "default": null,
+                    "description": "The times from its current state to its alternate state and back\r\nagain. Min. 1 times; Max. 255 times"
+                }
+            ],
+            "useTag": 3,
+            "command": "OUTS",
+            "indexed": true,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set outputs state\r\nDescription Execute this command to set outputs state."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "REBOOT",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Reboot the unit\r\nDescription Execute this command to reboot the unit"
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 1,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: EGSM/DCS (900/1800MHz)"
+                        ],
+                        [
+                            "1",
+                            "1: EGSM/PCS (900/1900MHz)"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Band",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "Reset the unit to the specific mobile frequency band\r\n0: EGSM/DCS (900/1800MHz)\r\n1: EGSM/PCS (900/1900MHz)"
+                }
+            ],
+            "useTag": 3,
+            "command": "RESET",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Reset all parameters to the manufactory default\r\nDescription Execute this command to reset the unit. After resetting the unit, the previous upload\r\nparameters will be cleared. Include phone numbers, user reports and logging\r\ndata…etc."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "1",
+                            "Input1 state changed report"
+                        ],
+                        [
+                            "2",
+                            "Input2 state changed report"
+                        ],
+                        [
+                            "4",
+                            "Input3 state changed report"
+                        ],
+                        [
+                            "8",
+                            "Input4 state changed report"
+                        ],
+                        [
+                            "16",
+                            "Main power low report"
+                        ],
+                        [
+                            "32",
+                            "Main power destroyed report"
+                        ],
+                        [
+                            "64",
+                            "Backup battery low report"
+                        ],
+                        [
+                            "128",
+                            "GPS destroyed report"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Report Polling Mask",
+                    "label": null,
+                    "control": "bitwise",
+                    "default": null,
+                    "description": "Specify which default report will be used for real time reporting.\r\nDefault is all reports will be used. (Report Polling Mask=255)\r\nBitwise operation (0: Off, 1: On)\r\nBit0: Input1 state changed report\r\nBit1: Input2 state changed report\r\nBit2: Input3 state changed report\r\nBit3: Input4 state changed report\r\nBit4: Main power low report\r\nBit5: Main power destroyed report\r\nBit6: Backup battery low report\r\nBit7: GPS destroyed report"
+                },
+                {
+                    "data": [
+                        [
+                            "1",
+                            "Input1 state changed report"
+                        ],
+                        [
+                            "2",
+                            "Input2 state changed report"
+                        ],
+                        [
+                            "4",
+                            "Input3 state changed report"
+                        ],
+                        [
+                            "8",
+                            "Input4 state changed report"
+                        ],
+                        [
+                            "16",
+                            "Main power low report"
+                        ],
+                        [
+                            "32",
+                            "Main power destroyed report"
+                        ],
+                        [
+                            "64",
+                            "Backup battery low report"
+                        ],
+                        [
+                            "128",
+                            "GPS destroyed report"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Report Logging Mask",
+                    "label": null,
+                    "control": "bitwise",
+                    "default": null,
+                    "description": "Specify which default report will be used for logging report.\r\nDefault is all reports will be used. (Report Logging Mask=255)\r\nBitwise operation (0: Off, 1: On)\r\nBit0: Input1 state changed report\r\nBit1: Input2 state changed report\r\nBit2: Input3 state changed report\r\nBit3: Input4 state changed report\r\nBit4: Main power low report\r\nBit5: Main power destroyed report\r\nBit6: Backup battery low report\r\nBit7: GPS destroyed report"
+                }
+            ],
+            "useTag": 3,
+            "command": "RMSK",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read default report mask\r\nDescription Execute this command to set or query default report mask."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "InputMask",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "This parameter defines which inputs to be the condition. One or\r\nmore inputs can be specificed in this parameter."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "InputControl",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Defines how the inputs specificed in parameter InputMask are\r\nconsidered during processing. The bit value of 0 means OFF\r\nand 1 means ON."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Longitude",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The longitude of the circle zone. If zone condition is not used,\r\nleft this field empty."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Latitude",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The latitude of the circle zone. If zone condition is not used, left\r\nthis field empty."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "ZoneTolerence",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The radius of the circle zone in meters. If zone condition is not\r\nused, left this field empty. (50..65535) meters"
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable zone"
+                        ],
+                        [
+                            "1",
+                            "1: Entering the Zone"
+                        ],
+                        [
+                            "2",
+                            "2: Exiting the Zone"
+                        ],
+                        [
+                            "3",
+                            "3: Inside the Zone"
+                        ],
+                        [
+                            "4",
+                            "4: Outside the Zone"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "ZoneControl",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Defines how the geographic zone specificed in parameter\r\nZoneID is considered during report processing. If zone\r\ncondition is not used, left this field empty.\r\n0: Disable zone\r\n1: Entering the Zone\r\nThe report initiates defined actions when the current (valid)\r\nGPS position transitions from outside the zone to inside of the\r\nzone boundaries.\r\n2: Exiting the Zone\r\nThe report initiates defined actions when the current (valid)\r\nGPS position transitions from inside the zone to outside of the\r\nzone boundaries.\r\n3: Inside the Zone\r\nThe report initiates defined actions when the current (valid)\r\nGPS position is within the specified zone boundaries.\r\n4: Outside the Zone\r\nThe report initiates defined actions when the current (valid)\r\nGPS is outside of the specified zone boundaries"
+                },
+                {
+                    "data": [
+                        [
+                            "1",
+                            "1: Logging"
+                        ],
+                        [
+                            "2",
+                            "2: Polling"
+                        ],
+                        [
+                            "3",
+                            "3:Logging + polling"
+                        ],
+                        [
+                            "4",
+                            "4: Set Output."
+                        ],
+                        [
+                            "5",
+                            "5: Logging + Set output"
+                        ],
+                        [
+                            "6",
+                            "6. Polling + Set Output"
+                        ],
+                        [
+                            "7",
+                            "7. Logging + Polling + Set Output"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "ReportAction",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "This parameter defines the actions to be taken once the report\r\nis in an active state. One or more actions can be specified on\r\nany report. The following list defines all available action types:\r\n1: Logging\r\nWhen all defined report conditions are true, log the most recent\r\nGPS position to non-volatile flash memory for future retrieval.\r\n2: Polling\r\nWhen all defined report conditions are true, send the latest\r\nGPS position to the remote base station.\r\n3:Logging + polling\r\nWhen all defined report conditions are true, log the most recent\r\nGPS position to non-volatile flash memory and send the latest\r\nGPS position to the remote base station.\r\n4: Set Output\r\nWhen all defined report conditions are true, set the output relay.\r\n5: Logging + Set output\r\nWhen all defined conditions are true, log the most recent GPS\r\nposition to non-volatile flash memory and set the output relay.\r\n6. Polling + Set Output\r\nWhen all defined conditions are true, send the latest GPS\r\nposition to the remote base station and set the output relay.\r\n7. Logging + Polling + Set Output\r\nWhen all defined conditions are true, log the most recent GPS\r\nposition to non-volatile flash memory, send the latest GPS\r\nposition to the remote base station, and set the output relay"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "OutputID",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The outputs are numbered through 1 to 4. This parameter is\r\nused in conjunction with parameter ReportAction=4(Set\r\nOutput). A value 0 means ignore output control"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "OutputControl",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Defines how the output specified in parameter OutputID is\r\ncontrolled while the report is active. 0:OFF 1:ON"
+                }
+            ],
+            "useTag": 3,
+            "command": "REPORT",
+            "indexed": 1,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read user defined report\r\nDescription Execute this command to set or query user defined report parameters."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": null,
+            "useTag": 3,
+            "command": "CLRP",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Clear the user defined reports\r\nDescription Execute this command to clear all of the user defined reports."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "Enable power saving mode.\r\n0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "LowVoltage",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "If the vehicle battery voltage is below the LowVoltage, unit will\r\nsend a alarm message to the control center. The default voltage\r\nvalue is 12.0 volts."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: GSM OFF"
+                        ],
+                        [
+                            "1",
+                            "1: GSM ON"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "GSMState",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Set GSM status when unit enter power saving mode.\r\n0: GSM OFF\r\n1: GSM ON"
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: GPS OFF"
+                        ],
+                        [
+                            "1",
+                            "1: GPS ON"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "GPSState",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Set GPS status when unit enter power saving mode.\r\n0: GPS OFF\r\n1: GPS ON"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "PowerDownDelay",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "After ACC off for the delay time, the unit will go into power\r\nsaving mode. (0..65535 seconds)\r\nWhen SleepPriority = 1, the minimum value of\r\nPowerDownDelay is 180.\r\nWhen SleepPriority = 0, the minimum value of\r\nPowerDownDelay is 0."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "PowerUpDuration",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Full power duration after alarm triggered. (180..65535 seconds)"
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "SleepPriority",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "Enable priority sleep mode.\r\n0: Disable\r\nUnit will finish executing the tracking command such as number\r\nof tracking times, then goes to sleeping mode.\r\n1: Enable\r\nUnit will be forced to enter sleep mode regardless of any\r\ntracking command in progress."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "PowerDownDuration",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                }
+            ],
+            "useTag": 3,
+            "command": "PMGR",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read power management parameters of the unit.\r\nDescription Execute this command to setup or query the power management parameters of the\r\nunit. If the power saving mode is enabled, all the power saving features will be\r\ntriggered by ACC (Input1)."
+        },
+        {
+            "cat": "I",
+            "mode": "m",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "IMEI",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                }
+            ],
+            "useTag": 3,
+            "command": "IMEI",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Read telephone IMEI number\r\nDescription Execute this command to read the IMEI (International Mobile station Equipment\r\nIdentity) of the unit."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "PhoneNumber",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The specific phone number for unit to dial up."
+                }
+            ],
+            "useTag": 3,
+            "command": "VMON",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Voice wiretap / monitoring\r\nDescription Execute this command to wiretap the voice conversation inside the car. When the unit\r\nreceives this command, the unit will call out to the specific phone number\r\nautomatically."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable/Disable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "Enable vehicle towed function\r\n0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "SatelliteUsed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Minimum GPS satellites reception. (0..16)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "MinSpeed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Minimun vehicle speed. (0..65535) Km/h"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "MaxSpeed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Maximum vehicle speed. (0..65535) Km/h"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Duration",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The time duration after satelliteUsed, MinSpeed and MaxSpeed\r\nconditions are true. (0..65535 seconds)"
+                }
+            ],
+            "useTag": 3,
+            "command": "TOW",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Enable/Disable vehicle towed function\r\nDescription Execute this command set/read vehicle towed parameters. The vehicle towed report\r\nwill be sent to the base station when ACC (Input1) OFF and vehicle speed between\r\nMinSpeed and MaxSpeed for a Duration time."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Enable mileage accumulator function. If mileage function is\r\nenabled, the current mileage will be added to the end of each\r\nreport position.\r\n0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "InitialMileage",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Set initial mileage (0.0 ~ 4294967.0) Km"
+                }
+            ],
+            "useTag": 3,
+            "command": "MILE",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Enable/Disable mileage accumulator function\r\nDescription Execute this command set/read mileage accumulator function."
+        },
+        {
+            "cat": "I",
+            "mode": "m",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "Result",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The test result code is a decimal value.\r\n0: No Error\r\n1: GPS Failed\r\n2: GSM Failed\r\n4: EEPROM Failed\r\n8: SRAM Failed\r\n16: Backup battery failed\r\n64: Modem failed\r\n128: Burn-in test failed"
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "MainPowerVoltage",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "This field indicates main power source voltage."
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "BatteryVoltage",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "This field indicates backup battery voltage. The backup battery must be turned ON\r\n(Refer to $ST+BBCTRL command) before excute this command. If the backup\r\nbattery voltage is lower than 3.6V, it means the backup battery is empty or damage."
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "SystemCode",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The system current status code. This system code is only for\r\nmanufactory reference purpose."
+                }
+            ],
+            "useTag": 3,
+            "command": "TEST",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Unit hardware diagnostic\r\nDescription Execute this command to process unit hardware diagnostic."
+        },
+        {
+            "cat": "I",
+            "mode": "m",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "VERSION",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                }
+            ],
+            "useTag": 3,
+            "command": "VERSION",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Get the firmware version of the unit.\r\nDescription Execute this command to query firmware version of the unit."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: 1200bps"
+                        ],
+                        [
+                            "1",
+                            "1: 2400bps"
+                        ],
+                        [
+                            "2",
+                            "2: 4800bps"
+                        ],
+                        [
+                            "3",
+                            "3: 9600bps"
+                        ],
+                        [
+                            "4",
+                            "4: 19200bps"
+                        ],
+                        [
+                            "5",
+                            "5: 38400bps"
+                        ],
+                        [
+                            "6",
+                            "6: 57600bps"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "BaudRateID",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "Serial port baudrate ID\r\n0: 1200bps\r\n1: 2400bps\r\n2: 4800bps\r\n3: 9600bps\r\n4: 19200bps\r\n5: 38400bps\r\n6: 57600bps (Serial port default)"
+                }
+            ],
+            "useTag": 3,
+            "command": "BAUD",
+            "indexed": 1,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set/Read baudrate of serial port\r\nDescription Execute this command to set/read the baudrate parameter of the serial port. This\r\ncommand only supported for serial configuration."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "0: Disable\r\n1: Enable"
+                }
+            ],
+            "useTag": 3,
+            "command": "NMEA",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Enable/Disable GPS NMEA string output\r\nDescription Execute this command to enable or disable GPS NMEA string output. Currently, this\r\nfunction only supported $GPRMC string output and serial port baud rate must be\r\n2400bps at least."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "Enable speeding report\r\n0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": [
+                        [
+                            "1",
+                            "1:Logging"
+                        ],
+                        [
+                            "2",
+                            "2:Polling"
+                        ],
+                        [
+                            "3",
+                            "3:Logging and Polling"
+                        ],
+                        [
+                            "4",
+                            "4. Set Output"
+                        ],
+                        [
+                            "5",
+                            "5. Logging + Set Output"
+                        ],
+                        [
+                            "6",
+                            "6. Polling + Set Output"
+                        ],
+                        [
+                            "7",
+                            "7. Logging + Polling + Set Output"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "ReportAction",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "This parameter defines the actions to be taken once the speeding\r\nreport is in an active state. One or more actions can be specified\r\non this report. The following list defines all available action types:\r\n1:Logging\r\nWhen all defined report conditions are true, log the most recent\r\nGPS position to non-volatile flash memory for future retrieval.\r\n2:Polling\r\nWhen all defined report conditions are true, send the latest GPS\r\nposition to the remote base station.\r\n3:Logging and Polling:\r\nWhen all defined report conditions are true, the unit will do\r\nfollowing:\r\nA. Log the most recent GPS position to non-volatile flash\r\nmemory for future retrieval.\r\nB. Send the latest GPS position to the remote base station.\r\n4. Set Output:\r\nWhen all defined conditions are true, it set the state of the\r\nassigned output port number. When any defined condition\r\nbecomes false, the assigned output port number backs to the\r\noriginal state.\r\n5. Logging + Set Output:\r\nWhen all defined conditions are true, log the most recent GPS\r\nposition to non-volatile flash memory and set the state of the\r\nassigned output port number. When any defined condition\r\nbecomes false, the assigned output port number backs to the\r\noriginal state.\r\n6. Polling + Set Output:\r\nWhen all defined conditions are true, send the latest GPS position\r\nto the remote base station set the state of the assigned output port\r\nnumber. When any defined condition becomes false, the assigned\r\noutput port number backs to the original state.\r\nReportAction\r\n7. Logging + Polling + Set Output:\r\nWhen all defined conditions are true, log the most recent\r\nGPS position to non-volatile flash memory, send the most\r\nrecent GPS position to the remote base station, and set the\r\nstate of the assigned output port number. When any defined\r\ncondition becomes false, the assigned output port number\r\nbacks to the original state."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "MinSpeed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The minimum speed of speed range\r\n(0 – 255 km/h)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "MaxSpeed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The maximum speed of speed range\r\n(0 – 255 km/h)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Duration",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "his parameter defines the speeding report will be actived once the\r\nspeed range is satisfied for a time duration. Valid value for logging\r\nand polling is following:\r\nLogging: 1~65535 seconds\r\nPolling: 15~65535 seconds\r\nLogging + Polling: 15~65535 seconds."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Output ID",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The unit hardware output number. Outputs are numbered 1\r\nthrough 4."
+                },
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0 Set output inactive."
+                        ],
+                        [
+                            "1",
+                            "1 Set output active."
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Output Control",
+                    "label": null,
+                    "control": "select",
+                    "default": "0",
+                    "description": "0 Set output inactive.\r\n1 Set output active."
+                }
+            ],
+            "useTag": 3,
+            "command": "SPEED",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set the speeding report\r\nDescription Execute this command to set the speeding report"
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Message",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The message string. (The max length is 145 characters)"
+                }
+            ],
+            "useTag": 3,
+            "command": "MMSG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Send MDT messages to the base station\r\nDescription Execute this command through serial port to send MDT messages to the base station\r\nvia preset communication type."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Message",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "The message string. (The max length is 145 characters)"
+                }
+            ],
+            "useTag": 3,
+            "command": "TMSG",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Send messages from the base station to the MDT\r\nDescription Execute this command to send messages from the base station to the MDT."
+        },
+        {
+            "cat": "I",
+            "mode": "m",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "SMID",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                }
+            ],
+            "useTag": 3,
+            "command": "SMID",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Query ID of sim card\r\nDescription Execute this command to query ID of sim card."
+        },
+        {
+            "cat": "I",
+            "mode": "m",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "GSM Network Operator Name",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "CSQ",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "GPRS connection state",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": null
+                }
+            ],
+            "useTag": 3,
+            "command": "QUST",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Query GPRS connection state\r\nDescription Execute this command to query GPRS connection state."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Default"
+                        ],
+                        [
+                            "1",
+                            "1: Stop polling report ID message"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "HaltPolling",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Default\r\n1: Stop polling report ID message"
+                }
+            ],
+            "useTag": 3,
+            "command": "HALT",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Enable/Disable report ID message polling\r\nDescription Execute this command to enable/disable report ID message polling."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Off Disable this function."
+                        ],
+                        [
+                            "1",
+                            "1: On Enable this function."
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Preset Time",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Off Disable this function.\r\n1: On Enable this function.\r\n\r\nThe time for report. The format is hour, minute and second."
+                }
+            ],
+            "useTag": 3,
+            "command": "TIMER",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Set the timer report\r\nDescription\r\nExecute this command to setup or query unit"
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "DateTime",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "YYYYMMDDhhmmss (GMT Date and Time)﹒"
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "Lac",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Location area code"
+                },
+                {
+                    "data": null,
+                    "mode": "m",
+                    "name": "Cell ID",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Cell ID"
+                }
+            ],
+            "useTag": 3,
+            "command": "GLAC",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Get the location area code\r\nDescription\r\nExecute this command to query Location information."
+        },
+        {
+            "cat": "X",
+            "mode": "w",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: No Reset"
+                        ],
+                        [
+                            "1",
+                            "1: Reset all counter"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Reset",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: No Reset\r\n1: Reset all counter"
+                }
+            ],
+            "useTag": 3,
+            "command": "CONT",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Counter record\r\nDescription\r\nExecute this command to query four counter.One for the number of reboot, one for the total number of GPRS connection attempt, one for the number of GPRS connection failed, one for the total number of GPRS connection with the server."
+        },
+        {
+            "cat": "C",
+            "mode": "a",
+            "note": null,
+            "label": null,
+            "level": 0,
+            "fields": [
+                {
+                    "data": [
+                        [
+                            "0",
+                            "0: Disable"
+                        ],
+                        [
+                            "1",
+                            "1: Enable"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Enable",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "0: Disable\r\n1: Enable"
+                },
+                {
+                    "data": [
+                        [
+                            "1",
+                            "1: Logging"
+                        ],
+                        [
+                            "2",
+                            "2:Polling"
+                        ],
+                        [
+                            "3",
+                            "3:Logging and Polling"
+                        ]
+                    ],
+                    "mode": "a",
+                    "name": "Report Mode",
+                    "label": null,
+                    "control": "select",
+                    "default": null,
+                    "description": "1: Logging:\r\nWhen all defined report conditions are true, log the most recent GPS position to non-volatile flash memory for future retrieval.\r\n2:Polling: When all defined report conditions are true, send the latest GPS position to the remote base station.\r\n3:Logging and Polling: When all defined report conditions are true, the unit will do following: a. Log the most recent GPS position to non-volatile flash memory for future retrieval. b. Send the latest GPS position to the remote base station."
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Idle Speed",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "Idle speed (0-65535 km/hr)"
+                },
+                {
+                    "data": null,
+                    "mode": "a",
+                    "name": "Duration",
+                    "label": null,
+                    "control": "text",
+                    "default": null,
+                    "description": "the duration of idle time ( 1-65535 min)"
+                }
+            ],
+            "useTag": 3,
+            "command": "IDLE",
+            "indexed": null,
+            "usePass": 1,
+            "exportable": null,
+            "description": "Calculate the idle time.\r\nDescription\r\nExecute this command to accumulate the total Idle time in which the ACC is on but the\r\nGPS speed is less than pre-defined interval for a certain time. The “Report ID 60” & the “Report ID 61” will be the used for this command:\r\nReport ID 60: The idle starts event.\r\nReport ID 61: The idle ends event.\r\nThe time difference of the “Time of report ID 61” and the “time of the ID 60” is the time\r\nperiod of the IDLE event. The total idle time for a trip could"
+        }
+    ],
+    "headerSync": "0xFA 0xF8"
+}

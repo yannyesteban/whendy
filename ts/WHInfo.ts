@@ -111,7 +111,7 @@ export class WHInfo extends HTMLElement {
 
 	set data(data){
         if(!this.template){
-            return:
+            return;
         }
         
         const template = document.createElement("template");

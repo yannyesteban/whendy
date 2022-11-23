@@ -546,6 +546,9 @@ export class ListText extends HTMLElement {
 
 	public render() {
 		console.log("slotchange");
+
+		Float.setIndex(this.menu);
+		
 		this.resetData();
 
 		$(this).addClass("active");

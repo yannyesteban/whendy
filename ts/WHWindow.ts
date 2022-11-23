@@ -391,8 +391,8 @@ export class WHWin extends HTMLElement {
 					this.setAttribute("mode", "custom");
 				},
 				onRelease: (info) => {
-					this.width = info.width + "px";
-					this.height = info.height + "px";
+					//this.width = info.width + "px";
+					//this.height = info.height + "px";
 				}
 
 			});

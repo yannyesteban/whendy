@@ -70,36 +70,40 @@
         <div>{=event}</div>
     </div>
 
-    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
+    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', role:'position', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
-        1
+        P
     </button>
     <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', role:'output', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
         O
     </button>
-    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
+    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', role:'arming', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
-        3
+        A
+    </button>
+    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}',role:'reboot', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
+
+        R
+    </button>
+    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', role:'callback', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
+
+        C
     </button>
     <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
-        4
+        PN
     </button>
     <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
-        5
+        DC
     </button>
     <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
 
-        6
+        »
     </button>
-    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
-
-        7
-    </button>
-    <button onclick="document.querySelector('gt-rapid-command').load({unitId: '{=unitId}', command:'100', index: 0, mode: 1, buttons: ['onSave', 'onSend']})">
-
-        8
-    </button>
+    <label>
+    <input type="checkbox">Follow</label>
+    <label>
+        <input type="checkbox">Visible</label>
 </div>

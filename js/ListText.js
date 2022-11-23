@@ -403,6 +403,7 @@ export class ListText extends HTMLElement {
     reportValidity() { return this.internals_.reportValidity(); }
     render() {
         console.log("slotchange");
+        Float.setIndex(this.menu);
         this.resetData();
         $(this).addClass("active");
         $(this).removeClass("valid");

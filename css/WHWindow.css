@@ -66,6 +66,5 @@ dd {
 
 :host([mode="auto"]) ::slotted(wh-win-body) {
   height: auto !important;
-  width: auto !important;
 }
 /*# sourceMappingURL=WHWindow.css.map */
