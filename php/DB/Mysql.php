@@ -53,7 +53,7 @@ class Mysql extends DBase{
 		if ($charset!=''){
 			$this->charset = $charset;
         }
-	    $this->c = new \mysqli($this->server, $this->user, $this->pass, $this->dbase);
+	    $this->c = new \mysqli($this->server, $this->user, $this->pass, $this->dbase, $this->port);
 		//$this->c->set_charset('latin1');
 		//hr($this->charset);
 		//$this->c->set_charset($this->charset);
