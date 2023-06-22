@@ -15,7 +15,7 @@ class Mysql extends DBase{
 	public $charset = "utf-8";
 	
 	
-	public $result = false;
+	public $result = null;
 	public $pagination = false;
 	public $page = 1;
 	public $pageLimit = 10;
@@ -27,6 +27,15 @@ class Mysql extends DBase{
 	public $affectedRows = false;	
 	private $c = null;
 	
+	public $fieldCount = 0;
+	public $status = false; 
+	public $recordCount = 0;
+
+	public $cn = null;
+	public $smtp = null;
+	
+	
+
 	public function __construct($server='', $user='', $pass='', $database='', $port='', $charset='') {
 		
 		$this->connect($server, $user, $pass, $database, $port, $charset);		
@@ -223,9 +232,9 @@ class Mysql extends DBase{
         }
 		//hr($this->query, "red");
 		if($this->errno){
-			hr($this->query);
-			hr($this->error);
-			hr($this->errno);
+			//hr($this->query);
+			//hr($this->error);
+			//hr($this->errno);
 			//return false;
 			
 		}
@@ -299,7 +308,7 @@ class Mysql extends DBase{
 				$field->length = (isset($aux[2])? isset($aux[2]): '');
 				$field->decimals = (isset($aux[3])? isset($aux[3]): '');
 				$field->mtype = $this->getMetaType($aux[1]);
-				$field->not_null = ($rs['Null'] == 'NO')?true:false;
+				$field->notNull = ($rs['Null'] == 'NO')?true:false;
 				$field->key = ($rs['Key'] == 'PRI')? true: false;
 				$field->default = $rs['Default'];
 				$field->serial = ($rs['Extra'] == 'auto_increment')? true: false;
@@ -486,7 +495,7 @@ class Mysql extends DBase{
 	
 	public function serialId($table, $field, $filters = []){
 		/* erroorrrrrrrrrrrrrrrrr */
-		$len = strlen($pre)+1;
+		
 		$_where = '';
 
 		foreach($filters as $k => $v){
@@ -595,28 +604,28 @@ class Mysql extends DBase{
 	function metaError($errno){
 		switch ($errno){
 		case "1216":
-			return C_ERROR_RESTRICCION;
+			//return C_ERROR_RESTRICCION;
 			break;
 		case "1217":
-			return C_ERROR_ELIMINACION;
+			//return C_ERROR_ELIMINACION;
 			break;
 		case "1054":
-			return C_ERROR_COLUMNA;
+			//return C_ERROR_COLUMNA;
 			break;
 		case "1062":
-			return C_ERROR_DUPLICADO;
+			//return C_ERROR_DUPLICADO;
 			break;
 		case "1146":
-			return C_ERROR_TABLA;
+			//return C_ERROR_TABLA;
 			break;
 		case "1007":
-			return C_ERROR_EXISTE_DB;
+			//return C_ERROR_EXISTE_DB;
 			break;
 		case "1451":
-			return C_ERROR_UPD_DEL_FK;
+			//return C_ERROR_UPD_DEL_FK;
 			break;
 		default:
-			return $msg_error." N� de error: ".$nro_error;
+			return " No de error: ".$errno;
 		}// end switch
 	
 	}
@@ -661,7 +670,8 @@ class Mysql extends DBase{
 	}
 
 	public function prepare($sql){
-		$this->stmt = $this->c->prepare($sql);
+
+		/*$this->stmt = $this->c->prepare($sql);
 
 		$query = "
 		SELECT 
@@ -669,12 +679,14 @@ class Mysql extends DBase{
 		FROM $this->tForms as f
 		WHERE form = ?
 		";
+		
 		$this->cn->prepare($query);
 		$this->cn->stmt->bind_param("s",$name);
 		
 		$this->cn->stmt->execute();
 
 		$result = $this->cn->stmt->get_result();
+		*/
 		//print_r($this->cn->stmt->fetch());
 	}
 

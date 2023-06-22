@@ -1,5 +1,6 @@
 <?php
 
+#[AllowDynamicProperties]
 class Element
 {
     
@@ -24,6 +25,7 @@ class Element
         return self::$_acceptedRoles;
     }
 
+    
     public function __construct($opt = [])
     {
         foreach ($opt as $k => $v) {
