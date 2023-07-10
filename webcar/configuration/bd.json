@@ -2,7 +2,7 @@
 	{
 		"name": "",
 		"driver": "mysql",
-		"host": "127.0.0.1",
+		"host": "Mysql-Whendy",
 		"port": "3306",
 		"user": "root",
 		"pass": "123456",
@@ -12,7 +12,7 @@
 	{
 		"name": "sevian",
 		"driver": "mysql",
-		"host": "127.0.0.1",
+		"host": "Mysql-Whendy",
 		"port": "3306",
 		"user": "root",
 		"pass": "123456",
